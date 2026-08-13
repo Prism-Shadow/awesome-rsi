@@ -1,4 +1,4 @@
-# Awesome-RSI [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# Awesome RSI (Recursive Self-Improvement) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 > A curated list of **benchmarks** and **methods** for **Recursive Self-Improvement (RSI)** — AI agents that improve *themselves*.
 
