@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "sync:citations": "node scripts/sync-citation-graph.mjs",
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {

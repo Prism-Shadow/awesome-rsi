@@ -547,46 +547,5 @@ export const papers = [
     "abstract": "AI agents have become surprisingly proficient at software engineering over the past year, largely due to improvements in reasoning capabilities. This raises a deeper question: can these systems extend their capabilities to automate AI research itself? In this paper, we explore post-training, the critical phase that turns base LLMs into useful assistants. We introduce PostTrainBench to benchmark how well LLM agents can perform post-training autonomously under bounded compute constraints (10 hours on one H100 GPU). We ask frontier agents (e.g., Claude Code with Opus 4.6) to optimize the performance of a base LLM on a particular benchmark (e.g., Qwen3-4B on AIME). Importantly, we do not provide any predefined strategies to the agents and instead give them full autonomy to find necessary information on the web, run experiments, and curate data. We find that frontier agents make substantial progress but generally lag behind instruction-tuned LLMs from leading providers: 23.2% for the best agent vs. 51.1% for official instruction-tuned models. However, agents can exceed instruction-tuned models in targeted scenarios: GPT-5.1 Codex Max achieves 89% on BFCL with Gemma-3-4B vs. 67% for the official model. We also observe several failure modes worth flagging. Agents sometimes engage in reward hacking: training on the test set, downloading existing instruction-tuned checkpoints instead of training their own, and using API keys they find to generate synthetic data without authorization. These behaviors are concerning and highlight the importance of careful sandboxing as these systems become more capable. Overall, we hope PostTrainBench will be useful for tracking progress in AI R&D automation and for studying the risks that come with it. Website and code are available at https://posttrainbench.com/.",
     "arxiv": "https://arxiv.org/abs/2603.08640",
     "pdf": "https://arxiv.org/pdf/2603.08640"
-  },
-  {
-    "id": "2602.04811",
-    "nickname": "SE-Bench",
-    "title": "SE-Bench: Benchmarking Self-Evolution with Knowledge Internalization",
-    "authors": [
-      "Jiarui Yuan",
-      "Tailin Jin",
-      "Weize Chen",
-      "Zeyuan Liu"
-    ],
-    "published": "2026-02-04",
-    "year": 2026,
-    "tags": [
-      "Self-Evolution",
-      "Continual Learning"
-    ],
-    "citations": 2,
-    "abstract": "True self-evolution requires agents to act as lifelong learners that internalize novel experiences to solve future problems. However, rigorously measuring this foundational capability is hindered by two obstacles: the entanglement of prior knowledge, where ``new'' knowledge may appear in pre-training data, and the entanglement of reasoning complexity, where failures may stem from problem difficulty rather than an inability to recall learned knowledge. We introduce SE-Bench, a diagnostic environment that obfuscates the NumPy library and its API doc into a pseudo-novel package with randomized identifiers. Agents are trained to internalize this package and evaluated on simple coding tasks without access to documentation, yielding a clean setting where tasks are trivial with the new API doc but impossible for base models without it. Our investigation reveals three insights: (1) the Open-Book Paradox, where training with reference documentation inhibits retention, requiring \"Closed-Book Training\" to force knowledge compression into weights; (2) the RL Gap, where standard RL fails to internalize new knowledge completely due to PPO clipping and negative gradients; and (3) the viability of Self-Play for internalization, proving models can learn from self-generated, noisy tasks when coupled with SFT, but not RL. Overall, SE-Bench establishes a rigorous diagnostic platform for self-evolution with knowledge internalization. Our code and dataset can be found at https://github.com/thunlp/SE-Bench.",
-    "arxiv": "https://arxiv.org/abs/2602.04811",
-    "pdf": "https://arxiv.org/pdf/2602.04811"
-  },
-  {
-    "id": "2410.06215",
-    "nickname": "DataEnvGym",
-    "title": "DataEnvGym: Data Generation Agents in Teacher Environments with Student Feedback",
-    "authors": [
-      "Zaid Khan",
-      "Elias Stengel-Eskin",
-      "Jaemin Cho",
-      "Mohit Bansal"
-    ],
-    "published": "2024-10-08",
-    "year": 2024,
-    "tags": [
-      "Data-Centric"
-    ],
-    "citations": 19,
-    "abstract": "The process of creating training data to teach models is currently driven by humans, who manually analyze model weaknesses and plan how to create data that improves a student model. Approaches using LLMs as annotators reduce human effort, but still require humans to interpret feedback from evaluations and control the LLM to produce data the student needs. Automating this labor-intensive process by creating autonomous data generation agents - or teachers - is desirable, but requires environments that can simulate the feedback-driven, iterative, closed loop of data creation. To enable rapid, scalable testing for such agents and their modules, we introduce DataEnvGym, a testbed of teacher environments for data generation agents. DataEnvGym frames data generation as a sequential decision-making task, involving an agent consisting of a data generation policy (which generates a plan for creating training data) and a data generation engine (which transforms the plan into data), inside an environment that provides student feedback. The agent's goal is to improve student performance. Students are iteratively trained and evaluated on generated data, and their feedback (in the form of errors or weak skills) is reported to the agent after each iteration. DataEnvGym includes multiple teacher environment instantiations across 3 levels of structure in the state representation and action space. More structured environments are based on inferred skills and offer more interpretability and curriculum control. We support 4 domains (math, code, VQA, and tool-use) and test multiple students and teachers. Example agents in our teaching environments can iteratively improve students across tasks and settings. Moreover, we show that environments teach different skill levels and test variants of key modules, pointing to future work in improving data generation agents, engines, and feedback mechanisms.",
-    "arxiv": "https://arxiv.org/abs/2410.06215",
-    "pdf": "https://arxiv.org/pdf/2410.06215"
   }
 ];

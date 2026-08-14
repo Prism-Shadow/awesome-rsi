@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { papers } from "./data/papers.js";
 import PapersTab from "./components/PapersTab.jsx";
+import MethodsTab from "./components/MethodsTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
@@ -21,9 +22,6 @@ function useTheme() {
 export default function App() {
   const [tab, setTab] = useState("papers");
   const [theme, toggleTheme] = useTheme();
-
-  const totalCitations = papers.reduce((sum, p) => sum + p.citations, 0);
-  const topicCount = new Set(papers.flatMap((p) => p.tags)).size;
 
   return (
     <>
@@ -53,20 +51,6 @@ export default function App() {
             skill learning, memory, continual learning, and automated AI research. Filter by topic,
             search, and sort by recency or influence.
           </p>
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <b>{papers.length}</b>
-              <span>Papers</span>
-            </div>
-            <div className="hero-stat">
-              <b>{topicCount}</b>
-              <span>Topics</span>
-            </div>
-            <div className="hero-stat">
-              <b>{totalCitations}</b>
-              <span>Citations</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -75,21 +59,41 @@ export default function App() {
           <button
             className={`tab${tab === "papers" ? " is-active" : ""}`}
             role="tab"
+            id="tab-benchmark-papers"
+            aria-controls="panel-benchmark-papers"
             aria-selected={tab === "papers"}
             onClick={() => setTab("papers")}
           >
-            Paper List
+            Benchmark Paper List
+          </button>
+          <button
+            className={`tab${tab === "methods" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-methods"
+            aria-controls="panel-methods"
+            aria-selected={tab === "methods"}
+            onClick={() => setTab("methods")}
+          >
+            Methods &amp; Systems
           </button>
           <button
             className={`tab${tab === "resources" ? " is-active" : ""}`}
             role="tab"
+            id="tab-resources"
+            aria-controls="panel-resources"
             aria-selected={tab === "resources"}
             onClick={() => setTab("resources")}
           >
             Books &amp; Courses
           </button>
         </nav>
-        {tab === "papers" ? <PapersTab /> : <ResourcesTab />}
+        <div
+          id={`panel-${tab === "papers" ? "benchmark-papers" : tab}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${tab === "papers" ? "benchmark-papers" : tab}`}
+        >
+          {tab === "papers" ? <PapersTab /> : tab === "methods" ? <MethodsTab /> : <ResourcesTab />}
+        </div>
       </main>
 
       <footer className="site-footer">
