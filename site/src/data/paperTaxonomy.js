@@ -346,4 +346,22 @@ export const paperTaxonomy = {
     creation: ["Human-in-the-loop"],
     evaluation: ["Rule-based"],
   },
+  "2507.05257": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Memory"],
+    construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
+    metric: ["Accuracy", "Gain", "Cost", "Latency"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based", "LLM-as-a-judge"],
+  },
+  "2505.11942": {
+    origin: ["Original"],
+    mode: ["Online", "Streaming"],
+    artifact: ["Non-parametric", "Memory"],
+    construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
 };

@@ -9,7 +9,12 @@ const corpusIds = new Set(papers.map((paper) => paper.id));
 const pdfVerifiedEdges = [
   { source: "2607.05155", target: "2606.05661", verifiedBy: "paper-pdf" },
   { source: "2607.05155", target: "2606.05080", verifiedBy: "paper-pdf" },
+  { source: "2607.05155", target: "2511.20857", verifiedBy: "paper-pdf" },
+  { source: "2607.05155", target: "2505.11942", verifiedBy: "paper-pdf" },
   { source: "2608.01149", target: "2606.05661", verifiedBy: "paper-pdf" },
+  { source: "2608.01149", target: "2511.20857", verifiedBy: "paper-pdf" },
+  { source: "2608.01149", target: "2510.17281", verifiedBy: "paper-pdf" },
+  { source: "2608.01149", target: "2505.11942", verifiedBy: "paper-pdf" },
 ];
 
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));

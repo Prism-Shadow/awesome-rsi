@@ -5,8 +5,8 @@ export const citationGraphMeta = {
   "scope": "Current awesome-rsi corpus only",
   "sourceName": "Semantic Scholar Academic Graph API",
   "sourceUrl": "https://www.semanticscholar.org/product/api",
-  "semanticScholarEdges": 28,
-  "pdfVerifiedEdges": 3,
+  "semanticScholarEdges": 37,
+  "pdfVerifiedEdges": 8,
   "pdfFallbackPapers": [
     "2607.05155",
     "2608.01149"
@@ -15,6 +15,21 @@ export const citationGraphMeta = {
 
 export const citationEdges = [
   {
+    "source": "2510.17281",
+    "target": "2507.05257",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2511.20857",
+    "target": "2505.11942",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2511.20857",
+    "target": "2507.05257",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
     "source": "2604.10547",
     "target": "2603.08640",
     "verifiedBy": "semantic-scholar"
@@ -22,6 +37,11 @@ export const citationEdges = [
   {
     "source": "2604.17308",
     "target": "2511.20857",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2605.18421",
+    "target": "2507.05257",
     "verifiedBy": "semantic-scholar"
   },
   {
@@ -46,6 +66,11 @@ export const citationEdges = [
   },
   {
     "source": "2606.05661",
+    "target": "2505.11942",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2606.05661",
     "target": "2510.17281",
     "verifiedBy": "semantic-scholar"
   },
@@ -61,6 +86,16 @@ export const citationEdges = [
   },
   {
     "source": "2607.05155",
+    "target": "2505.11942",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2607.05155",
+    "target": "2511.20857",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2607.05155",
     "target": "2606.05080",
     "verifiedBy": "paper-pdf"
   },
@@ -68,6 +103,11 @@ export const citationEdges = [
     "source": "2607.05155",
     "target": "2606.05661",
     "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2607.05202",
+    "target": "2505.11942",
+    "verifiedBy": "semantic-scholar"
   },
   {
     "source": "2607.05202",
@@ -111,6 +151,21 @@ export const citationEdges = [
   },
   {
     "source": "2608.01149",
+    "target": "2505.11942",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2608.01149",
+    "target": "2510.17281",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2608.01149",
+    "target": "2511.20857",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2608.01149",
     "target": "2606.05661",
     "verifiedBy": "paper-pdf"
   },
@@ -141,7 +196,22 @@ export const citationEdges = [
   },
   {
     "source": "2608.04003",
+    "target": "2505.11942",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2608.04003",
+    "target": "2507.05257",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2608.04003",
     "target": "2511.20857",
+    "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2608.06144",
+    "target": "2505.11942",
     "verifiedBy": "semantic-scholar"
   },
   {
