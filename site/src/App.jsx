@@ -28,7 +28,8 @@ export default function App() {
       <header className="site-header">
         <div className="header-inner">
           <a className="brand" href="#">
-            <span className="brand-mark">[RSI]</span> Awesome Recursive Self-Improvement
+            <span className="brand-full">Awesome Recursive Self-Improvement</span>
+            <span className="brand-short">Awesome RSI</span>
           </a>
           <div className="header-actions">
             <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">

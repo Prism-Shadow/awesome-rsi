@@ -211,10 +211,6 @@ export default function FilterBar({
     <section className="filter-shell" aria-label="Filter papers">
       <div className="filter-board">
         <div className="filter-board-head">
-          <div>
-            <span className="filter-board-title">Explore the collection</span>
-            <small>Multi-select within a row · combine filters across rows</small>
-          </div>
           <span className="filter-status"><b>{resultCount}</b> of {totalCount} papers</span>
         </div>
 
