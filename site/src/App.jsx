@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { papers } from "./data/papers.js";
+import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
@@ -20,8 +21,19 @@ function useTheme() {
 }
 
 export default function App() {
-  const [tab, setTab] = useState("papers");
+  const [tab, setTab] = useState(() => window.location.hash.startsWith("#blog") ? "blog" : "papers");
   const [theme, toggleTheme] = useTheme();
+
+  const selectTab = (nextTab) => {
+    if (nextTab === "blog") {
+      window.history.replaceState(null, "", "#blog");
+      window.dispatchEvent(new Event("hashchange"));
+    } else if (window.location.hash.startsWith("#blog")) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      window.dispatchEvent(new Event("hashchange"));
+    }
+    setTab(nextTab);
+  };
 
   return (
     <>
@@ -58,24 +70,24 @@ export default function App() {
       <main className="container">
         <nav className="tabs" role="tablist">
           <button
+            className={`tab${tab === "blog" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-blog"
+            aria-controls="panel-blog"
+            aria-selected={tab === "blog"}
+            onClick={() => selectTab("blog")}
+          >
+            Blog
+          </button>
+          <button
             className={`tab${tab === "papers" ? " is-active" : ""}`}
             role="tab"
             id="tab-benchmark-papers"
             aria-controls="panel-benchmark-papers"
             aria-selected={tab === "papers"}
-            onClick={() => setTab("papers")}
+            onClick={() => selectTab("papers")}
           >
             Benchmark Paper List
-          </button>
-          <button
-            className={`tab${tab === "methods" ? " is-active" : ""}`}
-            role="tab"
-            id="tab-methods"
-            aria-controls="panel-methods"
-            aria-selected={tab === "methods"}
-            onClick={() => setTab("methods")}
-          >
-            Methods &amp; Systems
           </button>
           <button
             className={`tab${tab === "resources" ? " is-active" : ""}`}
@@ -83,9 +95,19 @@ export default function App() {
             id="tab-resources"
             aria-controls="panel-resources"
             aria-selected={tab === "resources"}
-            onClick={() => setTab("resources")}
+            onClick={() => selectTab("resources")}
           >
             Books &amp; Courses
+          </button>
+          <button
+            className={`tab${tab === "methods" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-methods"
+            aria-controls="panel-methods"
+            aria-selected={tab === "methods"}
+            onClick={() => selectTab("methods")}
+          >
+            Methods &amp; Systems
           </button>
         </nav>
         <div
@@ -93,7 +115,13 @@ export default function App() {
           role="tabpanel"
           aria-labelledby={`tab-${tab === "papers" ? "benchmark-papers" : tab}`}
         >
-          {tab === "papers" ? <PapersTab /> : tab === "methods" ? <MethodsTab /> : <ResourcesTab />}
+          {tab === "blog"
+            ? <BlogTab />
+            : tab === "papers"
+              ? <PapersTab />
+              : tab === "methods"
+                ? <MethodsTab />
+                : <ResourcesTab />}
         </div>
       </main>
 
