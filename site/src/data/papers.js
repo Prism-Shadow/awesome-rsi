@@ -547,5 +547,98 @@ export const papers = [
     "abstract": "AI agents have become surprisingly proficient at software engineering over the past year, largely due to improvements in reasoning capabilities. This raises a deeper question: can these systems extend their capabilities to automate AI research itself? In this paper, we explore post-training, the critical phase that turns base LLMs into useful assistants. We introduce PostTrainBench to benchmark how well LLM agents can perform post-training autonomously under bounded compute constraints (10 hours on one H100 GPU). We ask frontier agents (e.g., Claude Code with Opus 4.6) to optimize the performance of a base LLM on a particular benchmark (e.g., Qwen3-4B on AIME). Importantly, we do not provide any predefined strategies to the agents and instead give them full autonomy to find necessary information on the web, run experiments, and curate data. We find that frontier agents make substantial progress but generally lag behind instruction-tuned LLMs from leading providers: 23.2% for the best agent vs. 51.1% for official instruction-tuned models. However, agents can exceed instruction-tuned models in targeted scenarios: GPT-5.1 Codex Max achieves 89% on BFCL with Gemma-3-4B vs. 67% for the official model. We also observe several failure modes worth flagging. Agents sometimes engage in reward hacking: training on the test set, downloading existing instruction-tuned checkpoints instead of training their own, and using API keys they find to generate synthetic data without authorization. These behaviors are concerning and highlight the importance of careful sandboxing as these systems become more capable. Overall, we hope PostTrainBench will be useful for tracking progress in AI R&D automation and for studying the risks that come with it. Website and code are available at https://posttrainbench.com/.",
     "arxiv": "https://arxiv.org/abs/2603.08640",
     "pdf": "https://arxiv.org/pdf/2603.08640"
+  },
+  {
+    "id": "2511.20857",
+    "nickname": "Evo-Memory",
+    "title": "Evo-Memory: Benchmarking LLM Agent Test-time Learning with Self-Evolving Memory",
+    "authors": [
+      "Tianxin Wei",
+      "Noveen Sachdeva",
+      "Benjamin Coleman",
+      "Zhankui He",
+      "Yuanchen Bei",
+      "Xuying Ning",
+      "Mengting Ai",
+      "Yunzhe Li",
+      "Jingrui He",
+      "Ed H. Chi",
+      "Chi Wang",
+      "Shuo Chen",
+      "Fernando Pereira",
+      "Wang-Cheng Kang",
+      "Derek Zhiyuan Cheng"
+    ],
+    "published": "2025-11-25",
+    "year": 2025,
+    "tags": [
+      "Self-Evolution",
+      "Memory",
+      "Continual Learning"
+    ],
+    "citations": 113,
+    "abstract": "Statefulness is essential for large language model (LLM) agents to perform long-term planning and problem-solving. This makes memory a critical component, yet its management and evolution remain largely underexplored. Existing evaluations mostly focus on static conversational settings, where memory is passively retrieved from dialogue to answer queries, overlooking the dynamic ability to accumulate and reuse experience across evolving task streams. In real-world environments such as interactive problem assistants or embodied agents, LLMs are required to handle continuous task streams, yet often fail to learn from accumulated interactions, losing valuable contextual insights, a limitation that calls for test-time evolution, where LLMs retrieve, integrate, and update memory continuously during deployment. To bridge this gap, we introduce Evo-Memory, a comprehensive streaming benchmark and framework for evaluating self-evolving memory in LLM agents. Evo-Memory structures datasets into sequential task streams, requiring LLMs to search, adapt, and evolve memory after each interaction. We unify and implement over ten representative memory modules and evaluate them across 10 diverse multi-turn goal-oriented and single-turn reasoning and QA datasets. To better benchmark experience reuse, we provide a baseline method, ExpRAG, for retrieving and utilizing prior experience, and further propose ReMem, an action-think-memory refine pipeline that tightly integrates reasoning, task actions, and memory updates to achieve continual improvement.",
+    "arxiv": "https://arxiv.org/abs/2511.20857",
+    "pdf": "https://arxiv.org/pdf/2511.20857"
+  },
+  {
+    "id": "2510.17281",
+    "nickname": "MemoryBench",
+    "title": "MemoryBench: A Benchmark for Memory and Continual Learning in LLM Systems",
+    "authors": [
+      "Qingyao Ai",
+      "Yichen Tang",
+      "Changyue Wang",
+      "Jianming Long",
+      "Weihang Su",
+      "Yiqun Liu"
+    ],
+    "published": "2025-10-20",
+    "year": 2025,
+    "tags": [
+      "Memory",
+      "Continual Learning",
+      "Self-Evolution"
+    ],
+    "citations": 47,
+    "abstract": "Scaling up data, parameters, and test-time computation has been the mainstream methods to improve LLM systems (LLMsys), but their upper bounds are almost reached due to the gradual depletion of high-quality data and marginal gains obtained from larger computational resource consumption. Inspired by the abilities of human and traditional AI systems in learning from practice, constructing memory and continual learning frameworks for LLMsys has become an important and popular research direction in recent literature. Yet, existing benchmarks for LLM memory often focus on evaluating the system on homogeneous reading comprehension tasks with long-form inputs rather than testing their abilities to learn from accumulated user feedback in service time. Therefore, we propose a user feedback simulation framework and a comprehensive benchmark covering multiple domains, languages, and types of tasks to evaluate the continual learning abilities of LLMsys. Experiments show that the effectiveness and efficiency of state-of-the-art baselines are far from satisfying, and we hope this benchmark could pave the way for future studies on LLM memory and optimization algorithms.",
+    "arxiv": "https://arxiv.org/abs/2510.17281",
+    "pdf": "https://arxiv.org/pdf/2510.17281"
+  },
+  {
+    "id": "2508.19005",
+    "nickname": "StuLife",
+    "title": "Building Self-Evolving Agents via Experience-Driven Lifelong Learning: A Framework and Benchmark",
+    "authors": [
+      "Yuxuan Cai",
+      "Yipeng Hao",
+      "Jie Zhou",
+      "Hang Yan",
+      "Zhikai Lei",
+      "Rui Zhen",
+      "Zhenhua Han",
+      "Yutao Yang",
+      "Junsong Li",
+      "Qianjun Pan",
+      "Tianyu Huai",
+      "Qin Chen",
+      "Xin Li",
+      "Kai Chen",
+      "Bo Zhang",
+      "Xipeng Qiu",
+      "Liang He"
+    ],
+    "published": "2025-08-26",
+    "year": 2025,
+    "tags": [
+      "Self-Evolution",
+      "Memory",
+      "Skill Learning",
+      "Continual Learning"
+    ],
+    "citations": 37,
+    "abstract": "As AI advances toward general intelligence, the focus is shifting from systems optimized for static tasks to creating open-ended agents that learn continuously. In this paper, we introduce Experience-driven Lifelong Learning (ELL), a framework for building self-evolving agents capable of continuous growth through real-world interaction. The framework is built on four core principles: (1) Experience Exploration: Agents learn through continuous, self-motivated interaction with dynamic environments, navigating interdependent tasks and generating rich experiential trajectories. (2) Long-term Memory: Agents preserve and structure historical knowledge, including personal experiences, domain expertise, and commonsense reasoning, into a persistent memory system. (3) Skill Learning: Agents autonomously improve by abstracting recurring patterns from experience into reusable skills, which are actively refined and validated for application in new tasks. (4) Knowledge Internalization: Agents internalize explicit and discrete experiences into implicit and intuitive capabilities as \"second nature\". We also introduce StuLife, a benchmark dataset for ELL that simulates a student's holistic college journey, from enrollment to academic and personal development, across three core phases and ten detailed sub-scenarios. StuLife is designed around three key paradigm shifts: From Passive to Proactive, From Context to Memory, and From Imitation to Learning. In this dynamic environment, agents must acquire and distill practical skills and maintain persistent memory to make decisions based on evolving state variables. StuLife provides a comprehensive platform for evaluating lifelong learning capabilities, including memory retention, skill transfer, and self-motivated behavior. Beyond evaluating SOTA LLMs on the StuLife benchmark, we also explore the role of context engineering in advancing AGI.",
+    "arxiv": "https://arxiv.org/abs/2508.19005",
+    "pdf": "https://arxiv.org/pdf/2508.19005"
   }
 ];

@@ -63,17 +63,36 @@ function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
 }
 
 function DimensionHelp({ id, label, help }) {
+  const rootItems = help.items.filter((item) => !item.parent);
+
   return (
     <section id={id} className="dimension-help" aria-label={`${label} definitions`}>
       <p className="dimension-help-summary">{help.summary}</p>
-      <dl>
-        {help.items.map((item) => (
-          <div key={item.term}>
-            <dt>{item.term}</dt>
-            <dd>{item.description}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className="dimension-help-list">
+        {rootItems.map((item) => {
+          const children = help.items.filter((candidate) => candidate.parent === item.term);
+
+          return (
+            <article className={`dimension-help-item${children.length ? " has-children" : ""}`} key={item.term}>
+              <h4>{item.term}</h4>
+              <p>{item.description}</p>
+              {children.length > 0 && (
+                <div className="dimension-help-children">
+                  <span className="dimension-help-children-label">Includes</span>
+                  <div className="dimension-help-child-grid">
+                    {children.map((child) => (
+                      <section className="dimension-help-child" key={child.term}>
+                        <h5>{child.term}</h5>
+                        <p>{child.description}</p>
+                      </section>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
       {help.note && <p className="dimension-help-note"><span>Note</span>{help.note}</p>}
     </section>
   );

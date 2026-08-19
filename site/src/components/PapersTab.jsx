@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { papers } from "../data/papers.js";
 import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
+import { citationEdges } from "../data/citationGraph.js";
 import FilterBar from "./FilterBar.jsx";
 import PaperCard from "./PaperCard.jsx";
 import CitationGraph from "./CitationGraph.jsx";
@@ -123,7 +124,7 @@ export default function PapersTab() {
           <button className={view === "list" ? "is-active" : ""} onClick={() => setView("list")} aria-pressed={view === "list"}>☷ List</button>
           <button className={view === "graph" ? "is-active" : ""} onClick={() => setView("graph")} aria-pressed={view === "graph"}>⌘ Citation graph</button>
         </div>
-        <p>{view === "graph" ? "19 real citation relationships in the full corpus" : "Detailed metadata and abstracts"}</p>
+        <p>{view === "graph" ? `${citationEdges.length} real citation relationships in the full corpus` : "Detailed metadata and abstracts"}</p>
       </div>
       {visible.length === 0 ? (
         <div className="empty-state">
