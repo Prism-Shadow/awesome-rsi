@@ -1,8 +1,68 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
 
 const GRAPH_WIDTH = 920;
 const GRAPH_HEIGHT = 620;
+const MIN_ZOOM = 0.65;
+const MAX_ZOOM = 3;
+
+function clamp(value, minimum, maximum) {
+  return Math.min(maximum, Math.max(minimum, value));
+}
+
+function defaultCamera() {
+  return { x: GRAPH_WIDTH / 2, y: GRAPH_HEIGHT / 2, zoom: 1 };
+}
+
+function constrainCamera(camera) {
+  const halfWidth = GRAPH_WIDTH / camera.zoom / 2;
+  const halfHeight = GRAPH_HEIGHT / camera.zoom / 2;
+  const minimumVisible = 72;
+  return {
+    ...camera,
+    x: clamp(camera.x, minimumVisible - halfWidth, GRAPH_WIDTH - minimumVisible + halfWidth),
+    y: clamp(camera.y, minimumVisible - halfHeight, GRAPH_HEIGHT - minimumVisible + halfHeight),
+  };
+}
+
+function worldUnitsPerPixel(svg, zoom) {
+  const bounds = svg.getBoundingClientRect();
+  return Math.max(
+    GRAPH_WIDTH / zoom / Math.max(bounds.width, 1),
+    GRAPH_HEIGHT / zoom / Math.max(bounds.height, 1),
+  );
+}
+
+function worldPointAtClient(svg, camera, point) {
+  const bounds = svg.getBoundingClientRect();
+  const unitsPerPixel = worldUnitsPerPixel(svg, camera.zoom);
+  return {
+    x: camera.x + (point.x - bounds.left - bounds.width / 2) * unitsPerPixel,
+    y: camera.y + (point.y - bounds.top - bounds.height / 2) * unitsPerPixel,
+  };
+}
+
+function cameraFromAnchor(svg, zoom, anchor, clientPoint) {
+  const bounds = svg.getBoundingClientRect();
+  const unitsPerPixel = worldUnitsPerPixel(svg, zoom);
+  return constrainCamera({
+    zoom,
+    x: anchor.x - (clientPoint.x - bounds.left - bounds.width / 2) * unitsPerPixel,
+    y: anchor.y - (clientPoint.y - bounds.top - bounds.height / 2) * unitsPerPixel,
+  });
+}
+
+function pointerGeometry(pointers) {
+  const points = [...pointers.values()];
+  const centroid = points.reduce((total, point) => ({
+    x: total.x + point.x / points.length,
+    y: total.y + point.y / points.length,
+  }), { x: 0, y: 0 });
+  const distance = points.length > 1
+    ? Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)
+    : 0;
+  return { centroid, distance };
+}
 
 function nodeRadius(citations) {
   return 10 + Math.sqrt(Math.max(citations, 0)) * 2.65;
@@ -125,7 +185,51 @@ export default function CitationGraph({ papers }) {
   const layout = useMemo(() => buildLayout(papers, visibleEdges), [papers, visibleEdges]);
   const [selectedId, setSelectedId] = useState(() => papers[0]?.id ?? null);
   const [hoveredId, setHoveredId] = useState(null);
-  const [zoom, setZoom] = useState(1);
+  const [camera, setCamera] = useState(defaultCamera);
+  const [isPanning, setIsPanning] = useState(false);
+  const svgRef = useRef(null);
+  const cameraRef = useRef(camera);
+  const pointersRef = useRef(new Map());
+  const gestureRef = useRef(null);
+  const gestureMovedRef = useRef(false);
+  const suppressClickUntilRef = useRef(0);
+
+  const updateCamera = (nextCamera) => {
+    cameraRef.current = nextCamera;
+    setCamera(nextCamera);
+  };
+
+  useEffect(() => {
+    const nextCamera = defaultCamera();
+    cameraRef.current = nextCamera;
+    pointersRef.current.clear();
+    gestureRef.current = null;
+    setIsPanning(false);
+    setCamera(nextCamera);
+  }, [layout]);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return undefined;
+
+    const handleWheel = (event) => {
+      event.preventDefault();
+      const currentCamera = cameraRef.current;
+      const nextZoom = clamp(
+        currentCamera.zoom * Math.exp(-event.deltaY * 0.0015),
+        MIN_ZOOM,
+        MAX_ZOOM,
+      );
+      const point = { x: event.clientX, y: event.clientY };
+      const anchor = worldPointAtClient(svg, currentCamera, point);
+      const nextCamera = cameraFromAnchor(svg, nextZoom, anchor, point);
+      cameraRef.current = nextCamera;
+      setCamera(nextCamera);
+    };
+
+    svg.addEventListener("wheel", handleWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", handleWheel);
+  }, [papers.length]);
 
   const selectedPaper = fullPaperById.get(selectedId) ?? papers[0] ?? null;
   const activeId = hoveredId;
@@ -140,12 +244,92 @@ export default function CitationGraph({ papers }) {
   const times = papers.map((paper) => new Date(`${paper.published}T00:00:00Z`).getTime());
   const minTime = times.length ? Math.min(...times) : 0;
   const maxTime = times.length ? Math.max(...times) : 0;
-  const focusNode = selectedPaper ? layout.get(selectedPaper.id) : null;
-  const viewWidth = GRAPH_WIDTH / zoom;
-  const viewHeight = GRAPH_HEIGHT / zoom;
-  const centerX = zoom > 1 && focusNode ? focusNode.x : GRAPH_WIDTH / 2;
-  const centerY = zoom > 1 && focusNode ? focusNode.y : GRAPH_HEIGHT / 2;
-  const viewBox = `${centerX - viewWidth / 2} ${centerY - viewHeight / 2} ${viewWidth} ${viewHeight}`;
+  const viewWidth = GRAPH_WIDTH / camera.zoom;
+  const viewHeight = GRAPH_HEIGHT / camera.zoom;
+  const viewBox = `${camera.x - viewWidth / 2} ${camera.y - viewHeight / 2} ${viewWidth} ${viewHeight}`;
+
+  const beginGesture = (svg) => {
+    const geometry = pointerGeometry(pointersRef.current);
+    const startCamera = cameraRef.current;
+    gestureRef.current = {
+      pointerCount: pointersRef.current.size,
+      centroid: geometry.centroid,
+      distance: geometry.distance,
+      camera: startCamera,
+      anchor: worldPointAtClient(svg, startCamera, geometry.centroid),
+    };
+  };
+
+  const handlePointerDown = (event) => {
+    event.preventDefault();
+    if (pointersRef.current.size === 0) gestureMovedRef.current = false;
+    const captureTarget = event.target;
+    pointersRef.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+      captureTarget,
+    });
+    captureTarget.setPointerCapture(event.pointerId);
+    beginGesture(event.currentTarget);
+    setIsPanning(true);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!pointersRef.current.has(event.pointerId)) return;
+    event.preventDefault();
+    pointersRef.current.set(event.pointerId, {
+      ...pointersRef.current.get(event.pointerId),
+      x: event.clientX,
+      y: event.clientY,
+    });
+
+    if (!gestureRef.current || gestureRef.current.pointerCount !== pointersRef.current.size) {
+      beginGesture(event.currentTarget);
+      return;
+    }
+
+    const gesture = gestureRef.current;
+    const geometry = pointerGeometry(pointersRef.current);
+    if (Math.hypot(
+      geometry.centroid.x - gesture.centroid.x,
+      geometry.centroid.y - gesture.centroid.y,
+    ) > 3 || Math.abs(geometry.distance - gesture.distance) > 3) {
+      gestureMovedRef.current = true;
+    }
+
+    const nextZoom = gesture.pointerCount > 1 && gesture.distance > 0
+      ? clamp(gesture.camera.zoom * geometry.distance / gesture.distance, MIN_ZOOM, MAX_ZOOM)
+      : gesture.camera.zoom;
+    updateCamera(cameraFromAnchor(event.currentTarget, nextZoom, gesture.anchor, geometry.centroid));
+  };
+
+  const endPointerGesture = (event) => {
+    const pointer = pointersRef.current.get(event.pointerId);
+    if (!pointer) return;
+    pointersRef.current.delete(event.pointerId);
+    if (gestureMovedRef.current) suppressClickUntilRef.current = Date.now() + 250;
+
+    if (pointersRef.current.size > 0) {
+      beginGesture(event.currentTarget);
+    } else {
+      gestureRef.current = null;
+      setIsPanning(false);
+    }
+
+    if (pointer.captureTarget.hasPointerCapture(event.pointerId)) {
+      pointer.captureTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const changeZoom = (amount) => {
+    const currentCamera = cameraRef.current;
+    updateCamera(constrainCamera({
+      ...currentCamera,
+      zoom: clamp(Number((currentCamera.zoom + amount).toFixed(2)), MIN_ZOOM, MAX_ZOOM),
+    }));
+  };
+
+  const resetView = () => updateCamera(defaultCamera());
 
   if (papers.length === 0) return null;
 
@@ -166,11 +350,23 @@ export default function CitationGraph({ papers }) {
       <div className="graph-workspace">
         <div className="graph-stage">
           <div className="graph-controls" aria-label="Graph zoom controls">
-            <button onClick={() => setZoom((value) => Math.min(1.8, Number((value + 0.2).toFixed(1))))} aria-label="Zoom in">+</button>
-            <button onClick={() => setZoom((value) => Math.max(0.8, Number((value - 0.2).toFixed(1))))} aria-label="Zoom out">−</button>
-            <button onClick={() => setZoom(1)} aria-label="Reset zoom">1:1</button>
+            <button onClick={() => changeZoom(0.2)} aria-label="Zoom in">+</button>
+            <button onClick={() => changeZoom(-0.2)} aria-label="Zoom out">−</button>
+            <button onClick={resetView} aria-label="Reset graph view">{Math.round(camera.zoom * 100)}%</button>
           </div>
-          <svg viewBox={viewBox} role="img" aria-label={`Citation network with ${papers.length} papers and ${visibleEdges.length} verified citation relationships`}>
+          <div className="graph-interaction-hint">Drag to pan · scroll or pinch to zoom</div>
+          <svg
+            ref={svgRef}
+            className={isPanning ? "is-panning" : ""}
+            viewBox={viewBox}
+            role="img"
+            aria-label={`Citation network with ${papers.length} papers and ${visibleEdges.length} verified citation relationships`}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={endPointerGesture}
+            onPointerCancel={endPointerGesture}
+            onLostPointerCapture={endPointerGesture}
+          >
             <defs>
               <marker id="citation-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M 0 0 L 10 5 L 0 10 z" />
@@ -207,7 +403,10 @@ export default function CitationGraph({ papers }) {
                     aria-label={`${paper.nickname}, ${paper.citations} citations`}
                     onMouseEnter={() => setHoveredId(paper.id)}
                     onMouseLeave={() => setHoveredId(null)}
-                    onClick={() => setSelectedId(paper.id)}
+                    onClick={(event) => {
+                      if (event.detail > 0 && Date.now() < suppressClickUntilRef.current) return;
+                      setSelectedId(paper.id);
+                    }}
                     onKeyDown={(event) => {
                       if (event.key === "Enter" || event.key === " ") {
                         event.preventDefault();
