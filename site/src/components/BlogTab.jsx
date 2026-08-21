@@ -15,6 +15,52 @@ function postIdFromHash() {
   return match ? decodeURIComponent(match[1]) : null;
 }
 
+// Minimal inline markup so post text stays plain-string and easy to hand-edit:
+// [label](url) becomes a link, **text** becomes bold. Everything else is literal.
+function renderInline(text) {
+  const nodes = [];
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+  let lastIndex = 0;
+  let match;
+  let key = 0;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] !== undefined) {
+      const external = /^https?:\/\//.test(match[2]);
+      nodes.push(
+        <a
+          key={key++}
+          href={match[2]}
+          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+        >
+          {match[1]}
+        </a>,
+      );
+    } else {
+      nodes.push(<strong key={key++}>{match[3]}</strong>);
+    }
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+  return nodes;
+}
+
+function ArticleBlock({ block }) {
+  if (block.type === "list") {
+    const List = block.ordered ? "ol" : "ul";
+    return (
+      <List>
+        {block.items.map((item, index) => <li key={index}>{renderInline(item)}</li>)}
+      </List>
+    );
+  }
+  return <p>{renderInline(block.text)}</p>;
+}
+
 function BlogIndex({ onOpenPost }) {
   return (
     <section className="blog-index" aria-label="Blog posts">
@@ -56,12 +102,23 @@ function BlogArticle({ post, onBack }) {
       <h2 id="blog-article-title">{post.title}</h2>
       <p className="blog-article-lead">{post.summary}</p>
 
-      <section className="blog-article-body" aria-labelledby="release-highlights-title">
-        <h3 id="release-highlights-title">What’s included</h3>
-        <ul>
-          {post.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-        </ul>
-      </section>
+      {post.sections
+        ? post.sections.map((section, index) => (
+            <section className="blog-article-body" key={section.heading ?? index}>
+              {section.heading ? <h3>{section.heading}</h3> : null}
+              {section.blocks.map((block, blockIndex) => (
+                <ArticleBlock block={block} key={blockIndex} />
+              ))}
+            </section>
+          ))
+        : (
+          <section className="blog-article-body" aria-labelledby="release-highlights-title">
+            <h3 id="release-highlights-title">What’s included</h3>
+            <ul>
+              {post.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+            </ul>
+          </section>
+        )}
     </article>
   );
 }
