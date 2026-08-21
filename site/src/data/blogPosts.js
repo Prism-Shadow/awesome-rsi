@@ -9,47 +9,18 @@ export const blogPosts = [
     tags: ["intro", "RSI", "definition", "benchmarks"],
     sections: [
       {
-        heading: "What is recursive self-improvement?",
         blocks: [
           {
             type: "p",
-            text: "The idea is old. In 1965 I.J. Good described an *intelligence explosion*: since designing machines is itself an intellectual task, a capable enough machine could design a better one, which designs a better one still — **\"the first ultraintelligent machine is the last invention that man need ever make.\"** Yudkowsky's self-rewriting \"seed AI\" and Bostrom's *Superintelligence* (2014) carried the theme forward, but for decades it stayed a thought experiment about a hypothetical future.",
+            text: "The idea is old. In 1965 I.J. Good described an **intelligence explosion**: since designing machines is itself an intellectual task, a capable enough machine could design a better one, which designs a better one still — **\"the first ultraintelligent machine is the last invention that man need ever make.\"** Yudkowsky's self-rewriting \"seed AI\" and Bostrom's *Superintelligence* (2014) carried the theme forward, but for decades it stayed a thought experiment about a hypothetical future.",
           },
-        ],
-      },
-      {
-        heading: "Three things that make RSI hard to follow",
-        blocks: [
           {
             type: "p",
-            text: "The field is exciting precisely because it is unsettled — which also makes it hard to navigate. Three problems stand out:",
+            text: "It is no longer hypothetical. The capabilities of large language model agents have made recursive self-improvement (RSI) appear reachable, and the literature is expanding accordingly. Three difficulties follow. **First**, the term is unstable: much as with \"world model,\" it is applied loosely, so that editing a prompt and retraining model weights are both called RSI and few authors mean quite the same thing. **Second**, the field is growing faster than it is being organized — a July 2026 survey ([arXiv:2607.07663](https://arxiv.org/abs/2607.07663)) catalogues **1,250** arXiv papers from 2024–2026 — yet little of this work has been synthesized into a comparable whole. **Third**, the pace has outrun its pedagogy: there is no settled course or textbook, and newcomers lack an obvious entry point.",
           },
-          {
-            type: "list",
-            ordered: true,
-            items: [
-              "**The definition won't sit still.** Like \"world model,\" the term is used loosely — editing a prompt and retraining weights both get called \"RSI\" — so everyone means something slightly different.",
-              "**It grows faster than anyone can summarize.** A July 2026 survey ([arXiv:2607.07663](https://arxiv.org/abs/2607.07663)) scanned **1,250** arXiv papers on recursive self-improvement from 2024–2026, yet there is little synthesis of how they relate or compare.",
-              "**The learning materials can't keep up.** The field moves too fast for a settled course or textbook, so a newcomer has no obvious on-ramp.",
-            ],
-          },
-        ],
-      },
-      {
-        heading: "What this project does about it",
-        blocks: [
           {
             type: "p",
-            text: "Awesome RSI answers each of those three problems in turn:",
-          },
-          {
-            type: "list",
-            ordered: true,
-            items: [
-              "**Dimensions instead of one label.** We define RSI along a set of orthogonal dimensions, so systems are described by *where they sit* on each axis rather than by whether they earn the label.",
-              "**Comparison views over the corpus.** The same collection is offered as a filterable benchmark list, sortable by date or citations, plus a citation graph — a timeline, a leaderboard, and a map that let benchmarks and methods be compared horizontally and vertically.",
-              "**A curated learning shelf.** We surveyed the books, courses, and materials on RSI and collected the worthwhile ones in one place, so there is finally a single on-ramp.",
-            ],
+            text: "Awesome RSI addresses each in turn. **First**, rather than adjudicate what qualifies as \"real\" RSI, we define the notion along a set of orthogonal dimensions and locate each system by its position on them. **Second**, we present the same corpus through complementary views — a filterable, sortable benchmark list and a verified citation graph — so that benchmarks and methods may be compared as a timeline, a leaderboard, or a map. **Third**, we assemble the books and courses worth reading into a single curated shelf. The remainder of this post treats each in order.",
           },
         ],
       },
@@ -62,22 +33,22 @@ export const blogPosts = [
           },
           {
             type: "p",
-            text: "Those questions are really a set of dimensions. Rather than police who counts as \"real\" RSI, we describe each system along a few axes:",
+            text: "Those questions are, in effect, a set of dimensions. Rather than adjudicate membership, we characterize each system along a few axes:",
           },
           {
             type: "list",
             ordered: false,
             items: [
-              "**What evolves.** Which building block actually changes — non-parametric context, memory, skills, or harness code, versus genuinely parametric recursion where one model generation trains the next.",
-              "**How it evolves.** Whether experience arrives online as a stream or curriculum, through a clean offline train/test split, or a hybrid that seeds a skill library offline and keeps evolving in use.",
-              "**Where the signal comes from.** What supervises the improvement — a rule-based check, an external verifier, an LLM judge, or a self-generated reward.",
-              "**How far the loop closes.** How much human involvement remains, from human-in-the-loop to a fully closed loop.",
-              "**What we measure.** Final accuracy, the *gain* over a non-evolving baseline, cost, or latency — gain, not accuracy, is often the honest metric.",
+              "**What evolves.** Which building block changes — non-parametric context, memory, skills, or harness code, as against genuinely parametric recursion in which one model generation trains the next.",
+              "**How it evolves.** Whether experience arrives online as a stream or curriculum, through a fixed offline train/test split, or a hybrid that seeds a skill library offline and continues to adapt in use.",
+              "**Where the signal originates.** What supervises the improvement — a rule-based check, an external verifier, an LLM judge, or a self-generated reward.",
+              "**How far the loop closes.** The degree of remaining human involvement, from human-in-the-loop to a fully closed loop.",
+              "**What is measured.** Final accuracy, the *gain* over a non-evolving baseline, cost, or latency — of which gain, rather than final accuracy, is often the more informative.",
             ],
           },
           {
             type: "p",
-            text: "These are the same axes the benchmark list is tagged with, so you can filter the corpus by the definition itself.",
+            text: "These are the axes the benchmark list is tagged with, so the corpus can be filtered by the definition itself.",
           },
         ],
       },
@@ -92,11 +63,19 @@ export const blogPosts = [
             type: "list",
             ordered: false,
             items: [
-              "**Benchmark Paper List** — the benchmark corpus with a seven-dimension filter board (origin, RSI mode, artifact, construction, metric, creation, evaluation), plus full-text search and sorting by date or citations.",
-              "**Citation graph** — a verified graph of how the papers cite one another, with pan-and-zoom, to read the corpus as a map rather than a list.",
-              "**Methods & Systems** — the methods side of the field: how self-improvement is actually done, kept alongside the benchmarks that measure it.",
-              "**Books & Courses** — the curated learning shelf of technical books, university courses, and other materials.",
+              "**Benchmark Paper List** — the benchmark corpus with a seven-dimension filter board (origin, RSI mode, artifact, construction, metric, creation, evaluation), full-text search, and sorting by date or citations.",
+              "**Citation graph** — a verified graph of how the papers cite one another, with pan-and-zoom, presenting the corpus as a map rather than a list.",
+              "**Methods & Systems** — the methods side of the field: how self-improvement is carried out, kept alongside the benchmarks that measure it.",
             ],
+          },
+        ],
+      },
+      {
+        heading: "Books & courses",
+        blocks: [
+          {
+            type: "p",
+            text: "As no textbook yet exists, we have gathered the material worth reading into a single shelf: technical books on agent memory and self-evolution, university courses such as Stanford's CS329A and Harvard's CS2881R, and surveys and harness write-ups that survey the field. It is collected under the **Books & Courses** tab and is updated as strong material appears.",
           },
         ],
       },
@@ -105,15 +84,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "This is a living map, and it improves with more eyes on it. If a benchmark, method, or resource is missing — or a taxonomy label looks wrong — open a pull request or an issue; new entries carry the taxonomy metadata so they drop straight into the filter views.",
-          },
-          {
-            type: "list",
-            ordered: false,
-            items: [
-              "Repository and contribution guide: [github.com/Prism-Shadow/awesome-rsi](https://github.com/Prism-Shadow/awesome-rsi)",
-              "Background reading — the survey behind the 1,250-paper figure: [Recursive Self-Improvement in AI (arXiv:2607.07663)](https://arxiv.org/abs/2607.07663)",
-            ],
+            text: "Awesome RSI is intended as a living map, and it improves with additional review. If a paper, method, or resource is missing — or a taxonomy label appears incorrect — please open a pull request or an issue at [github.com/Prism-Shadow/awesome-rsi](https://github.com/Prism-Shadow/awesome-rsi). New entries carry the taxonomy metadata and integrate directly into the filter views.",
           },
         ],
       },
