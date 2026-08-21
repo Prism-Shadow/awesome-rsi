@@ -29,11 +29,15 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "We define RSI as a process where an agent improves its **own** future performance by editing one of its **own** building blocks — parametric ones such as model parameters, or non-parametric ones such as **context**, **memory**, **skills**, and **harness/scaffold code** — using feedback drawn from its own work.",
+            text: "We define RSI as a process where an agent improves its **own** future performance by editing one of its **own** building blocks — parametric ones such as model parameters, or non-parametric ones such as **context**, **memory**, **skills**, and **harness code** — using feedback drawn from its own work or from the outside world.¹",
+          },
+          {
+            type: "footnote",
+            text: "¹ The external source matters: it has been argued that with no signal from outside at all, self-improvement is impossible in principle — an information-theoretic limit on how much a system can bootstrap from itself alone.",
           },
           {
             type: "p",
-            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the three dimensions that are most often misread; further dimensions are documented on the site.",
+            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the two dimensions that are most often misread; further dimensions are documented on the site.",
           },
           {
             type: "p",
@@ -62,16 +66,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "The same papers can be read in more than one way:",
-          },
-          {
-            type: "list",
-            ordered: false,
-            items: [
-              "**Benchmark Paper List** — the benchmark corpus with a seven-dimension filter board (origin, RSI mode, artifact, construction, metric, creation, evaluation), full-text search, and sorting by date or citations.",
-              "**Citation graph** — a verified graph of how the papers cite one another, with pan-and-zoom, presenting the corpus as a map rather than a list.",
-              "**Methods & Systems** — the methods side of the field: how self-improvement is carried out, kept alongside the benchmarks that measure it.",
-            ],
+            text: "This is more than a paper list; the same corpus can be examined from several angles. First, the list can be sorted by year or by citation count. Second, it can be filtered by the dimensions of the previous section: selecting values across dimensions returns only the papers that satisfy all of them, and noting which combinations return few or no papers can point to an underexplored direction worth pursuing. Third, a citation graph shows how the papers reference one another, annotated with year and citation count. Fourth, we separate benchmark work from method work, so the two can be consulted independently.",
           },
         ],
       },

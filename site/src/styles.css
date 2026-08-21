@@ -403,6 +403,15 @@ a:hover {
   margin-bottom: 0;
 }
 
+.blog-footnote {
+  margin: 1.25rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
 .blog-article-body p + ul,
 .blog-article-body p + ol {
   margin-top: 0.25rem;

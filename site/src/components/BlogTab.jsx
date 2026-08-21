@@ -58,6 +58,9 @@ function ArticleBlock({ block }) {
       </List>
     );
   }
+  if (block.type === "footnote") {
+    return <p className="blog-footnote">{renderInline(block.text)}</p>;
+  }
   return <p>{renderInline(block.text)}</p>;
 }
 
