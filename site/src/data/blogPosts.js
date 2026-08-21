@@ -2,10 +2,10 @@ export const blogPosts = [
   {
     id: "introducing-awesome-rsi",
     kind: "Introduction",
-    title: "Awesome RSI: A Comprehensive Collection with Clear Definitions and Comparison Dimensions",
+    title: "Awesome RSI: A Comprehensive Collection with Dimensioned Definitions",
     published: "2026-08-21",
     summary:
-      "Recursive self-improvement is moving faster than its own vocabulary. This post introduces our own precise, dimensioned definition; comparison views over the papers; and a curated shelf of books and courses.",
+      "Recursive self-improvement is moving faster than its own vocabulary. This post introduces our own dimensioned definition; comparison views over the papers; and a curated shelf of books and courses.",
     tags: ["intro", "RSI", "definition", "benchmarks"],
     sections: [
       {
@@ -14,10 +14,6 @@ export const blogPosts = [
           {
             type: "p",
             text: "The idea is old. In 1965 I.J. Good described an *intelligence explosion*: since designing machines is itself an intellectual task, a capable enough machine could design a better one, which designs a better one still — **\"the first ultraintelligent machine is the last invention that man need ever make.\"** Yudkowsky's self-rewriting \"seed AI\" and Bostrom's *Superintelligence* (2014) carried the theme forward, but for decades it stayed a thought experiment about a hypothetical future.",
-          },
-          {
-            type: "p",
-            text: "Large language model agents turned it into an engineering question. Today RSI usually means something concrete and measurable: an agent that improves its **own** future performance by editing one of its **own** building blocks — parametric ones such as model parameters, or non-parametric ones such as **context**, **memory**, **skills**, and **harness/scaffold code** — using feedback drawn from its own work. The question is no longer *when the singularity arrives*, but which block changes, what signal drives the change, and whether anything measurably improved.",
           },
         ],
       },
@@ -44,14 +40,14 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "Awesome RSI answers each of those problems directly:",
+            text: "Awesome RSI answers each of those three problems in turn:",
           },
           {
             type: "list",
             ordered: true,
             items: [
-              "**A precise, dimensioned definition.** We give a concrete definition and break it into orthogonal dimensions, so systems are described by *where they sit* on each axis rather than by whether they earn the label.",
-              "**Comparison views over the corpus.** The same collection is offered as a filterable benchmark list, sortable by date or citations, plus a verified citation graph — a timeline, a leaderboard, and a map at once.",
+              "**Dimensions instead of one label.** We define RSI along a set of orthogonal dimensions, so systems are described by *where they sit* on each axis rather than by whether they earn the label.",
+              "**Comparison views over the corpus.** The same collection is offered as a filterable benchmark list, sortable by date or citations, plus a citation graph — a timeline, a leaderboard, and a map that let benchmarks and methods be compared horizontally and vertically.",
               "**A curated learning shelf.** We surveyed the books, courses, and materials on RSI and collected the worthwhile ones in one place, so there is finally a single on-ramp.",
             ],
           },
@@ -62,15 +58,11 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "Here is our current working definition — a draft, meant to be argued with and refined:",
+            text: "Large language model agents turned it into an engineering question. Today RSI usually means something concrete and measurable: an agent that improves its **own** future performance by editing one of its **own** building blocks — parametric ones such as model parameters, or non-parametric ones such as **context**, **memory**, **skills**, and **harness/scaffold code** — using feedback drawn from its own work. The question is no longer *when the singularity arrives*, but which block changes, what signal drives the change, and whether anything measurably improved.",
           },
           {
             type: "p",
-            text: "*A recursive self-improvement system improves its own future performance by modifying one of its own building blocks — context, memory, skills, harness/scaffold code, or model parameters — using a feedback signal derived from its own activity, with the improvement carried forward to later tasks.*",
-          },
-          {
-            type: "p",
-            text: "A single label can't capture that, so we describe each system along a few dimensions:",
+            text: "Those questions are really a set of dimensions. Rather than police who counts as \"real\" RSI, we describe each system along a few axes:",
           },
           {
             type: "list",
