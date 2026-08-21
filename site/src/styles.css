@@ -1705,11 +1705,11 @@ a:hover {
   color: var(--muted);
 }
 
-/* ---------- methods placeholder ---------- */
+/* ---------- methods & systems ---------- */
 
 .methods-placeholder {
   min-height: 22rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   padding: clamp(2rem, 6vw, 4.5rem);
   display: grid;
   grid-template-columns: minmax(8rem, 0.32fr) minmax(0, 1fr);
@@ -1793,6 +1793,57 @@ a:hover {
   font-size: 0.66rem;
 }
 
+.method-card {
+  gap: 0;
+}
+
+.method-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.method-status {
+  color: var(--muted);
+  font: 0.66rem var(--mono);
+}
+
+.method-taxonomy {
+  margin: 0.9rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.method-taxonomy > div {
+  min-width: 0;
+  padding: 0.7rem 0.8rem;
+  background: var(--surface-2);
+}
+
+.method-taxonomy > div + div {
+  border-left: 1px solid var(--line);
+}
+
+.method-taxonomy dt {
+  color: var(--muted);
+  font: 700 0.62rem var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.method-taxonomy dd {
+  margin: 0.25rem 0 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {
@@ -1840,4 +1891,8 @@ a:hover {
   .graph-legend { justify-content: flex-start; gap: 0.55rem 1rem; }
   .methods-placeholder { grid-template-columns: 1fr; gap: 1.2rem; padding: 2rem 1.25rem; }
   .methods-placeholder-index { min-height: 2rem; border-right: 0; border-bottom: 1px solid var(--line); }
+  .method-taxonomy { grid-template-columns: 1fr 1fr; }
+  .method-taxonomy > div + div { border-left: 0; }
+  .method-taxonomy > div:nth-child(even) { border-left: 1px solid var(--line); }
+  .method-taxonomy > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
 }
