@@ -385,6 +385,38 @@ a:hover {
   gap: 0.75rem;
 }
 
+.blog-article-body ol {
+  margin: 0;
+  padding-left: 1.3rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.blog-article-body p {
+  margin: 0 0 1rem;
+  color: var(--body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.blog-article-body p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-footnote {
+  margin: 1.25rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.blog-article-body p + ul,
+.blog-article-body p + ol {
+  margin-top: 0.25rem;
+}
+
 .blog-article-body li {
   padding-left: 0.25rem;
   color: var(--body);
