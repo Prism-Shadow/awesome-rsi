@@ -350,9 +350,9 @@ a:hover {
   max-width: 45rem;
   margin: 0.5rem 0 0;
   color: var(--ink);
-  font-size: clamp(2rem, 6vw, 3.7rem);
-  line-height: 1.02;
-  letter-spacing: -0.05em;
+  font-size: clamp(1.5rem, 4.2vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .blog-article-lead {
