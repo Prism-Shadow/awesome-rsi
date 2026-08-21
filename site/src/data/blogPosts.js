@@ -49,11 +49,11 @@ export const blogPosts = [
           },
           {
             type: "p",
-            text: "**2. How the improvement is structured.** Three arrangements recur. *Offline RSI* resembles supervised learning: the agent attempts labeled training tasks, receives a supervision signal, consolidates the experience into skills or memory (or trains it back into the base model), and is then evaluated on a held-out test set — for example, GDPevo ([arXiv:2608.03764](https://arxiv.org/abs/2608.03764)). *Online RSI* resembles reinforcement learning, with training and test on the same task: the agent works a single task continuously, accumulating knowledge in its environment to maximize expected reward over a long horizon, balancing exploration and exploitation — for example, EdgeBench ([arXiv:2607.05155](https://arxiv.org/abs/2607.05155)) and the PostTrainBench setup above. *Mixed RSI* combines the two, continuing to consolidate new experience during the test phase of an otherwise offline protocol.",
+            text: "**2. How the improvement is structured.** First, offline RSI resembles supervised learning: the agent attempts labeled training tasks, receives a supervision signal, consolidates the experience into skills or memory (or trains it back into the base model), and is then evaluated on a held-out test set — for example, GDPevo ([arXiv:2608.03764](https://arxiv.org/abs/2608.03764)). Second, online RSI resembles reinforcement learning, with training and test on the same task: the agent works a single task continuously, accumulating knowledge in its environment to maximize expected reward over a long horizon, balancing exploration and exploitation — for example, EdgeBench ([arXiv:2607.05155](https://arxiv.org/abs/2607.05155)) and the PostTrainBench setup above. Third, mixed RSI combines the two, continuing to consolidate new experience during the test phase of an otherwise offline setting.",
           },
           {
             type: "p",
-            text: "**3. The remaining axes.** Others distinguish systems further. The evaluation *metric* need not be accuracy alone; cost and time matter too, since useful self-improvement should be faster and cheaper as well as more accurate. The *source of the supervision signal* is a separate axis — a score or a reference answer, drawn from the environment or from a labeled training set. And for benchmarks specifically, two more: whether the benchmark is built from scratch or assembled from existing ones, and whether it is authored by hand or generated automatically by an agent.",
+            text: "**3. The remaining axes.** Others distinguish systems further. The evaluation metric need not be accuracy alone; cost and time matter too, since useful self-improvement should be faster and cheaper as well as more accurate. The source of the supervision signal is a separate axis — a score or a reference answer, drawn from the environment or from a labeled training set. And for benchmarks specifically, two more: whether the benchmark is built from scratch or assembled from existing ones, and whether it is authored by hand or generated automatically by an agent.",
           },
           {
             type: "p",
@@ -66,7 +66,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "This is more than a paper list; the same corpus can be examined from several angles. First, the list can be sorted by year or by citation count. Second, it can be filtered by the dimensions of the previous section: selecting values across dimensions returns only the papers that satisfy all of them, and noting which combinations return few or no papers can point to an underexplored direction worth pursuing. Third, a citation graph shows how the papers reference one another, annotated with year and citation count. Fourth, we separate benchmark work from method work, so the two can be consulted independently.",
+            text: "Awesome RSI is more than a paper list; the same corpus can be examined from several angles. First, the list can be sorted by year or by citation count. Second, it can be filtered by the dimensions of the previous section: selecting values across dimensions returns only the papers that satisfy all of them, and noting which combinations return few or no papers can point to an underexplored direction worth pursuing. Third, a citation graph shows how the papers reference one another, annotated with year and citation count. Fourth, we separate benchmark work from method work, so the two can be consulted independently.",
           },
         ],
       },
@@ -75,7 +75,7 @@ export const blogPosts = [
         blocks: [
           {
             type: "p",
-            text: "As no textbook yet exists, we have gathered the material worth reading into a single shelf: technical books on agent memory and self-evolution, university courses such as Stanford's CS329A and Harvard's CS2881R, and surveys and harness write-ups that survey the field. It is collected under the **Books & Courses** tab and is updated as strong material appears.",
+            text: "We gathered the material worth reading into a single shelf: technical books on agent memory and self-evolution, university courses such as Stanford's CS329A and Harvard's CS2881R, and surveys and harness write-ups that review the field. It is collected under the **Books & Courses** tab and is updated as strong material appears.",
           },
         ],
       },
