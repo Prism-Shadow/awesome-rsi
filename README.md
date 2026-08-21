@@ -1,21 +1,30 @@
-# Awesome RSI (Recursive Self-Improvement) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# Awesome RSI (Recursive Self-Improvement) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Blog](https://img.shields.io/badge/%F0%9F%93%9D%20Blog-read%20the%20intro-8A2BE2)](https://prism-shadow.github.io/awesome-rsi/#blog)
 
 > A curated list of **benchmarks** and **methods** for **Recursive Self-Improvement (RSI)** — AI agents that improve *themselves*.
 
-We track the research on agents that get better by editing their own building blocks — whether that's their **context**, **memory**, **skills**, **harness/scaffold code**, or **model parameters**. The goal is a living map of *how* self-improvement is done and *how* we measure whether it worked.
+We track the research on agents that get better by editing their own building blocks — whether that's their **context**, **memory**, **skills**, **harness code**, or **model parameters**. The goal is a living map of *how* self-improvement is done and *how* we measure whether it worked.
+
+📝 **New here?** Start with the [introductory blog post](https://prism-shadow.github.io/awesome-rsi/#blog) — it explains what RSI is, why the field is hard to navigate, and how this collection defines and compares the work.
 
 ## What this repo is for
 
 1. **A paper list** — the curated core: RSI **methods** (how self-improvement is done) and **benchmarks** (how it's measured), each with a one-line "what it is and why it matters."
-2. **A website** — a GitHub Pages site hosting the full paper list with multiple views: sorted by **date**, sorted by **citations**, and grouped by **cluster/topic**, so the same corpus can be read as a timeline, a leaderboard, or a map.
+2. **A website** — a GitHub Pages site that hosts the corpus as several views: a benchmark list with a multi-dimensional filter board, sortable by **date** or **citations**; a **citation graph**; a **Methods & Systems** list; and a **Books & Courses** shelf — so the same work can be read as a timeline, a leaderboard, or a map.
+3. **A blog** — longer-form writing on the field, starting with the introduction to this project.
 
-## Scope
+## Contributing
 
-**In scope**
-- Methods that let an agent improve its own context, memory, skills, harness, or parameters.
-- Benchmarks and evaluation setups that measure self-improvement (gain over iterations, transfer, stability, etc.).
+Contributions are welcome. If a benchmark, method, or learning resource is missing — or a taxonomy label looks wrong — please open a pull request or an issue. New entries should carry the taxonomy metadata used by the site's filter views (benchmark origin, RSI mode, artifact, construction criteria, metric, creation, and evaluation) so they slot directly into the comparison views.
 
-**Out of scope (for now)**
-- General agent papers with no self-improvement loop.
-- Pure training-method papers where the model does not drive its own improvement.
-- Tooling with no research artifact behind it.
+## Citation
+
+If this collection is useful in your work, please cite it:
+
+```bibtex
+@misc{awesomersi2026,
+  title        = {Awesome RSI: A Curated Collection of Recursive Self-Improvement Benchmarks and Methods},
+  author       = {Prism-Shadow},
+  year         = {2026},
+  howpublished = {\url{https://github.com/Prism-Shadow/awesome-rsi}},
+}
+```
