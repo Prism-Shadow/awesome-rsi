@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
+import { paperCardCopy, tagLabelsZh } from "../i18n.js";
 
 // Tag hues reuse the GDPevo domain palette (see styles.css variables).
 const TAG_COLORS = {
@@ -14,13 +16,14 @@ const TAG_COLORS = {
   "Finance & Business": ["var(--amber)", "var(--amber-soft)"],
 };
 
-function formatAuthors(authors) {
+function formatAuthors(authors, lang, copy) {
   if (authors.length <= 4) return authors.join(", ");
-  return authors.slice(0, 3).join(", ") + `, et al. (${authors.length} authors)`;
+  if (lang === "zh") return `${authors.slice(0, 3).join(", ")} 等（${copy.authors(authors.length)}）`;
+  return authors.slice(0, 3).join(", ") + `, et al. (${copy.authors(authors.length)})`;
 }
 
-function formatDate(iso) {
-  return new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", {
+function formatDate(iso, lang) {
+  return new Date(iso + "T00:00:00Z").toLocaleDateString(lang === "zh" ? "zh-CN" : "en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -28,17 +31,19 @@ function formatDate(iso) {
   });
 }
 
-export default function PaperCard({ paper }) {
+export default function PaperCard({ paper, lang }) {
   const [showAbstract, setShowAbstract] = useState(false);
+  const copy = paperCardCopy[lang];
+  const abstract = lang === "zh" ? paperAbstractsZh[paper.id] ?? paper.abstract : paper.abstract;
 
   return (
     <article className="paper-card">
       <div className="paper-top">
         <span className="paper-nick">{paper.nickname}</span>
         <span className="paper-meta">
-          <span>{formatDate(paper.published)}</span>
+          <span>{formatDate(paper.published, lang)}</span>
           <span className="cite-badge">
-            {paper.citations} citation{paper.citations === 1 ? "" : "s"}
+            {copy.citations(paper.citations)}
           </span>
           <span>arXiv:{paper.id}</span>
         </span>
@@ -48,13 +53,13 @@ export default function PaperCard({ paper }) {
           {paper.title}
         </a>
       </h3>
-      <p className="paper-authors">{formatAuthors(paper.authors)}</p>
+      <p className="paper-authors">{formatAuthors(paper.authors, lang, copy)}</p>
       <div className="paper-tags">
         {paper.tags.map((tag) => {
           const [ink, bg] = TAG_COLORS[tag] ?? [];
           return (
             <span key={tag} className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }}>
-              {tag}
+              {lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}
             </span>
           );
         })}
@@ -67,10 +72,10 @@ export default function PaperCard({ paper }) {
           PDF
         </a>
         <button className="abstract-toggle" onClick={() => setShowAbstract((v) => !v)}>
-          {showAbstract ? "Hide abstract ▴" : "Show abstract ▾"}
+          {showAbstract ? copy.hideAbstract : copy.showAbstract}
         </button>
       </div>
-      {showAbstract && <p className="paper-abstract">{paper.abstract}</p>}
+      {showAbstract && <p className="paper-abstract">{abstract}</p>}
     </article>
   );
 }

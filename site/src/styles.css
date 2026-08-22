@@ -77,6 +77,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html[lang="zh-Hans"] body {
+  font-family: "Noto Sans SC", var(--sans);
+  letter-spacing: 0.002em;
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
@@ -135,6 +140,42 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.lang-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12rem;
+  padding: 0.18rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.lang-choice {
+  display: inline-grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 750 0.74rem/1 var(--sans);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lang-choice:hover {
+  color: var(--ink);
+}
+
+.lang-choice.is-active {
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
 }
 
 .icon-btn {
@@ -1812,6 +1853,12 @@ a:hover {
   .brand { font-size: 0.88rem; }
   .brand-full { display: none; }
   .brand-short { display: inline; }
+  .header-inner { gap: 0.45rem; }
+  .header-actions { gap: 0.32rem; }
+  .lang-segment { padding: 0.12rem; }
+  .lang-choice { width: 2rem; height: 1.9rem; font-size: 0.67rem; }
+  .icon-btn { width: 2.15rem; height: 2.15rem; justify-content: center; padding: 0; }
+  .icon-btn-label { display: none; }
   .blog-post-card { padding: 1rem; }
   .blog-article { padding-top: 0.7rem; }
   .search-sort-row { grid-template-columns: 1fr; }

@@ -1,19 +1,16 @@
-export default function MethodsTab() {
+import { methodsCopy } from "../i18n.js";
+
+export default function MethodsTab({ lang }) {
+  const copy = methodsCopy[lang];
   return (
     <section className="methods-placeholder" aria-labelledby="methods-placeholder-title">
-      <div className="methods-placeholder-index" aria-hidden="true">02 / Methods</div>
+      <div className="methods-placeholder-index" aria-hidden="true">{copy.index}</div>
       <div>
-        <span className="methods-placeholder-kicker">Collection in progress</span>
-        <h2 id="methods-placeholder-title">Methods &amp; Systems</h2>
-        <p>
-          This section will collect reusable RSI methods, learning algorithms, agent architectures,
-          and self-improvement systems rather than benchmark papers.
-        </p>
-        <div className="methods-placeholder-scope" aria-label="Planned method categories">
-          <span>Learning methods</span>
-          <span>Agent systems</span>
-          <span>Training loops</span>
-          <span>Memory &amp; skills</span>
+        <span className="methods-placeholder-kicker">{copy.kicker}</span>
+        <h2 id="methods-placeholder-title">{copy.title}</h2>
+        <p>{copy.body}</p>
+        <div className="methods-placeholder-scope" aria-label={copy.scopeLabel}>
+          {copy.scopes.map((scope) => <span key={scope}>{scope}</span>)}
         </div>
       </div>
     </section>

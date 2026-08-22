@@ -1,4 +1,5 @@
 import { books, courses, learningMaterials } from "../data/resources.js";
+import { localizedValue, resourcesCopy } from "../i18n.js";
 
 function ResourceCard({ title, by, description, url, links }) {
   return (
@@ -23,32 +24,33 @@ function ResourceCard({ title, by, description, url, links }) {
   );
 }
 
-export default function ResourcesTab() {
+export default function ResourcesTab({ lang }) {
+  const copy = resourcesCopy[lang];
   return (
     <>
       <section className="resource-section">
-        <h2>Books</h2>
+        <h2>{copy.books}</h2>
         <div className="resource-grid">
           {books.map((b) => (
             <ResourceCard
               key={b.title}
-              title={b.title}
-              by={b.author}
-              description={b.description}
+              title={localizedValue(b, "title", lang)}
+              by={localizedValue(b, "author", lang)}
+              description={localizedValue(b, "description", lang)}
               url={b.url}
             />
           ))}
         </div>
       </section>
       <section className="resource-section">
-        <h2>Courses</h2>
+        <h2>{copy.courses}</h2>
         <div className="resource-grid">
           {courses.map((c) => (
             <ResourceCard
               key={c.title}
-              title={c.title}
-              by={c.provider}
-              description={c.description}
+              title={localizedValue(c, "title", lang)}
+              by={localizedValue(c, "provider", lang)}
+              description={localizedValue(c, "description", lang)}
               url={c.url}
               links={c.links}
             />
@@ -56,14 +58,14 @@ export default function ResourcesTab() {
         </div>
       </section>
       <section className="resource-section">
-        <h2>Learning Materials</h2>
+        <h2>{copy.learningMaterials}</h2>
         <div className="resource-grid">
           {learningMaterials.map((material) => (
             <ResourceCard
               key={material.title}
-              title={material.title}
-              by={material.provider}
-              description={material.description}
+              title={localizedValue(material, "title", lang)}
+              by={localizedValue(material, "provider", lang)}
+              description={localizedValue(material, "description", lang)}
               url={material.url}
             />
           ))}

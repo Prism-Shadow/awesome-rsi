@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { blogPosts } from "../data/blogPosts.js";
+import { blogPostsZh } from "../data/blogPosts.zh.js";
+import { blogCopy } from "../i18n.js";
 
-function formatDate(value) {
-  return new Intl.DateTimeFormat("en", {
+function formatDate(value, lang) {
+  return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -64,11 +66,11 @@ function ArticleBlock({ block }) {
   return <p>{renderInline(block.text)}</p>;
 }
 
-function BlogIndex({ onOpenPost }) {
+function BlogIndex({ onOpenPost, posts, lang, copy }) {
   return (
-    <section className="blog-index" aria-label="Blog posts">
+    <section className="blog-index" aria-label={copy.posts}>
       <div className="blog-post-list">
-        {blogPosts.map((post) => (
+        {posts.map((post) => (
           <a
             className="blog-post-card"
             href={`#blog/${encodeURIComponent(post.id)}`}
@@ -80,11 +82,11 @@ function BlogIndex({ onOpenPost }) {
           >
             <span className="blog-post-meta">
               <span>{post.kind}</span>
-              <time dateTime={post.published}>{formatDate(post.published)}</time>
+              <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
             </span>
             <h3>{post.title}</h3>
             <p>{post.summary}</p>
-            <span className="blog-post-tags" aria-label="Post tags">
+            <span className="blog-post-tags" aria-label={copy.tags}>
               {post.tags.map((tag) => <code key={tag}>{tag}</code>)}
             </span>
           </a>
@@ -94,13 +96,13 @@ function BlogIndex({ onOpenPost }) {
   );
 }
 
-function BlogArticle({ post, onBack }) {
+function BlogArticle({ post, onBack, lang, copy }) {
   return (
     <article className="blog-article" aria-labelledby="blog-article-title">
-      <button className="blog-back-link" type="button" onClick={onBack}>← Back to blog</button>
+      <button className="blog-back-link" type="button" onClick={onBack}>{copy.back}</button>
       <div className="blog-article-meta">
         <span>{post.kind}</span>
-        <time dateTime={post.published}>{formatDate(post.published)}</time>
+        <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
       </div>
       <h2 id="blog-article-title">{post.title}</h2>
       <p className="blog-article-lead">{post.summary}</p>
@@ -116,7 +118,7 @@ function BlogArticle({ post, onBack }) {
           ))
         : (
           <section className="blog-article-body" aria-labelledby="release-highlights-title">
-            <h3 id="release-highlights-title">What’s included</h3>
+            <h3 id="release-highlights-title">{copy.included}</h3>
             <ul>
               {post.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
             </ul>
@@ -126,8 +128,10 @@ function BlogArticle({ post, onBack }) {
   );
 }
 
-export default function BlogTab() {
+export default function BlogTab({ lang }) {
   const [activePostId, setActivePostId] = useState(postIdFromHash);
+  const posts = lang === "zh" ? blogPostsZh : blogPosts;
+  const copy = blogCopy[lang];
 
   useEffect(() => {
     const handleHashChange = () => setActivePostId(postIdFromHash());
@@ -139,7 +143,7 @@ export default function BlogTab() {
     };
   }, []);
 
-  const activePost = blogPosts.find((post) => post.id === activePostId);
+  const activePost = posts.find((post) => post.id === activePostId);
   const openPost = (postId) => {
     window.history.pushState(null, "", `#blog/${encodeURIComponent(postId)}`);
     setActivePostId(postId);
@@ -151,6 +155,6 @@ export default function BlogTab() {
   };
 
   return activePost
-    ? <BlogArticle post={activePost} onBack={closePost} />
-    : <BlogIndex onOpenPost={openPost} />;
+    ? <BlogArticle post={activePost} onBack={closePost} lang={lang} copy={copy} />
+    : <BlogIndex onOpenPost={openPost} posts={posts} lang={lang} copy={copy} />;
 }

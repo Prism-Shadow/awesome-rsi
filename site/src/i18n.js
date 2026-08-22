@@ -1,0 +1,278 @@
+export const appCopy = {
+  en: {
+    pageTitle: "Awesome RSI — Recursive Self-Improvement Papers",
+    pageDescription: "A curated, filterable collection of papers, books, and courses on Recursive Self-Improvement.",
+    themeToggle: "Toggle theme",
+    light: "Light",
+    dark: "Dark",
+    language: "Language",
+    english: "English",
+    chinese: "Chinese",
+    heroTitleBefore: "A curated map of ",
+    heroTitleEmphasis: "Recursive Self-Improvement",
+    heroTitleAfter: " research",
+    heroBody: "Papers, books, and courses on agents that learn from their own experience — self-evolution, skill learning, memory, continual learning, and automated AI research. Filter by topic, search, and sort by recency or influence.",
+    tabs: {
+      blog: "Blog",
+      papers: "Benchmark Paper List",
+      resources: "Books & Courses",
+      methods: "Methods & Systems",
+    },
+    footerBefore: "Maintained as part of ",
+    footerAfter: ". Paper metadata from arXiv; citation counts from Semantic Scholar. Contributions welcome — open a PR to add a paper.",
+  },
+  zh: {
+    pageTitle: "Awesome RSI — 递归自我改进研究",
+    pageDescription: "一个可筛选、可检索的递归自我改进论文、书籍与课程精选合集。",
+    themeToggle: "切换主题",
+    light: "浅色",
+    dark: "深色",
+    language: "语言",
+    english: "英文",
+    chinese: "中文",
+    heroTitleBefore: "递归自我改进研究",
+    heroTitleEmphasis: "精选图谱",
+    heroTitleAfter: "",
+    heroBody: "收录关于智能体从自身经验中学习的论文、书籍与课程，涵盖自我演化、技能学习、记忆、持续学习和自动化 AI 研究。你可以按主题筛选、搜索，并按时间或影响力排序。",
+    tabs: {
+      blog: "博客",
+      papers: "基准论文",
+      resources: "书籍与课程",
+      methods: "方法与系统",
+    },
+    footerBefore: "本网站由 ",
+    footerAfter: " 项目持续维护。论文元数据来自 arXiv，引用次数来自 Semantic Scholar。欢迎提交 PR，补充新的论文。",
+  },
+};
+
+export const papersCopy = {
+  en: {
+    viewAs: "View as",
+    list: "List",
+    graph: "Citation graph",
+    graphSummary: (count) => `${count} real citation relationships in the full corpus`,
+    listSummary: "Detailed metadata and abstracts",
+    noPapers: "No papers found",
+    noPapersHint: "Try removing one of the filters or widening a range.",
+    reset: "Reset all filters",
+  },
+  zh: {
+    viewAs: "视图",
+    list: "列表",
+    graph: "引用图谱",
+    graphSummary: (count) => `完整论文集中包含 ${count} 条真实引用关系`,
+    listSummary: "查看详细元数据与摘要",
+    noPapers: "没有符合条件的论文",
+    noPapersHint: "可以尝试减少筛选条件，或扩大数值范围。",
+    reset: "重置全部筛选",
+  },
+};
+
+export const filterCopy = {
+  en: {
+    filterPapers: "Filter papers",
+    resultCount: (visible, total) => ({ before: "", visible, middle: " of ", total, after: " papers" }),
+    all: "All",
+    includes: "Includes",
+    note: "Note",
+    explain: (label) => `Explain ${label}`,
+    definitions: (label) => `${label} definitions`,
+    onlyValue: "Only value in the current collection",
+    minimum: (label) => `${label} minimum`,
+    maximum: (label) => `${label} maximum`,
+    numericRange: "Numeric range",
+    publicationYear: "Publication year",
+    citations: "Citations",
+    logic: "OR within rows",
+    logicAnd: "AND across rows",
+    reset: "Reset all filters",
+    searchPlaceholder: "Search within filtered papers by title, author, abstract, or arXiv ID",
+    sortPapers: "Sort papers",
+    sort: "Sort",
+    newest: "Newest",
+    mostCited: "Most cited",
+    numericHelp: {
+      summary: "Continuous filters for publication recency and global citation count.",
+      items: [
+        { term: "Publication year", description: "Keep papers published within the selected year interval." },
+        { term: "Citations", description: "Keep papers whose current Semantic Scholar citation count falls within the selected interval." },
+      ],
+      note: "Drag either handle; both numeric filters combine with the categorical dimensions using AND.",
+    },
+  },
+  zh: {
+    filterPapers: "筛选论文",
+    resultCount: (visible, total) => ({ before: "共 ", visible, middle: " / ", total, after: " 篇论文" }),
+    all: "全部",
+    includes: "包含",
+    note: "说明",
+    explain: (label) => `查看“${label}”的定义`,
+    definitions: (label) => `${label}的定义`,
+    onlyValue: "当前合集只有这一个取值",
+    minimum: (label) => `${label}下限`,
+    maximum: (label) => `${label}上限`,
+    numericRange: "数值范围",
+    publicationYear: "发表年份",
+    citations: "引用次数",
+    logic: "同一行内按“或”筛选",
+    logicAnd: "不同行之间按“且”筛选",
+    reset: "重置全部筛选",
+    searchPlaceholder: "在筛选结果中搜索标题、作者、摘要或 arXiv ID",
+    sortPapers: "论文排序",
+    sort: "排序",
+    newest: "最新发表",
+    mostCited: "引用最多",
+    numericHelp: {
+      summary: "按发表时间和全局引用次数连续筛选论文。",
+      items: [
+        { term: "发表年份", description: "只保留发表于所选年份区间内的论文。" },
+        { term: "引用次数", description: "只保留当前 Semantic Scholar 引用次数落在所选区间内的论文。" },
+      ],
+      note: "拖动任一滑块即可调整范围；两个数值条件与上方分类条件之间均按“且”组合。",
+    },
+  },
+};
+
+export const paperCardCopy = {
+  en: {
+    citations: (count) => `${count} citation${count === 1 ? "" : "s"}`,
+    authors: (count) => `${count} authors`,
+    showAbstract: "Show abstract ▾",
+    hideAbstract: "Hide abstract ▴",
+  },
+  zh: {
+    citations: (count) => `${count} 次引用`,
+    authors: (count) => `共 ${count} 位作者`,
+    showAbstract: "展开摘要 ▾",
+    hideAbstract: "收起摘要 ▴",
+  },
+};
+
+export const graphCopy = {
+  en: {
+    verifiedNetwork: "Verified bibliography network",
+    title: "Citation topology",
+    intro: "Arrows run from the citing paper to the paper it references. Filters above apply to both nodes and edges.",
+    visiblePapers: "visible papers",
+    verifiedEdges: "verified edges",
+    controls: "Graph zoom controls",
+    zoomIn: "Zoom in",
+    zoomOut: "Zoom out",
+    resetView: "Reset graph view",
+    hint: "Drag to pan · scroll or pinch to zoom",
+    networkLabel: (papers, edges) => `Citation network with ${papers} papers and ${edges} verified citation relationships`,
+    citations: "citations",
+    older: "Older",
+    newer: "Newer",
+    nodeSize: "Node size = global citations",
+    cites: "cites",
+    noEdges: "No verified citation relationships remain under the current filters.",
+    globalCitations: "global citations",
+    citedByCorpus: "cited by corpus",
+    referencesInCorpus: "references in corpus",
+    references: "References",
+    citedBy: "Cited by",
+    noReferences: "No verified references to another visible paper.",
+    noCitations: "No visible paper cites this work yet.",
+    originalPdf: "Original PDF",
+    semanticScholar: "Semantic Scholar",
+    openArxiv: "Open paper on arXiv ↗",
+    provenanceLead: "Every edge in the graph represents an actual citation between papers; none are generated from keywords, topic similarity, or model inference.",
+    snapshot: "Snapshot:",
+  },
+  zh: {
+    verifiedNetwork: "经核验的文献引用网络",
+    title: "引用关系图谱",
+    intro: "箭头从引用方指向被引用论文。上方筛选条件会同时作用于节点和连线。",
+    visiblePapers: "篇可见论文",
+    verifiedEdges: "条已核验引用",
+    controls: "图谱缩放控制",
+    zoomIn: "放大",
+    zoomOut: "缩小",
+    resetView: "重置图谱视图",
+    hint: "拖动平移 · 滚轮或双指缩放",
+    networkLabel: (papers, edges) => `包含 ${papers} 篇论文和 ${edges} 条已核验引用关系的图谱`,
+    citations: "次引用",
+    older: "较早",
+    newer: "较新",
+    nodeSize: "节点大小代表全局引用次数",
+    cites: "引用",
+    noEdges: "当前筛选结果中没有已核验的引用关系。",
+    globalCitations: "全局引用",
+    citedByCorpus: "被合集引用",
+    referencesInCorpus: "引用合集论文",
+    references: "参考文献",
+    citedBy: "引用本文",
+    noReferences: "没有已核验的、指向其他可见论文的引用。",
+    noCitations: "当前可见论文中还没有工作引用本文。",
+    originalPdf: "原始 PDF",
+    semanticScholar: "Semantic Scholar",
+    openArxiv: "在 arXiv 查看论文 ↗",
+    provenanceLead: "图中的每一条连线都对应论文之间实际存在的引用关系，不包含根据关键词、主题相似度或模型推断生成的关系。",
+    snapshot: "数据快照：",
+  },
+};
+
+export const resourcesCopy = {
+  en: { books: "Books", courses: "Courses", learningMaterials: "Learning Materials", links: (title) => `${title} links` },
+  zh: { books: "书籍", courses: "课程", learningMaterials: "学习资料", links: (title) => `${title}相关链接` },
+};
+
+export const methodsCopy = {
+  en: {
+    index: "02 / Methods",
+    kicker: "Collection in progress",
+    title: "Methods & Systems",
+    body: "This section will collect reusable RSI methods, learning algorithms, agent architectures, and self-improvement systems rather than benchmark papers.",
+    scopeLabel: "Planned method categories",
+    scopes: ["Learning methods", "Agent systems", "Training loops", "Memory & skills"],
+  },
+  zh: {
+    index: "02 / 方法",
+    kicker: "持续收集中",
+    title: "方法与系统",
+    body: "这里将收录可复用的 RSI 方法、学习算法、智能体架构与自我改进系统，不与基准论文混在一起。",
+    scopeLabel: "计划收录的方法类别",
+    scopes: ["学习方法", "智能体系统", "训练循环", "记忆与技能"],
+  },
+};
+
+export const blogCopy = {
+  en: {
+    posts: "Blog posts",
+    tags: "Post tags",
+    back: "← Back to blog",
+    included: "What’s included",
+  },
+  zh: {
+    posts: "博客文章",
+    tags: "文章标签",
+    back: "← 返回博客列表",
+    included: "本次更新内容",
+  },
+};
+
+export const tagLabelsZh = {
+  "Self-Evolution": "自我演化",
+  "Skill Learning": "技能学习",
+  Memory: "记忆",
+  "Continual Learning": "持续学习",
+  "Data-Centric": "数据中心方法",
+  "Post-Training & RL": "后训练与强化学习",
+  "Harness Optimization": "Harness 优化",
+  "Research Automation": "研究自动化",
+  "Learning Dynamics": "学习动力学",
+  "Finance & Business": "金融与商业",
+};
+
+export function getInitialLanguage() {
+  try {
+    const saved = localStorage.getItem("awesome-rsi-lang");
+    if (saved === "en" || saved === "zh") return saved;
+  } catch {}
+  return navigator.language?.toLowerCase().startsWith("zh") ? "zh" : "en";
+}
+
+export function localizedValue(item, field, lang) {
+  return lang === "zh" ? item[`${field}Zh`] ?? item[field] : item[field];
+}
