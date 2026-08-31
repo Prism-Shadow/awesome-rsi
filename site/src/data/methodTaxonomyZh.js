@@ -23,7 +23,7 @@ const methodTaxonomyZh = {
     },
   },
   topology: {
-    label: "演化拓扑",
+    label: "RSI 拓扑",
     summary: "历史版本以什么关系共同影响新版本的产生。",
     note: "即使生成的 Child 最终挂在一条主要谱系下，只要更新同时利用了多个历史版本的状态或证据，也归为图。",
     items: {
@@ -46,23 +46,12 @@ const methodTaxonomyZh = {
   },
   updater: {
     label: "产物更新者",
-    summary: "哪个智能体 Session 负责写入供后续工作使用的持久产物。",
-    note: "这里只标记真正写入持久产物的 Session；只提供诊断或评分、但不负责写入的角色不算产物更新者。",
+    summary: "由谁参与形成 Student 后续会继续使用的持久产物更新。",
+    note: "Student 指接受评测的任务执行智能体。“联合”不要求两个角色都亲自执行最终的文件写入。",
     items: {
-      Self: ["自身", "产生经验的原 Session 自己写入持久产物。"],
-      "Other agent": ["其他智能体", "由另一个独立的智能体 Session 写入产物。"],
-      "Same-setup replica": ["同配置副本", "新 Session 使用与原智能体完全相同的模型、Prompt、工具和 Harness 配置。"],
-      "Different-setup agent": ["不同配置智能体", "更新者使用不同的模型、角色 Prompt、工具集或 Harness 配置。"],
-    },
-  },
-  depth: {
-    label: "更新深度",
-    summary: "反馈是直接写回、分阶段整理，还是连改进机制本身也会变化。",
-    note: "元递归强调改进逻辑本身会变化，而不是固定更新流程被重复执行。",
-    items: {
-      "Direct update": ["直接更新", "一个更新者根据反馈直接修改目标产物。"],
-      "Propose–curate": ["提出—整理", "一个阶段提出经验或改动，另一个阶段负责审核、合并或写回。"],
-      "Meta-recursive": ["元递归", "更新器、评价器或决定如何改进的逻辑也会变化，并在后续轮次继续使用。"],
+      Self: ["自身", "由 Student 自己形成更新。"],
+      Teacher: ["教师", "由独立 Teacher 根据 Student 的经验形成更新。"],
+      Joint: ["联合", "Student 主动提出或修订更新，再由 Teacher 进一步整理、筛选或修改。"],
     },
   },
   source: {
@@ -81,8 +70,8 @@ const methodTaxonomyZh = {
   },
   feedback: {
     label: "反馈类型",
-    summary: "更新获得的是分数信号，还是包含具体信息的非分数反馈。",
-    note: "LLM 评审给出的标量仍属于分数；这里的“LLM 评审”专指它提供的文字判断、解释或批评。",
+    summary: "针对 Student 工作结果的反馈是分数信号，还是包含具体信息的非分数反馈。",
+    note: "不记录只用于演化 Teacher 的反馈。LLM 评审给出的标量仍属于分数；这里的“LLM 评审”专指它对 Student 给出的文字判断、解释或批评。",
     items: {
       Score: ["分数", "用数值或类别评价任务结果。"],
       Binary: ["二值", "只提供成功、失败、通过或未通过。"],
@@ -95,8 +84,8 @@ const methodTaxonomyZh = {
   },
   frequency: {
     label: "更新频率",
-    summary: "系统积累多少执行过程后，会写入一次持久更新。",
-    note: "按代更新与离线集中整理统一归入“批次”。",
+    summary: "积累多少 Student 执行过程后，会更新一次 Student 的持久产物。",
+    note: "不记录 Teacher 自身的演化周期。按代更新与 Student 经验的离线集中整理统一归入“批次”。",
     items: {
       Step: ["单步", "在轨迹中的一次动作—Observation 之后更新。"],
       Event: ["事件触发", "在失败、能力缺口、提示或子目标完成等事件发生时更新。"],
