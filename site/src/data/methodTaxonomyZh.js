@@ -33,7 +33,7 @@ const methodTaxonomyZh = {
     },
   },
   selection: {
-    label: "保留标准",
+    label: "验收标准",
     summary: "依据什么证据决定是否保留一次修改。",
     note: "产物通过局部验证，不等于整个智能体的 Benchmark 能力一定提升。",
     items: {
@@ -66,7 +66,7 @@ const methodTaxonomyZh = {
     },
   },
   source: {
-    label: "监督来源",
+    label: "反馈来源",
     summary: "驱动改进的证据来自哪里。",
     note: "这里记录演化过程中实际使用的证据，而不只记录最终测试协议。",
     items: {

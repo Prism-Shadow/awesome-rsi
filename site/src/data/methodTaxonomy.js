@@ -51,7 +51,7 @@ export const methodFilterDimensions = [
   ),
   dimension(
     "selection",
-    "Selection criterion",
+    "Acceptance criterion",
     "What evidence decides whether an update is retained.",
     [
       ["Artifact validation", "Unit tests, compilation, interface checks, or another direct validation of the edited artifact."],
@@ -87,7 +87,7 @@ export const methodFilterDimensions = [
   ),
   dimension(
     "source",
-    "Supervision source",
+    "Feedback source",
     "Where the evidence that drives improvement comes from.",
     [
       ["Benchmark", "Answers, verifiers, or scores from the benchmark being evaluated."],
