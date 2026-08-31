@@ -1,10 +1,11 @@
 const methodTaxonomyZh = {
   artifact: {
     label: "RSI 修改对象",
-    summary: "系统修改模型参数，还是修改可持久化的非参数状态。",
-    note: "“参数”表示权重更新；Harness 代码、上下文、记忆和技能均属于非参数修改。工具归入 Harness 代码。",
+    summary: "改进结果保存在模型参数中，还是保存在非参数产物中。",
+    note: "工具归入 Harness 代码。同一篇论文可以同时修改多种非参数产物。",
     items: {
-      Parametric: ["参数", "Base model、Policy、Critic、Evaluator 或其他学习组件的权重。"],
+      Parametric: ["参数", "模型权重发生变化，并将更新后的参数带入后续改进或任务。"],
+      "Non-parametric": ["非参数", "Base model 权重保持不变，能力通过可持久化的外部产物积累。"],
       "Harness code": ["Harness 代码", "智能体框架、Harness、控制流、自我改进机制或工具的可执行代码。"],
       Context: ["上下文", "持续写入模型上下文的 Prompt、指令、规则、示例或其他材料。"],
       Memory: ["记忆", "跨步骤、轨迹或任务存储并检索的信息或经验。"],
@@ -117,18 +118,21 @@ export function localizeMethodDimensions(dimensions, lang) {
 
   return dimensions.map((dimension) => {
     const translation = methodTaxonomyZh[dimension.id];
+    const displayTerm = (term) => translation.items[term]?.[0] ?? term;
     return {
       ...dimension,
       label: translation.label,
       options: dimension.options.map((option) => ({
         ...option,
         label: translation.items[option.value]?.[0] ?? option.label,
+        parentLabel: option.parent ? displayTerm(option.parent) : undefined,
       })),
       help: {
         summary: translation.summary,
         items: dimension.help.items.map((item) => ({
           ...item,
-          term: translation.items[item.term]?.[0] ?? item.term,
+          term: displayTerm(item.term),
+          parent: item.parent ? displayTerm(item.parent) : undefined,
           description: translation.items[item.term]?.[1] ?? item.description,
         })),
         note: translation.note,
