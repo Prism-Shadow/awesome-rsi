@@ -36,7 +36,7 @@ const methodTaxonomyZh = {
     summary: "依据什么证据决定是否保留一次修改。",
     items: {
       "Artifact validation": ["产物验证", "通过单元测试、编译、接口检查或其他针对修改对象的直接验证。"],
-      "Task result": ["任务结果", "依据当前任务是否成功，或是否获得更高奖励。"],
+      "Instance result": ["单题结果", "依据当前任务实例是否成功，或是否获得更高奖励。"],
       "Benchmark score": ["Benchmark 得分", "依据一组评测问题上的总体表现。"],
       "Combined metrics": ["组合指标", "同时考虑表现、成本、速度、稳定性、新颖性或其他目标。"],
       "No validation": ["无独立验证", "生成后直接写入，不设置单独的验收环节。"],
@@ -45,7 +45,6 @@ const methodTaxonomyZh = {
   updater: {
     label: "产物更新者",
     summary: "由谁参与形成 Student 后续会继续使用的持久产物更新。",
-    note: "Student 指接受评测的任务执行智能体。“联合”不要求两个角色都亲自执行最终的文件写入。",
     items: {
       Self: ["自身", "由 Student 自己形成更新。"],
       Teacher: ["教师", "由独立 Teacher 根据 Student 的经验形成更新。"],
@@ -61,8 +60,7 @@ const methodTaxonomyZh = {
       "Train/dev set": ["训练／验证集", "使用与最终测试分离的进化任务或数据划分。"],
       Environment: ["环境", "使用状态变化、Observation、原生 Reward 或执行结果。"],
       "Executable verifier": ["可执行验证器", "使用单元测试、编译器、容器或形式检查器。"],
-      "LLM judge": ["LLM 评审", "用语言模型评价器近似真实任务质量。"],
-      "Agent feedback": ["智能体反馈", "使用自我批评、自洽性、辩论或其他智能体的判断。"],
+      "LLM feedback": ["LLM 反馈", "由 Student、Teacher、Judge 或其他模型通过评审、自我批评、自洽性或辩论产生反馈。"],
       Human: ["人工", "使用人工标签、偏好、审核或干预。"],
     },
   },
