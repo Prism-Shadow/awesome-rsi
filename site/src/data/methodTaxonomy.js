@@ -25,7 +25,6 @@ export const methodFilterDimensions = [
       ["Memory", "Information or experience stored and retrieved across steps, trajectories, or tasks.", "Non-parametric"],
       ["Skill", "A reusable strategy, procedure, workflow, or executable capability.", "Non-parametric"],
     ],
-    "Tools are included in Harness code. A paper may modify more than one non-parametric artifact.",
   ),
   dimension(
     "mode",

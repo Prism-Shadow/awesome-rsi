@@ -2,7 +2,6 @@ const methodTaxonomyZh = {
   artifact: {
     label: "RSI 修改对象",
     summary: "改进结果保存在模型参数中，还是保存在非参数产物中。",
-    note: "工具归入 Harness 代码。同一篇论文可以同时修改多种非参数产物。",
     items: {
       Parametric: ["参数", "模型权重发生变化，并将更新后的参数带入后续改进或任务。"],
       "Non-parametric": ["非参数", "Base model 权重保持不变，能力通过可持久化的外部产物积累。"],
