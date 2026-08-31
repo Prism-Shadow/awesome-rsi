@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
+import { graphCopy } from "../i18n.js";
 
 const GRAPH_WIDTH = 920;
 const GRAPH_HEIGHT = 620;
@@ -68,7 +69,7 @@ function nodeRadius(citations) {
   return 10 + Math.sqrt(Math.max(citations, 0)) * 2.65;
 }
 
-function buildLayout(papers, edges) {
+function buildLayout(papers, edges, getNodeWeight) {
   const nodes = papers.map((paper, index) => {
     const angle = index * 2.3999632297;
     const ring = 165 + (index % 4) * 34;
@@ -78,7 +79,7 @@ function buildLayout(papers, edges) {
       y: GRAPH_HEIGHT / 2 + Math.sin(angle) * ring * 0.78,
       vx: 0,
       vy: 0,
-      radius: nodeRadius(paper.citations),
+      radius: nodeRadius(getNodeWeight(paper)),
     };
   });
   const byId = new Map(nodes.map((node) => [node.id, node]));
@@ -159,7 +160,7 @@ function getFreshnessColor(paper, minTime, maxTime) {
   return `hsl(158 48% ${lightness}%)`;
 }
 
-function RelationList({ title, emptyText, edges, paperById, relationKey, onSelect }) {
+function RelationList({ title, emptyText, edges, paperById, relationKey, onSelect, copy }) {
   return (
     <div className="relation-list">
       <div className="relation-title"><span>{title}</span><b>{edges.length}</b></div>
@@ -169,7 +170,7 @@ function RelationList({ title, emptyText, edges, paperById, relationKey, onSelec
         return (
           <button key={`${edge.source}-${edge.target}`} onClick={() => onSelect(related.id)}>
             <span>{related.nickname}</span>
-            <small>{edge.verifiedBy === "paper-pdf" ? "Original PDF" : "Semantic Scholar"}</small>
+            <small>{edge.verifiedBy === "paper-pdf" ? copy.originalPdf : copy.semanticScholar}</small>
           </button>
         );
       })}
@@ -177,12 +178,25 @@ function RelationList({ title, emptyText, edges, paperById, relationKey, onSelec
   );
 }
 
-export default function CitationGraph({ papers }) {
+const defaultNodeWeight = (paper) => paper.citations ?? 0;
+const defaultPrimaryMetric = (paper) => paper.citations ?? 0;
+
+export default function CitationGraph({
+  papers,
+  lang,
+  edges = citationEdges,
+  meta = citationGraphMeta,
+  copyOverride,
+  nodeWeight = defaultNodeWeight,
+  primaryMetric = defaultPrimaryMetric,
+  primaryMetricLabel,
+  nodeAriaLabel,
+}) {
   const fullPaperById = useMemo(() => new Map(papers.map((paper) => [paper.id, paper])), [papers]);
   const visibleIds = useMemo(() => new Set(papers.map((paper) => paper.id)), [papers]);
-  const visibleEdges = useMemo(() => citationEdges.filter((edge) =>
-    visibleIds.has(edge.source) && visibleIds.has(edge.target)), [visibleIds]);
-  const layout = useMemo(() => buildLayout(papers, visibleEdges), [papers, visibleEdges]);
+  const visibleEdges = useMemo(() => edges.filter((edge) =>
+    visibleIds.has(edge.source) && visibleIds.has(edge.target)), [edges, visibleIds]);
+  const layout = useMemo(() => buildLayout(papers, visibleEdges, nodeWeight), [papers, visibleEdges, nodeWeight]);
   const [selectedId, setSelectedId] = useState(() => papers[0]?.id ?? null);
   const [hoveredId, setHoveredId] = useState(null);
   const [camera, setCamera] = useState(defaultCamera);
@@ -193,6 +207,7 @@ export default function CitationGraph({ papers }) {
   const gestureRef = useRef(null);
   const gestureMovedRef = useRef(false);
   const suppressClickUntilRef = useRef(0);
+  const copy = copyOverride ?? graphCopy[lang];
 
   const updateCamera = (nextCamera) => {
     cameraRef.current = nextCamera;
@@ -337,30 +352,30 @@ export default function CitationGraph({ papers }) {
     <section className="citation-view" aria-labelledby="citation-graph-title">
       <div className="graph-heading">
         <div>
-          <span className="graph-eyebrow">Verified bibliography network</span>
-          <h2 id="citation-graph-title">Citation topology</h2>
-          <p>Arrows run from the citing paper to the paper it references. Filters above apply to both nodes and edges.</p>
+          <span className="graph-eyebrow">{copy.verifiedNetwork}</span>
+          <h2 id="citation-graph-title">{copy.title}</h2>
+          <p>{copy.intro}</p>
         </div>
         <div className="graph-summary">
-          <span><b>{papers.length}</b> visible papers</span>
-          <span><b>{visibleEdges.length}</b> verified edges</span>
+          <span><b>{papers.length}</b> {copy.visiblePapers}</span>
+          <span><b>{visibleEdges.length}</b> {copy.verifiedEdges}</span>
         </div>
       </div>
 
       <div className="graph-workspace">
         <div className="graph-stage">
-          <div className="graph-controls" aria-label="Graph zoom controls">
-            <button onClick={() => changeZoom(0.2)} aria-label="Zoom in">+</button>
-            <button onClick={() => changeZoom(-0.2)} aria-label="Zoom out">−</button>
-            <button onClick={resetView} aria-label="Reset graph view">{Math.round(camera.zoom * 100)}%</button>
+          <div className="graph-controls" aria-label={copy.controls}>
+            <button onClick={() => changeZoom(0.2)} aria-label={copy.zoomIn}>+</button>
+            <button onClick={() => changeZoom(-0.2)} aria-label={copy.zoomOut}>−</button>
+            <button onClick={resetView} aria-label={copy.resetView}>{Math.round(camera.zoom * 100)}%</button>
           </div>
-          <div className="graph-interaction-hint">Drag to pan · scroll or pinch to zoom</div>
+          <div className="graph-interaction-hint">{copy.hint}</div>
           <svg
             ref={svgRef}
             className={isPanning ? "is-panning" : ""}
             viewBox={viewBox}
             role="img"
-            aria-label={`Citation network with ${papers.length} papers and ${visibleEdges.length} verified citation relationships`}
+            aria-label={copy.networkLabel(papers.length, visibleEdges.length)}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={endPointerGesture}
@@ -400,7 +415,9 @@ export default function CitationGraph({ papers }) {
                     transform={`translate(${node.x} ${node.y})`}
                     role="button"
                     tabIndex="0"
-                    aria-label={`${paper.nickname}, ${paper.citations} citations`}
+                    aria-label={nodeAriaLabel
+                      ? nodeAriaLabel(paper, nodeWeight(paper))
+                      : `${paper.nickname}，${paper.citations} ${copy.citations}`}
                     onMouseEnter={() => setHoveredId(paper.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={(event) => {
@@ -423,11 +440,11 @@ export default function CitationGraph({ papers }) {
             </g>
           </svg>
           <div className="graph-legend">
-            <div><span>Older</span><i className="date-ramp" /><span>Newer</span></div>
-            <div><i className="size-dot small" /><i className="size-dot large" /><span>Node size = global citations</span></div>
-            <div><i className="arrow-line" /><span>cites</span></div>
+            <div><span>{copy.older}</span><i className="date-ramp" /><span>{copy.newer}</span></div>
+            <div><i className="size-dot small" /><i className="size-dot large" /><span>{copy.nodeSize}</span></div>
+            <div><i className="arrow-line" /><span>{copy.cites}</span></div>
           </div>
-          {visibleEdges.length === 0 && <div className="graph-no-edges">No verified citation relationships remain under the current filters.</div>}
+          {visibleEdges.length === 0 && <div className="graph-no-edges">{copy.noEdges}</div>}
         </div>
 
         <aside className="graph-inspector" aria-live="polite">
@@ -437,13 +454,13 @@ export default function CitationGraph({ papers }) {
               <h3>{selectedPaper.nickname}</h3>
               <p>{selectedPaper.title}</p>
               <div className="inspector-metrics">
-                <div><b>{selectedPaper.citations}</b><span>global citations</span></div>
-                <div><b>{incoming.length}</b><span>cited by corpus</span></div>
-                <div><b>{outgoing.length}</b><span>references in corpus</span></div>
+                <div><b>{primaryMetric(selectedPaper)}</b><span>{primaryMetricLabel ?? copy.globalCitations}</span></div>
+                <div><b>{incoming.length}</b><span>{copy.citedByCorpus}</span></div>
+                <div><b>{outgoing.length}</b><span>{copy.referencesInCorpus}</span></div>
               </div>
-              <RelationList title="References" emptyText="No verified references to another visible paper." edges={outgoing} paperById={fullPaperById} relationKey="target" onSelect={setSelectedId} />
-              <RelationList title="Cited by" emptyText="No visible paper cites this work yet." edges={incoming} paperById={fullPaperById} relationKey="source" onSelect={setSelectedId} />
-              <a className="inspector-link" href={selectedPaper.arxiv} target="_blank" rel="noreferrer">Open paper on arXiv ↗</a>
+              <RelationList title={copy.references} emptyText={copy.noReferences} edges={outgoing} paperById={fullPaperById} relationKey="target" onSelect={setSelectedId} copy={copy} />
+              <RelationList title={copy.citedBy} emptyText={copy.noCitations} edges={incoming} paperById={fullPaperById} relationKey="source" onSelect={setSelectedId} copy={copy} />
+              <a className="inspector-link" href={selectedPaper.arxiv} target="_blank" rel="noreferrer">{copy.openArxiv}</a>
             </>
           )}
         </aside>
@@ -451,10 +468,15 @@ export default function CitationGraph({ papers }) {
 
       <div className="graph-provenance">
         <span className="verified-mark">✓</span>
-        <p>
-          <b>No inferred or topic-similarity edges.</b> {citationGraphMeta.semanticScholarEdges} relationships were verified through the
-          {" "}<a href={citationGraphMeta.sourceUrl} target="_blank" rel="noreferrer">Semantic Scholar Academic Graph API</a> and {citationGraphMeta.pdfVerifiedEdges} from the original PDFs where API bibliography data was unavailable. Snapshot: {citationGraphMeta.snapshot}.
-        </p>
+        {lang === "zh" ? (
+          <p>
+            <b>{copy.provenanceLead}</b> {copy.snapshot}{meta.snapshot}。
+          </p>
+        ) : (
+          <p>
+            <b>{copy.provenanceLead}</b> {copy.snapshot} {meta.snapshot}.
+          </p>
+        )}
       </div>
     </section>
   );

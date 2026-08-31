@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
-import { papers } from "./data/papers.js";
 import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
+import { appCopy, getInitialLanguage } from "./i18n.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
+const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", papers: "" };
+
+function tabFromHash() {
+  if (window.location.hash.startsWith("#blog")) return "blog";
+  if (window.location.hash === "#resources") return "resources";
+  if (window.location.hash.startsWith("#methods")) return "methods";
+  return "papers";
+}
 
 function useTheme() {
   const [theme, setTheme] = useState(
@@ -20,18 +28,40 @@ function useTheme() {
   return [theme, () => setTheme((t) => (t === "dark" ? "light" : "dark"))];
 }
 
+function useLanguage() {
+  const [lang, setLang] = useState(getInitialLanguage);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-Hans" : "en");
+    try {
+      localStorage.setItem("awesome-rsi-lang", lang);
+    } catch {}
+  }, [lang]);
+  return [lang, setLang];
+}
+
 export default function App() {
-  const [tab, setTab] = useState(() => window.location.hash.startsWith("#blog") ? "blog" : "papers");
+  const [tab, setTab] = useState(tabFromHash);
   const [theme, toggleTheme] = useTheme();
+  const [lang, setLang] = useLanguage();
+  const copy = appCopy[lang];
+
+  useEffect(() => {
+    document.title = copy.pageTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", copy.pageDescription);
+  }, [copy]);
+
+  useEffect(() => {
+    const syncTab = () => setTab(tabFromHash());
+    window.addEventListener("hashchange", syncTab);
+    return () => window.removeEventListener("hashchange", syncTab);
+  }, []);
 
   const selectTab = (nextTab) => {
-    if (nextTab === "blog") {
-      window.history.replaceState(null, "", "#blog");
-      window.dispatchEvent(new Event("hashchange"));
-    } else if (window.location.hash.startsWith("#blog")) {
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
-      window.dispatchEvent(new Event("hashchange"));
-    }
+    const nextHash = TAB_HASHES[nextTab];
+    const nextUrl = nextHash || `${window.location.pathname}${window.location.search}`;
+    window.history.replaceState(null, "", nextUrl);
+    window.dispatchEvent(new Event("hashchange"));
     setTab(nextTab);
   };
 
@@ -44,11 +74,26 @@ export default function App() {
             <span className="brand-short">Awesome RSI</span>
           </a>
           <div className="header-actions">
-            <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-              {theme === "dark" ? "☀ Light" : "☾ Dark"}
+            <div className="lang-segment" role="group" aria-label={copy.language}>
+              {(["en", "zh"]).map((option) => (
+                <button
+                  type="button"
+                  className={`lang-choice${lang === option ? " is-active" : ""}`}
+                  aria-label={option === "en" ? copy.english : copy.chinese}
+                  aria-pressed={lang === option}
+                  onClick={() => setLang(option)}
+                  key={option}
+                >
+                  {option.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <button className="icon-btn" onClick={toggleTheme} aria-label={copy.themeToggle}>
+              {theme === "dark" ? "☀" : "☾"}
+              <span className="icon-btn-label">{theme === "dark" ? copy.light : copy.dark}</span>
             </button>
             <a className="icon-btn" href={REPO_URL} target="_blank" rel="noreferrer">
-              GitHub ↗
+              <span className="icon-btn-label">GitHub</span> ↗
             </a>
           </div>
         </div>
@@ -57,13 +102,9 @@ export default function App() {
       <section className="hero">
         <div className="container">
           <h1>
-            A curated map of <em>Recursive Self-Improvement</em> research
+            {copy.heroTitleBefore}<em>{copy.heroTitleEmphasis}</em>{copy.heroTitleAfter}
           </h1>
-          <p>
-            Papers, books, and courses on agents that learn from their own experience — self-evolution,
-            skill learning, memory, continual learning, and automated AI research. Filter by topic,
-            search, and sort by recency or influence.
-          </p>
+          <p>{copy.heroBody}</p>
         </div>
       </section>
 
@@ -77,7 +118,7 @@ export default function App() {
             aria-selected={tab === "blog"}
             onClick={() => selectTab("blog")}
           >
-            Blog
+            {copy.tabs.blog}
           </button>
           <button
             className={`tab${tab === "papers" ? " is-active" : ""}`}
@@ -87,17 +128,7 @@ export default function App() {
             aria-selected={tab === "papers"}
             onClick={() => selectTab("papers")}
           >
-            Benchmark Paper List
-          </button>
-          <button
-            className={`tab${tab === "resources" ? " is-active" : ""}`}
-            role="tab"
-            id="tab-resources"
-            aria-controls="panel-resources"
-            aria-selected={tab === "resources"}
-            onClick={() => selectTab("resources")}
-          >
-            Books &amp; Courses
+            {copy.tabs.papers}
           </button>
           <button
             className={`tab${tab === "methods" ? " is-active" : ""}`}
@@ -107,7 +138,17 @@ export default function App() {
             aria-selected={tab === "methods"}
             onClick={() => selectTab("methods")}
           >
-            Methods &amp; Systems
+            {copy.tabs.methods}
+          </button>
+          <button
+            className={`tab${tab === "resources" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-resources"
+            aria-controls="panel-resources"
+            aria-selected={tab === "resources"}
+            onClick={() => selectTab("resources")}
+          >
+            {copy.tabs.resources}
           </button>
         </nav>
         <div
@@ -116,19 +157,18 @@ export default function App() {
           aria-labelledby={`tab-${tab === "papers" ? "benchmark-papers" : tab}`}
         >
           {tab === "blog"
-            ? <BlogTab />
+            ? <BlogTab lang={lang} />
             : tab === "papers"
-              ? <PapersTab />
+              ? <PapersTab lang={lang} />
               : tab === "methods"
-                ? <MethodsTab />
-                : <ResourcesTab />}
+                ? <MethodsTab lang={lang} />
+                : <ResourcesTab lang={lang} />}
         </div>
       </main>
 
       <footer className="site-footer">
         <div className="container">
-          Maintained as part of <a href={REPO_URL}>awesome-rsi</a>. Paper metadata from arXiv;
-          citation counts from Semantic Scholar. Contributions welcome — open a PR to add a paper.
+          {copy.footerBefore}<a href={REPO_URL}>awesome-rsi</a>{copy.footerAfter}
         </div>
       </footer>
     </>

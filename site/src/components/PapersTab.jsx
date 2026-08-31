@@ -5,6 +5,9 @@ import { citationEdges } from "../data/citationGraph.js";
 import FilterBar from "./FilterBar.jsx";
 import PaperCard from "./PaperCard.jsx";
 import CitationGraph from "./CitationGraph.jsx";
+import { localizeFilterDimensions } from "../data/taxonomyZh.js";
+import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
+import { papersCopy } from "../i18n.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(filterDimensions.map(({ id }) => [id, []]));
 const YEARS = papers.map((paper) => paper.year);
@@ -13,21 +16,23 @@ const YEAR_BOUNDS = [Math.min(...YEARS), Math.max(...YEARS)];
 const CITATION_BOUNDS = [Math.min(...CITATIONS), Math.max(...CITATIONS)];
 const indexedPapers = papers.map((paper) => ({ ...paper, facets: paperTaxonomy[paper.id] }));
 
-export default function PapersTab() {
+export default function PapersTab({ lang }) {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
   const [yearRange, setYearRange] = useState(YEAR_BOUNDS);
   const [citationRange, setCitationRange] = useState(CITATION_BOUNDS);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("date");
   const [view, setView] = useState("list");
+  const dimensions = useMemo(() => localizeFilterDimensions(filterDimensions, lang), [lang]);
+  const copy = papersCopy[lang];
 
-  const facetCounts = useMemo(() => Object.fromEntries(filterDimensions.map((dimension) => [
+  const facetCounts = useMemo(() => Object.fromEntries(dimensions.map((dimension) => [
     dimension.id,
     Object.fromEntries(dimension.options.map((option) => [
       option.value,
       indexedPapers.filter((paper) => paper.facets[dimension.id].includes(option.value)).length,
     ])),
-  ])), []);
+  ])), [dimensions]);
 
   const visible = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -38,7 +43,7 @@ export default function PapersTab() {
       .filter((paper) => paper.citations >= citationRange[0] && paper.citations <= citationRange[1])
       .filter((paper) => {
         if (!normalizedQuery) return true;
-        return [paper.id, paper.title, paper.nickname, paper.abstract, ...paper.authors]
+        return [paper.id, paper.title, paper.nickname, paper.abstract, paperAbstractsZh[paper.id], ...paper.authors]
           .join(" ")
           .toLowerCase()
           .includes(normalizedQuery);
@@ -46,7 +51,7 @@ export default function PapersTab() {
       .sort((a, b) => sortBy === "citations"
         ? b.citations - a.citations || b.published.localeCompare(a.published)
         : b.published.localeCompare(a.published));
-  }, [selections, yearRange, citationRange, query, sortBy]);
+  }, [selections, yearRange, citationRange, query, sortBy, lang]);
 
   const toggleOption = (dimensionId, optionValue) => setSelections((current) => {
     const dimension = filterDimensions.find(({ id }) => id === dimensionId);
@@ -98,7 +103,7 @@ export default function PapersTab() {
   return (
     <>
       <FilterBar
-        dimensions={filterDimensions}
+        dimensions={dimensions}
         selections={selections}
         facetCounts={facetCounts}
         onToggle={toggleOption}
@@ -117,26 +122,27 @@ export default function PapersTab() {
         totalCount={papers.length}
         hasFilters={hasFilters}
         onClear={clearFilters}
+        lang={lang}
       />
       <div className="view-toolbar">
         <div>
-          <span>View as</span>
-          <button className={view === "list" ? "is-active" : ""} onClick={() => setView("list")} aria-pressed={view === "list"}>☷ List</button>
-          <button className={view === "graph" ? "is-active" : ""} onClick={() => setView("graph")} aria-pressed={view === "graph"}>⌘ Citation graph</button>
+          <span>{copy.viewAs}</span>
+          <button className={view === "list" ? "is-active" : ""} onClick={() => setView("list")} aria-pressed={view === "list"}>☷ {copy.list}</button>
+          <button className={view === "graph" ? "is-active" : ""} onClick={() => setView("graph")} aria-pressed={view === "graph"}>⌘ {copy.graph}</button>
         </div>
-        <p>{view === "graph" ? `${citationEdges.length} real citation relationships in the full corpus` : "Detailed metadata and abstracts"}</p>
+        <p>{view === "graph" ? copy.graphSummary(citationEdges.length) : copy.listSummary}</p>
       </div>
       {visible.length === 0 ? (
         <div className="empty-state">
-          <b>No papers found</b>
-          <span>Try removing one of the filters or widening a range.</span>
-          <button onClick={clearFilters}>Reset all filters</button>
+          <b>{copy.noPapers}</b>
+          <span>{copy.noPapersHint}</span>
+          <button onClick={clearFilters}>{copy.reset}</button>
         </div>
       ) : view === "list" ? (
         <div className="paper-list">
-          {visible.map((paper) => <PaperCard key={paper.id} paper={paper} />)}
+          {visible.map((paper) => <PaperCard key={paper.id} paper={paper} lang={lang} />)}
         </div>
-      ) : <CitationGraph papers={visible} />}
+      ) : <CitationGraph papers={visible} lang={lang} />}
     </>
   );
 }

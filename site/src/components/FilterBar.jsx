@@ -1,15 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { filterCopy } from "../i18n.js";
 
-const NUMERIC_RANGE_HELP = {
-  summary: "Continuous filters for publication recency and global citation count.",
-  items: [
-    { term: "Publication year", description: "Keep papers published within the selected year interval." },
-    { term: "Citations", description: "Keep papers whose current Semantic Scholar citation count falls within the selected interval." },
-  ],
-  note: "Drag either handle; both numeric filters combine with the categorical dimensions using AND.",
-};
-
-function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
+function RangeFilter({ label, min, max, value, onChange, copy, suffix = "" }) {
   const [low, high] = value;
   const span = Math.max(max - min, 1);
   const lowPercent = ((low - min) / span) * 100;
@@ -22,7 +14,7 @@ function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
           <span>{label}</span>
           <strong>{min}{suffix}</strong>
         </div>
-        <div className="fixed-range"><i /><span>Only value in the current collection</span></div>
+        <div className="fixed-range"><i /><span>{copy.onlyValue}</span></div>
       </div>
     );
   }
@@ -45,7 +37,7 @@ function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
           min={min}
           max={max}
           value={low}
-          aria-label={`${label} minimum`}
+          aria-label={copy.minimum(label)}
           onChange={(event) => onChange([Math.min(Number(event.target.value), high), high])}
         />
         <input
@@ -53,7 +45,7 @@ function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
           min={min}
           max={max}
           value={high}
-          aria-label={`${label} maximum`}
+          aria-label={copy.maximum(label)}
           onChange={(event) => onChange([low, Math.max(Number(event.target.value), low)])}
         />
       </div>
@@ -62,11 +54,11 @@ function RangeFilter({ label, min, max, value, onChange, suffix = "" }) {
   );
 }
 
-function DimensionHelp({ id, label, help }) {
+function DimensionHelp({ id, label, help, copy }) {
   const rootItems = help.items.filter((item) => !item.parent);
 
   return (
-    <section id={id} className="dimension-help" aria-label={`${label} definitions`}>
+    <section id={id} className="dimension-help" aria-label={copy.definitions(label)}>
       <p className="dimension-help-summary">{help.summary}</p>
       <div className="dimension-help-list">
         {rootItems.map((item) => {
@@ -78,7 +70,7 @@ function DimensionHelp({ id, label, help }) {
               <p>{item.description}</p>
               {children.length > 0 && (
                 <div className="dimension-help-children">
-                  <span className="dimension-help-children-label">Includes</span>
+                  <span className="dimension-help-children-label">{copy.includes}</span>
                   <div className="dimension-help-child-grid">
                     {children.map((child) => (
                       <section className="dimension-help-child" key={child.term}>
@@ -93,22 +85,22 @@ function DimensionHelp({ id, label, help }) {
           );
         })}
       </div>
-      {help.note && <p className="dimension-help-note"><span>Note</span>{help.note}</p>}
+      {help.note && <p className="dimension-help-note"><span>{copy.note}</span>{help.note}</p>}
     </section>
   );
 }
 
-function DimensionTitle({ label, helpId, helpOpen, onHelpToggle }) {
+function DimensionTitle({ label, helpId, helpOpen, onHelpToggle, copy }) {
   return (
     <div className="dimension-title">
       <span>{label}</span>
       <button
         type="button"
         className={`dimension-help-trigger${helpOpen ? " is-active" : ""}`}
-        aria-label={`Explain ${label}`}
+        aria-label={copy.explain(label)}
         aria-expanded={helpOpen}
         aria-controls={helpId}
-        title={`Explain ${label}`}
+        title={copy.explain(label)}
         onClick={onHelpToggle}
       >
         ?
@@ -117,7 +109,7 @@ function DimensionTitle({ label, helpId, helpOpen, onHelpToggle }) {
   );
 }
 
-function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpOpen, onHelpToggle }) {
+function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpOpen, onHelpToggle, copy }) {
   const visibleOptions = dimension.options.filter((option) => {
     if (!option.parent) return true;
     const siblingValues = dimension.options
@@ -130,7 +122,7 @@ function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpO
   return (
     <div className={`dimension-row${helpOpen ? " has-help-open" : ""}`}>
       <div className="dimension-label">
-        <DimensionTitle label={dimension.label} helpId={helpId} helpOpen={helpOpen} onHelpToggle={onHelpToggle} />
+        <DimensionTitle label={dimension.label} helpId={helpId} helpOpen={helpOpen} onHelpToggle={onHelpToggle} copy={copy} />
       </div>
       <div className="dimension-content">
         <div className="dimension-options">
@@ -138,7 +130,7 @@ function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpO
             className={`filter-option filter-option-all${selected.length === 0 ? " is-active" : ""}`}
             onClick={onClear}
           >
-            All
+            {copy.all}
           </button>
           {visibleOptions.map((option) => {
             const active = selected.includes(option.value);
@@ -153,11 +145,11 @@ function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpO
                 className={`filter-option${option.parent ? " is-child" : ""}${childValues.length > 0 ? " has-children" : ""}${expanded ? " is-expanded" : ""}${active ? " is-active" : ""}`}
                 aria-pressed={active}
                 aria-expanded={childValues.length > 0 ? expanded : undefined}
-                aria-label={option.parent ? `${option.parent}: ${option.label}` : option.label}
+                aria-label={option.parent ? `${option.parentLabel ?? option.parent}：${option.label}` : option.label}
                 onClick={() => onToggle(option.value)}
               >
                 <span className="option-check" aria-hidden="true">{active ? "✓" : "+"}</span>
-                {option.parent && <span className="option-parent">{option.parent}</span>}
+                {option.parent && <span className="option-parent">{option.parentLabel ?? option.parent}</span>}
                 <span>{option.label}</span>
                 <span className="option-count">{counts[option.value] ?? 0}</span>
                 {childValues.length > 0 && <span className="option-disclosure" aria-hidden="true">⌄</span>}
@@ -165,7 +157,7 @@ function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpO
             );
           })}
         </div>
-        {helpOpen && <DimensionHelp id={helpId} label={dimension.label} help={dimension.help} />}
+        {helpOpen && <DimensionHelp id={helpId} label={dimension.label} help={dimension.help} copy={copy} />}
       </div>
     </div>
   );
@@ -191,9 +183,19 @@ export default function FilterBar({
   totalCount,
   hasFilters,
   onClear,
+  lang,
+  copyOverride,
+  sortOptions,
 }) {
   const searchRef = useRef(null);
   const [openHelpId, setOpenHelpId] = useState(null);
+  const copy = copyOverride ?? filterCopy[lang];
+  const countCopy = copy.resultCount(resultCount, totalCount);
+  const resolvedSortOptions = sortOptions ?? [
+    { value: "date", label: copy.newest },
+    { value: "citations", label: copy.mostCited },
+  ];
+  const hasNumericFilters = Boolean(yearBounds || citationBounds);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -208,10 +210,12 @@ export default function FilterBar({
   }, []);
 
   return (
-    <section className="filter-shell" aria-label="Filter papers">
+    <section className="filter-shell" aria-label={copy.filterPapers}>
       <div className="filter-board">
         <div className="filter-board-head">
-          <span className="filter-status"><b>{resultCount}</b> of {totalCount} papers</span>
+          <span className="filter-status">
+            {countCopy.before}<b>{countCopy.visible}</b>{countCopy.middle}{countCopy.total}{countCopy.after}
+          </span>
         </div>
 
         {dimensions.map((dimension) => (
@@ -224,30 +228,32 @@ export default function FilterBar({
             onClear={() => onClearDimension(dimension.id)}
             helpOpen={openHelpId === dimension.id}
             onHelpToggle={() => setOpenHelpId((current) => current === dimension.id ? null : dimension.id)}
+            copy={copy}
           />
         ))}
 
-        <div className={`dimension-row number-row${openHelpId === "numeric" ? " has-help-open" : ""}`}>
+        {hasNumericFilters && <div className={`dimension-row number-row${openHelpId === "numeric" ? " has-help-open" : ""}`}>
           <div className="dimension-label">
             <DimensionTitle
-              label="Numeric range"
+              label={copy.numericRange}
               helpId="dimension-help-numeric"
               helpOpen={openHelpId === "numeric"}
               onHelpToggle={() => setOpenHelpId((current) => current === "numeric" ? null : "numeric")}
+              copy={copy}
             />
           </div>
           <div className="dimension-content">
             <div className="range-grid">
-              <RangeFilter label="Publication year" min={yearBounds[0]} max={yearBounds[1]} value={yearRange} onChange={onYearRangeChange} />
-              <RangeFilter label="Citations" min={citationBounds[0]} max={citationBounds[1]} value={citationRange} onChange={onCitationRangeChange} />
+              {yearBounds && <RangeFilter label={copy.publicationYear} min={yearBounds[0]} max={yearBounds[1]} value={yearRange} onChange={onYearRangeChange} copy={copy} />}
+              {citationBounds && <RangeFilter label={copy.citations} min={citationBounds[0]} max={citationBounds[1]} value={citationRange} onChange={onCitationRangeChange} copy={copy} />}
             </div>
-            {openHelpId === "numeric" && <DimensionHelp id="dimension-help-numeric" label="Numeric range" help={NUMERIC_RANGE_HELP} />}
+            {openHelpId === "numeric" && <DimensionHelp id="dimension-help-numeric" label={copy.numericRange} help={copy.numericHelp} copy={copy} />}
           </div>
-        </div>
+        </div>}
 
         <div className="filter-board-foot">
-          <span><i className="logic-dot" /> OR within rows <b>+</b> AND across rows</span>
-          <button className="clear-btn" onClick={onClear} disabled={!hasFilters}>Reset all filters</button>
+          <span><i className="logic-dot" /> {copy.logic} <b>+</b> {copy.logicAnd}</span>
+          <button className="clear-btn" onClick={onClear} disabled={!hasFilters}>{copy.reset}</button>
         </div>
       </div>
 
@@ -257,16 +263,23 @@ export default function FilterBar({
           <input
             ref={searchRef}
             type="search"
-            placeholder="Search within filtered papers by title, author, abstract, or arXiv ID"
+            placeholder={copy.searchPlaceholder}
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
           />
           <kbd>⌘ K</kbd>
         </label>
-        <div className="sort-group" role="group" aria-label="Sort papers">
-          <span className="sort-label">Sort</span>
-          <button className={`sort-btn${sortBy === "date" ? " is-active" : ""}`} onClick={() => onSortChange("date")}>Newest</button>
-          <button className={`sort-btn${sortBy === "citations" ? " is-active" : ""}`} onClick={() => onSortChange("citations")}>Most cited</button>
+        <div className="sort-group" role="group" aria-label={copy.sortPapers}>
+          <span className="sort-label">{copy.sort}</span>
+          {resolvedSortOptions.map((option) => (
+            <button
+              key={option.value}
+              className={`sort-btn${sortBy === option.value ? " is-active" : ""}`}
+              onClick={() => onSortChange(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
     </section>
