@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
+import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
+import { paperInstitutions } from "../data/paperInstitutions.js";
+import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperCardCopy, tagLabelsZh } from "../i18n.js";
 
 // Tag hues reuse the GDPevo domain palette (see styles.css variables).
@@ -33,8 +36,18 @@ function formatDate(iso, lang) {
 
 export default function PaperCard({ paper, lang }) {
   const [showAbstract, setShowAbstract] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const copy = paperCardCopy[lang];
   const abstract = lang === "zh" ? paperAbstractsZh[paper.id] ?? paper.abstract : paper.abstract;
+  const dimensions = localizeFilterDimensions(filterDimensions, lang);
+  const facets = paperTaxonomy[paper.id];
+  const labels = Object.fromEntries(dimensions.map((dimension) => [
+    dimension.id,
+    {
+      label: dimension.label,
+      values: Object.fromEntries(dimension.options.map((option) => [option.value, option.label])),
+    },
+  ]));
 
   return (
     <article className="paper-card">
@@ -54,6 +67,10 @@ export default function PaperCard({ paper, lang }) {
         </a>
       </h3>
       <p className="paper-authors">{formatAuthors(paper.authors, lang, copy)}</p>
+      <p className="paper-institutions">
+        <strong>{copy.institutions}</strong>
+        <span>{paperInstitutions[paper.id].join(" · ")}</span>
+      </p>
       <div className="paper-tags">
         {paper.tags.map((tag) => {
           const [ink, bg] = TAG_COLORS[tag] ?? [];
@@ -68,14 +85,28 @@ export default function PaperCard({ paper, lang }) {
         <a href={paper.arxiv} target="_blank" rel="noreferrer">
           arXiv
         </a>
-        <a href={paper.pdf} target="_blank" rel="noreferrer">
-          PDF
-        </a>
         <button className="abstract-toggle" onClick={() => setShowAbstract((v) => !v)}>
           {showAbstract ? copy.hideAbstract : copy.showAbstract}
         </button>
+        <button className="abstract-toggle" onClick={() => setShowProfile((v) => !v)} aria-expanded={showProfile}>
+          {showProfile ? copy.hideProfile : copy.showProfile}
+        </button>
       </div>
       {showAbstract && <p className="paper-abstract">{abstract}</p>}
+      {showProfile && (
+        <section className="taxonomy-profile" aria-label={copy.profileLabel}>
+          {dimensions.map((dimension) => (
+            <div className="taxonomy-profile-row" key={dimension.id}>
+              <strong>{labels[dimension.id].label}</strong>
+              <div>
+                {facets[dimension.id].map((value) => (
+                  <span key={value}>{labels[dimension.id].values[value] ?? value}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
     </article>
   );
 }

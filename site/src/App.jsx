@@ -6,6 +6,14 @@ import ResourcesTab from "./components/ResourcesTab.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
+const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", papers: "" };
+
+function tabFromHash() {
+  if (window.location.hash.startsWith("#blog")) return "blog";
+  if (window.location.hash === "#resources") return "resources";
+  if (window.location.hash.startsWith("#methods")) return "methods";
+  return "papers";
+}
 
 function useTheme() {
   const [theme, setTheme] = useState(
@@ -33,7 +41,7 @@ function useLanguage() {
 }
 
 export default function App() {
-  const [tab, setTab] = useState(() => window.location.hash.startsWith("#blog") ? "blog" : "papers");
+  const [tab, setTab] = useState(tabFromHash);
   const [theme, toggleTheme] = useTheme();
   const [lang, setLang] = useLanguage();
   const copy = appCopy[lang];
@@ -43,14 +51,17 @@ export default function App() {
     document.querySelector('meta[name="description"]')?.setAttribute("content", copy.pageDescription);
   }, [copy]);
 
+  useEffect(() => {
+    const syncTab = () => setTab(tabFromHash());
+    window.addEventListener("hashchange", syncTab);
+    return () => window.removeEventListener("hashchange", syncTab);
+  }, []);
+
   const selectTab = (nextTab) => {
-    if (nextTab === "blog") {
-      window.history.replaceState(null, "", "#blog");
-      window.dispatchEvent(new Event("hashchange"));
-    } else if (window.location.hash.startsWith("#blog")) {
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
-      window.dispatchEvent(new Event("hashchange"));
-    }
+    const nextHash = TAB_HASHES[nextTab];
+    const nextUrl = nextHash || `${window.location.pathname}${window.location.search}`;
+    window.history.replaceState(null, "", nextUrl);
+    window.dispatchEvent(new Event("hashchange"));
     setTab(nextTab);
   };
 
@@ -120,16 +131,6 @@ export default function App() {
             {copy.tabs.papers}
           </button>
           <button
-            className={`tab${tab === "resources" ? " is-active" : ""}`}
-            role="tab"
-            id="tab-resources"
-            aria-controls="panel-resources"
-            aria-selected={tab === "resources"}
-            onClick={() => selectTab("resources")}
-          >
-            {copy.tabs.resources}
-          </button>
-          <button
             className={`tab${tab === "methods" ? " is-active" : ""}`}
             role="tab"
             id="tab-methods"
@@ -138,6 +139,16 @@ export default function App() {
             onClick={() => selectTab("methods")}
           >
             {copy.tabs.methods}
+          </button>
+          <button
+            className={`tab${tab === "resources" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-resources"
+            aria-controls="panel-resources"
+            aria-selected={tab === "resources"}
+            onClick={() => selectTab("resources")}
+          >
+            {copy.tabs.resources}
           </button>
         </nav>
         <div

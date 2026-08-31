@@ -69,7 +69,7 @@ function nodeRadius(citations) {
   return 10 + Math.sqrt(Math.max(citations, 0)) * 2.65;
 }
 
-function buildLayout(papers, edges) {
+function buildLayout(papers, edges, getNodeWeight) {
   const nodes = papers.map((paper, index) => {
     const angle = index * 2.3999632297;
     const ring = 165 + (index % 4) * 34;
@@ -79,7 +79,7 @@ function buildLayout(papers, edges) {
       y: GRAPH_HEIGHT / 2 + Math.sin(angle) * ring * 0.78,
       vx: 0,
       vy: 0,
-      radius: nodeRadius(paper.citations),
+      radius: nodeRadius(getNodeWeight(paper)),
     };
   });
   const byId = new Map(nodes.map((node) => [node.id, node]));
@@ -178,12 +178,25 @@ function RelationList({ title, emptyText, edges, paperById, relationKey, onSelec
   );
 }
 
-export default function CitationGraph({ papers, lang }) {
+const defaultNodeWeight = (paper) => paper.citations ?? 0;
+const defaultPrimaryMetric = (paper) => paper.citations ?? 0;
+
+export default function CitationGraph({
+  papers,
+  lang,
+  edges = citationEdges,
+  meta = citationGraphMeta,
+  copyOverride,
+  nodeWeight = defaultNodeWeight,
+  primaryMetric = defaultPrimaryMetric,
+  primaryMetricLabel,
+  nodeAriaLabel,
+}) {
   const fullPaperById = useMemo(() => new Map(papers.map((paper) => [paper.id, paper])), [papers]);
   const visibleIds = useMemo(() => new Set(papers.map((paper) => paper.id)), [papers]);
-  const visibleEdges = useMemo(() => citationEdges.filter((edge) =>
-    visibleIds.has(edge.source) && visibleIds.has(edge.target)), [visibleIds]);
-  const layout = useMemo(() => buildLayout(papers, visibleEdges), [papers, visibleEdges]);
+  const visibleEdges = useMemo(() => edges.filter((edge) =>
+    visibleIds.has(edge.source) && visibleIds.has(edge.target)), [edges, visibleIds]);
+  const layout = useMemo(() => buildLayout(papers, visibleEdges, nodeWeight), [papers, visibleEdges, nodeWeight]);
   const [selectedId, setSelectedId] = useState(() => papers[0]?.id ?? null);
   const [hoveredId, setHoveredId] = useState(null);
   const [camera, setCamera] = useState(defaultCamera);
@@ -194,7 +207,7 @@ export default function CitationGraph({ papers, lang }) {
   const gestureRef = useRef(null);
   const gestureMovedRef = useRef(false);
   const suppressClickUntilRef = useRef(0);
-  const copy = graphCopy[lang];
+  const copy = copyOverride ?? graphCopy[lang];
 
   const updateCamera = (nextCamera) => {
     cameraRef.current = nextCamera;
@@ -402,7 +415,9 @@ export default function CitationGraph({ papers, lang }) {
                     transform={`translate(${node.x} ${node.y})`}
                     role="button"
                     tabIndex="0"
-                    aria-label={`${paper.nickname}，${paper.citations} ${copy.citations}`}
+                    aria-label={nodeAriaLabel
+                      ? nodeAriaLabel(paper, nodeWeight(paper))
+                      : `${paper.nickname}，${paper.citations} ${copy.citations}`}
                     onMouseEnter={() => setHoveredId(paper.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={(event) => {
@@ -439,7 +454,7 @@ export default function CitationGraph({ papers, lang }) {
               <h3>{selectedPaper.nickname}</h3>
               <p>{selectedPaper.title}</p>
               <div className="inspector-metrics">
-                <div><b>{selectedPaper.citations}</b><span>{copy.globalCitations}</span></div>
+                <div><b>{primaryMetric(selectedPaper)}</b><span>{primaryMetricLabel ?? copy.globalCitations}</span></div>
                 <div><b>{incoming.length}</b><span>{copy.citedByCorpus}</span></div>
                 <div><b>{outgoing.length}</b><span>{copy.referencesInCorpus}</span></div>
               </div>
@@ -455,11 +470,11 @@ export default function CitationGraph({ papers, lang }) {
         <span className="verified-mark">✓</span>
         {lang === "zh" ? (
           <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot}{citationGraphMeta.snapshot}。
+            <b>{copy.provenanceLead}</b> {copy.snapshot}{meta.snapshot}。
           </p>
         ) : (
           <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot} {citationGraphMeta.snapshot}.
+            <b>{copy.provenanceLead}</b> {copy.snapshot} {meta.snapshot}.
           </p>
         )}
       </div>

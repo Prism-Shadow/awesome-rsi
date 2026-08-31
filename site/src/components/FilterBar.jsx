@@ -184,11 +184,18 @@ export default function FilterBar({
   hasFilters,
   onClear,
   lang,
+  copyOverride,
+  sortOptions,
 }) {
   const searchRef = useRef(null);
   const [openHelpId, setOpenHelpId] = useState(null);
-  const copy = filterCopy[lang];
+  const copy = copyOverride ?? filterCopy[lang];
   const countCopy = copy.resultCount(resultCount, totalCount);
+  const resolvedSortOptions = sortOptions ?? [
+    { value: "date", label: copy.newest },
+    { value: "citations", label: copy.mostCited },
+  ];
+  const hasNumericFilters = Boolean(yearBounds || citationBounds);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -225,7 +232,7 @@ export default function FilterBar({
           />
         ))}
 
-        <div className={`dimension-row number-row${openHelpId === "numeric" ? " has-help-open" : ""}`}>
+        {hasNumericFilters && <div className={`dimension-row number-row${openHelpId === "numeric" ? " has-help-open" : ""}`}>
           <div className="dimension-label">
             <DimensionTitle
               label={copy.numericRange}
@@ -237,12 +244,12 @@ export default function FilterBar({
           </div>
           <div className="dimension-content">
             <div className="range-grid">
-              <RangeFilter label={copy.publicationYear} min={yearBounds[0]} max={yearBounds[1]} value={yearRange} onChange={onYearRangeChange} copy={copy} />
-              <RangeFilter label={copy.citations} min={citationBounds[0]} max={citationBounds[1]} value={citationRange} onChange={onCitationRangeChange} copy={copy} />
+              {yearBounds && <RangeFilter label={copy.publicationYear} min={yearBounds[0]} max={yearBounds[1]} value={yearRange} onChange={onYearRangeChange} copy={copy} />}
+              {citationBounds && <RangeFilter label={copy.citations} min={citationBounds[0]} max={citationBounds[1]} value={citationRange} onChange={onCitationRangeChange} copy={copy} />}
             </div>
             {openHelpId === "numeric" && <DimensionHelp id="dimension-help-numeric" label={copy.numericRange} help={copy.numericHelp} copy={copy} />}
           </div>
-        </div>
+        </div>}
 
         <div className="filter-board-foot">
           <span><i className="logic-dot" /> {copy.logic} <b>+</b> {copy.logicAnd}</span>
@@ -264,8 +271,15 @@ export default function FilterBar({
         </label>
         <div className="sort-group" role="group" aria-label={copy.sortPapers}>
           <span className="sort-label">{copy.sort}</span>
-          <button className={`sort-btn${sortBy === "date" ? " is-active" : ""}`} onClick={() => onSortChange("date")}>{copy.newest}</button>
-          <button className={`sort-btn${sortBy === "citations" ? " is-active" : ""}`} onClick={() => onSortChange("citations")}>{copy.mostCited}</button>
+          {resolvedSortOptions.map((option) => (
+            <button
+              key={option.value}
+              className={`sort-btn${sortBy === option.value ? " is-active" : ""}`}
+              onClick={() => onSortChange(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
     </section>
