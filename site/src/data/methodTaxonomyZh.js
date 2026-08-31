@@ -34,7 +34,6 @@ const methodTaxonomyZh = {
   selection: {
     label: "验收标准",
     summary: "依据什么证据决定是否保留一次修改。",
-    note: "产物通过局部验证，不等于整个智能体的 Benchmark 能力一定提升。",
     items: {
       "Artifact validation": ["产物验证", "通过单元测试、编译、接口检查或其他针对修改对象的直接验证。"],
       "Task result": ["任务结果", "依据当前任务是否成功，或是否获得更高奖励。"],

@@ -59,7 +59,6 @@ export const methodFilterDimensions = [
       ["Combined metrics", "A joint criterion involving performance, cost, speed, stability, novelty, or another objective."],
       ["No validation", "The generated update is written directly without a separate acceptance gate."],
     ],
-    "Artifact validation shows that an edit works locally; it does not by itself establish better benchmark capability.",
   ),
   dimension(
     "updater",
