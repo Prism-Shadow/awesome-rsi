@@ -1,10 +1,8 @@
 import { useMemo, useState } from "react";
 import { papers } from "../data/papers.js";
 import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
-import { citationEdges } from "../data/citationGraph.js";
 import FilterBar from "./FilterBar.jsx";
 import PaperCard from "./PaperCard.jsx";
-import CitationGraph from "./CitationGraph.jsx";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
 import { papersCopy } from "../i18n.js";
@@ -22,7 +20,6 @@ export default function PapersTab({ lang }) {
   const [citationRange, setCitationRange] = useState(CITATION_BOUNDS);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("date");
-  const [view, setView] = useState("list");
   const dimensions = useMemo(() => localizeFilterDimensions(filterDimensions, lang), [lang]);
   const copy = papersCopy[lang];
 
@@ -124,25 +121,17 @@ export default function PapersTab({ lang }) {
         onClear={clearFilters}
         lang={lang}
       />
-      <div className="view-toolbar">
-        <div>
-          <span>{copy.viewAs}</span>
-          <button className={view === "list" ? "is-active" : ""} onClick={() => setView("list")} aria-pressed={view === "list"}>☷ {copy.list}</button>
-          <button className={view === "graph" ? "is-active" : ""} onClick={() => setView("graph")} aria-pressed={view === "graph"}>⌘ {copy.graph}</button>
-        </div>
-        <p>{view === "graph" ? copy.graphSummary(citationEdges.length) : copy.listSummary}</p>
-      </div>
       {visible.length === 0 ? (
         <div className="empty-state">
           <b>{copy.noPapers}</b>
           <span>{copy.noPapersHint}</span>
           <button onClick={clearFilters}>{copy.reset}</button>
         </div>
-      ) : view === "list" ? (
+      ) : (
         <div className="paper-list">
           {visible.map((paper) => <PaperCard key={paper.id} paper={paper} lang={lang} />)}
         </div>
-      ) : <CitationGraph papers={visible} lang={lang} />}
+      )}
     </>
   );
 }
