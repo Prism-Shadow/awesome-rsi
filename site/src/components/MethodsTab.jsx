@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { methods } from "../data/methods.js";
+import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { methodFilterDimensions, methodTaxonomy } from "../data/methodTaxonomy.js";
 import { localizeMethodDimensions } from "../data/methodTaxonomyZh.js";
 import FilterBar from "./FilterBar.jsx";
@@ -9,7 +10,15 @@ import { methodFilterCopy, methodsCopy } from "../i18n.js";
 const INITIAL_SELECTIONS = Object.fromEntries(methodFilterDimensions.map(({ id }) => [id, []]));
 const YEARS = methods.map((method) => method.year);
 const YEAR_BOUNDS = [Math.min(...YEARS), Math.max(...YEARS)];
-const indexedMethods = methods.map((method) => ({ ...method, facets: methodTaxonomy[method.id] }));
+const METHOD_CITATION_COUNTS = Object.fromEntries(methods.map((method) => [
+  method.id,
+  methodCitationEdges.filter((edge) => edge.target === method.id).length,
+]));
+const indexedMethods = methods.map((method) => ({
+  ...method,
+  facets: methodTaxonomy[method.id],
+  corpusCitations: METHOD_CITATION_COUNTS[method.id] ?? 0,
+}));
 
 export default function MethodsTab({ lang }) {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
@@ -47,8 +56,8 @@ export default function MethodsTab({ lang }) {
           ...Object.values(method.facets).flat(),
         ].join(" ").toLowerCase().includes(normalizedQuery);
       })
-      .sort((a, b) => sortBy === "title"
-        ? a.title.localeCompare(b.title)
+      .sort((a, b) => sortBy === "citations"
+        ? b.corpusCitations - a.corpusCitations || b.published.localeCompare(a.published)
         : b.published.localeCompare(a.published) || a.title.localeCompare(b.title));
   }, [selections, yearRange, query, sortBy]);
 
@@ -91,7 +100,7 @@ export default function MethodsTab({ lang }) {
         copyOverride={filterText}
         sortOptions={[
           { value: "date", label: filterText.newest },
-          { value: "title", label: filterText.alphabetical },
+          { value: "citations", label: filterText.mostCited },
         ]}
       />
       {visible.length === 0 ? (

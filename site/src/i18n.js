@@ -301,7 +301,7 @@ export const methodFilterCopy = {
     sortPapers: "Method sorting",
     sort: "Sort",
     newest: "Newest",
-    alphabetical: "A–Z",
+    mostCited: "Most cited",
     numericHelp: {
       summary: "Filter methods by the year their arXiv record was first posted.",
       items: [
@@ -331,7 +331,7 @@ export const methodFilterCopy = {
     sortPapers: "方法排序",
     sort: "排序",
     newest: "最新公开",
-    alphabetical: "标题顺序",
+    mostCited: "引用最多",
     numericHelp: {
       summary: "按照论文首次出现在 arXiv 的年份筛选方法。",
       items: [
