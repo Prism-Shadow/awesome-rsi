@@ -161,7 +161,7 @@ a:hover {
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--muted);
+  color: var(--ink);
   font: 750 0.74rem/1 var(--sans);
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -1068,7 +1068,7 @@ a:hover {
   appearance: none;
   border: none;
   background: var(--surface);
-  color: var(--muted);
+  color: var(--ink);
   font: inherit;
   font-size: 0.84rem;
   font-weight: 600;
@@ -1139,7 +1139,7 @@ a:hover {
   border: 0;
   border-radius: 0.36rem;
   background: transparent;
-  color: var(--muted);
+  color: var(--ink);
   font: 700 0.76rem var(--sans);
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
