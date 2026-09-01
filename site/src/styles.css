@@ -1099,13 +1099,9 @@ a:hover {
   padding: 0;
 }
 
-.clear-btn:disabled { color: var(--muted); opacity: 0.45; cursor: default; }
-
 .clear-btn:hover {
   text-decoration: underline;
 }
-
-.clear-btn:disabled:hover { text-decoration: none; }
 
 /* ---------- citation graph ---------- */
 

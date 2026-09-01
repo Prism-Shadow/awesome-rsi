@@ -60,11 +60,6 @@ export default function MethodsTab({ lang }) {
   }));
 
   const clearDimension = (dimensionId) => setSelections((current) => ({ ...current, [dimensionId]: [] }));
-  const hasFilters = query.trim() !== ""
-    || Object.values(selections).some((values) => values.length > 0)
-    || yearRange[0] !== YEAR_BOUNDS[0]
-    || yearRange[1] !== YEAR_BOUNDS[1];
-
   const clearFilters = () => {
     setSelections(INITIAL_SELECTIONS);
     setYearRange(YEAR_BOUNDS);
@@ -91,7 +86,6 @@ export default function MethodsTab({ lang }) {
         onSortChange={setSortBy}
         resultCount={visible.length}
         totalCount={methods.length}
-        hasFilters={hasFilters}
         onClear={clearFilters}
         lang={lang}
         copyOverride={filterText}
