@@ -17,6 +17,7 @@ export const appCopy = {
       papers: "Benchmark Paper List",
       resources: "Books & Courses",
       methods: "Methods & Systems",
+      graph: "Citation Graph",
     },
     footerBefore: "Maintained as part of ",
     footerAfter: ". Paper metadata from arXiv; citation counts from Semantic Scholar. Contributions welcome — open a PR to add a paper.",
@@ -39,6 +40,7 @@ export const appCopy = {
       papers: "基准论文",
       resources: "书籍与课程",
       methods: "方法与系统",
+      graph: "引用图谱",
     },
     footerBefore: "本网站由 ",
     footerAfter: " 项目持续维护。论文元数据来自 arXiv，引用次数来自 Semantic Scholar。欢迎提交 PR，补充新的论文。",
@@ -47,21 +49,11 @@ export const appCopy = {
 
 export const papersCopy = {
   en: {
-    viewAs: "View as",
-    list: "List",
-    graph: "Citation graph",
-    graphSummary: (count) => `${count} real citation relationships in the full corpus`,
-    listSummary: "Detailed metadata and abstracts",
     noPapers: "No papers found",
     noPapersHint: "Try removing one of the filters or widening a range.",
     reset: "Reset all filters",
   },
   zh: {
-    viewAs: "视图",
-    list: "列表",
-    graph: "引用图谱",
-    graphSummary: (count) => `完整论文集中包含 ${count} 条真实引用关系`,
-    listSummary: "查看详细元数据与摘要",
     noPapers: "没有符合条件的论文",
     noPapersHint: "可以尝试减少筛选条件，或扩大数值范围。",
     reset: "重置全部筛选",
@@ -160,8 +152,8 @@ export const graphCopy = {
   en: {
     verifiedNetwork: "Verified bibliography network",
     title: "Citation topology",
-    intro: "Arrows run from the citing paper to the paper it references. Filters above apply to both nodes and edges.",
-    visiblePapers: "visible papers",
+    intro: "Arrows run from the citing paper to the paper it references. Search for a node to locate it without removing the surrounding network.",
+    visiblePapers: "papers",
     verifiedEdges: "verified edges",
     controls: "Graph zoom controls",
     zoomIn: "Zoom in",
@@ -174,7 +166,7 @@ export const graphCopy = {
     newer: "Newer",
     nodeSize: "Node size = global citations",
     cites: "cites",
-    noEdges: "No verified citation relationships remain under the current filters.",
+    noEdges: "No verified citation relationships are available in this network.",
     globalCitations: "global citations",
     citedByCorpus: "cited by corpus",
     referencesInCorpus: "references in corpus",
@@ -191,8 +183,8 @@ export const graphCopy = {
   zh: {
     verifiedNetwork: "经核验的文献引用网络",
     title: "引用关系图谱",
-    intro: "箭头从引用方指向被引用论文。上方筛选条件会同时作用于节点和连线。",
-    visiblePapers: "篇可见论文",
+    intro: "箭头从引用方指向被引用论文。搜索节点可以定位目标，同时保留完整的关系网络。",
+    visiblePapers: "篇论文",
     verifiedEdges: "条已核验引用",
     controls: "图谱缩放控制",
     zoomIn: "放大",
@@ -205,7 +197,7 @@ export const graphCopy = {
     newer: "较新",
     nodeSize: "节点大小代表全局引用次数",
     cites: "引用",
-    noEdges: "当前筛选结果中没有已核验的引用关系。",
+    noEdges: "当前网络中没有已核验的引用关系。",
     globalCitations: "全局引用",
     citedByCorpus: "被合集引用",
     referencesInCorpus: "引用合集论文",
@@ -226,8 +218,8 @@ export const methodGraphCopy = {
     ...graphCopy.en,
     verifiedNetwork: "Verified method bibliography network",
     title: "Method citation topology",
-    intro: "Arrows run from a method paper to another method paper in its bibliography. Filters above apply to both nodes and edges.",
-    visiblePapers: "visible methods",
+    intro: "Arrows run from a method paper to another method paper in its bibliography. Search for a node to locate it without removing the surrounding network.",
+    visiblePapers: "method papers",
     networkLabel: (papers, edges) => `Method citation network with ${papers} papers and ${edges} verified citation relationships`,
     nodeSize: "Node size = citations inside this collection",
     primaryMetric: "first posted",
@@ -238,13 +230,34 @@ export const methodGraphCopy = {
     ...graphCopy.zh,
     verifiedNetwork: "经核验的方法论文引用网络",
     title: "方法引用图谱",
-    intro: "箭头从引用方指向其参考文献中的另一篇方法论文。上方筛选条件会同时作用于节点和连线。",
-    visiblePapers: "篇可见方法论文",
+    intro: "箭头从引用方指向其参考文献中的另一篇方法论文。搜索节点可以定位目标，同时保留完整的关系网络。",
+    visiblePapers: "篇方法论文",
     networkLabel: (papers, edges) => `包含 ${papers} 篇方法论文和 ${edges} 条已核验引用关系的图谱`,
     nodeSize: "节点大小代表在本合集内被引用的次数",
     primaryMetric: "首次公开",
     corpusCitations: "合集内引用",
     provenanceLead: "每一条连线均根据原始论文 PDF 的参考文献文字核验，不包含根据关键词、主题相似度或模型推断生成的关系。",
+  },
+};
+
+export const graphExplorerCopy = {
+  en: {
+    title: "Citation graph explorer",
+    datasetLabel: "Citation graph collection",
+    benchmark: "Benchmark papers",
+    methods: "Methods & Systems",
+    searchLabel: "Find a node",
+    searchPlaceholder: "Search title, nickname, author, or arXiv ID",
+    noResults: "No matching node found.",
+  },
+  zh: {
+    title: "引用图谱浏览器",
+    datasetLabel: "引用图谱类别",
+    benchmark: "基准论文",
+    methods: "方法与系统",
+    searchLabel: "查找节点",
+    searchPlaceholder: "搜索标题、简称、作者或 arXiv ID",
+    noResults: "没有匹配的节点。",
   },
 };
 
@@ -255,21 +268,11 @@ export const resourcesCopy = {
 
 export const methodsCopy = {
   en: {
-    viewAs: "View as",
-    list: "List",
-    graph: "Citation graph",
-    graphSummary: (count) => `${count} verified citation relationships in the full method corpus`,
-    listSummary: "Method summaries and RSI taxonomy profiles",
     noMethods: "No methods found",
     noMethodsHint: "Try removing one of the filters or widening the publication range.",
     reset: "Reset all filters",
   },
   zh: {
-    viewAs: "视图",
-    list: "列表",
-    graph: "引用图谱",
-    graphSummary: (count) => `完整方法论文集中包含 ${count} 条已核验引用关系`,
-    listSummary: "查看方法概述与 RSI 维度档案",
     noMethods: "没有符合条件的方法论文",
     noMethodsHint: "可以尝试减少筛选条件，或扩大发表年份范围。",
     reset: "重置全部筛选",
@@ -298,7 +301,7 @@ export const methodFilterCopy = {
     sortPapers: "Method sorting",
     sort: "Sort",
     newest: "Newest",
-    alphabetical: "A–Z",
+    mostCited: "Most cited",
     numericHelp: {
       summary: "Filter methods by the year their arXiv record was first posted.",
       items: [
@@ -328,7 +331,7 @@ export const methodFilterCopy = {
     sortPapers: "方法排序",
     sort: "排序",
     newest: "最新公开",
-    alphabetical: "标题顺序",
+    mostCited: "引用最多",
     numericHelp: {
       summary: "按照论文首次出现在 arXiv 的年份筛选方法。",
       items: [

@@ -191,13 +191,14 @@ export default function CitationGraph({
   primaryMetric = defaultPrimaryMetric,
   primaryMetricLabel,
   nodeAriaLabel,
+  focusRequest,
 }) {
   const fullPaperById = useMemo(() => new Map(papers.map((paper) => [paper.id, paper])), [papers]);
   const visibleIds = useMemo(() => new Set(papers.map((paper) => paper.id)), [papers]);
   const visibleEdges = useMemo(() => edges.filter((edge) =>
     visibleIds.has(edge.source) && visibleIds.has(edge.target)), [edges, visibleIds]);
   const layout = useMemo(() => buildLayout(papers, visibleEdges, nodeWeight), [papers, visibleEdges, nodeWeight]);
-  const [selectedId, setSelectedId] = useState(() => papers[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [camera, setCamera] = useState(defaultCamera);
   const [isPanning, setIsPanning] = useState(false);
@@ -224,6 +225,15 @@ export default function CitationGraph({
   }, [layout]);
 
   useEffect(() => {
+    if (!focusRequest?.id) return;
+    const node = layout.get(focusRequest.id);
+    if (!node) return;
+    setSelectedId(focusRequest.id);
+    setHoveredId(null);
+    updateCamera(constrainCamera({ x: node.x, y: node.y, zoom: 1.65 }));
+  }, [focusRequest, layout]);
+
+  useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return undefined;
 
@@ -247,7 +257,7 @@ export default function CitationGraph({
   }, [papers.length]);
 
   const selectedPaper = fullPaperById.get(selectedId) ?? papers[0] ?? null;
-  const activeId = hoveredId;
+  const activeId = hoveredId ?? selectedId;
   const incoming = selectedPaper ? visibleEdges.filter((edge) => edge.target === selectedPaper.id) : [];
   const outgoing = selectedPaper ? visibleEdges.filter((edge) => edge.source === selectedPaper.id) : [];
   const activeEdges = new Set(visibleEdges
@@ -405,7 +415,7 @@ export default function CitationGraph({
               {papers.map((paper) => {
                 const node = layout.get(paper.id);
                 if (!node) return null;
-                const selected = paper.id === selectedPaper?.id;
+                const selected = paper.id === selectedId;
                 const related = connectedIds.has(paper.id);
                 const muted = activeId && paper.id !== activeId && !related;
                 return (

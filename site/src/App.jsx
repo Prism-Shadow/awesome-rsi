@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
+import GraphTab from "./components/GraphTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
-const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", papers: "" };
+const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", graph: "#graph-benchmark", papers: "" };
 
 function tabFromHash() {
   if (window.location.hash.startsWith("#blog")) return "blog";
   if (window.location.hash === "#resources") return "resources";
+  if (window.location.hash.startsWith("#graph") || window.location.hash === "#methods-graph") return "graph";
   if (window.location.hash.startsWith("#methods")) return "methods";
   return "papers";
 }
@@ -141,6 +143,16 @@ export default function App() {
             {copy.tabs.methods}
           </button>
           <button
+            className={`tab${tab === "graph" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-graph"
+            aria-controls="panel-graph"
+            aria-selected={tab === "graph"}
+            onClick={() => selectTab("graph")}
+          >
+            {copy.tabs.graph}
+          </button>
+          <button
             className={`tab${tab === "resources" ? " is-active" : ""}`}
             role="tab"
             id="tab-resources"
@@ -162,7 +174,9 @@ export default function App() {
               ? <PapersTab lang={lang} />
               : tab === "methods"
                 ? <MethodsTab lang={lang} />
-                : <ResourcesTab lang={lang} />}
+                : tab === "graph"
+                  ? <GraphTab lang={lang} />
+                  : <ResourcesTab lang={lang} />}
         </div>
       </main>
 

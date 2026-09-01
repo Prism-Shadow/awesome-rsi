@@ -181,7 +181,6 @@ export default function FilterBar({
   onSortChange,
   resultCount,
   totalCount,
-  hasFilters,
   onClear,
   lang,
   copyOverride,
@@ -253,7 +252,7 @@ export default function FilterBar({
 
         <div className="filter-board-foot">
           <span><i className="logic-dot" /> {copy.logic} <b>+</b> {copy.logicAnd}</span>
-          <button className="clear-btn" onClick={onClear} disabled={!hasFilters}>{copy.reset}</button>
+          <button className="clear-btn" onClick={onClear}>{copy.reset}</button>
         </div>
       </div>
 
