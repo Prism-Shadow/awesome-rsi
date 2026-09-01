@@ -1743,7 +1743,7 @@ a:hover {
   appearance: none;
   border: none;
   background: none;
-  color: var(--muted);
+  color: var(--ink);
   font: inherit;
   font-size: 0.84rem;
   font-weight: 600;
