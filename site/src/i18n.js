@@ -268,21 +268,38 @@ export const resourcesCopy = {
 
 export const methodsCopy = {
   en: {
-    noMethods: "No methods found",
+    noMethods: "No methods or systems found",
     noMethodsHint: "Try removing one of the filters or widening the publication range.",
     reset: "Reset all filters",
   },
   zh: {
-    noMethods: "没有符合条件的方法论文",
+    noMethods: "没有符合条件的方法或系统",
     noMethodsHint: "可以尝试减少筛选条件，或扩大发表年份范围。",
     reset: "重置全部筛选",
   },
 };
 
+export const systemCardCopy = {
+  en: {
+    researchPreview: "Research preview",
+    maintainers: "Maintained by",
+    showProfile: "Show system profile ▾",
+    hideProfile: "Hide system profile ▴",
+    profileLabel: "RSI system profile",
+  },
+  zh: {
+    researchPreview: "研究预览",
+    maintainers: "维护者",
+    showProfile: "展开系统维度 ▾",
+    hideProfile: "收起系统维度 ▴",
+    profileLabel: "RSI 系统维度档案",
+  },
+};
+
 export const methodFilterCopy = {
   en: {
-    filterPapers: "Filter methods",
-    resultCount: (visible, total) => ({ before: "", visible, middle: " of ", total, after: " methods" }),
+    filterPapers: "Filter methods and systems",
+    resultCount: (visible, total) => ({ before: "", visible, middle: " of ", total, after: " methods and systems" }),
     all: "All",
     includes: "Includes",
     note: "Note",
@@ -297,22 +314,22 @@ export const methodFilterCopy = {
     logic: "OR within rows",
     logicAnd: "AND across rows",
     reset: "Reset all filters",
-    searchPlaceholder: "Search methods by title, author, summary, venue, or arXiv ID",
-    sortPapers: "Method sorting",
+    searchPlaceholder: "Search methods and systems by title, author, summary, venue, or identifier",
+    sortPapers: "Methods and systems sorting",
     sort: "Sort",
     newest: "Newest",
     mostCited: "Most cited",
     numericHelp: {
-      summary: "Filter methods by the year their arXiv record was first posted.",
+      summary: "Filter entries by the year they were first publicly released.",
       items: [
-        { term: "First posted", description: "Keep papers whose first arXiv submission falls within the selected interval." },
+        { term: "First posted", description: "Use the first arXiv submission for papers and the listed release date for systems." },
       ],
-      note: "Venue badges show later conference publication separately from the original arXiv date.",
+      note: "Paper venue badges and system release labels are shown separately from this date filter.",
     },
   },
   zh: {
-    filterPapers: "筛选方法",
-    resultCount: (visible, total) => ({ before: "共 ", visible, middle: " / ", total, after: " 篇方法论文" }),
+    filterPapers: "筛选方法与系统",
+    resultCount: (visible, total) => ({ before: "共 ", visible, middle: " / ", total, after: " 项方法与系统" }),
     all: "全部",
     includes: "包含",
     note: "说明",
@@ -327,17 +344,17 @@ export const methodFilterCopy = {
     logic: "同一行内按“或”筛选",
     logicAnd: "不同行之间按“且”筛选",
     reset: "重置全部筛选",
-    searchPlaceholder: "搜索方法名称、作者、方法概述、会议或 arXiv ID",
-    sortPapers: "方法排序",
+    searchPlaceholder: "搜索方法或系统名称、作者、概述、来源或标识符",
+    sortPapers: "方法与系统排序",
     sort: "排序",
     newest: "最新公开",
     mostCited: "引用最多",
     numericHelp: {
-      summary: "按照论文首次出现在 arXiv 的年份筛选方法。",
+      summary: "按照条目首次公开的年份筛选方法与系统。",
       items: [
-        { term: "首次公开年份", description: "只保留首次 arXiv 提交时间位于所选年份范围内的论文。" },
+        { term: "首次公开年份", description: "论文使用首次 arXiv 提交时间，系统使用页面列出的版本发布时间。" },
       ],
-      note: "卡片上的会议标签单独表示论文后来正式录用的情况。",
+      note: "论文会议标签和系统版本信息会与该日期筛选项分开展示。",
     },
   },
 };

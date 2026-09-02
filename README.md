@@ -14,6 +14,12 @@ We track the research on agents that get better by editing their own building bl
 2. **A website** — a [GitHub Pages site](https://prism-shadow.github.io/awesome-rsi/) that hosts the corpus as several views: a benchmark list with a multi-dimensional filter board, sortable by **date** or **citations**; a **citation graph**; a **Methods & Systems** list; and a **Books & Courses** shelf — so the same work can be read as a timeline, a leaderboard, or a map.
 3. **A blog** — longer-form writing on the field, starting with the introduction to this project.
 
+## Open-source systems
+
+| System | RSI artifact | Description |
+|---|---|---|
+| [Proteus](https://github.com/proteus-evolve/Proteus) ([v0.3.0](https://github.com/proteus-evolve/Proteus/releases/tag/v0.3.0)) | Harness code and declared surfaces | Harness-agnostic framework for context-fresh self-evolution episodes, validation-gated self-edits, versioned snapshots, and measurement. |
+
 ## Contributing
 
 Contributions are welcome. If a benchmark, method, or learning resource is missing — or a taxonomy label looks wrong — please open a pull request or an issue. New entries should carry the taxonomy metadata used by the site's filter views (benchmark origin, RSI mode, artifact, construction criteria, metric, creation, and evaluation) so they slot directly into the comparison views.

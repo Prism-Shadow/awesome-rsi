@@ -1,24 +1,35 @@
 import { useMemo, useState } from "react";
 import { methods } from "../data/methods.js";
+import { systems } from "../data/systems.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { methodFilterDimensions, methodTaxonomy } from "../data/methodTaxonomy.js";
 import { localizeMethodDimensions } from "../data/methodTaxonomyZh.js";
 import FilterBar from "./FilterBar.jsx";
 import MethodCard from "./MethodCard.jsx";
+import SystemCard from "./SystemCard.jsx";
 import { methodFilterCopy, methodsCopy } from "../i18n.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(methodFilterDimensions.map(({ id }) => [id, []]));
-const YEARS = methods.map((method) => method.year);
+const methodEntries = [
+  ...methods.map((method) => ({
+    ...method,
+    entryType: "paper",
+    facets: methodTaxonomy[method.id],
+    corpusCitations: methodCitationEdges.filter((edge) => edge.target === method.id).length,
+  })),
+  ...systems.map((system) => ({
+    ...system,
+    entryType: "system",
+    published: system.released,
+    year: Number(system.released.slice(0, 4)),
+    venue: "Open-source system",
+    authors: [system.maintainers],
+    facets: system.taxonomy,
+    corpusCitations: 0,
+  })),
+];
+const YEARS = methodEntries.map((method) => method.year);
 const YEAR_BOUNDS = [Math.min(...YEARS), Math.max(...YEARS)];
-const METHOD_CITATION_COUNTS = Object.fromEntries(methods.map((method) => [
-  method.id,
-  methodCitationEdges.filter((edge) => edge.target === method.id).length,
-]));
-const indexedMethods = methods.map((method) => ({
-  ...method,
-  facets: methodTaxonomy[method.id],
-  corpusCitations: METHOD_CITATION_COUNTS[method.id] ?? 0,
-}));
 
 export default function MethodsTab({ lang }) {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
@@ -33,13 +44,13 @@ export default function MethodsTab({ lang }) {
     dimension.id,
     Object.fromEntries(dimension.options.map((option) => [
       option.value,
-      indexedMethods.filter((method) => method.facets[dimension.id].includes(option.value)).length,
+      methodEntries.filter((method) => method.facets[dimension.id].includes(option.value)).length,
     ])),
   ])), []);
 
   const visible = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return indexedMethods
+    return methodEntries
       .filter((method) => methodFilterDimensions.every(({ id }) =>
         selections[id].length === 0 || selections[id].some((value) => method.facets[id].includes(value))))
       .filter((method) => method.year >= yearRange[0] && method.year <= yearRange[1])
@@ -94,7 +105,7 @@ export default function MethodsTab({ lang }) {
         sortBy={sortBy}
         onSortChange={setSortBy}
         resultCount={visible.length}
-        totalCount={methods.length}
+        totalCount={methodEntries.length}
         onClear={clearFilters}
         lang={lang}
         copyOverride={filterText}
@@ -111,8 +122,10 @@ export default function MethodsTab({ lang }) {
         </div>
       ) : (
         <div className="paper-list method-list">
-          {visible.map((method) => <MethodCard method={method} lang={lang} key={method.id} />)}
-        </div>
+          {visible.map((method) => method.entryType === "system"
+            ? <SystemCard system={method} lang={lang} key={method.id} />
+            : <MethodCard method={method} lang={lang} key={method.id} />)}
+          </div>
       )}
     </section>
   );
