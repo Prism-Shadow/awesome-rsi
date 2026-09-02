@@ -188,6 +188,15 @@ export const methods = [
     summary: "A persistent RLM-style harness that preserves histories, memories, skills, prompts, and subagent specifications across trajectories so later work can build on earlier context.",
     summaryZh: "一个持久化的 RLM 风格 Harness，跨轨迹保存历史、记忆、技能、提示词和子智能体配置，让后续工作能够继续利用此前形成的上下文。",
   },
+  {
+    id: "2603.21877",
+    nickname: "P²O",
+    title: "P²O: Joint Policy and Prompt Optimization",
+    authors: ["Xinyu Lu", "Kaiqi Zhang", "Jinglin Yang"], authorCount: 9,
+    published: "2026-03-23", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "A self-improvement loop that alternates policy and prompt optimization: evolved prompts give policy learning better exploration templates, while the improving policy supplies increasingly difficult, high-value seeds for the next prompt round; prompt-induced gains are distilled into the model parameters.",
+    summaryZh: "一个纯自我改进闭环：交替进行策略优化与提示词优化，由演化提示词为策略学习提供更优探索模板，再把策略不断提升后发现的更难样本作为下一轮提示词演化的高价值 seed，并将提示词带来的增益蒸馏进模型参数。",
+  },
 ].map((method) => ({
   ...method,
   arxiv: `https://arxiv.org/abs/${method.id}`,

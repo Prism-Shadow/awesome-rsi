@@ -124,6 +124,7 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  "2603.21877": { artifact: ["Parametric", "Non-parametric", "Context"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Self"], source: ["Benchmark", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
   "2410.04444": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Self"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
   "2506.10943": { artifact: ["Parametric"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Self"], source: ["Train/dev set"], feedback: ["Score", "Non-binary", "Non-score", "Ground truth"], frequency: ["Batch"], scope: ["General"] },
   "2505.22954": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Combined metrics"], updater: ["Joint"], source: ["Benchmark", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
