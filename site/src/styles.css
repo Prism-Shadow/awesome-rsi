@@ -1798,6 +1798,17 @@ a:hover {
   color: var(--amber);
 }
 
+.method-status.is-system {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.system-maintainers strong {
+  color: var(--ink);
+  font-size: 0.76rem;
+}
+
 .method-summary {
   max-width: 64rem;
   margin: 0.65rem 0 0;
