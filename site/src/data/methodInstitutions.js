@@ -21,4 +21,6 @@ export const methodInstitutions = {
   "2608.16114": ["Northwestern University", "University of Southern California", "University of Illinois Chicago"],
   "2608.23397": ["Institute of Automation, Chinese Academy of Sciences", "Beijing Key Laboratory of Safe AI and Superalignment", "Beijing Institute of AI Safety and Governance", "University of Chinese Academy of Sciences", "Long-term AI"],
   "2608.23552": ["Princeton University", "Prime Intellect", "Massachusetts Institute of Technology"],
+  "2608.27454": ["Google Research", "Virginia Tech"],
+  "2609.00829": ["ICT AI Competence Center, Huawei Technologies"],
 };
