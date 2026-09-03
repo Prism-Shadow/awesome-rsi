@@ -1,4 +1,15 @@
+import rsiGuide from "./blog/rsi-guide.zh.md?raw";
+
 export const blogPostsZh = [
+  {
+    id: "understanding-rsi",
+    kind: "导读",
+    title: "万字长文带你读懂 RSI（自进化，Self-Evolving）",
+    published: "2026-09-03",
+    summary: "从进化产物、版本结构、更新者、更新模式、反馈和经验范围等维度，系统梳理递归自我改进研究，并结合代表性论文解释不同技术路线。",
+    tags: ["导读", "RSI", "自进化", "分类维度"],
+    markdown: rsiGuide,
+  },
   {
     id: "introducing-awesome-rsi",
     kind: "项目介绍",

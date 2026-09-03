@@ -107,6 +107,18 @@ export default function App() {
             {copy.heroTitleBefore}<em>{copy.heroTitleEmphasis}</em>{copy.heroTitleAfter}
           </h1>
           <p>{copy.heroBody}</p>
+          <a
+            className="hero-guide-link"
+            href="#blog/understanding-rsi"
+            onClick={() => window.setTimeout(
+              () => document.getElementById("panel-blog")?.scrollIntoView({ behavior: "smooth" }),
+              0,
+            )}
+          >
+            <span>{copy.guideEyebrow}</span>
+            {copy.guideLink}
+            <b aria-hidden="true">→</b>
+          </a>
         </div>
       </section>
 
