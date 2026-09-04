@@ -20,7 +20,7 @@ $A_{t+1}=U(A_t,\tau_t,f_t)$
 
 Here, $A_t$ denotes the Agent used in round $t$, $\tau_t$ is the trajectory it produces while performing the task, $f_t$ is the feedback it receives, and $U$ is the update mechanism. $A_t$ consists of the Model and the Harness. Updates may affect model parameters or the Harness's context, memory, Skills, tools, or code. The updated $A_{t+1}$ then participates in subsequent tasks. $U$ does not have to be executed by the Agent itself; it may instead be carried out by a Teacher, a Meta-Agent, or an external training procedure.
 
-## 2 RSI artifact: Parameters, Context, Memory, Skills, and Harness Code
+## 2 What RSI Changes: Parameters, Context, Memory, Skills, and Harness Code
 
 A modern intelligent agent can be abstracted as **Agent = Model + Harness**. The Model provides the basic capabilities for understanding, reasoning, and generation. The Harness organizes how the model receives information, accumulates experience, calls tools, and completes tasks; it includes context, memory, Skills, tools, and Harness code.
 
@@ -36,7 +36,7 @@ Parameter evolution writes experience back into model weights. Its advantage is 
 
 ![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
 
-SEAL begins from the observation that language models continually encounter new knowledge and tasks after deployment, while their weights usually remain fixed. The authors want a model to decide for itself "how it should train itself," without relying on a separate adaptation network. When presented with new input, the model therefore generates not only an answer but also a self-edit. A self-edit is a self-update plan that may reorganize the original information, generate training examples, specify optimization hyperparameters, or call tools for data augmentation and gradient updates.
+SEAL starts from a practical problem: language models continually encounter new knowledge and tasks after deployment, while their weights usually remain fixed. The authors want the model to decide for itself "how it should train itself," without relying on a separate adaptation network. To do this, the model generates not only an answer but also a self-edit for each new input. A self-edit is a self-update plan that may reorganize the original information, generate training examples, specify optimization hyperparameters, or call tools for data augmentation and gradient updates.
 
 The system then performs supervised fine-tuning according to the self-edit. After SFT, the experience changes from temporary text into a persistent weight update. The model initially does not know which self-edits are genuinely useful, so SEAL adds an outer reinforcement-learning loop: after a self-edit is applied, the updated model's downstream performance is measured again. That result becomes a reward used to train the model to generate more useful self-edits in the future.
 
@@ -108,7 +108,7 @@ The system also stores past failure patterns, including the observed problem, it
 
 The paper evaluates five Qwen3.5 models of different sizes on three Benchmarks. SkillSmith's advantage over its baselines becomes more pronounced as tasks grow more complex and require more Skills to be used together. Because SkillSmith directly changes tools and how they are called, updated Skills and tools must be tested together to avoid repairing one component while breaking another.
 
-## 3 RSI topology: Chain, Tree, and Graph
+## 3 Evolution Topologies: Chains, Trees, and Graphs
 
 The previous section discussed which parts of an Agent can be modified. This section asks how newly created versions inherit from prior results. After each update, a system may continue from only one version, preserve several branches, or let a new version draw on multiple historical sources at once. These organizational choices affect the breadth of exploration, evaluation cost, and the system's ability to recover from harmful updates. Based on the inheritance relationship between new and historical versions, RSI topology can be divided into three categories:
 
@@ -154,7 +154,7 @@ A new version must pass basic checks to ensure that its code runs and that it re
 
 DGM takes its name from the Gödel Machine, a theoretical self-modifying system that must first prove that a change will improve its utility before applying it. Such formal proofs are difficult for complex coding Agents, so DGM instead runs modified versions and tests their effectiveness using Benchmark scores.
 
-After continued evolution, DGM's SWE-bench score rises from 20.0% to 50.0%, while its Polyglot score rises from 14.2% to 30.7%. In the paper, one complete SWE-bench self-evolution experiment takes about two weeks and also consumes a large number of tokens. This illustrates that tree search systems such as DGM, which continually generate and evaluate multiple branches, generally require substantial time and model-call budgets.
+After continued evolution, DGM's SWE-bench score rises from 20.0% to 50.0%, while its Polyglot score rises from 14.2% to 30.7%. In the paper, one complete SWE-bench self-evolution experiment takes about two weeks and also consumes a large number of tokens. Continually generating and evaluating multiple branches in this way requires substantial time and model-call budgets.
 
 ### 3.3 Graph
 
@@ -178,13 +178,13 @@ Under the same evaluation budget, MGM outperforms a tree-based baseline that mod
 
 
 
-## 4 Artifact updater: Self, Teacher, and Joint Updating
+## 4 Who Updates the Agent: Self, Teacher, and Joint Updates
 
 
 
-An RSI system must both perform tasks and update itself from task trajectories and feedback. These two jobs may be handled by the same Agent or assigned to different Agents. For convenience, this section calls the task-performing Agent the Student and the other Agent that analyzes the Student's task trajectory and participates in modification the Teacher.
+An RSI system must both perform tasks and update itself from task trajectories and feedback. These two jobs may be handled by the same Agent or assigned to different Agents. This section calls the task-performing Agent the Student and the other Agent that analyzes the Student's task trajectory and participates in modification the Teacher.
 
-Based on who carries out the modification, RSI systems can be divided into three categories:
+RSI systems can be divided into three categories according to who carries out the modification:
 
 1. In self-update, the Student summarizes experience and modifies itself;
 
@@ -212,7 +212,7 @@ The Teacher does not have to be a dedicated Agent. It may instead be a reflectio
 
 ![13\-recuris\-fig3\.png](图片和附件/13-recuris-fig3.png)
 
-Recuris provides one concrete implementation of teacher update. In the paper, an Agent performs long-horizon tasks, while a fixed Meta-Agent aggregates failure records from multiple tasks and modifies the Skill Memory used by the Agent in the future. The Agent can be viewed as the Student in this section, and the Meta-Agent as the Teacher.
+In Recuris, an Agent performs long-horizon tasks, while a fixed Meta-Agent aggregates failure records from multiple tasks and modifies the Skill Memory used by the Agent in the future. In this section's terminology, the Agent is the Student and the Meta-Agent is the Teacher.
 
 When performing a long-horizon task, the Agent must both track current progress and invoke experience accumulated in the past. Recuris uses Working Memory to record the current objective, completed steps, and next plan, while Experiential Memory stores experience and Skills reusable across tasks. When a Skill is needed, the system selects relevant Skills according to the task progress and unfinished objectives recorded in Working Memory, keeping Skill selection aligned with the current step.
 
@@ -222,7 +222,7 @@ Recuris is evaluated on four long-horizon Benchmarks and ten models. It improves
 
 ### 4.3 Joint Update
 
-In joint update, both the Student and Teacher participate in modification, although their roles are not fixed. The Student may first summarize candidate experience from a task and the Teacher may then filter and write it back; alternatively, the Teacher may diagnose the problem and the Student may implement the change. The key criterion is whether both parties influence the final content written back. A Student that only performs tasks, or a Teacher that only assigns scores, does not constitute joint updating.
+In joint update, both the Student and Teacher participate in modification, although their roles are not fixed. The Student may first summarize candidate experience from a task and the Teacher may then filter and write it back; alternatively, the Teacher may diagnose the problem and the Student may implement the change. Both parties must influence the final content written back. A Student that only performs tasks, or a Teacher that only assigns scores, does not constitute joint updating.
 
 ![Joint update](图片和附件/codex-joint-update-en.png)
 
@@ -240,7 +240,7 @@ The paper evaluates Evo-Harness on multiple Benchmarks. It outperforms other exp
 
 
 
-## 5 When Does RSI Update? Offline, Online, and Hybrid Modes
+## 5 Update Timing: Offline, Online, and Hybrid RSI
 
 RSI can also be classified by when updates occur. Even when two methods both modify memory or Skills, they may schedule their updates differently: some finish updating before formal testing, some update while working through a task stream, and others build an initial body of experience before continuing to accumulate more during deployment.
 
@@ -268,7 +268,7 @@ GDPevo proposes Rule Hybridization to construct tasks. One set of basic rules fi
 
 GDPevo contains 12 task groups, each with five training tasks and five test tasks, for a total of 120 tasks. It also provides an automated pipeline that can generate another 12 task groups within two days. This makes it possible to refresh test questions regularly and reduces the chance that the model has encountered them beforehand.
 
-The authors evaluate four Agents with four types of feedback. The best-performing configuration improves from 50.63% accuracy before updating to 67.07% afterward, a gain of 16.44 percentage points. When all rules needed for the test are supplied directly, accuracy reaches 91.6%, which is 24.53 percentage points above the current best result. This gap shows that existing Agents still learn only part of the available rules from training tasks.
+The authors evaluate four Agents with four types of feedback. The best-performing configuration improves from 50.63% accuracy before updating to 67.07% afterward, a gain of 16.44 percentage points. When all rules needed for the test are supplied directly, accuracy reaches 91.6%, which is 24.53 percentage points above the current best result. Existing Agents therefore learn only part of the available rules from training tasks.
 
 ### 5.2 Online RSI
 
@@ -298,7 +298,7 @@ Hybrid RSI first builds a body of initial experience from demonstrations or trai
 
 
 
-Mem²Evolve first uses part of the task set to accumulate initial experience and build a set of reusable tools and expert Agents, then processes the remaining tasks. During later tasks, the Agent uses these existing resources while continuing to add new experience and components. It therefore combines offline initialization with continued updates during the task stream, making it a hybrid method.
+Mem²Evolve first uses part of the task set to accumulate initial experience and build a set of reusable tools and expert Agents, then processes the remaining tasks. During later tasks, the Agent uses these existing resources while continuing to add new experience and components. Combining offline initialization with continued updates during the task stream makes it a hybrid method.
 
 The system stores these resources in two types of Memory: Experience Memory holds lessons summarized from successful and failed tasks, while Asset Memory holds tools and expert Agents that can be invoked directly.
 
@@ -308,11 +308,11 @@ The paper evaluates the system across six task categories and eight Benchmarks. 
 
 
 
-## 6 Other RSI Taxonomy Dimensions
+## 6 Other Classification Dimensions
 
 The preceding sections organized RSI by its artifact, version structure, updater, and update timing. When reading individual papers, five additional dimensions are useful for comparison: Acceptance criterion, Feedback source, Feedback type, Update frequency, and Experience scope. These dimensions must be assessed separately, and one method may use more than one category within the same dimension.
 
-### 6.1 Acceptance criterion
+### 6.1 Acceptance Criterion
 
 After producing a modification, a system still needs evidence to decide whether to retain it. Common Acceptance criteria include:
 
@@ -326,7 +326,7 @@ After producing a modification, a system still needs evidence to decide whether 
 
 - **No independent validation:** The modification is written back immediately after generation without a separate acceptance step.
 
-### 6.2 Feedback source
+### 6.2 Feedback Source
 
 Feedback source describes where the evidence driving improvement comes from. It records the evidence actually used during evolution, not merely the testing method used for the final evaluation.
 
@@ -342,7 +342,7 @@ Feedback source describes where the evidence driving improvement comes from. It 
 
 - **Human:** Human labels, preferences, review, or intervention.
 
-### 6.3 Feedback type
+### 6.3 Feedback Type
 
 Feedback type distinguishes outcome scores from non-score feedback containing concrete information.
 
@@ -352,7 +352,7 @@ Feedback type distinguishes outcome scores from non-score feedback containing co
 
 A scalar produced by an LLM still counts as a score. Only textual judgments, explanations, or critiques count as LLM review. Feedback used solely to evolve the Teacher is not counted here.
 
-### 6.4 Update frequency
+### 6.4 Update Frequency
 
 Update frequency indicates how much Student execution is accumulated before a persistent artifact is updated:
 
@@ -366,7 +366,7 @@ Update frequency indicates how much Student execution is accumulated before a pe
 
 This dimension does not record the Teacher's own evolution cycle. Updates performed once per generation and offline aggregation of Student experience are both categorized as Batch.
 
-### 6.5 Experience scope
+### 6.5 Experience Scope
 
 Experience scope describes where an evolved artifact can be used:
 
