@@ -240,7 +240,7 @@ The paper evaluates Evo-Harness on multiple Benchmarks. It outperforms other exp
 
 
 
-## 5 Update Timing: Offline, Online, and Hybrid RSI
+## 5 When Does RSI Update? Offline, Online, and Hybrid Modes
 
 RSI can also be classified by when updates occur. Even when two methods both modify memory or Skills, they may schedule their updates differently: some finish updating before formal testing, some update while working through a task stream, and others build an initial body of experience before continuing to accumulate more during deployment.
 
@@ -250,7 +250,7 @@ Based on the temporal relationship between task execution and experience updates
 
 2. Online RSI continually updates while handling tasks, so experience from earlier tasks affects later ones;
 
-3. Hybrid RSI first builds an initial version offline and then continues adapting to new tasks after deployment.
+3. Hybrid Mode first builds an initial version offline and then continues adapting to new tasks after deployment.
 
 ![Offline, online, and hybrid RSI](图片和附件/codex-rsi-update-timing-en.png)
 
@@ -288,9 +288,9 @@ To isolate the effect of retained experience, the paper includes a state-reset c
 
 The paper evaluates four Agents built on Qwen3.7-Max. Retaining experience improves average scores by 9.33 to 19.37 points. Within the same scenario, the gain on the final three tasks is 6.10 to 8.70 points greater than on the first three, indicating that earlier experience becomes more useful as the number of related tasks increases.
 
-### 5.3 Hybrid RSI
+### 5.3 Hybrid Mode
 
-Hybrid RSI first builds a body of initial experience from demonstrations or training tasks, then continues updating during real use. This gives the Agent usable experience when it begins performing tasks while still allowing it to incorporate new situations later.
+Hybrid Mode first builds a body of initial experience from demonstrations or training tasks, then continues updating during real use. This gives the Agent usable experience when it begins performing tasks while still allowing it to incorporate new situations later.
 
 **Representative work:** [**Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation**](https://arxiv.org/abs/2604.10923)
 
