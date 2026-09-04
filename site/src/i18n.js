@@ -12,6 +12,8 @@ export const appCopy = {
     heroTitleEmphasis: "Recursive Self-Improvement",
     heroTitleAfter: " research",
     heroBody: "Papers, books, and courses on agents that learn from their own experience — self-evolution, skill learning, memory, continual learning, and automated AI research. Filter by topic, search, and sort by recency or influence.",
+    guideEyebrow: "START HERE",
+    guideLink: "New to RSI? Read the complete guide",
     tabs: {
       blog: "Blog",
       papers: "Benchmark Paper List",
@@ -35,6 +37,8 @@ export const appCopy = {
     heroTitleEmphasis: "精选图谱",
     heroTitleAfter: "",
     heroBody: "收录关于智能体从自身经验中学习的论文、书籍与课程，涵盖自我演化、技能学习、记忆、持续学习和自动化 AI 研究。你可以按主题筛选、搜索，并按时间或影响力排序。",
+    guideEyebrow: "从这里开始",
+    guideLink: "初次了解 RSI？阅读完整导读",
     tabs: {
       blog: "博客",
       papers: "基准论文",
@@ -390,12 +394,14 @@ export const blogCopy = {
     tags: "Post tags",
     back: "← Back to blog",
     included: "What’s included",
+    contents: "In this guide",
   },
   zh: {
     posts: "博客文章",
     tags: "文章标签",
     back: "← 返回博客列表",
     included: "本次更新内容",
+    contents: "本文目录",
   },
 };
 

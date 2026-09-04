@@ -1,4 +1,16 @@
+import rsiGuide from "./blog/rsi-guide.en.md?raw";
+
 export const blogPosts = [
+  {
+    id: "understanding-rsi",
+    kind: "Guide",
+    title: "Understanding RSI: A Comprehensive Guide to Self-Evolving AI",
+    published: "2026-09-03",
+    summary:
+      "A structured introduction to recursive self-improvement, covering what agents evolve, how versions relate, who performs the update, when evolution happens, and how feedback and experience shape the process.",
+    tags: ["guide", "RSI", "self-evolution", "taxonomy"],
+    markdown: rsiGuide,
+  },
   {
     id: "introducing-awesome-rsi",
     kind: "Introduction",
