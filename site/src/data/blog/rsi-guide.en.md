@@ -1,10 +1,10 @@
-# Understanding RSI: A Taxonomy of Self-Evolving Agents
+# A Comprehensive Guide to RSI (Self-Evolution, Self-Evolving Agents)
 
-Recursive self-improvement (RSI) has become a recurring theme in recent agent research. Related terms include self-evolution, self-evolving agents, and self-improving systems.
+RSI (Recursive Self-Improvement) has recently attracted considerable attention. Closely related terms include self-evolution, Self-Evolving, and Self-Improving.
 
-The field is moving quickly, and no single technical recipe has emerged. Some systems update model parameters; others accumulate context or memory, evolve skills, or directly modify tools, control flow, and harness code. This variety makes RSI difficult to capture with a single method or technical path.
+The field is still developing rapidly and has yet to converge on a single technical paradigm. Existing work differs widely in both what it improves and how: some methods update model parameters, some accumulate context or memory, some evolve Skills, and others directly modify tools, control flows, or Harness code. RSI is therefore difficult to describe through any single method or technical path.
 
-This guide draws on the [Awesome RSI repository](https://github.com/Prism-Shadow/awesome-rsi) ([website](https://prism-shadow.github.io/awesome-rsi/)) to organize existing work along several dimensions. The goal is to provide a practical framework for comparing self-evolving systems and placing new work alongside existing approaches.
+Drawing on the [Awesome RSI repository](https://github.com/Prism-Shadow/awesome-rsi) ([website](https://prism-shadow.github.io/awesome-rsi/)), this article organizes existing RSI work from a taxonomic perspective. We compare the connections and differences among self-evolving systems across several dimensions. By the end, you should have a clearer understanding of RSI and a framework for analyzing it: when you encounter a new self-evolving system, you will be able to quickly identify how it relates to and differs from existing work.
 
 ![An RSI taxonomy](图片和附件/codex-rsi-taxonomy-overview-gpt-en.png)
 
@@ -12,19 +12,19 @@ This guide draws on the [Awesome RSI repository](https://github.com/Prism-Shadow
 
 ## 1 What Exactly Is RSI?
 
-In this guide, RSI means that an agent uses task trajectories and feedback from its interaction with an environment to update itself, then carries that update into future tasks to improve its performance.
+This article defines RSI as follows: after interacting with an environment, an Agent uses task trajectories and feedback to modify its own state through an update mechanism, and the updated state then participates in later tasks to improve future performance.
 
 ![The basic RSI loop](图片和附件/codex-rsi-loop-en.png)
 
 $A_{t+1}=U(A_t,\tau_t,f_t)$
 
-Here, $A_t$ is the agent used in round $t$, $\tau_t$ is its task trajectory, $f_t$ is the feedback it receives, and $U$ is the update mechanism. $A_t$ includes both the model and its harness. An update may change model parameters or the harness's context, memory, skills, tools, or code. The resulting agent, $A_{t+1}$, is then used on later tasks. The agent does not have to execute $U$ itself; a teacher, meta-agent, or external training procedure may perform the update.
+Here, $A_t$ denotes the Agent used in round $t$, $\tau_t$ is the trajectory it produces while performing the task, $f_t$ is the feedback it receives, and $U$ is the update mechanism. $A_t$ consists of the Model and the Harness. Updates may affect model parameters or the Harness's context, memory, Skills, tools, or code. The updated $A_{t+1}$ then participates in subsequent tasks. $U$ does not have to be executed by the Agent itself; it may instead be carried out by a Teacher, a Meta-Agent, or an external training procedure.
 
-## 2 What RSI Changes: Parameters, Context, Memory, Skills, and Harness Code
+## 2 RSI artifact: Parameters, Context, Memory, Skills, and Harness Code
 
-A modern agent can be viewed as **Agent = Model + Harness**. The model provides the underlying capabilities for understanding, reasoning, and generation. The harness determines what information the model receives, how experience is stored, which tools it can call, and how tasks are executed. It includes context, memory, skills, tools, and harness code.
+A modern intelligent agent can be abstracted as **Agent = Model + Harness**. The Model provides the basic capabilities for understanding, reasoning, and generation. The Harness organizes how the model receives information, accumulates experience, calls tools, and completes tasks; it includes context, memory, Skills, tools, and Harness code.
 
-Different RSI methods change different parts of this system. Parameter evolution updates the model itself. Context, memory, and skill evolution change information managed by the harness. Tool and harness-code evolution can alter both the agent's available actions and the logic used to execute them.
+Different RSI methods may modify different parts of this system. Parameter evolution changes the Model. Context, memory, and Skill evolution modify persistent state within the Harness. Tool and Harness-code evolution changes the Agent's action space and control flow.
 
 ![Agent anatomy and major improvement targets](图片和附件/codex-agent-anatomy-en.png)
 
@@ -36,81 +36,81 @@ Parameter evolution writes experience back into model weights. Its advantage is 
 
 ![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
 
-SEAL starts from a simple problem: language models encounter new knowledge and tasks after deployment, but their weights usually stay fixed. SEAL lets the model decide how to train itself. Given new input, the model produces a self-edit alongside its answer. This self-edit may reorganize the source material, generate training examples, set optimization hyperparameters, or call tools for data augmentation and gradient updates.
+SEAL begins from the observation that language models continually encounter new knowledge and tasks after deployment, while their weights usually remain fixed. The authors want a model to decide for itself "how it should train itself," without relying on a separate adaptation network. When presented with new input, the model therefore generates not only an answer but also a self-edit. A self-edit is a self-update plan that may reorganize the original information, generate training examples, specify optimization hyperparameters, or call tools for data augmentation and gradient updates.
 
-The system follows the self-edit to run supervised fine-tuning, turning a temporary piece of text into a persistent change in the model's weights. Because the model does not initially know which self-edits will work, SEAL adds an outer reinforcement-learning loop. After applying a self-edit, the system measures the updated model's downstream performance and uses that score to train the model to produce better self-edits.
+The system then performs supervised fine-tuning according to the self-edit. After SFT, the experience changes from temporary text into a persistent weight update. The model initially does not know which self-edits are genuinely useful, so SEAL adds an outer reinforcement-learning loop: after a self-edit is applied, the updated model's downstream performance is measured again. That result becomes a reward used to train the model to generate more useful self-edits in the future.
 
-The authors test SEAL on knowledge incorporation and few-shot learning. A self-edit can specify the training data, its organization, and the training configuration. Each candidate must still be executed through fine-tuning and evaluated on downstream tasks, so exploring many self-edits remains computationally expensive.
+The authors evaluate SEAL on knowledge incorporation and few-shot learning tasks. The model's self-edits can specify not only training data, but also how that data should be organized and how training should be configured. The system actually updates the model according to each self-edit and then selects more effective plans based on the updated model's downstream score. As a result, fine-tuning and evaluating candidate self-edits still incur substantial computational cost.
 
 
 
 ### 2.2 Context Evolution
 
-Context is the material the model can read during its current inference: task requirements, conversation history, the current plan, prompts, rules, and selected external information. Context evolution reorganizes this material for the next inference. A system might remove irrelevant details, compress a long history, add lessons from failures, or rewrite the current plan.
+Context can be understood as the material directly visible to the model during the current inference, including task requirements, conversation history, the current plan, Prompts, rules, and organized external information. Context evolution reorganizes this material according to task outcomes so that the model sees more useful information during its next inference. A system may, for example, remove irrelevant information, compress an overlong history, add lessons from failures, or rewrite the current plan.
 
-Memory sits outside the active context until the system retrieves it. Once retrieved and inserted into the model input, it becomes part of the current context.
+The distinction between context and memory is that memory is information stored externally and waiting to be retrieved. Only after a memory is retrieved and inserted into the model input does it become part of the current context.
 
 **Representative work:** [**Prime Agent: A Self-Improving RLM Harness**](https://arxiv.org/abs/2608.23552)
 
 ![02\-prime\-agent\-fig1\.png](图片和附件/02-prime-agent-fig1.png)
 
-Long-horizon tasks may last far beyond a single model call. In a large software project, for example, an agent may work for hours, repeatedly reading code, running tests, recording results, and revising its plan. The model cannot keep the entire history in its active context, but discarding that history would erase its progress.
+Long-horizon tasks are difficult not only because the problems themselves are complex, but also because they may continue far beyond a single model call. In large-scale software development, for example, an Agent may work for hours, repeatedly reading code, running tests, recording results, and revising its plan. Yet the context that a model can read directly on each call is limited: retaining the entire history soon exceeds the context window, while discarding it causes the model to forget its progress.
 
-Prime Agent gives the model an external workspace that persists across calls. A persistent IPython REPL retains code, variables, files, and computation results, allowing the model to process long texts, access external resources, and perform test-time computation. The Continual Harness preserves task history, memory, skills, prompts, and subagent configurations. If work is interrupted, background processes keep the workspace alive so the agent can resume without rereading everything.
+Prime Agent addresses this problem by giving the model an external workspace that can persist over time. It uses a persistent IPython REPL to retain code, variables, files, and computational results. The model can use programs to process long texts, access external resources, or perform test-time computation. The Continual Harness records task history, memory, Skills, Prompts, and sub-Agent configurations. Even if the task is temporarily interrupted, background processes preserve the workspace. When work resumes, the Agent can continue from where it stopped without rereading everything.
 
-Prime Agent can also split a task across several subagents. Each subagent handles a separate problem and sends its result back to the main agent, enabling parallel exploration and result aggregation.
+For tasks that can be decomposed, Prime Agent also lets the main Agent create multiple sub-Agents. These sub-Agents handle separate problems and return their results directly to the main Agent, supporting parallel exploration and result aggregation.
 
-Prime Agent leaves model parameters unchanged. Instead, it stores task history and intermediate results outside the model, then retrieves the material needed for the next call and assembles it into context.
+Prime Agent does not update model parameters. It stores task history and intermediate results externally. When the model runs again, the Harness retrieves the material currently needed and assembles it into context.
 
 ### 2.3 Memory Evolution
 
-Memory evolution stores experience outside the active context and retrieves it when needed on later tasks. The system must decide what to keep, turn specific events into reusable lessons, and revise old memories when new evidence appears. Otherwise, failed attempts and incorrect explanations can keep affecting future work.
+Memory evolution writes experience into a separate long-term store and retrieves it as needed for later tasks. The system must select valuable information from its logs, turn specific experiences into reusable lessons, and revise old memories in light of new evidence. Otherwise, failed experiences and incorrect causal attributions may continue to affect future tasks.
 
 **Representative work:** [**ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory**](https://arxiv.org/abs/2509.25140)
 
 ![03\-reasoningbank\-fig2\.png](图片和附件/03-reasoningbank-fig2.png)
 
-ReasoningBank is designed for a continuing stream of tasks. An agent may discover a useful approach while solving one task, only to lose it when the task ends and repeat the same mistake later. Keeping the whole trajectory is not a good solution either: raw trajectories are long and full of incidental details. ReasoningBank instead condenses successful and failed trajectories into short, reusable memories.
+ReasoningBank targets continual tasks. An Agent may produce reusable experience while completing a task, but traditional systems usually discard this information afterward and then repeat the same mistakes on the next task. Saving an entire trajectory is also unsatisfactory because raw trajectories are long and contain many incidental details. ReasoningBank therefore turns successful and failed trajectories into concise, reusable experiences.
 
-For a new task, the agent retrieves relevant entries from the memory bank and uses them to guide its actions. When the task ends, it determines whether the attempt succeeded, extracts new experience from the trajectory, and writes that experience back. Successful trajectories contribute useful approaches; failed trajectories record decisions to avoid.
+When a new task arrives, the Agent retrieves relevant strategies from the memory bank to guide the current interaction. After the task ends, the Agent first determines whether the task was completed, then extracts new experience from the trajectory and writes it back to the memory bank. Successful trajectories provide effective approaches, while failed trajectories record decisions that should be avoided.
 
-The authors also propose memory-aware test-time scaling (MaTTS). The agent attempts the same task several times, producing a richer mix of successes and failures from which it can distill better memories. Those memories then guide later attempts.
+The authors also propose memory-aware test-time scaling (MaTTS): the Agent makes more attempts at the same task, producing a richer set of successful and failed examples from which higher-quality memories can be distilled. These memories then guide later attempts.
 
-On WebArena, ReasoningBank improves overall success rate by 3.7–6.2 percentage points over methods that store raw trajectories or only successful procedures. On SWE-Bench Verified, it improves the solution rate by 3.4–4.0 points.
+On WebArena and SWE-Bench Verified, ReasoningBank outperforms methods that store raw trajectories directly or retain only successful procedures. It improves overall success rate by 3.7–6.2 percentage points on the former and solution rate by 3.4–4.0 percentage points on the latter.
 
 ### 2.4 Skill Evolution
 
-A memory records what happened in a particular task. A skill captures what to do when a similar problem appears again. It may take the form of tool-use rules, behavioral constraints, an operating procedure, or a script. Skill evolution revises these reusable practices as the system accumulates successes and failures.
+A single memory records what happened in a particular task, while a Skill summarizes what should be done when a similar problem appears in the future. A Skill may consist of tool-use rules, behavioral requirements, operating procedures, or a script. Skill evolution continually revises these reusable practices based on successes and failures across multiple tasks.
 
 **Representative work:** [**TRACE: A Self-Evolving Skill Bank for Consistent, Limit-Aware LLM Agents**](https://arxiv.org/abs/2608.22793)
 
 ![04\-trace\-fig2\.png](图片和附件/04-trace-fig2.png)
 
-TRACE studies the reliability of in-vehicle assistants. In CAR-bench, simulated users make incomplete or ambiguous requests. The agent must clarify the user's intent through multi-turn dialogue, call the appropriate tools, and follow automotive safety rules. Many models can complete a task occasionally but fail to do so consistently across repeated runs.
+TRACE studies whether an in-vehicle assistant can complete tasks reliably. In CAR-bench, simulated users make requests that are incomplete or ambiguous. The Agent must first clarify the user's intent through multi-turn dialogue, then call tools to complete the operation while obeying safety rules for the automotive domain. Many models can occasionally complete a task, but their behavior is inconsistent across repeated runs.
 
-TRACE maintains a Skill Bank in which each skill covers a particular situation and records the relevant tool-use rules and behavioral requirements. After an evaluation round, the system groups successful and failed trajectories by the skills they used and compares their behavior. Failures may come from missing a necessary clarification, acting too early, or promising an unsupported operation. The system then revises the relevant skill, using successful trajectories as examples of better behavior, without rewriting a single global prompt.
+TRACE maintains a Skill Bank containing multiple Skills. Each Skill covers a particular type of situation and records the relevant tool-use rules and behavioral requirements. After each evaluation round, the system gathers the successful and failed trajectories that used the same Skill and compares their behavior. An Agent may fail because it did not ask for necessary information, acted too early, or promised something it could not accomplish. The system revises the corresponding Skill based on these problems, while successful trajectories provide better ways of handling the situation. When one type of task goes wrong, the system only needs to modify the relevant Skill instead of rewriting the entire Prompt.
 
-For each new task, the agent selects skills based on the current dialogue. The outcome is then used in the next update round. With GPT-5.5, TRACE raises the proportion of tasks completed successfully in all three consecutive attempts from 59.9% to 94.5%.
+When handling a new task, the Agent selects an appropriate Skill based on the current dialogue. After the task ends, the system continues updating these Skills based on the success or failure of the current run. With GPT-5.5, TRACE raises the proportion of tasks completed successfully in all three consecutive attempts from 59.9% to 94.5%.
 
 ### 2.5 Harness-Code Evolution
 
-Harness code assembles the model's context and turns its decisions into tool calls and task workflows. Skills usually describe how the agent should act. Harness-code evolution can go further by changing how context is assembled, adding or removing tools, and revising execution logic.
+Harness code organizes the context received by the model and translates the model's decisions into tool calls and task workflows. Skills usually tell the Agent how it should act, whereas Harness-code evolution can also change how context is assembled, add or remove tools, or revise execution logic.
 
 **Representative work:** [**SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems**](https://arxiv.org/abs/2606.01314)
 
 ![05\-skillsmith\-fig2\.png](图片和附件/05-skillsmith-fig2.png)
 
-Many skill-evolution methods assume a fixed tool set. If a task fails because a tool lacks the required capability, rewriting instructions will not solve the problem. SkillSmith can modify both skills and tools. When its reflection module finds a capability gap, it proposes a coordinated change that may revise a skill and edit, combine, split, or retire the relevant tools.
+Many Skill-evolution methods assume that tools remain fixed. If a task fails because a tool lacks the necessary capability, repeatedly revising the tool's instructions cannot solve the problem. SkillSmith therefore allows the system to modify both Skills and tools. After detecting a capability gap, its reflection module generates a coordinated set of changes: it adjusts the Skill while editing, composing, splitting, or retiring the relevant tools.
 
-Testing skills one at a time can miss conflicts that appear when several are used together. SkillSmith estimates which skills complement one another and which tend to interfere, based on their execution trajectories. An ecosystem-inspired utility model uses these relationships to influence retrieval, modification, and retirement.
+Testing each Skill in isolation may also miss coordination problems and conflicts that emerge when several Skills are used together. SkillSmith records which Skills frequently help each other and which tend to interfere, based on execution trajectories. Inspired by cooperation and competition in ecosystems, the authors use these relationships to decide which components to prioritize for invocation, modification, or retirement.
 
-The system also records past failure patterns, their likely causes, and the corresponding repairs. It can reject a new proposal that repeats a known error before running the same failed experiment again.
+The system also stores past failure patterns, including the observed problem, its cause, and the repair. If a new modification proposal repeats the same error, the system can reject it early and avoid repeating the same failed experiment.
 
-The paper evaluates five Qwen3.5 model sizes on three benchmarks. SkillSmith's advantage grows on more complex tasks that activate several skills at once. Because it changes both tools and their invocation, skills and tools must be validated together: a local repair can otherwise break another component.
+The paper evaluates five Qwen3.5 models of different sizes on three Benchmarks. SkillSmith's advantage over its baselines becomes more pronounced as tasks grow more complex and require more Skills to be used together. Because SkillSmith directly changes tools and how they are called, updated Skills and tools must be tested together to avoid repairing one component while breaking another.
 
-## 3 Evolution Topologies: Chains, Trees, and Graphs
+## 3 RSI topology: Chain, Tree, and Graph
 
-The previous section covered what an agent can change. This section looks at how each new version relates to its history. A system may continue along one path, preserve several branches, or let a new version draw on multiple historical sources. These choices affect how broadly the system can explore, how much evaluation it requires, and how easily it can recover from a harmful update. The three main topologies are:
+The previous section discussed which parts of an Agent can be modified. This section asks how newly created versions inherit from prior results. After each update, a system may continue from only one version, preserve several branches, or let a new version draw on multiple historical sources at once. These organizational choices affect the breadth of exploration, evaluation cost, and the system's ability to recover from harmful updates. Based on the inheritance relationship between new and historical versions, RSI topology can be divided into three categories:
 
 1. Chain evolution updates versions one after another along a single path;
 
@@ -122,23 +122,23 @@ The previous section covered what an agent can change. This section looks at how
 
 ### 3.1 Chain
 
-Chain evolution maintains one active version. The system modifies $A_t$ to obtain $A_{t+1}$, then uses $A_{t+1}$ as the basis for the next update: $A_0\rightarrow A_1\rightarrow A_2\rightarrow\cdots$. It does not need to maintain or select among multiple branches, but each version also inherits problems left by the previous one.
+Chain evolution maintains only one active version. The system modifies the current version $A_t$ to obtain $A_{t+1}$, then uses $A_{t+1}$ as the basis for the next update: $A_0\rightarrow A_1\rightarrow A_2\rightarrow\cdots$. This structure is simple to implement and does not require maintaining or choosing among multiple branches, but errors introduced in one round are inherited directly by the next.
 
 **Representative work:** [**SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents**](https://arxiv.org/abs/2604.17308)
 
 ![10\-skillflow\-fig1\.png](图片和附件/10-skillflow-fig1.png)
 
-SkillFlow follows a chain. Each task family starts with an empty skill library. After the agent completes a task, the model generates a skill patch from the execution trajectory and verification feedback. The patch may add, revise, or delete skills and helper scripts. The updated library is used directly on the next task, forming $S_0\rightarrow S_1\rightarrow S_2\rightarrow\cdots$. At every step, there is only one current version and no parallel candidate branches.
+SkillFlow uses a typical chain update process. Each task family starts with an empty Skill library. After the Agent completes a task, the model generates a Skill patch from the execution trajectory and verification feedback. The patch may add, revise, or delete Skills and helper scripts. The updated Skill library is then used directly for the next task, forming $S_0\rightarrow S_1\rightarrow S_2\rightarrow\cdots$. There is only one current version throughout the process, and the system never creates multiple candidate branches at the same time.
 
-The benchmark tests whether an agent can derive skills from experience, repair them after failures, and maintain one skill library across a task sequence. It contains 20 task families and 166 executable tasks spanning finance, supply chains, healthcare, governance, and data processing.
+SkillFlow uses this process to examine whether an Agent can generate Skills from task experience, correct Skills after failures, and maintain a single Skill library across a sequence of tasks. It contains 20 task families and 166 executable tasks in total, spanning finance, supply chains, healthcare, governance, and data processing.
 
-Tasks in the same family share an operating procedure but use different inputs and requirements, with difficulty increasing over time. The agent can reuse earlier practices without copying earlier answers.
+Tasks within a family follow similar operating procedures but use different inputs and specific requirements, with difficulty increasing gradually. The Agent can reuse practices learned from earlier tasks, but cannot simply copy their answers.
 
-The paper evaluates 11 models with four agent harnesses. With Claude Opus 4.6, continual skill updates raise task success from 62.65% to 71.08%, although some configurations remain flat or decline. Stronger configurations tend to revise a small set of general skills; weaker ones keep adding similar entries and fragment the library. An incorrect skill can therefore continue down the chain until a later patch repairs it.
+The paper evaluates 11 models using four Agent Harnesses. Claude Opus 4.6 improves from a 62.65% task success rate to 71.08%, although some configurations remain flat or decline. The authors find that stronger configurations repeatedly revise a small number of general Skills, while weaker ones tend to keep adding similar Skills and fragment the library. Once an incorrect Skill is written, later tasks may continue to reuse the same error.
 
 ### 3.2 Tree
 
-Tree evolution preserves multiple agent versions. One version may produce several children, and later updates may resume from any saved version, creating separate lines of improvement. A temporarily weak version can remain in the tree if one of its changes may prove useful later. More branches, however, require more parent selection and evaluation.
+Tree evolution preserves multiple Agent versions that have already been created. One version may produce several children, and later updates may resume from any historical version, causing different directions of improvement to form separate branches. Versions that perform poorly for the moment can remain in the tree because one of their changes may later become the basis of further improvement. As the number of branches grows, however, selecting parents and evaluating new versions requires more time and compute.
 
 **Representative work:** [**Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents**](https://arxiv.org/abs/2505.22954)
 
@@ -146,65 +146,65 @@ Tree evolution preserves multiple agent versions. One version may produce severa
 
 
 
-DGM builds a tree of coding-agent versions. Starting from one initial agent, it saves every version it creates. Each round selects a saved version as the parent, then modifies its prompt, tools, or workflow code to produce a child. The underlying model stays fixed.
+DGM uses a typical tree topology. The system starts with an initial coding Agent and keeps every version generated afterward in a collection. In each round, it selects one version as the parent and modifies its Prompt, tools, or workflow code to produce a child. The underlying model remains fixed throughout the experiments.
 
-The selected agent examines its benchmark results, proposes an improvement, and implements the change in its own code. It might add a finer-grained code-editing tool, change how it handles long contexts, or introduce repeated attempts and peer review.
+The selected Agent first examines its own Benchmark evaluation records, proposes the next improvement, and then implements that change in its own code. For example, it may add a more fine-grained code-editing tool, revise how it handles long context, or introduce repeated attempts and peer review.
 
-A new version must pass basic checks showing that its code runs and can still edit a codebase. It is then evaluated on SWE-bench or Polyglot. Passing versions remain in the collection even when they score below their parents, and historical versions may be selected again later. A parent can produce several children, which can in turn evolve separately. Higher-scoring versions are selected more often, but lower-scoring branches are not immediately discarded. Parent selection and collection management still follow fixed rules rather than evolving with the agent.
+A new version must pass basic checks to ensure that its code runs and that it retains the ability to edit a codebase. The system then evaluates its programming ability on SWE-bench or Polyglot. Versions that pass the checks remain in the collection even if their scores are temporarily lower than their parents'. Their parents and other historical versions are not overwritten and may be selected again later. One version can produce multiple children, and different children may continue evolving separately, gradually expanding the version tree. Higher-scoring versions are more likely to be selected, but other versions retain a chance to evolve. At present, the rules for parent selection and collection management are predefined by the system and do not evolve with the Agent.
 
-DGM takes its name from the Gödel Machine, a theoretical self-modifying system that applies a change only after proving that it will improve utility. Such proofs are impractical for a complex coding agent, so DGM runs each modified version and measures it on benchmarks instead.
+DGM takes its name from the Gödel Machine, a theoretical self-modifying system that must first prove that a change will improve its utility before applying it. Such formal proofs are difficult for complex coding Agents, so DGM instead runs modified versions and tests their effectiveness using Benchmark scores.
 
-Over the course of evolution, DGM raises its SWE-bench score from 20.0% to 50.0% and its Polyglot score from 14.2% to 30.7%. A complete SWE-bench evolution run takes about two weeks and consumes many tokens. DGM shows the cost of this form of tree search: every additional branch must be generated and evaluated.
+After continued evolution, DGM's SWE-bench score rises from 20.0% to 50.0%, while its Polyglot score rises from 14.2% to 30.7%. In the paper, one complete SWE-bench self-evolution experiment takes about two weeks and also consumes a large number of tokens. This illustrates that tree search systems such as DGM, which continually generate and evaluate multiple branches, generally require substantial time and model-call budgets.
 
 ### 3.3 Graph
 
-In a tree, each new version has one parent and usually draws its update evidence from that parent. Graph evolution lets one update use several sources—for example, trajectories from the same agent on different tasks or results from another branch. The stored parent-child links may still look like a tree, while update information flows across tasks and branches.
+In tree evolution, a new version descends from one parent, and the evidence used to modify it usually comes from that parent as well. Graph evolution allows a single update to draw on multiple sources, such as trajectories from the same Agent across different tasks or execution results from an Agent on another branch. Parent-child relationships between versions may still be stored as a tree, but the information used for updating can flow across tasks and branches.
 
 **Representative work:** [**Mendel Gödel Machine: Recursive Self-Improving Coding Agents via Comparative Evolution**](https://arxiv.org/abs/2608.07645)
 
 ![11\-mgm\-fig1\.png](图片和附件/11-mgm-fig1.png)
 
-MGM keeps DGM's version tree but changes the evidence used to produce a child. DGM generally modifies code from one failed trajectory on one task. Because that failure may involve the task, tool use, and workflow at the same time, a single trajectory often does not reveal what needs to change. MGM compares it with other trajectories already stored in the version collection.
+MGM retains DGM's version tree but changes what information is used to generate a new version. DGM generally modifies code based on one Agent's failed trajectory on a single task. A single failure may be shaped by the task itself, tool use, workflow, and several other factors at once, making it difficult to identify what truly needs to change. MGM therefore compares that trajectory with other trajectories already accumulated in the version collection.
 
-The original single-trajectory update remains as **clonal mutation**. MGM adds two comparison-based alternatives.
+MGM retains the update method based on a single failed trajectory, calling it **clonal mutation**. It also introduces two additional update methods.
 
-**Reaction-norm mutation** compares the same agent's trajectories across different tasks. A problem that recurs on several tasks is more likely to come from the agent than from an edge case in one task. The child still descends from that agent, but its update draws on evidence from several tasks.
+**Reaction-norm mutation** compares trajectories produced by the same Agent on different tasks. When similar problems recur across several tasks, the system has stronger grounds to attribute the problem to the Agent itself rather than to an edge case in one task. The modified child still descends from that Agent, but evidence for the change comes from multiple tasks.
 
-**Cross-lineage hybridization** compares agents from different branches on the same task. If one fails and the other succeeds, the successful trajectory can guide the failing version. If both fail, their differences can still expose complementary failure modes. The agent being modified receives both trajectories and outcomes, extracts useful behavior from the comparison, and implements it in its own code.
+**Cross-lineage hybridization** compares Agents from different branches on the same task. When one Agent fails and another succeeds, the successful trajectory can guide changes to the failing version. If both Agents fail, the system can still compare the two trajectories to identify complementary failure patterns. During the update, the system provides both Agents' trajectories and outcomes as evidence. The Agent being modified extracts reusable practices from the comparison and adds them to its own code.
 
-Both methods reuse evaluation trajectories already present in the version collection. Cross-task and cross-branch comparisons narrow the set of likely causes and make the resulting edits more targeted.
+Both methods use evaluation trajectories that already exist in the version collection. Comparisons across tasks and branches provide more specific clues about failures and narrow the range of issues that must be investigated during modification.
 
-Under the same evaluation budget, MGM outperforms a single-trajectory tree baseline on both SWE-bench Verified and Polyglot. On Polyglot, the score rises from 50.8% to 93.2%, compared with 77.9% for the tree baseline. The update methods use similar numbers of tokens, and the evolved harness is also tested on other programming benchmarks and underlying models.
-
-
-
-## 4 Who Updates the Agent: Self, Teacher, and Joint Updates
+Under the same evaluation budget, MGM outperforms a tree-based baseline that modifies Agents using only a single trajectory on both SWE-bench Verified and Polyglot. On Polyglot, for example, the Agent's score increases from 50.8% to 93.2%, while the single-trajectory tree baseline reaches 77.9%. The different update methods have similar token costs, and MGM's evolved Harness remains useful when the programming Benchmark or underlying model is changed.
 
 
 
-An RSI system must perform tasks and turn task trajectories and feedback into updates. The same agent may do both jobs, or an external updater may handle part or all of the second. This section calls the task-performing agent the student and the external participant in the update the teacher. A teacher may be another agent, a reflection module, or an optimization process.
+## 4 Artifact updater: Self, Teacher, and Joint Updating
+
+
+
+An RSI system must both perform tasks and update itself from task trajectories and feedback. These two jobs may be handled by the same Agent or assigned to different Agents. For convenience, this section calls the task-performing Agent the Student and the other Agent that analyzes the Student's task trajectory and participates in modification the Teacher.
 
 Based on who carries out the modification, RSI systems can be divided into three categories:
 
-1. In self-update, the student summarizes experience and modifies itself;
+1. In self-update, the Student summarizes experience and modifies itself;
 
-2. In teacher update, the student performs tasks while an independent teacher carries out the update;
+2. In teacher update, the Student performs tasks while an independent Teacher carries out the actual update;
 
-3. In joint update, the student and teacher each shape part of the modification. One may diagnose a problem while the other implements the change, or one may summarize experience while the other organizes and writes it back. The order and division of labor vary across methods.
+3. In joint update, the Student and Teacher each handle part of the modification process. For example, one may diagnose the problem while the other implements the change, or one may summarize experience while the other organizes and writes it back. The exact division of labor and sequence vary across methods.
 
 ### 4.1 Self-Update
 
-In self-update, the student both performs the task and makes the modification. The environment may provide scores, errors, or other feedback, but no separate updater interprets the trajectory or writes the result. The student decides what to retain and changes the memory, skills, rules, or code used in future tasks.
+In self-update, the same Student both performs the task and carries out the modification. The environment may provide scores, errors, or other feedback, but no separate Agent analyzes the trajectory or writes the update. The Student decides which experiences to retain and modifies the memory, Skills, rules, or code that will be used in future tasks.
 
 ![Self-update](图片和附件/codex-self-update-en.png)
 
-No update information needs to pass between separate agents, but the student must interpret the feedback and implement the change on its own. A mistaken diagnosis may therefore be written into a persistent artifact and affect later tasks.
+This avoids communication between Agents, but the Student must interpret feedback and implement the modification itself. If the Student misunderstands what went wrong, that error may be written into a persistent artifact and continue to affect later tasks.
 
 ### 4.2 Teacher Update
 
-In teacher update, the student performs the task but does not directly modify the persistent artifact used later. An external teacher reads demonstrations, task trajectories, evaluation results, or prior experience, then generates or reorganizes memories, skills, tools, or harness code.
+In teacher update, the Student that performs the task does not directly modify the persistent artifact that will be used later. This step is carried out by a Teacher outside the Student. The Teacher may read demonstrations, task trajectories, evaluation results, or prior experience, then generate or organize new memories, Skills, tools, or Harness code.
 
-Depending on the method, the teacher may summarize successful experience, diagnose failures, or merge, filter, and retire existing content. Supplying only a score or an acceptance result is not enough: the teacher must help decide what is written back or how it changes.
+The Teacher does not have to be a dedicated Agent. It may instead be a reflection module, an optimizer, or an update process equipped with validation rules. Depending on the method, a Teacher may summarize successful experience and analyze failure causes, or merge, filter, and retire existing content. A module that only supplies a score or acceptance result is not a Teacher. To count as one, it must actually decide what is written back and how it is changed.
 
 ![Teacher update](图片和附件/codex-teacher-update-en.png)
 
@@ -212,17 +212,17 @@ Depending on the method, the teacher may summarize successful experience, diagno
 
 ![13\-recuris\-fig3\.png](图片和附件/13-recuris-fig3.png)
 
-Recuris separates task execution from skill updates. An agent performs long-horizon tasks, while a fixed Meta-Agent collects failure records across tasks and modifies the Skill Memory used on future tasks. In this section's terminology, the task agent is the student and the Meta-Agent is the teacher.
+Recuris provides one concrete implementation of teacher update. In the paper, an Agent performs long-horizon tasks, while a fixed Meta-Agent aggregates failure records from multiple tasks and modifies the Skill Memory used by the Agent in the future. The Agent can be viewed as the Student in this section, and the Meta-Agent as the Teacher.
 
-During a long-horizon task, the agent must track current progress while drawing on earlier experience. Recuris uses Working Memory for the current objective, completed steps, and next plan; Experiential Memory stores experience and skills that can be reused across tasks. The system selects skills according to the progress and unfinished objectives in Working Memory, so retrieval stays aligned with the current step.
+When performing a long-horizon task, the Agent must both track current progress and invoke experience accumulated in the past. Recuris uses Working Memory to record the current objective, completed steps, and next plan, while Experiential Memory stores experience and Skills reusable across tasks. When a Skill is needed, the system selects relevant Skills according to the task progress and unfinished objectives recorded in Working Memory, keeping Skill selection aligned with the current step.
 
-When a task goes wrong, Recuris links the failure to the memory components used in that run. If similar problems recur across tasks, the Meta-Agent analyzes the records and proposes a local change to the relevant skill. Only validated changes enter Skill Memory, after which the agent uses the revised skill on later tasks. The task agent produces the evidence; the Meta-Agent diagnoses the problem and writes the update.
+After a problem occurs during a task, Recuris uses the execution trajectory to associate the failure with the memory components used in that round. When similar problems recur across multiple tasks, the Meta-Agent analyzes these records and proposes a local modification to the relevant Skill. A candidate modification is written into Skill Memory only after validation, and the Agent uses the updated Skill in subsequent tasks. Throughout this process, the task-performing Agent produces trajectories and uses Skills, while the Meta-Agent analyzes problems and carries out modifications.
 
-Across four long-horizon benchmarks and ten models, Recuris improves 35 of 37 completed model–benchmark combinations. The largest gain on the longest tasks is 32.2 points.
+Recuris is evaluated on four long-horizon Benchmarks and ten models. It improves performance in 35 of 37 model-Benchmark combinations, with gains of up to 32.2 points on the longest tasks.
 
 ### 4.3 Joint Update
 
-In joint update, both the student and teacher shape the modification, but their roles are not fixed. The student may summarize candidate experience for the teacher to filter and write back; alternatively, the teacher may diagnose a problem for the student to implement. It counts as joint only when both sides affect the content of the update. Merely performing tasks or assigning scores is not enough.
+In joint update, both the Student and Teacher participate in modification, although their roles are not fixed. The Student may first summarize candidate experience from a task and the Teacher may then filter and write it back; alternatively, the Teacher may diagnose the problem and the Student may implement the change. The key criterion is whether both parties influence the final content written back. A Student that only performs tasks, or a Teacher that only assigns scores, does not constitute joint updating.
 
 ![Joint update](图片和附件/codex-joint-update-en.png)
 
@@ -230,67 +230,67 @@ In joint update, both the student and teacher shape the modification, but their 
 
 ![14\-evo\-harness\-fig3\.png](图片和附件/14-evo-harness-fig3.png)
 
-Evo-Harness divides the update between a Solver and an Evolver. The Solver performs each task and extracts candidate experience from the run. The Evolver reviews those candidates, decides how the existing skill harness should change, and writes the result back. In this section's terminology, the Solver is the student and the Evolver is the teacher.
+In Evo-Harness, the Solver corresponds to the Student and the Evolver to the Teacher. The Solver first summarizes candidate experiences, after which the Evolver filters, organizes, and writes them into the Harness. The Solver does more than perform tasks: it also summarizes candidate experience from each execution. The Evolver then reviews those experiences and decides how to modify the existing Skill Harness. The final content written back is jointly produced by the two roles.
 
-Evo-Harness operates over a continual task stream in which each task may provide only one useful execution record. A record can contain reusable practices alongside paths, filenames, and conditions specific to that task.
+Evo-Harness operates over a continual task stream. After completing one task, the Agent summarizes experience from that execution and then proceeds to the next. Execution records contain reusable practices, but also paths, filenames, and specific conditions relevant only to the current task.
 
-When a task fails or receives negative feedback, the Solver extracts candidate experience from the instruction, trajectory, outcome, and feedback. It also records when the experience applies and what evidence supports it. At the end of a task batch, the Evolver compares these candidates with the current harness and decides what to add, merge, revise, or discard. The retained material becomes cross-task rules or procedures for a particular task type, and the updated skill harness is used on the next batch.
+When a task fails or receives negative feedback, the Solver summarizes candidate experience from the task instruction, execution trajectory, outcome, and feedback, and identifies the circumstances in which the experience applies and the evidence supporting it. At the end of each task batch, the Evolver compares candidate experiences against the current Harness and decides whether to add, merge, revise, or discard them. It then organizes retained experiences into cross-task rules or procedures for a particular type of task. The updated Skill Harness is used for the next task batch.
 
-Evo-Harness outperforms other experience-reuse methods on all five evaluated benchmarks. Removing the Solver's candidate-extraction step lowers performance, showing that the update depends on both the Solver's reflection and the Evolver's organization.
+The paper evaluates Evo-Harness on multiple Benchmarks. It outperforms other experience-reuse methods on all five Benchmarks. Removing the step in which the Solver generates candidate experience reduces performance relative to the full method, suggesting that both the Solver's reflection and the Evolver's organization contribute positively to the update.
 
 
 
-## 5 Update Timing: Offline, Online, and Hybrid RSI
+## 5 When Does RSI Update? Offline, Online, and Hybrid Modes
 
-Two systems may update the same artifact but at different times. One may finish evolving before final testing, another may update throughout a task stream, and a third may start with offline experience and keep learning during deployment.
+RSI can also be classified by when updates occur. Even when two methods both modify memory or Skills, they may schedule their updates differently: some finish updating before formal testing, some update while working through a task stream, and others build an initial body of experience before continuing to accumulate more during deployment.
 
-This gives three update modes:
+Based on the temporal relationship between task execution and experience updates, RSI mode can be divided into three categories:
 
 1. Offline RSI completes updates on training tasks and remains fixed during testing;
 
 2. Online RSI continually updates while handling tasks, so experience from earlier tasks affects later ones;
 
-3. Hybrid RSI builds an initial version offline, then continues adapting after deployment.
+3. Hybrid RSI first builds an initial version offline and then continues adapting to new tasks after deployment.
 
 ![Offline, online, and hybrid RSI](图片和附件/codex-rsi-update-timing-en.png)
 
 ### 5.1 Offline RSI
 
-Offline RSI separates evolution from final testing. The system first accumulates experience on training tasks, then freezes its updates and evaluates on unseen tasks. If training and test tasks are identical, the agent may simply memorize answers; if they are unrelated, the test says little about whether its experience can transfer.
+Offline RSI separates updating from testing. The system first accumulates experience on training tasks, then stops updating during the test phase and uses unseen tasks to evaluate whether this experience can be reused. Training and test tasks cannot be identical, or the Agent may merely memorize answers. Their distributions also cannot be completely different, or the evaluation cannot determine whether the learned experience is useful.
 
 **Representative work:** [**GDPevo: Evaluating Agent Self-Evolution on Real Business Tasks**](https://arxiv.org/abs/2608.03764)
 
 ![06\-gdpevo\-fig1\.png](图片和附件/06-gdpevo-fig1.png)
 
-GDPevo evaluates whether offline evolution transfers to unseen tasks. Many benchmarks leave the relationship between training and test tasks unclear, making it difficult to separate genuine transfer from prior exposure to similar questions. GDPevo starts from business workflows in CRM, ERP, finance, healthcare, law, and data processing, then breaks each workflow into smaller rules.
+GDPevo is a Benchmark designed specifically to evaluate offline RSI. Existing evaluations often do not clearly explain how training and test tasks relate. When a score rises, it is therefore difficult to tell whether the Agent learned to reuse experience or had previously seen a similar task. GDPevo selects tasks from real business workflows in CRM, ERP, finance, healthcare, law, and data processing, then decomposes each workflow into smaller rules.
 
-Its task-construction method, Rule Hybridization, places the same basic rules in different combinations across five training tasks and recombines them into five test tasks. The agent may receive feedback and build memories or skills during training, but it stops updating once testing begins. The test tasks are new, while some of their component rules are familiar, so the benchmark can measure whether the agent recombines prior knowledge rather than recalls an answer.
+GDPevo proposes Rule Hybridization to construct tasks. One set of basic rules first appears in different combinations across five training tasks and is then recombined into five test tasks. The Agent may receive feedback and form memories or Skills during training, but it stops updating once testing begins. Although the test tasks have not appeared before, they contain rules encountered during training, allowing the Benchmark to test whether the Agent can apply prior experience to new rule combinations.
 
-GDPevo contains 12 groups of five training and five test tasks, for 120 tasks in total. An automated pipeline can generate another 12 groups within two days, making it easier to refresh the test set and reduce prior exposure.
+GDPevo contains 12 task groups, each with five training tasks and five test tasks, for a total of 120 tasks. It also provides an automated pipeline that can generate another 12 task groups within two days. This makes it possible to refresh test questions regularly and reduces the chance that the model has encountered them beforehand.
 
-Across four agents and four feedback types, the best configuration improves from 50.63% accuracy before evolution to 67.07% afterward, a gain of 16.44 points. Supplying all required test rules directly raises accuracy to 91.6%, leaving a 24.53-point gap. Current agents therefore recover only part of the reusable information available during training.
+The authors evaluate four Agents with four types of feedback. The best-performing configuration improves from 50.63% accuracy before updating to 67.07% afterward, a gain of 16.44 percentage points. When all rules needed for the test are supplied directly, accuracy reaches 91.6%, which is 24.53 percentage points above the current best result. This gap shows that existing Agents still learn only part of the available rules from training tasks.
 
 ### 5.2 Online RSI
 
-Online RSI interleaves task execution and updates. After each task, the agent retains experience from its result and feedback; that experience is available on the next task. There is no separate training phase, so improvement must be measured along the task sequence.
+Online RSI arranges tasks into a continual sequence. After completing the current task, the Agent organizes and retains experience from the execution result and feedback. That experience is already available when the next task begins. Task execution and experience updates alternate without a separate training phase. Performance must be observed along the task sequence to determine whether accumulated experience helps on later tasks.
 
 **Representative work:** [**FinEvo-Bench: A Longitudinal Benchmark for Self-Evolving Agents in Professional Financial Workflows**](https://arxiv.org/abs/2608.06144)
 
 ![09\-finevo\-bench\-fig2\.png](图片和附件/09-finevo-bench-fig2.png)
 
-FinEvo-Bench places 120 financial tasks in one continual stream. Experience from each completed task remains available on later tasks, making the benchmark an online RSI setting. It covers six domains and 20 business scenarios; each scenario contains six tasks that share a procedure but use different data and questions.
+FinEvo-Bench is a Benchmark for online RSI that organizes 120 financial tasks into one continual stream. The Agent retains experience after completing each task and uses it on subsequent tasks. The Benchmark covers six domains and 20 business scenarios. Each scenario contains six tasks that follow the same procedure but use different data and ask different specific questions.
 
-Tasks from the same scenario are interleaved with other scenarios rather than placed together. The authors also test three randomized task orders. The agent must recover a procedure learned earlier and apply it to a related task after handling unrelated work in between.
+The six tasks from one scenario do not appear consecutively; they are interleaved with tasks from other scenarios. The paper also randomizes the task order three times to ensure that the result does not depend on one particular ordering. After handling other tasks in between, the Agent must still retrieve a previously learned procedure and apply it to a new task of the same type.
 
-After each task, the agent receives rubric-based feedback and writes useful lessons into memory, skills, or an operating manual. The session then closes, but the saved experience remains available to the next session. The agent is evaluated while it evolves rather than in a separate test phase.
+After each task, the Agent receives rubric-based feedback and writes useful reflections into memory, Skills, or an operating manual. The current session then closes, but these experiences persist and are used directly on the next task. There is no separate training phase during the evaluation: the Agent completes tasks and updates itself at the same time.
 
-Each experiment includes a state-reset control. Both groups use the same model, agent framework, task order, and scoring procedure; one retains earlier experience, while the other clears it before every task. Their score difference isolates the value of retained experience.
+To isolate the effect of retained experience, the paper includes a state-reset control for every experiment. Both groups use the same model, Agent framework, task order, and scoring procedure. The experimental group retains prior experience, while the control group clears its state before each task. The difference between their scores measures the gain from retaining experience.
 
-Across four agents built on Qwen3.7-Max, retaining experience raises average scores by 9.33 to 19.37 points. Within each scenario, the gain on the final three tasks exceeds the gain on the first three by 6.10 to 8.70 points, showing a larger benefit after more related experience has accumulated.
+The paper evaluates four Agents built on Qwen3.7-Max. Retaining experience improves average scores by 9.33 to 19.37 points. Within the same scenario, the gain on the final three tasks is 6.10 to 8.70 points greater than on the first three, indicating that earlier experience becomes more useful as the number of related tasks increases.
 
 ### 5.3 Hybrid RSI
 
-Hybrid RSI begins with experience collected from demonstrations or training tasks, then continues updating during deployment. The agent starts with useful prior knowledge without giving up the ability to adapt to new situations.
+Hybrid RSI first builds a body of initial experience from demonstrations or training tasks, then continues updating during real use. This gives the Agent usable experience when it begins performing tasks while still allowing it to incorporate new situations later.
 
 **Representative work:** [**Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation**](https://arxiv.org/abs/2604.10923)
 
@@ -298,27 +298,27 @@ Hybrid RSI begins with experience collected from demonstrations or training task
 
 
 
-Mem²Evolve first uses part of the task set to build initial experience, reusable tools, and expert agents. It then processes the remaining tasks while continuing to add new experience and components. This connects offline initialization with online updates in one pipeline.
+Mem²Evolve first uses part of the task set to accumulate initial experience and build a set of reusable tools and expert Agents, then processes the remaining tasks. During later tasks, the Agent uses these existing resources while continuing to add new experience and components. It therefore combines offline initialization with continued updates during the task stream, making it a hybrid method.
 
-The system stores these resources in two places. Experience Memory holds lessons from successful and failed tasks; Asset Memory holds tools and expert agents that can be invoked directly.
+The system stores these resources in two types of Memory: Experience Memory holds lessons summarized from successful and failed tasks, while Asset Memory holds tools and expert Agents that can be invoked directly.
 
-For a new task, the system first decomposes the problem and searches Asset Memory for suitable components. It reuses an existing component when possible; otherwise, it retrieves related experience and combines it with external information to create a new tool or expert agent. New tools must pass automatically generated unit tests. After the task, new experience and validated components are written back for future use.
+When a new task arrives, the system first decomposes it into subtasks and searches Asset Memory for suitable components. It reuses a component when one is available. When none is available, the system retrieves related experience and combines it with external information to create a new tool or expert Agent. New tools must first pass automatically generated unit tests. After the task, new experience and validated components are written into the two Memories for future use.
 
-Across six task categories and eight benchmarks, the complete system performs 11.80% better on average than a method that only accumulates experience and 6.46% better than one that only creates tools or expert agents. Initializing both memory stores also improves performance on every benchmark compared with starting from empty stores.
+The paper evaluates the system across six task categories and eight Benchmarks. The complete system performs 11.80% better on average than a method that only accumulates experience, and 6.46% better than one that only creates tools or expert Agents. Compared with a setting in which both Memories are empty, the initialized system performs better on every Benchmark.
 
 
 
-## 6 Other Classification Dimensions
+## 6 Other RSI Taxonomy Dimensions
 
-The previous sections classified RSI by what changes, how versions relate, who performs the update, and when it happens. Five additional dimensions help distinguish individual methods: acceptance criteria, feedback source, feedback type, update frequency, and experience scope. A method may occupy more than one category within the same dimension.
+The preceding sections organized RSI by its artifact, version structure, updater, and update timing. When reading individual papers, five additional dimensions are useful for comparison: Acceptance criterion, Feedback source, Feedback type, Update frequency, and Experience scope. These dimensions must be assessed separately, and one method may use more than one category within the same dimension.
 
-### 6.1 Acceptance Criteria
+### 6.1 Acceptance criterion
 
-After producing a modification, a system needs evidence to decide whether to keep it. Common acceptance criteria include:
+After producing a modification, a system still needs evidence to decide whether to retain it. Common Acceptance criteria include:
 
 - **Artifact validation:** Unit tests, compilation, interface checks, or other direct validation of the modified artifact.
 
-- **Instance result:** Whether the current task instance succeeds or receives a higher reward.
+- **Instance result:** Whether the current task instance succeeds or receives a higher Reward.
 
 - **Benchmark score:** Overall performance across a set of evaluation problems.
 
@@ -326,37 +326,37 @@ After producing a modification, a system needs evidence to decide whether to kee
 
 - **No independent validation:** The modification is written back immediately after generation without a separate acceptance step.
 
-### 6.2 Feedback Source
+### 6.2 Feedback source
 
 Feedback source describes where the evidence driving improvement comes from. It records the evidence actually used during evolution, not merely the testing method used for the final evaluation.
 
-- **Benchmark:** Answers, verifiers, or scores taken directly from the benchmark under evaluation.
+- **Benchmark:** Answers, Verifiers, or scores taken directly from the Benchmark under evaluation.
 
 - **Train/dev set:** Evolution tasks or data splits kept separate from the final test set.
 
-- **Environment:** State changes, observations, native rewards, or execution outcomes.
+- **Environment:** State changes, Observations, native Rewards, or execution outcomes.
 
 - **Executable verifier:** Unit tests, compilers, containers, or formal checkers.
 
-- **LLM feedback:** Reviews, self-critique, self-consistency, or debate produced by the student, teacher, or another model.
+- **LLM feedback:** Reviews, self-critique, self-consistency, or debate produced by the Student, Teacher, or another model.
 
 - **Human:** Human labels, preferences, review, or intervention.
 
-### 6.3 Feedback Type
+### 6.3 Feedback type
 
 Feedback type distinguishes outcome scores from non-score feedback containing concrete information.
 
-- **Score:** A numerical value or category that evaluates the task outcome. Binary feedback distinguishes only success from failure or pass from fail. Non-binary feedback provides a reward, accuracy, utility, or another score with more than two possible values.
+- **Score:** A numerical value or category that evaluates the task outcome. Binary feedback distinguishes only success from failure or pass from fail. Non-binary feedback provides a Reward, accuracy, utility, or another score with more than two possible values.
 
-- **Non-score:** Concrete information beyond an outcome score. Ground truth includes a reference answer, target state, expected output, or reference implementation. LLM review includes textual judgments, explanations, or critiques produced by a language model. Other information includes observations, logs, diagnostics, causal attribution, constraints, or critiques produced by an agent.
+- **Non-score:** Concrete information beyond an outcome score. Ground truth includes a reference answer, target state, expected output, or reference implementation. LLM review includes textual judgments, explanations, or critiques produced by a language model. Other information includes Observations, logs, diagnostics, causal attribution, constraints, or critiques produced by an Agent.
 
-A scalar produced by an LLM still counts as a score. Only textual judgments, explanations, or critiques count as LLM review. Feedback used solely to evolve the teacher is not counted here.
+A scalar produced by an LLM still counts as a score. Only textual judgments, explanations, or critiques count as LLM review. Feedback used solely to evolve the Teacher is not counted here.
 
-### 6.4 Update Frequency
+### 6.4 Update frequency
 
-Update frequency indicates how much student execution accumulates before a persistent artifact is updated:
+Update frequency indicates how much Student execution is accumulated before a persistent artifact is updated:
 
-- **Step:** After one action–observation pair within a trajectory.
+- **Step:** After one action–Observation pair within a trajectory.
 
 - **Event-triggered:** Upon failure, discovery of a capability gap, receipt of a hint, or completion of a subgoal.
 
@@ -364,9 +364,9 @@ Update frequency indicates how much student execution accumulates before a persi
 
 - **Batch:** After accumulating multiple trajectories or candidate sets, or completing a round of offline data collection.
 
-This dimension does not record the teacher's own evolution cycle. Updates performed once per generation and offline aggregation of student experience are both categorized as Batch.
+This dimension does not record the Teacher's own evolution cycle. Updates performed once per generation and offline aggregation of Student experience are both categorized as Batch.
 
-### 6.5 Experience Scope
+### 6.5 Experience scope
 
 Experience scope describes where an evolved artifact can be used:
 
