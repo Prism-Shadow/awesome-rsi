@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
 import { blogCopy } from "../i18n.js";
@@ -21,11 +23,22 @@ function unescapeMarkdown(text) {
   return text.replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, "$1");
 }
 
+function MathMarkup({ expression, displayMode = false, className }) {
+  const Tag = displayMode ? "div" : "span";
+  const html = katex.renderToString(expression, {
+    displayMode,
+    throwOnError: false,
+    strict: false,
+  });
+
+  return <Tag className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
 // Minimal inline markup so post text stays plain-string and easy to hand-edit.
 function renderInline(text, keyPrefix = "inline") {
   const normalized = unescapeMarkdown(text);
   const nodes = [];
-  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`/g;
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|\$([^$\n]+)\$/g;
   let lastIndex = 0;
   let match;
   let key = 0;
@@ -46,8 +59,16 @@ function renderInline(text, keyPrefix = "inline") {
       );
     } else if (match[3] !== undefined) {
       nodes.push(<strong key={`${keyPrefix}-${key++}`}>{match[3]}</strong>);
-    } else {
+    } else if (match[4] !== undefined) {
       nodes.push(<code key={`${keyPrefix}-${key++}`}>{match[4]}</code>);
+    } else {
+      nodes.push(
+        <MathMarkup
+          className="blog-inline-math"
+          expression={match[5]}
+          key={`${keyPrefix}-${key++}`}
+        />,
+      );
     }
     lastIndex = pattern.lastIndex;
   }
@@ -207,7 +228,14 @@ function MarkdownArticle({ markdown, copy }) {
             );
           }
           if (block.type === "equation") {
-            return <div className="blog-equation" key={`equation-${index}`}>{block.text}</div>;
+            return (
+              <MathMarkup
+                className="blog-equation"
+                displayMode
+                expression={block.text.slice(1, -1)}
+                key={`equation-${index}`}
+              />
+            );
           }
           return <p key={`paragraph-${index}`}>{renderInline(block.text, `paragraph-${index}`)}</p>;
         })}

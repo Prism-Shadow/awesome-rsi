@@ -726,6 +726,14 @@ a:hover {
   text-align: center;
 }
 
+.blog-equation .katex-display {
+  margin: 0;
+}
+
+.blog-inline-math {
+  white-space: nowrap;
+}
+
 .blog-figure {
   margin: 1.6rem 0 2rem;
 }
