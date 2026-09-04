@@ -6,15 +6,15 @@ The field is still developing rapidly and has yet to converge on a single techni
 
 Drawing on the [Awesome RSI repository](https://github.com/Prism-Shadow/awesome-rsi) ([website](https://prism-shadow.github.io/awesome-rsi/)), this article organizes existing RSI work from a taxonomic perspective. We compare the connections and differences among self-evolving systems across several dimensions. By the end, you should have a clearer understanding of RSI and a framework for analyzing it: when you encounter a new self-evolving system, you will be able to quickly identify how it relates to and differs from existing work.
 
-![codex\-rsi\-taxonomy\-overview\-gpt\-preview\-v1\.png](图片和附件/codex-rsi-taxonomy-overview-gpt-preview-v1.png)
+![An RSI taxonomy](图片和附件/codex-rsi-taxonomy-overview-gpt-en.png)
 
-![codex\-rsi\-artifact\-mode\-matrix\-v1\.png](图片和附件/codex-rsi-artifact-mode-matrix-v1.png)
+![RSI works by improvement target and update timing](图片和附件/codex-rsi-artifact-mode-matrix-en.png)
 
 ## 1 What Exactly Is RSI?
 
 This article defines RSI as follows: after interacting with an environment, an Agent uses task trajectories and feedback to modify its own state through an update mechanism, and the updated state then participates in later tasks to improve future performance.
 
-![codex\-rsi\-loop\-v5\.png](图片和附件/codex-rsi-loop-v5.png)
+![The basic RSI loop](图片和附件/codex-rsi-loop-en.png)
 
 $A_{t+1}=U(A_t,\tau_t,f_t)$
 
@@ -26,7 +26,7 @@ A modern intelligent agent can be abstracted as **Agent = Model + Harness**. The
 
 Different RSI methods may modify different parts of this system. Parameter evolution changes the Model. Context, memory, and Skill evolution modify persistent state within the Harness. Tool and Harness-code evolution changes the Agent's action space and control flow.
 
-![codex\-agent\-anatomy\-v3\.png](图片和附件/codex-agent-anatomy-v3.png)
+![Agent anatomy and major improvement targets](图片和附件/codex-agent-anatomy-en.png)
 
 ### 2.1 Parameter Evolution
 
@@ -118,7 +118,7 @@ The previous section discussed which parts of an Agent can be modified. This sec
 
 3. Graph evolution allows experience from multiple tasks, versions, or lineages to converge in one update.
 
-![codex\-evolution\-topologies\-v1\.png](图片和附件/codex-evolution-topologies-v1.png)
+![Chain, tree, and graph evolution topologies](图片和附件/codex-evolution-topologies-en.png)
 
 ### 3.1 Sequential
 
@@ -196,7 +196,7 @@ Based on who carries out the modification, RSI systems can be divided into three
 
 In self-update, the same Student both performs the task and carries out the modification. The environment may provide scores, errors, or other feedback, but no separate Agent analyzes the trajectory or writes the update. The Student decides which experiences to retain and modifies the memory, Skills, rules, or code that will be used in future tasks.
 
-![codex\-self\-update\-v1\.png](图片和附件/codex-self-update-v1.png)
+![Self-update](图片和附件/codex-self-update-en.png)
 
 This avoids communication between Agents, but the Student must interpret feedback and implement the modification itself. If the Student misunderstands what went wrong, that error may be written into a persistent artifact and continue to affect later tasks.
 
@@ -206,7 +206,7 @@ In teacher update, the Student that performs the task does not directly modify t
 
 The Teacher does not have to be a dedicated Agent. It may instead be a reflection module, an optimizer, or an update process equipped with validation rules. Depending on the method, a Teacher may summarize successful experience and analyze failure causes, or merge, filter, and retire existing content. A module that only supplies a score or acceptance result is not a Teacher. To count as one, it must actually decide what is written back and how it is changed.
 
-![codex\-teacher\-update\-v1\.png](图片和附件/codex-teacher-update-v1.png)
+![Teacher update](图片和附件/codex-teacher-update-en.png)
 
 **Representative work:** [**Recursive Experiential-Working Memory Evolution for Long-Horizon Agent Harnesses**](https://arxiv.org/abs/2608.24876)
 
@@ -224,7 +224,7 @@ Recuris is evaluated on four long-horizon Benchmarks and ten models. It improves
 
 In joint update, both the Student and Teacher participate in modification, although their roles are not fixed. The Student may first summarize candidate experience from a task and the Teacher may then filter and write it back; alternatively, the Teacher may diagnose the problem and the Student may implement the change. The key criterion is whether both parties influence the final content written back. A Student that only performs tasks, or a Teacher that only assigns scores, does not constitute joint updating.
 
-![codex\-joint\-update\-v1\.png](图片和附件/codex-joint-update-v1.png)
+![Joint update](图片和附件/codex-joint-update-en.png)
 
 **Representative work:** [**Evo-Harness: Context-to-Harness Skill Compilation for Self-Evolving Agents**](https://arxiv.org/abs/2608.15071)
 
@@ -252,7 +252,7 @@ Based on the temporal relationship between task execution and experience updates
 
 3. Hybrid RSI first builds an initial version offline and then continues adapting to new tasks after deployment.
 
-![codex\-rsi\-update\-timing\-v1\.png](图片和附件/codex-rsi-update-timing-v1.png)
+![Offline, online, and hybrid RSI](图片和附件/codex-rsi-update-timing-en.png)
 
 ### 5.1 Offline RSI
 
