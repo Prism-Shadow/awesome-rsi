@@ -1,7 +1,7 @@
 // Verified against the bibliography text of the local paper PDFs.
 // Each edge points from the citing method to the method it references.
 export const methodCitationGraphMeta = {
-  snapshot: "2026-08-31",
+  snapshot: "2026-09-07",
   scope: "Current Methods & Systems corpus only",
   sourceName: "Original paper PDFs",
 };

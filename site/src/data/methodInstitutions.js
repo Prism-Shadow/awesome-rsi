@@ -12,6 +12,7 @@ export const methodInstitutions = {
   "2604.16839": ["Hong Kong University of Science and Technology (Guangzhou)", "Jilin University", "The Chinese University of Hong Kong"],
   "2508.06433": ["Zhejiang University", "Alibaba Group", "State Key Laboratory for Novel Software Technology, Nanjing University"],
   "2604.23472": ["Shenzhen X-Institute", "Soochow University", "Shenzhen Loop Area Institute", "Tsinghua University", "National University of Singapore"],
+  "2604.25850": ["Fudan University", "Peking University", "Shanghai Qiji Zhifeng Co., Ltd"],
   "2606.01314": ["Shanghai Jiao Tong University", "Eastern Institute of Technology, Ningbo", "University of Science and Technology of China", "Southeast University", "Ningbo Institute of Digital Twin"],
   "2606.26294": ["University of Cambridge", "NVIDIA", "Flower Labs", "Mohamed bin Zayed University of Artificial Intelligence", "Inria"],
   "2608.07645": ["University of Electronic Science and Technology of China", "Ludwig Maximilian University of Munich", "Munich Center for Machine Learning"],

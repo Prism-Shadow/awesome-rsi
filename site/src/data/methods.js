@@ -108,6 +108,15 @@ export const methods = [
     summaryZh: "同时维护任务智能体与优化器智能体两个群体；优化器既修改任务程序也修改自身，而任务智能体的得分又反过来驱动优化器演化。",
   },
   {
+    id: "2604.25850",
+    nickname: "AHE",
+    title: "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+    authors: ["Jiahang Lin", "Shichun Liu", "Chengjun Pan"], authorCount: 11,
+    published: "2026-04-28", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Distills batches of coding-agent trajectories into layered diagnostics, edits file-level harness components, and uses next-round task outcomes to verify or roll back each predicted change.",
+    summaryZh: "把成批的编程智能体轨迹提炼为分层诊断，修改文件级 Harness 组件，再用下一轮任务结果验证或撤销每项预期改动。",
+  },
+  {
     id: "2606.01314",
     nickname: "SkillSmith",
     title: "SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems",
