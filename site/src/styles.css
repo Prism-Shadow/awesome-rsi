@@ -1989,7 +1989,7 @@ a:hover {
   display: flex;
   align-items: baseline;
   gap: 0.45rem;
-  color: var(--muted);
+  color: var(--body);
   font-size: 0.78rem;
   line-height: 1.55;
 }

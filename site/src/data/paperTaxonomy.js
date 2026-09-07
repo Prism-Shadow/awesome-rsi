@@ -274,6 +274,15 @@ export const paperTaxonomy = {
     creation: ["Human-in-the-loop", "Manual"],
     evaluation: ["Rule-based"],
   },
+  "2606.04455": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Harness code"],
+    construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
+    metric: ["Accuracy", "Cost", "Latency"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
   "2606.04261": {
     origin: ["Composite"],
     mode: ["Online", "Repeated / iterative"],
