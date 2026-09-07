@@ -148,6 +148,24 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  "2602.22480": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Harness code"],
+    construction: ["Headroom", "Diversity"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
+  "2609.01437": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Harness code"],
+    construction: ["Headroom", "Diversity", "Generalization"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based", "LLM-as-a-judge"],
+  },
   "2608.09096": {
     origin: ["Composite"],
     mode: ["Offline"],
@@ -263,6 +281,15 @@ export const paperTaxonomy = {
     construction: ["Headroom", "Diversity"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop", "Manual"],
+    evaluation: ["Rule-based"],
+  },
+  "2606.04455": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Harness code"],
+    construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
+    metric: ["Accuracy", "Cost", "Latency"],
+    creation: ["Human-in-the-loop"],
     evaluation: ["Rule-based"],
   },
   "2606.04261": {

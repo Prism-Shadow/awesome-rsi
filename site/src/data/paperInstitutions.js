@@ -1,4 +1,6 @@
 export const paperInstitutions = {
+  "2602.22480": ["Scale AI"],
+  "2609.01437": ["ByteDance Seed", "Singapore University of Technology and Design", "Georgia Institute of Technology", "M-A-P", "TokenWave.AI"],
   "2608.09096": ["Renmin University of China", "BOSS Zhipin"],
   "2608.06144": ["Beihang University", "Qwen DianJin Team, Alibaba Cloud Computing"],
   "2608.06301": ["Scale AI"],
@@ -12,6 +14,7 @@ export const paperInstitutions = {
   "2607.05155": ["ByteDance Seed"],
   "2606.05661": ["University of California, Berkeley", "Snorkel AI", "University of Wisconsin–Madison"],
   "2606.05080": ["University of Washington", "Stanford University", "University of California, Santa Barbara", "University of California, San Diego", "University of Notre Dame", "Princeton University", "National University of Singapore", "University of Waterloo", "Massachusetts Institute of Technology", "NVIDIA", "Bake AI", "Google", "MIT–IBM Watson AI Lab", "Independent Researcher"],
+  "2606.04455": ["Institute of Software, Chinese Academy of Sciences", "University of Chinese Academy of Sciences", "Ant Group"],
   "2606.04261": ["Virginia Tech", "University of Illinois Urbana-Champaign", "University of Wisconsin–Madison", "University of California, Berkeley"],
   "2605.18421": ["Hong Kong University of Science and Technology (Guangzhou)", "Createlink Technology", "Beijing University of Posts and Telecommunications", "Beijing Institute of Technology"],
   "2604.20087": ["Carnegie Mellon University", "Amazon AGI"],

@@ -1,6 +1,64 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2602.22480",
+    "nickname": "VeRO",
+    "title": "VeRO: A Harness for Agents to Optimize Agents",
+    "authors": [
+      "Varun Ursekar",
+      "Apaar Shanker",
+      "Veronica Chatrath",
+      "Yuan Xue",
+      "Samuel Marc Denton"
+    ],
+    "published": "2026-02-25",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "An important emerging application of coding agents is agent harness optimization: the iterative improvement of a target agent by editing and evaluating its code. Despite its relevance, the community lacks a systematic understanding of coding agent performance on this task. Harness optimization differs from conventional software engineering: agent harnesses interleave deterministic code with stochastic LLM completions, requiring structured capture of both intermediate execution traces and downstream outcomes. To address these challenges, we introduce (1) VeRO (Versioning, Rewards, and Observations), an outer harness that provides versioned snapshots, budget-controlled evaluation, and structured execution traces of target harnesses, and (2) VeRO-Bench, a benchmark suite of target agents and tasks with reference evaluation procedures. Using VeRO, we conduct an empirical study comparing optimizers across tasks and analyzing which modifications reliably improve target agent harnesses. We release VeRO to support research on agent optimization as a core capability for coding agents.",
+    "arxiv": "https://arxiv.org/abs/2602.22480",
+    "pdf": "https://arxiv.org/pdf/2602.22480"
+  },
+  {
+    "id": "2609.01437",
+    "nickname": "HarnessDev",
+    "title": "HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?",
+    "authors": [
+      "Yuhao Wu",
+      "Jingyuan Zhang",
+      "Jiajun Shi",
+      "Xinping Lei",
+      "Qingshui Gu",
+      "Yuxuan Zhang",
+      "Zexuan Wang",
+      "Chen He",
+      "Chen Huang",
+      "Maojia Song",
+      "Zhiyuan Zeng",
+      "Shaowen Wang",
+      "Jinkai Liu",
+      "Yunfeng Shi",
+      "Jiaheng Liu",
+      "Shen Yan",
+      "Wenhao Huang",
+      "Ge Zhang",
+      "Wenxuan Zhang"
+    ],
+    "published": "2026-09-01",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "As agents move from research prototypes to deployed tools, their capability increasingly depends on model-external execution infrastructure, commonly termed the agent harness. Changing this harness while holding model weights fixed can substantially alter task performance. Current agent evaluations typically report downstream performance under a chosen harness, leaving a model's ability to develop the harness itself comparatively underexplored. We introduce HarnessDev, a benchmark that shifts the unit of evaluation from task outputs to runnable infrastructure. HarnessDev covers two stages. In Creation, the agent starts from a minimal seed and a small number of cases, then builds a complete execution system. In Evolution, it starts from its own created harness and iteratively revises it using downstream execution feedback, with the goal of improving benchmark performance. We then evaluate each constructed harness on capability (task success on held-out benchmarks) and efficiency (execution-token cost). The reported Creation results cover six creator LLMs, four domains, and five downstream benchmarks totaling 2,207 unique downstream instances, with hidden evaluation tasks withheld from development. We find that generated harnesses remain substantially behind mature human-engineered references on code and on search and research, while matching or exceeding the selected references on writing and machine-learning experimentation, with large variation in execution cost. Evolution produces some performance gains, but they are unstable and transfer only partially to held-out tasks. Experiments with a fixed runtime model further show that the gains depend strongly on the model executing the harness, indicating limited transfer across models.",
+    "arxiv": "https://arxiv.org/abs/2609.01437",
+    "pdf": "https://arxiv.org/pdf/2609.01437"
+  },
+  {
     "id": "2608.09096",
     "nickname": "Evo-Bench",
     "title": "Evo-Bench: Can Language Models Improve Agent Harness?",
@@ -384,6 +442,35 @@ export const papers = [
     "abstract": "Scientific and engineering progress is fundamentally a long-horizon iterative process: proposing changes, running experiments, measuring outcomes, and continuously refining artifacts. Yet existing benchmarks for frontier models primarily evaluate either single-turn responses or short-horizon agent trajectories, failing to capture the challenges of sustained iterative improvement over extended time horizons. To address this gap, we introduce AutoLab, a new benchmark for ultra long-horizon closed-loop optimization. AutoLab consists of 36 realistic, expert-curated tasks spanning four diverse domains: system optimization, puzzle & challenge, model development, and CUDA kernel optimization. Each task begins with a correct but deliberately suboptimal baseline and challenges agents to improve it within a strict wall-clock budget. Evaluating 17 state-of-the-art models reveals the dominant predictor of success is not the quality of an agent's initial attempt, but its persistence in repeatedly benchmarking, editing, and incorporating empirical feedback. While claude-opus-4.6 exhibits strong long-horizon optimization capabilities, most frontier models, including several proprietary ones, either terminate prematurely or exhaust their budgets with minimal progress. These results underscore the importance of time awareness and persistent iteration in autonomous agents. We open-source the full benchmark, evaluation harness, and task artifacts, to accelerate research toward truly capable long-horizon agents.",
     "arxiv": "https://arxiv.org/abs/2606.05080",
     "pdf": "https://arxiv.org/pdf/2606.05080"
+  },
+  {
+    "id": "2606.04455",
+    "nickname": "Meta-Agent Challenge",
+    "title": "The Meta-Agent Challenge: Are Current Agents Capable of Autonomous Agent Development?",
+    "authors": [
+      "Xinyu Lu",
+      "Tianshu Wang",
+      "Pengbo Wang",
+      "Zujie Wen",
+      "Zhiqiang Zhang",
+      "Jun Zhou",
+      "Boxi Cao",
+      "Yaojie Lu",
+      "Hongyu Lin",
+      "Xianpei Han",
+      "Le Sun"
+    ],
+    "published": "2026-06-03",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Research Automation",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "Current AI benchmarks evaluate agents on task execution within human-designed workflows. These evaluations fundamentally fail to measure a critical next-level capability: whether models can autonomously develop agent systems. We introduce the Meta-Agent Challenge (MAC), an evaluation framework designed to test the capacity of frontier models for autonomous agent development. Specifically, a code agent (the meta-agent) is given a sandboxed environment, an evaluation API, and a time limitation to iteratively program an agent artifact that maximizes performance on a held-out test set across five domains. To ensure evaluation integrity, this framework is secured by multi-layer defenses against reward hacking. Leveraging this framework, we demonstrate that meta-agents rarely match human-engineered baseline policies, and the few that do are dominated by proprietary frontier models. Moreover, the design process exhibits high variance, and high optimization pressure surfaces emergent adversarial behaviors like ground-truth exfiltration—highlighting critical deficits in both robustness and model alignment. Ultimately, MAC provides a rigorous, open-source benchmark for autonomous AI research and development, offering an empirical proxy for evaluating recursive self-improvement. Benchmark is publicly available at: https://github.com/ant-research/meta-agent-challenge.",
+    "arxiv": "https://arxiv.org/abs/2606.04455",
+    "pdf": "https://arxiv.org/pdf/2606.04455"
   },
   {
     "id": "2606.04261",
