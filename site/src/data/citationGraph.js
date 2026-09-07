@@ -6,11 +6,13 @@ export const citationGraphMeta = {
   "sourceName": "Semantic Scholar Academic Graph API",
   "sourceUrl": "https://www.semanticscholar.org/product/api",
   "semanticScholarEdges": 37,
-  "pdfVerifiedEdges": 12,
+  "pdfVerifiedEdges": 15,
   "pdfFallbackPapers": [
     "2606.04455",
     "2607.05155",
     "2608.01149",
+    "2608.06301",
+    "2608.09096",
     "2609.01437"
   ]
 };
@@ -237,6 +239,11 @@ export const citationEdges = [
     "verifiedBy": "semantic-scholar"
   },
   {
+    "source": "2608.06301",
+    "target": "2602.22480",
+    "verifiedBy": "paper-pdf"
+  },
+  {
     "source": "2608.09096",
     "target": "2603.08640",
     "verifiedBy": "semantic-scholar"
@@ -245,6 +252,11 @@ export const citationEdges = [
     "source": "2608.09096",
     "target": "2607.05202",
     "verifiedBy": "semantic-scholar"
+  },
+  {
+    "source": "2608.09096",
+    "target": "2602.22480",
+    "verifiedBy": "paper-pdf"
   },
   {
     "source": "2609.01437",
@@ -259,6 +271,11 @@ export const citationEdges = [
   {
     "source": "2609.01437",
     "target": "2608.09096",
+    "verifiedBy": "paper-pdf"
+  },
+  {
+    "source": "2609.01437",
+    "target": "2602.22480",
     "verifiedBy": "paper-pdf"
   }
 ];

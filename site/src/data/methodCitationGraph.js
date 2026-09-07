@@ -7,6 +7,23 @@ export const methodCitationGraphMeta = {
 };
 
 export const methodCitationEdges = [
+  { source: "2605.24539", target: "2603.28052", verifiedBy: "paper-pdf" },
+  { source: "2605.24539", target: "2604.25850", verifiedBy: "paper-pdf" },
+  { source: "2606.14249", target: "2505.22954", verifiedBy: "paper-pdf" },
+  { source: "2606.14249", target: "2603.28052", verifiedBy: "paper-pdf" },
+  { source: "2606.14249", target: "2604.25850", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2505.22954", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2603.28052", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2604.25850", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2606.06324", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2606.09498", verifiedBy: "paper-pdf" },
+  { source: "2607.13683", target: "2606.14249", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2505.22954", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2603.28052", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2604.25850", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2605.09998", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2606.09498", verifiedBy: "paper-pdf" },
+  { source: "2607.15524", target: "2606.14249", verifiedBy: "paper-pdf" },
   { source: "2505.22954", target: "2410.04444", verifiedBy: "paper-pdf" },
   { source: "2508.06433", target: "2409.07429", verifiedBy: "paper-pdf" },
   { source: "2508.06433", target: "2502.12110", verifiedBy: "paper-pdf" },

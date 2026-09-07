@@ -1,4 +1,8 @@
 export const methodInstitutions = {
+  "2605.24539": ["Tsinghua University", "AgiBot"],
+  "2606.14249": ["Darwin Agent Team"],
+  "2607.13683": ["EverMind AI", "Shanda Group"],
+  "2607.15524": ["Sakana AI", "University of California, Berkeley"],
   "2603.21877": ["Institute of Software, Chinese Academy of Sciences", "University of Chinese Academy of Sciences", "Institute of Information Engineering, Chinese Academy of Sciences", "National Computer Network Emergency Response Technical Team/Coordination Center of China"],
   "2410.04444": ["Peking University", "University of California, Santa Barbara", "University of Arizona"],
   "2506.10943": ["Massachusetts Institute of Technology"],

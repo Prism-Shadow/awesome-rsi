@@ -148,6 +148,15 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  "2602.22480": {
+    origin: ["Composite"],
+    mode: ["Offline"],
+    artifact: ["Non-parametric", "Harness code"],
+    construction: ["Headroom", "Diversity"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
   "2609.01437": {
     origin: ["Composite"],
     mode: ["Offline"],

@@ -1,6 +1,28 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2602.22480",
+    "nickname": "VeRO",
+    "title": "VeRO: A Harness for Agents to Optimize Agents",
+    "authors": [
+      "Varun Ursekar",
+      "Apaar Shanker",
+      "Veronica Chatrath",
+      "Yuan Xue",
+      "Samuel Marc Denton"
+    ],
+    "published": "2026-02-25",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "An important emerging application of coding agents is agent harness optimization: the iterative improvement of a target agent by editing and evaluating its code. Despite its relevance, the community lacks a systematic understanding of coding agent performance on this task. Harness optimization differs from conventional software engineering: agent harnesses interleave deterministic code with stochastic LLM completions, requiring structured capture of both intermediate execution traces and downstream outcomes. To address these challenges, we introduce (1) VeRO (Versioning, Rewards, and Observations), an outer harness that provides versioned snapshots, budget-controlled evaluation, and structured execution traces of target harnesses, and (2) VeRO-Bench, a benchmark suite of target agents and tasks with reference evaluation procedures. Using VeRO, we conduct an empirical study comparing optimizers across tasks and analyzing which modifications reliably improve target agent harnesses. We release VeRO to support research on agent optimization as a core capability for coding agents.",
+    "arxiv": "https://arxiv.org/abs/2602.22480",
+    "pdf": "https://arxiv.org/pdf/2602.22480"
+  },
+  {
     "id": "2609.01437",
     "nickname": "HarnessDev",
     "title": "HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?",
