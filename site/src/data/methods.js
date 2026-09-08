@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.02074",
+    nickname: "CHIME",
+    title: "CHIME: Credit-Aware Hierarchical Memory Evolution for Long-Horizon Agentic Planning",
+    authors: ["Yongshi Ye", "Tian Lan", "Feihu Jiang"], authorCount: 10,
+    published: "2026-09-02", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Separates planning and execution memories, attributes task outcomes before storing experience, and updates the relevant bank to guide later tasks without changing model weights.",
+    summaryZh: "分开维护规划记忆和执行记忆，先判断任务成败的原因，再更新对应记忆库以指导后续任务，全程不修改模型参数。",
+  },
+  {
     id: "2605.24539",
     nickname: "DemoEvolve",
     title: "DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations",
