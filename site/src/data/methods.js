@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.05295",
+    nickname: "RISE",
+    title: "RISE: Recursive Improvement via Self-Extrapolating Policy Distillation",
+    authors: ["Yang Li", "Semih Yavuz", "Shafiq Joty"], authorCount: 3,
+    published: "2026-09-04", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Alternates verifiable-reward training with distillation from a teacher extrapolated from its own checkpoints, refreshing the teacher as the student improves.",
+    summaryZh: "交替进行可验证奖励训练和自蒸馏，用自身检查点的变化方向外推构造教师，并随学生更新不断刷新教师。",
+  },
+  {
     id: "2605.24539",
     nickname: "DemoEvolve",
     title: "DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations",
