@@ -1,5 +1,23 @@
 export const methods = [
   {
+    id: "2609.05295",
+    nickname: "RISE",
+    title: "RISE: Recursive Improvement via Self-Extrapolating Policy Distillation",
+    authors: ["Yang Li", "Semih Yavuz", "Shafiq Joty"], authorCount: 3,
+    published: "2026-09-04", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Alternates verifiable-reward training with distillation from a teacher extrapolated from its own checkpoints, refreshing the teacher as the student improves.",
+    summaryZh: "交替进行可验证奖励训练和自蒸馏，用自身检查点的变化方向外推构造教师，并随学生更新不断刷新教师。",
+  },
+  {
+    id: "2609.02074",
+    nickname: "CHIME",
+    title: "CHIME: Credit-Aware Hierarchical Memory Evolution for Long-Horizon Agentic Planning",
+    authors: ["Yongshi Ye", "Tian Lan", "Feihu Jiang"], authorCount: 10,
+    published: "2026-09-02", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Separates planning and execution memories, attributes task outcomes before storing experience, and updates the relevant bank to guide later tasks without changing model weights.",
+    summaryZh: "分开维护规划记忆和执行记忆，先判断任务成败的原因，再更新对应记忆库以指导后续任务，全程不修改模型参数。",
+  },
+  {
     id: "2605.24539",
     nickname: "DemoEvolve",
     title: "DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations",
