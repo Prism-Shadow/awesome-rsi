@@ -19,6 +19,7 @@ We track the research on agents that get better by editing their own building bl
 | System | RSI artifact | Description |
 |---|---|---|
 | [Proteus](https://github.com/proteus-evolve/Proteus) ([v0.3.0](https://github.com/proteus-evolve/Proteus/releases/tag/v0.3.0)) | Harness code and declared surfaces | Harness-agnostic framework for context-fresh self-evolution episodes, validation-gated self-edits, versioned snapshots, and measurement. |
+| [Reef](https://github.com/Human-Agent-Society/reef) ([v0.0.2](https://github.com/Human-Agent-Society/reef/releases/tag/v0.0.2)) | Model weights and a harness tree of rules, skills, prompts, and configuration | Serving layer that records interactions behind an inference endpoint, matches later reports back to them, and publishes candidate weight or harness updates that win a comparison against the current version. |
 
 ## Contributing
 
