@@ -1,5 +1,4 @@
 export const methodInstitutions = {
-  "2609.05295": ["Salesforce AI Research"],
   "2609.02074": ["Xiamen University", "Zhejiang University", "Alibaba Group"],
   "2605.24539": ["Tsinghua University", "AgiBot"],
   "2606.14249": ["Darwin Agent Team"],

@@ -114,7 +114,6 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
-  "2609.05295": { artifact: ["Parametric"], mode: ["Offline"], topology: ["Graph"], selection: ["No validation"], updater: ["Self"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
   "2609.02074": { artifact: ["Non-parametric", "Context", "Memory"], mode: ["Online", "Offline"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Self"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   "2605.24539": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Graph"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Human"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2606.14249": { artifact: ["Parametric", "Non-parametric", "Harness code", "Context", "Memory"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
