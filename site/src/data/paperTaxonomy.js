@@ -2,6 +2,8 @@
 // active dimensions are combined with AND. Keep this file data-only so labels can
 // be reviewed and corrected without changing the filtering components.
 
+import { artifactDimension } from "./artifactTaxonomy.js";
+
 export const filterDimensions = [
   {
     id: "origin",
@@ -45,32 +47,7 @@ export const filterDimensions = [
       { value: "Offline → Online", label: "Offline → Online" },
     ],
   },
-  {
-    id: "artifact",
-    label: "RSI artifact",
-    help: {
-      summary: "What is carried forward and improved by the recursive or long-horizon process.",
-      items: [
-        { term: "Parametric", description: "Reserved for genuine model-generation recursion: A1 trains A2, A2 then participates in training A3, and the cycle continues across improved generations." },
-        { term: "Non-parametric", description: "The base model weights stay fixed while capability is accumulated in external state or artifacts during the agent's long-horizon process." },
-        { term: "Skill", parent: "Non-parametric", description: "Reusable procedures, prompts, programs, workflows, or skill descriptions are created and revised." },
-        { term: "Memory", parent: "Non-parametric", description: "Facts, experiences, trajectories, feedback, or retrieval entries are stored and reused in later work." },
-        { term: "Harness code", parent: "Non-parametric", description: "The surrounding agent system changes: prompts, tools, control flow, orchestration, or execution code." },
-        { term: "Other", parent: "Non-parametric", description: "Another external artifact evolves, such as a data policy, training strategy, experiment configuration, or task solution." },
-      ],
-      note: "A fixed training agent producing one post-trained target model is not Parametric RSI in this taxonomy.",
-    },
-    options: [
-      // Reserved for recursive model generations: A1 trains A2, A2 trains A3, and so on.
-      // Producing a post-trained target model during a fixed training-agent run is not enough.
-      { value: "Parametric", label: "Parametric" },
-      { value: "Non-parametric", label: "Non-parametric" },
-      { value: "Skill", label: "Skill", parent: "Non-parametric" },
-      { value: "Memory", label: "Memory", parent: "Non-parametric" },
-      { value: "Harness code", label: "Harness code", parent: "Non-parametric" },
-      { value: "Other artifact", label: "Other", parent: "Non-parametric" },
-    ],
-  },
+  artifactDimension,
   {
     id: "construction",
     label: "Construction criteria",
@@ -151,7 +128,7 @@ export const paperTaxonomy = {
   "2602.22480": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Harness code"],
+    artifact: ["Non-parametric", "Harness code", "Context"],
     construction: ["Headroom", "Diversity"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -160,7 +137,7 @@ export const paperTaxonomy = {
   "2609.01437": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Harness code"],
+    artifact: ["Non-parametric", "Harness code", "Context"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -169,7 +146,7 @@ export const paperTaxonomy = {
   "2608.09096": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Harness code"],
+    artifact: ["Non-parametric", "Harness code", "Context"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -187,7 +164,7 @@ export const paperTaxonomy = {
   "2608.06301": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Harness code"],
+    artifact: ["Non-parametric", "Harness code", "Context"],
     construction: ["Headroom", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -214,7 +191,7 @@ export const paperTaxonomy = {
   "2608.03874": {
     origin: ["Original"],
     mode: ["Online", "Curriculum", "Streaming"],
-    artifact: ["Non-parametric", "Skill"],
+    artifact: ["Non-parametric", "Context", "Skill"],
     construction: ["Diversity", "Generalization"],
     metric: ["Accuracy", "Gain"],
     creation: ["Human-in-the-loop"],
@@ -223,7 +200,7 @@ export const paperTaxonomy = {
   "2608.01149": {
     origin: ["Composite"],
     mode: ["Online", "Streaming"],
-    artifact: ["Non-parametric", "Skill", "Memory"],
+    artifact: ["Non-parametric", "Context", "Skill", "Memory"],
     construction: ["Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain"],
     creation: ["Human-in-the-loop"],
@@ -232,7 +209,7 @@ export const paperTaxonomy = {
   "2608.00155": {
     origin: ["Composite"],
     mode: ["Online", "Random order", "Streaming"],
-    artifact: ["Non-parametric", "Skill", "Memory"],
+    artifact: ["Non-parametric", "Context", "Skill", "Memory"],
     construction: ["Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain"],
     creation: ["Human-in-the-loop"],
@@ -241,7 +218,7 @@ export const paperTaxonomy = {
   "2607.25886": {
     origin: ["Composite"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -259,7 +236,7 @@ export const paperTaxonomy = {
   "2607.05155": {
     origin: ["Original"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop", "Manual"],
@@ -268,7 +245,7 @@ export const paperTaxonomy = {
   "2606.05661": {
     origin: ["Original"],
     mode: ["Online", "Streaming"],
-    artifact: ["Non-parametric", "Memory", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Memory", "Other artifact"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain"],
     creation: ["Human-in-the-loop"],
@@ -277,7 +254,7 @@ export const paperTaxonomy = {
   "2606.05080": {
     origin: ["Original"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop", "Manual"],
@@ -286,7 +263,7 @@ export const paperTaxonomy = {
   "2606.04455": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Harness code"],
+    artifact: ["Non-parametric", "Harness code", "Context"],
     construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Cost", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -295,7 +272,7 @@ export const paperTaxonomy = {
   "2606.04261": {
     origin: ["Composite"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -304,7 +281,7 @@ export const paperTaxonomy = {
   "2605.18421": {
     origin: ["Composite"],
     mode: ["Online", "Streaming"],
-    artifact: ["Non-parametric", "Memory"],
+    artifact: ["Non-parametric", "Context", "Memory"],
     construction: ["Diversity", "Generalization"],
     metric: ["Accuracy", "Gain"],
     creation: ["Human-in-the-loop"],
@@ -322,7 +299,7 @@ export const paperTaxonomy = {
   "2604.17308": {
     origin: ["Original"],
     mode: ["Online", "Offline", "Offline → Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Skill"],
+    artifact: ["Non-parametric", "Context", "Skill"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],
@@ -331,7 +308,7 @@ export const paperTaxonomy = {
   "2604.10547": {
     origin: ["Composite"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -340,7 +317,7 @@ export const paperTaxonomy = {
   "2603.08640": {
     origin: ["Composite"],
     mode: ["Online", "Repeated / iterative"],
-    artifact: ["Non-parametric", "Other artifact"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
     construction: ["Headroom", "Diversity", "Generalization"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -349,7 +326,7 @@ export const paperTaxonomy = {
   "2511.20857": {
     origin: ["Composite"],
     mode: ["Online", "Streaming"],
-    artifact: ["Non-parametric", "Memory"],
+    artifact: ["Non-parametric", "Context", "Memory"],
     construction: ["Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -367,7 +344,7 @@ export const paperTaxonomy = {
   "2508.19005": {
     origin: ["Original"],
     mode: ["Online", "Curriculum", "Streaming"],
-    artifact: ["Non-parametric", "Skill", "Memory"],
+    artifact: ["Non-parametric", "Context", "Skill", "Memory"],
     construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -376,7 +353,7 @@ export const paperTaxonomy = {
   "2507.05257": {
     origin: ["Composite"],
     mode: ["Offline"],
-    artifact: ["Non-parametric", "Memory"],
+    artifact: ["Non-parametric", "Context", "Memory"],
     construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain", "Cost", "Latency"],
     creation: ["Human-in-the-loop"],
@@ -385,7 +362,7 @@ export const paperTaxonomy = {
   "2505.11942": {
     origin: ["Original"],
     mode: ["Online", "Streaming"],
-    artifact: ["Non-parametric", "Memory"],
+    artifact: ["Non-parametric", "Context", "Memory"],
     construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
     metric: ["Accuracy", "Gain", "Cost"],
     creation: ["Human-in-the-loop"],

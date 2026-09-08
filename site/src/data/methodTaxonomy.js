@@ -1,6 +1,8 @@
 // Flat, multi-label taxonomy for RSI methods. Values within one row use OR;
 // active rows combine with AND. The definitions mirror the paper-reading rubric.
 
+import { artifactDimension } from "./artifactTaxonomy.js";
+
 const dimension = (id, label, summary, items, note) => ({
   id,
   label,
@@ -13,19 +15,7 @@ const dimension = (id, label, summary, items, note) => ({
 });
 
 export const methodFilterDimensions = [
-  dimension(
-    "artifact",
-    "RSI artifact",
-    "Whether improvement is carried forward in model parameters or non-parametric artifacts.",
-    [
-      ["Parametric", "Model weights change, and the updated parameters are carried into later improvement or work."],
-      ["Non-parametric", "Base-model weights remain fixed while capability accumulates in persistent external artifacts."],
-      ["Harness code", "Executable agent, harness, control-flow, self-improvement, or tool code.", "Non-parametric"],
-      ["Context", "Persistent prompts, instructions, rules, examples, or other material placed in model context.", "Non-parametric"],
-      ["Memory", "Information or experience stored and retrieved across steps, trajectories, or tasks.", "Non-parametric"],
-      ["Skill", "A reusable strategy, procedure, workflow, or executable capability.", "Non-parametric"],
-    ],
-  ),
+  artifactDimension,
   dimension(
     "mode",
     "RSI mode",
@@ -134,12 +124,12 @@ export const methodTaxonomy = {
   "2505.22954": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Combined metrics"], updater: ["Joint"], source: ["Benchmark", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
   "2409.07429": { artifact: ["Non-parametric", "Memory", "Skill"], mode: ["Online", "Offline", "Offline → Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Teacher"], source: ["Train/dev set", "Environment"], feedback: ["Non-score", "Ground truth", "Other"], frequency: ["Trajectory", "Batch"], scope: ["Specialized"] },
   "2502.12110": { artifact: ["Non-parametric", "Memory"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Teacher"], source: ["LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Event"], scope: ["General"] },
-  "2403.03186": { artifact: ["Non-parametric", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Step", "Event", "Trajectory"], scope: ["Specialized"] },
-  "2509.25140": { artifact: ["Non-parametric", "Memory"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["General", "Specialized"] },
-  "2604.10923": { artifact: ["Non-parametric", "Harness code", "Memory", "Skill"], mode: ["Online", "Offline → Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Ground truth", "LLM-as-a-judge"], frequency: ["Trajectory", "Batch"], scope: ["General"] },
+  "2403.03186": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Step", "Event", "Trajectory"], scope: ["Specialized"] },
+  "2509.25140": { artifact: ["Non-parametric", "Context", "Memory"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["General", "Specialized"] },
+  "2604.10923": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Online", "Offline → Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Ground truth", "LLM-as-a-judge"], frequency: ["Trajectory", "Batch"], scope: ["General"] },
   "2606.17220": { artifact: ["Non-parametric", "Context", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Self"], source: ["Train/dev set", "Executable verifier"], feedback: ["Score", "Non-binary"], frequency: ["Batch"], scope: ["Specialized"] },
   "2604.16839": { artifact: ["Non-parametric", "Memory"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Teacher"], source: ["Environment", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Event", "Trajectory"], scope: ["General"] },
-  "2508.06433": { artifact: ["Non-parametric", "Memory", "Skill"], mode: ["Offline → Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Environment"], feedback: ["Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
+  "2508.06433": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline → Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Environment"], feedback: ["Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   "2603.28052": { artifact: ["Non-parametric", "Harness code", "Context", "Memory"], mode: ["Offline"], topology: ["Graph"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Benchmark", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2604.23472": { artifact: ["Non-parametric", "Harness code"], mode: ["Offline"], topology: ["Graph"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Benchmark"], feedback: ["Score", "Non-binary"], frequency: ["Batch"], scope: ["General"] },
   "2604.25850": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["General"] },
@@ -151,9 +141,11 @@ export const methodTaxonomy = {
   "2606.26294": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge"], frequency: ["Batch"], scope: ["General"] },
   "2608.07645": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Graph"], selection: ["Combined metrics"], updater: ["Joint"], source: ["Benchmark", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
   "2608.24876": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline", "Offline → Online"], topology: ["Sequential"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Environment", "Executable verifier", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
-  "2608.22793": { artifact: ["Non-parametric", "Skill"], mode: ["Offline → Online"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  "2608.22793": { artifact: ["Non-parametric", "Context", "Skill"], mode: ["Offline → Online"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2608.15071": { artifact: ["Non-parametric", "Context", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Joint"], source: ["Train/dev set", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
-  "2608.16114": { artifact: ["Non-parametric", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
-  "2608.23397": { artifact: ["Non-parametric", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Non-score", "Other"], frequency: ["Event", "Trajectory"], scope: ["Specialized"] },
+  "2608.16114": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Teacher"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  "2608.23397": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Non-score", "Other"], frequency: ["Event", "Trajectory"], scope: ["Specialized"] },
   "2608.23552": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Self"], source: ["Environment", "Executable verifier"], feedback: ["Non-score", "Other"], frequency: ["Step", "Event", "Trajectory"], scope: ["General", "Specialized"] },
+  "2608.27454": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  "2609.00829": { artifact: ["Non-parametric", "Harness code", "Context", "Skill"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
 };

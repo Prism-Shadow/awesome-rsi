@@ -1,16 +1,7 @@
+import { artifactTranslationZh } from "./artifactTaxonomy.js";
+
 const methodTaxonomyZh = {
-  artifact: {
-    label: "RSI 修改对象",
-    summary: "改进结果保存在模型参数中，还是保存在非参数产物中。",
-    items: {
-      Parametric: ["参数", "模型权重发生变化，并将更新后的参数带入后续改进或任务。"],
-      "Non-parametric": ["非参数", "Base model 权重保持不变，能力通过可持久化的外部产物积累。"],
-      "Harness code": ["Harness 代码", "智能体框架、Harness、控制流、自我改进机制或工具的可执行代码。"],
-      Context: ["上下文", "持续写入模型上下文的 Prompt、指令、规则、示例或其他材料。"],
-      Memory: ["记忆", "跨步骤、轨迹或任务存储并检索的信息或经验。"],
-      Skill: ["技能", "可复用的策略、流程、工作流或可执行能力。"],
-    },
-  },
+  artifact: artifactTranslationZh,
   mode: {
     label: "RSI 模式",
     summary: "演化发生在最终评测或部署之前，还是发生在持续使用过程中。",
