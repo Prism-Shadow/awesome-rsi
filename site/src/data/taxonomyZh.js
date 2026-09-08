@@ -1,3 +1,5 @@
+import { artifactTranslationZh } from "./artifactTaxonomy.js";
+
 const taxonomyZh = {
   origin: {
     label: "基准来源",
@@ -22,20 +24,7 @@ const taxonomyZh = {
       "Offline → Online": ["离线 → 在线", "混合流程：先在离线阶段形成初始能力或技能库，再在实际在线使用中继续演化。"],
     },
   },
-  artifact: {
-    label: "RSI 产物",
-    summary: "在递归或长程过程中被持续保留并改进的内容。",
-    note: "如果一个固定的训练智能体只产出单个后训练目标模型，本分类不会将其视为参数式 RSI。",
-    items: {
-      Parametric: ["参数式", "仅指真正跨模型代际的递归：A1 训练 A2，随后 A2 参与训练 A3，并在后续代际中持续循环。"],
-      "Non-parametric": ["非参数式", "基础模型权重保持不变，能力通过智能体长程运行中的外部状态或产物不断积累。"],
-      Skill: ["技能", "创建并修订可复用的流程、提示词、程序、工作流或技能说明。"],
-      Memory: ["记忆", "保存事实、经验、轨迹、反馈或检索条目，并在后续任务中复用。"],
-      "Harness code": ["Harness 代码", "修改智能体外围系统，包括提示词、工具、控制流、编排方式或执行代码。"],
-      Other: ["其他", "演化的是其他外部产物，例如数据策略、训练方案、实验配置或任务解法。"],
-    },
-    optionLabels: { "Other artifact": "其他" },
-  },
+  artifact: artifactTranslationZh,
   construction: {
     label: "构建标准",
     summary: "作者在构建基准任务时有意优化或筛选的属性。",
