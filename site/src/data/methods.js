@@ -90,6 +90,15 @@ export const methods = [
     summaryZh: "面向长程电脑操作持续记录观察与反思，在出现可复用流程时创建可执行技能，并在后续交互中检索和调用。",
   },
   {
+    id: "2512.02472",
+    nickname: "R-Few",
+    title: "Guided Self-Evolving LLMs with Minimal Human Supervision",
+    authors: ["Wenhao Yu", "Zhenwen Liang", "Chengsong Huang"], authorCount: 7,
+    published: "2025-12-02", year: 2025, venue: "arXiv preprint", status: "preprint",
+    summary: "Guides Challenger–Solver self-play with lightweight human oversight: the Challenger samples a few human-labeled examples to ground question generation, and the Solver trains on mixed human and synthetic data under an online difficulty-based curriculum, which mitigates drift and diversity collapse.",
+    summaryZh: "用少量人工监督引导 Challenger–Solver 自博弈：Challenger 抽取少量人工标注样例来约束出题，Solver 在人工与合成数据混合的在线难度课程上训练，从而缓解概念漂移和多样性坍缩。",
+  },
+  {
     id: "2509.25140",
     nickname: "ReasoningBank",
     title: "ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory",
