@@ -7,6 +7,7 @@ export const methodInstitutions = {
   "2410.04444": ["Peking University", "University of California, Santa Barbara", "University of Arizona"],
   "2506.10943": ["Massachusetts Institute of Technology"],
   "2505.22954": ["University of British Columbia", "Vector Institute", "Sakana AI", "Canada CIFAR AI Chair"],
+  "2603.09206": ["University of Maryland", "Brown University", "Washington University in St. Louis", "Adobe", "University of Illinois Urbana-Champaign", "University of Southern California", "NVIDIA"],
   "2409.07429": ["Carnegie Mellon University", "Massachusetts Institute of Technology"],
   "2502.12110": ["Rutgers University", "Independent Researcher", "AIOS Foundation"],
   "2403.03186": ["Skywork AI", "Beijing Academy of Artificial Intelligence", "Nanyang Technological University", "Peking University", "Institute of Software, Chinese Academy of Sciences", "University of Hong Kong", "The Chinese University of Hong Kong, Shenzhen"],
