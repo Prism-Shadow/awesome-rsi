@@ -99,6 +99,15 @@ export const methods = [
     summaryZh: "从自行判断的成功和失败轨迹中提炼可泛化的推理策略，供后续任务检索，并通过增加测试时 rollout 持续丰富和改进记忆库。",
   },
   {
+    id: "2608.19880",
+    nickname: "EnvHarness",
+    title: "EnvHarness: Awakening Static Worlds for Agent Learning",
+    authors: ["Chengsong Huang", "Zifeng Wang", "Rujun Han"], authorCount: 17,
+    published: "2026-08-20", year: 2026, venue: "ICML 2026", status: "accepted",
+    summary: "Wraps a static environment in programmable plug-in components that reshape its behavior while keeping its verifier; EnvRigger observes the target policy's trajectories, synthesizes components that target diagnosed flaws, validates them on fresh rollouts, and the policy is then trained on the reshaped environment.",
+    summaryZh: "用可编程的插件组件包裹静态环境，在保留原验证器的前提下改变其行为；EnvRigger 观察目标策略的轨迹、针对诊断出的缺陷合成组件并用新的 rollout 验证，策略随后在改造后的环境上继续训练。",
+  },
+  {
     id: "2604.10923",
     nickname: "Mem²Evolve",
     title: "Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation",
