@@ -81,6 +81,15 @@ export const methods = [
     summaryZh: "把新记忆整理成结构化卡片，并让它更新相关历史记忆的摘要、属性和链接，逐步形成类似卡片盒笔记法的动态知识网络。",
   },
   {
+    id: "2601.22628",
+    nickname: "TTCS",
+    title: "TTCS: Test-Time Curriculum Synthesis for Self-Evolving",
+    authors: ["Chengyi Yang", "Zhishang Xiang", "Yunbo Tang"], authorCount: 8,
+    published: "2026-01-30", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Co-evolves a question synthesizer and a solver during test-time training: the synthesizer generates progressively harder variants of the test questions guided by solver feedback, and the solver updates its weights with self-consistency rewards on both original and synthesized questions.",
+    summaryZh: "在测试时训练中让问题合成器与求解器协同演化：合成器依据求解器反馈生成逐步变难的测试题变体，求解器在原题和合成题上用自洽性奖励更新参数。",
+  },
+  {
     id: "2403.03186",
     nickname: "Cradle",
     title: "Cradle: Empowering Foundation Agents Towards General Computer Control",
