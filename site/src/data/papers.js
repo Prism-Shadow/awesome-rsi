@@ -1,6 +1,50 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2605.08678",
+    "nickname": "MLS-Bench",
+    "title": "MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI",
+    "authors": [
+      "Bohan Lyu",
+      "Yucheng Yang",
+      "Siqiao Huang",
+      "Jiaru Zhang",
+      "Qixin Xu",
+      "Xinghan Li",
+      "Xinyang Han",
+      "Yicheng Zhang",
+      "Huaqing Zhang",
+      "Runhan Huang",
+      "Kaicheng Yang",
+      "Zitao Chen",
+      "Wentao Guo",
+      "Junlin Yang",
+      "Xinyue Ai",
+      "Wenhao Chai",
+      "Yadi Cao",
+      "Ziran Yang",
+      "Kun Wang",
+      "Dapeng Jiang",
+      "Huan-ang Gao",
+      "Shange Tang",
+      "Chengshuai Shi",
+      "Simon S. Du",
+      "Max Simchowitz",
+      "Jiantao Jiao",
+      "Dawn Song",
+      "Chi Jin"
+    ],
+    "published": "2026-05-09",
+    "year": 2026,
+    "tags": [
+      "Research Automation"
+    ],
+    "citations": 7,
+    "abstract": "Modern AI progress has been driven by ML methods that are generalizable across settings and scalable to larger regimes. As large language models demonstrate advanced capabilities in reasoning, coding, and engineering tasks, it is increasingly important to understand whether they can discover such methods rather than only apply existing ones. We introduce MLS-Bench, a benchmark for evaluating whether AI systems can invent generalizable and scalable ML methods. MLS-Bench contains 140 tasks across 12 domains, each requiring an agent to improve one targeted component of an ML system or algorithm and demonstrate that the improvement generalizes across controlled settings and scales. We find that current agents remain far from reliably surpassing human-designed methods, and that engineering-style tuning is easier for them than genuine method invention. We further study the effects of test-time scaling, adaptive compute allocation, and context provision on agents' discovery performance, together with case studies of their behavior. Our analyses suggest that the bottleneck is not only in proposing new methods, but also in the scientific insight needed to plan, validate, and scale claims about them. More search, compute, or context alone does not remove this bottleneck. We build and maintain a community platform for cumulative and comparable iteration, and release the data and code at https://mls-bench.com.",
+    "arxiv": "https://arxiv.org/abs/2605.08678",
+    "pdf": "https://arxiv.org/pdf/2605.08678"
+  },
+  {
     "id": "2602.22480",
     "nickname": "VeRO",
     "title": "VeRO: A Harness for Agents to Optimize Agents",

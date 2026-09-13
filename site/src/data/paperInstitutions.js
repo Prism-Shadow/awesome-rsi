@@ -1,4 +1,5 @@
 export const paperInstitutions = {
+  "2605.08678": ["University of California, Berkeley", "Shanghai Jiao Tong University", "Princeton University", "Tsinghua University", "University of California, San Diego", "Carnegie Mellon University", "University of Washington", "Purdue University", "Harvard University", "University of Pennsylvania"],
   "2602.22480": ["Scale AI"],
   "2609.01437": ["ByteDance Seed", "Singapore University of Technology and Design", "Georgia Institute of Technology", "M-A-P", "TokenWave.AI"],
   "2608.09096": ["Renmin University of China", "BOSS Zhipin"],
