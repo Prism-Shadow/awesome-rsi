@@ -1,4 +1,6 @@
 export const methodInstitutions = {
+  "2609.08944": ["Renmin University of China", "Tencent"],
+  "2609.02217": ["National University of Singapore", "Institute of Advanced Intelligence and Computing (IAIC)"],
   "2510.04618": ["Stanford University","SambaNova Systems","University of California, Berkeley"],
   "2507.19457": ["University of California, Berkeley","Stanford University","BespokeLabs.ai","University of Notre Dame","Databricks","Massachusetts Institute of Technology"],
   "2504.07952": ["Stanford University","Together AI"],

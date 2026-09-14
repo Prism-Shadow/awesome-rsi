@@ -7,6 +7,12 @@ export const methodCitationGraphMeta = {
 };
 
 export const methodCitationEdges = [
+  { source: "2609.08944", target: "2507.19457", verifiedBy: "paper-pdf" },
+  { source: "2609.08944", target: "2409.07429", verifiedBy: "paper-pdf" },
+  { source: "2609.02217", target: "2409.07429", verifiedBy: "paper-pdf" },
+  { source: "2609.02217", target: "2509.25140", verifiedBy: "paper-pdf" },
+  { source: "2609.02217", target: "2508.06433", verifiedBy: "paper-pdf" },
+  { source: "2609.02217", target: "2504.07952", verifiedBy: "paper-pdf" },
   { source: "2510.04618", target: "2507.19457", verifiedBy: "paper-pdf" },
   { source: "2510.04618", target: "2504.07952", verifiedBy: "paper-pdf" },
   { source: "2510.04618", target: "2409.07429", verifiedBy: "paper-pdf" },

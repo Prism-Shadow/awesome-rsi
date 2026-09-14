@@ -1,5 +1,23 @@
 export const methods = [
   {
+    id: "2609.08944",
+    nickname: "SkillAdam",
+    title: "SkillAdam: Stable and Efficient Skill Evolution for Agents",
+    authors: ["Gaoyuan Li", "Meihao Fan", "Yizhe Liu"], authorCount: 10,
+    published: "2026-09-08", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Revises skill documents using a persistent issue tracker and an adaptive edit budget, retaining changes when batch-level evaluation shows gains without unacceptable regressions.",
+    summaryZh: "用持续更新的问题记录指导 Skill 修改，根据近期改进的波动控制改动幅度，并通过批量评测保留有效且未明显损害已有表现的版本。",
+  },
+  {
+    id: "2609.02217",
+    nickname: "SkillGLoW",
+    title: "SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams",
+    authors: ["Ao Yan", "Zhang Xin", "Jiawei Du"], authorCount: 4,
+    published: "2026-09-02", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Groups task-local experience by shared solving procedure, consolidates it into reusable skill priors, and checks library revisions through execution before combining them with fresh local skills.",
+    summaryZh: "按共同的解题流程归纳任务中的局部经验，整理为可复用的 Skill，通过实际执行检验技能库更新，再与当前任务新生成的局部 Skill 配合使用。",
+  },
+  {
     "id": "2510.04618",
     "nickname": "ACE",
     "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
