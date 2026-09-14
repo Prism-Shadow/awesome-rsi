@@ -84,6 +84,8 @@ export function renderCatalog() {
   sections.push('## Benchmarks');
   sections.push('[Compare benchmark dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/)');
   sections.push('Grouped by RSI mode, newest first. Benchmarks that support multiple protocols appear in each relevant group. Artifact labels describe what evolves in the evaluated workflow.');
+  sections.push('<a href="assets/readme/benchmark-map.svg">\n  <img src="assets/readme/benchmark-map.svg" alt="Left-to-right benchmark tree: RSI mode branches into Online, Offline, and Offline to Online, with representative benchmarks for each protocol. Open the full-size map for a closer look." width="100%">\n</a>');
+  sections.push('[Online](#online) · [Offline](#offline) · [Offline → Online](#offline-to-online)');
   const descriptions = {
     Online: 'Experience accumulates during the task stream or repeated interaction, and later work can use it.',
     Offline: 'Evolution precedes a separate held-out evaluation.',

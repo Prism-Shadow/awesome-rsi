@@ -1,16 +1,20 @@
 <div align="center">
 
 <a href="https://prism-shadow.github.io/awesome-rsi/">
-  <img src="assets/readme/logo.svg" alt="Awesome RSI — Recursive Self-Improvement" width="660">
+  <img src="assets/readme/logo.svg" alt="Awesome RSI — Recursive Self-Improvement" width="520">
 </a>
 
-**Discover how agents learn from experience and improve themselves.**
+<a href="https://prism-shadow.github.io/awesome-rsi/">
+  <img src="assets/readme/website-entry.svg" alt="Find your next RSI paper — Explore the Awesome RSI website" width="100%">
+</a>
 
-[Explore the website](https://prism-shadow.github.io/awesome-rsi/) · [Read the RSI guide](https://prism-shadow.github.io/awesome-rsi/#blog/understanding-rsi) · [Browse papers](#paper-map) · [Contribute](#contributing)
+<!-- DEMO VIDEO: Add the GitHub-hosted walkthrough video URL here once the recording is ready. -->
 
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Website](https://img.shields.io/badge/Website-EN%20%2B%20ZH-0f6b4f?style=flat-square)](https://prism-shadow.github.io/awesome-rsi/)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-0f6b4f?style=flat-square)](https://github.com/Prism-Shadow/awesome-rsi/pulls)
+</div>
+
+## Start here
+
+Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Improvement**. We follow the loop: an agent performs tasks, learns from trajectories and feedback, updates its own state, and uses that updated state in later work. That state can be model parameters, harness code, context, memory, or skills.
 
 <!-- BEGIN GENERATED COUNTS -->
 
@@ -18,30 +22,19 @@
 
 <!-- END GENERATED COUNTS -->
 
-</div>
-
-<!-- DEMO VIDEO: Replace this image and caption with the GitHub-hosted video URL once the recording is ready. -->
-<p align="center">
-  <img src="assets/readme/demo-placeholder.svg" alt="Website walkthrough — video coming soon. Browse papers, compare RSI dimensions, and explore citation graphs." width="100%">
-  <br>
-  <sub>Website walkthrough · Video coming soon</sub>
-</p>
-
-## Start here
-
-Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Improvement**. We follow the loop: an agent performs tasks, learns from trajectories and feedback, updates its own state, and uses that updated state in later work. That state can be model parameters, harness code, context, memory, or skills.
-
 | Looking for… | Start with… |
 | :--- | :--- |
 | An introduction to RSI | [Understanding RSI](https://prism-shadow.github.io/awesome-rsi/#blog/understanding-rsi) — an illustrated guide, available in English and Chinese. |
-| A method to build on | [Methods & Systems](#methods--systems) — browse by what changes during improvement. |
-| A way to measure improvement | [Benchmarks](#benchmarks) — compare artifacts and online, offline, or hybrid protocols. |
+| A method to build on | [Methods & Systems](https://prism-shadow.github.io/awesome-rsi/#methods) — filter by artifacts, topology, feedback, and more. |
+| A way to measure improvement | [Benchmarks](https://prism-shadow.github.io/awesome-rsi/) — compare artifacts and online, offline, or hybrid protocols. |
 | Connections between papers | [Citation graphs](https://prism-shadow.github.io/awesome-rsi/#graph-methods) — switch between methods and benchmarks, search for a node, zoom, and pan. |
 | More background | [Books, courses, and learning materials](https://prism-shadow.github.io/awesome-rsi/#resources). |
 
 ## Paper map
 
-**What does the agent improve?** Start with the RSI artifact dimension below. The website adds filters for RSI mode, topology, feedback, update frequency, and more.
+Each list in this README is organized along **one dimension**: **RSI artifact** for methods and systems, and **RSI mode** for benchmarks. For more ways to explore the collection, visit the [Awesome RSI website](https://prism-shadow.github.io/awesome-rsi/), where you can compare additional dimensions and combine filters to find work that matches your interests.
+
+**What does the agent improve?** The tree below follows the RSI artifact dimension.
 
 <a href="assets/readme/paper-map.svg">
   <img src="assets/readme/paper-map.svg" alt="Left-to-right paper tree: RSI artifact splits into Parametric and Non-parametric. Parametric covers model parameters; Non-parametric covers Harness code, Context, Memory, Skill, and Other artifacts. Each branch shows example papers. Open the full-size map for a closer look." width="100%">
@@ -197,6 +190,12 @@ Currently represented in the [benchmark collection](#benchmarks), including data
 
 Grouped by RSI mode, newest first. Benchmarks that support multiple protocols appear in each relevant group. Artifact labels describe what evolves in the evaluated workflow.
 
+<a href="assets/readme/benchmark-map.svg">
+  <img src="assets/readme/benchmark-map.svg" alt="Left-to-right benchmark tree: RSI mode branches into Online, Offline, and Offline to Online, with representative benchmarks for each protocol. Open the full-size map for a closer look." width="100%">
+</a>
+
+[Online](#online) · [Offline](#offline) · [Offline → Online](#offline-to-online)
+
 ### Online
 
 Experience accumulates during the task stream or repeated interaction, and later work can use it.
@@ -257,41 +256,6 @@ An artifact is built offline and continues to evolve during online use.
 4. **Follow the connections:** open Citation graph, choose methods or benchmarks, and search for a paper. Drag and zoom to explore its neighborhood.
 
 The site supports **English and Chinese**, with the language switch in the upper-right corner.
-
-## Contributing
-
-Missing a paper, resource, or a better classification? [Open an issue](https://github.com/Prism-Shadow/awesome-rsi/issues) or send a pull request. Please include the original paper or project link and a short explanation of its self-improvement loop.
-
-| Contribution | Files to update |
-| :--- | :--- |
-| Method paper | [`methods.js`](site/src/data/methods.js), [`methodTaxonomy.js`](site/src/data/methodTaxonomy.js), [`methodAbstracts.js`](site/src/data/methodAbstracts.js), [`methodInstitutions.js`](site/src/data/methodInstitutions.js) |
-| Benchmark paper | [`papers.js`](site/src/data/papers.js), [`paperTaxonomy.js`](site/src/data/paperTaxonomy.js), [`paperInstitutions.js`](site/src/data/paperInstitutions.js), [`paperAbstractsZh.js`](site/src/data/paperAbstractsZh.js) |
-| System or framework | [`systems.js`](site/src/data/systems.js) — listed alongside papers in Methods & Systems. |
-| Book, course, or learning material | [`resources.js`](site/src/data/resources.js) |
-
-Use the existing taxonomy definitions and explain uncertain labels in the PR. Keep accepted venues distinct from preprints. Citation-graph edges need reference evidence, not just topical similarity.
-
-The README paper lists and counts are generated from the site's data, so there is only one catalog to maintain. After changing an entry, run:
-
-```bash
-node scripts/generate-readme.mjs
-node scripts/generate-readme.mjs --check
-```
-
-<details>
-<summary>Local development and README assets</summary>
-
-```bash
-cd site
-npm ci
-npm run dev
-# Production build:
-npm run build
-```
-
-README artwork lives in [`assets/readme`](assets/readme). The SVGs use the website's colors and remain editable. To add the walkthrough, upload the video to GitHub and replace the block marked `DEMO VIDEO` near the top of this file with its hosted URL.
-
-</details>
 
 ## Citation
 
