@@ -1,5 +1,56 @@
 export const methods = [
   {
+    "id": "2510.04618",
+    "nickname": "ACE",
+    "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+    "authors": [
+      "Qizheng Zhang",
+      "Changran Hu",
+      "Shubhangi Upasani"
+    ],
+    "authorCount": 13,
+    "published": "2025-10-06",
+    "year": 2025,
+    "venue": "ICLR 2026",
+    "status": "accepted",
+    "summary": "Turns execution feedback into incremental updates to a structured playbook, preserving useful strategies while revising and deduplicating experience for later tasks.",
+    "summaryZh": "根据执行反馈增量更新结构化策略手册，保留有效策略、修订已有经验并清理重复内容，让后续任务继续使用。"
+  },
+  {
+    "id": "2507.19457",
+    "nickname": "GEPA",
+    "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+    "authors": [
+      "Lakshya A Agrawal",
+      "Shangyin Tan",
+      "Dilara Soylu"
+    ],
+    "authorCount": 17,
+    "published": "2025-07-25",
+    "year": 2025,
+    "venue": "ICLR 2026 Oral",
+    "status": "accepted",
+    "summary": "Reflects on execution traces and task feedback to revise prompts, then evaluates and recombines complementary candidates through Pareto-based search.",
+    "summaryZh": "读取执行轨迹和任务反馈来反思、修改 Prompt，再通过评测和 Pareto 搜索保留候选，并组合不同版本的互补改进。"
+  },
+  {
+    "id": "2504.07952",
+    "nickname": "Dynamic Cheatsheet",
+    "title": "Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory",
+    "authors": [
+      "Mirac Suzgun",
+      "Mert Yuksekgonul",
+      "Federico Bianchi"
+    ],
+    "authorCount": 5,
+    "published": "2025-04-10",
+    "year": 2025,
+    "venue": "EACL 2026",
+    "status": "accepted",
+    "summary": "Maintains a self-curated cheatsheet of strategies and code snippets across queries, updating memory from past attempts so later problems can reuse the accumulated experience.",
+    "summaryZh": "跨问题维护并更新一份包含策略和代码片段的经验小抄，从既往尝试中整理经验，供后续问题复用。"
+  },
+  {
     "id": "2603.19461",
     "nickname": "Hyperagents",
     "title": "Hyperagents",
