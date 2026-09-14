@@ -270,4 +270,15 @@ If this collection is useful in your work, please cite it:
 }
 ```
 
+## WeChat Group
+
+Scan the QR code to join the Awesome RSI discussion group.
+
+<!-- Refresh this image when the group QR code expires; the current image shows a validity date of September 21. -->
+<p align="center">
+  <a href="assets/readme/wechat-group.png">
+    <img src="assets/readme/wechat-group.png" alt="Awesome RSI WeChat discussion group QR code" width="420">
+  </a>
+</p>
+
 [Back to top ↑](#)
