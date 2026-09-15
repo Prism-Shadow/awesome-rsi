@@ -18,7 +18,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**50 method papers · 29 benchmark papers · 2 systems**
+**50 method papers · 29 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -154,6 +154,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [ReMe: A Local-First, Self-Evolving Personal Knowledge Base for AI Agents](https://github.com/agentscope-ai/ReMe) | Project · v0.4.1.12 |
 | [Dream-RSI: Recursive Self-Improvement through Evolving Worlds](https://dream-rsi.com/assets/dream-rsi.pdf) | Preprint |
 | [SkillAdam: Stable and Efficient Skill Evolution for Agents](https://arxiv.org/abs/2609.08944) | arXiv preprint |
 | [SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams](https://arxiv.org/abs/2609.02217) | arXiv preprint |
@@ -190,6 +191,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [ReMe: A Local-First, Self-Evolving Personal Knowledge Base for AI Agents](https://github.com/agentscope-ai/ReMe) | Project · v0.4.1.12 |
 | [SkillAdam: Stable and Efficient Skill Evolution for Agents](https://arxiv.org/abs/2609.08944) | arXiv preprint |
 | [Reef: Continual Learning Infrastructure for Self-Improving Agents](https://github.com/Human-Agent-Society/reef) | Project · v0.0.2 |
 | [SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams](https://arxiv.org/abs/2609.02217) | arXiv preprint |
