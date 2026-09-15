@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590" role="img" aria-labelledby="title desc">
+  <title id="title">The Awesome RSI paper map</title>
+  <desc id="desc">A left-to-right tree groups papers by RSI artifact, from Parametric and Non-parametric to six artifact categories and representative papers.</desc>
+  <rect x="1" y="1" width="1118" height="588" rx="20" fill="#ffffff" stroke="#e7e8f0"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <text x="32" y="41" fill="#0d0f1a" font-size="22" font-weight="750">What changes during self-improvement?</text>
+    <text x="32" y="67" fill="#41465a" font-size="14">One reading path through our methods and benchmarks</text>
+    <text x="740" y="67" fill="#41465a" font-size="12" letter-spacing="1.5">EXAMPLE PAPERS</text>
+    <g fill="none" stroke="#b7cfc3" stroke-width="2">
+      <path d="M192 300h24V129h28M216 300v42h28"/>
+      <path d="M414 129h60M414 342h26V213h34M440 342v207h34M440 297h34M440 381h34M440 465h34"/>
+      <path d="M675 129h44M675 213h44M675 297h44M675 381h44M675 465h44M675 549h44"/>
+    </g>
+    <rect x="32" y="269" width="160" height="62" rx="13" fill="#0f6b4f"/>
+    <text x="112" y="295" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">RSI artifact</text>
+    <text x="112" y="316" text-anchor="middle" fill="#d5efe1" font-size="12">What gets updated?</text>
+    <rect x="244" y="104" width="170" height="50" rx="12" fill="#e8f4ee"/>
+    <rect x="244" y="317" width="170" height="50" rx="12" fill="#e8f4ee"/>
+    <g fill="#0a4b38" font-size="17" font-weight="650" text-anchor="middle"><text x="329" y="135">Parametric</text><text x="329" y="348">Non-parametric</text></g>
+    <g stroke="#e7e8f0">
+      <rect x="474" y="104" width="201" height="50" rx="12" fill="#e8f4ee"/>
+      <rect x="474" y="188" width="201" height="50" rx="12" fill="#e8f4ee"/>
+      <rect x="474" y="272" width="201" height="50" rx="12" fill="#e8eef6"/>
+      <rect x="474" y="356" width="201" height="50" rx="12" fill="#eceefd"/>
+      <rect x="474" y="440" width="201" height="50" rx="12" fill="#e3f5f2"/>
+      <rect x="474" y="524" width="201" height="50" rx="12" fill="#f6eddc"/>
+    </g>
+    <g fill="#0d0f1a" font-size="17" font-weight="650">
+      <text x="492" y="135">Model parameters</text><text x="492" y="219">Harness code</text>
+      <text x="492" y="303">Context</text><text x="492" y="387">Memory</text>
+      <text x="492" y="471">Skill</text><text x="492" y="555">Other artifacts</text>
+    </g>
+    <g fill="#0d0f1a" font-size="16" font-weight="600">
+      <text x="740" y="126">SEAL · P²O</text><text x="740" y="210">DGM · MGM · HarnessDev</text>
+      <text x="740" y="294">RHI · SePO · CL-Bench</text><text x="740" y="378">A-MEM · HeLa-Mem · MemoryBench</text>
+      <text x="740" y="462">Evo-Harness · SkillSmith · GDPevo</text><text x="740" y="546">PostTrainBench · RSIBench-Data</text>
+    </g>
+    <g fill="#41465a" font-size="13">
+      <text x="740" y="148">Updated weights participate in later work</text><text x="740" y="232">Agent logic, control flow, and tool code</text>
+      <text x="740" y="316">Prompts and evolving working context</text><text x="740" y="400">Stored information and reusable experience</text>
+      <text x="740" y="484">Strategies, procedures, and skill resources</text><text x="740" y="568">Data strategies, experiments, and task solutions</text>
+    </g>
+  </g>
+</svg>
