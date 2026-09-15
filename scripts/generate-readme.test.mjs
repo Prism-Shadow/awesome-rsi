@@ -2,7 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { artifactDimension } from '../site/src/data/artifactTaxonomy.js';
+import { methods } from '../site/src/data/methods.js';
 import { catalogData, renderCatalog, renderReadme, replaceSection } from './generate-readme.mjs';
+
+test('method links preserve arXiv sources and support PDF-only preprints', () => {
+  const { methodEntries } = catalogData();
+  for (const method of methods) {
+    assert.equal(methodEntries.find(({ id }) => id === method.id).url, method.arxiv || method.pdf);
+  }
+  const dream = methodEntries.find(({ id }) => id === 'dream-rsi');
+  assert.equal(dream.url, 'https://dream-rsi.com/assets/dream-rsi.pdf');
+  assert.ok(!renderCatalog().includes('arxiv.org/abs/dream-rsi'));
+});
 
 test('every method, system, and benchmark appears once per matching group', () => {
   const { methodEntries, systemEntries, benchmarkEntries } = catalogData();

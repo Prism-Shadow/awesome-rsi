@@ -39,7 +39,7 @@ function validate(entries, options, label) {
 
 export function catalogData() {
   const methodEntries = methods.map((method) => ({
-    ...method, date: method.published, url: `https://arxiv.org/abs/${method.id}`,
+    ...method, date: method.published, url: method.arxiv || method.pdf,
     taxonomy: methodTaxonomy[method.id], publication: method.venue,
   }));
   const systemEntries = systems.map((system) => ({
