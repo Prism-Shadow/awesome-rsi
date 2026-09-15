@@ -1,4 +1,5 @@
 export const methodInstitutions = {
+  "dream-rsi": ["Google", "University of Maryland, College Park", "Google DeepMind", "University of Virginia"],
   "2609.08944": ["Renmin University of China", "Tencent"],
   "2609.02217": ["National University of Singapore", "Institute of Advanced Intelligence and Computing (IAIC)"],
   "2510.04618": ["Stanford University","SambaNova Systems","University of California, Berkeley"],

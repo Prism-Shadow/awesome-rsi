@@ -161,7 +161,7 @@ export default function GraphTab({ lang }) {
                 >
                   <span>{paper.nickname}</span>
                   <strong>{paper.title}</strong>
-                  <small>arXiv:{paper.id} · {(paper.authors ?? []).slice(0, 2).join(", ")}</small>
+                  <small>{paper.arxiv ? `arXiv:${paper.id} · ` : ""}{(paper.authors ?? []).slice(0, 2).join(", ")}</small>
                 </button>
               ))}
             </div>

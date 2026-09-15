@@ -1,5 +1,17 @@
 export const methods = [
   {
+    id: "dream-rsi",
+    nickname: "Dream-RSI",
+    title: "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
+    authors: ["Tong Zheng", "Xidong Wu", "Zheng Zhang"], authorCount: 17,
+    // Release date from the authors' CITATION.cff; an arXiv posting is still pending.
+    published: "2026-09-11", year: 2026, venue: "Preprint", status: "preprint",
+    arxiv: null,
+    pdf: "https://dream-rsi.com/assets/dream-rsi.pdf",
+    summary: "Replays recorded discovery trees to evaluate and revise exploration-policy code cheaply, then redeploys the selected policy to guide fresh searches and expand the history available for improvement.",
+    summaryZh: "把历史搜索树作为回放环境，以较低成本评估和修改探索策略代码，再将选出的策略投入新一轮真实搜索，持续积累后续改进可用的经验。",
+  },
+  {
     id: "2609.08944",
     nickname: "SkillAdam",
     title: "SkillAdam: Stable and Efficient Skill Evolution for Agents",
@@ -545,6 +557,6 @@ export const methods = [
   },
 ].map((method) => ({
   ...method,
-  arxiv: `https://arxiv.org/abs/${method.id}`,
-  pdf: `https://arxiv.org/pdf/${method.id}`,
+  arxiv: method.arxiv === null ? null : (method.arxiv ?? `https://arxiv.org/abs/${method.id}`),
+  pdf: method.pdf ?? `https://arxiv.org/pdf/${method.id}`,
 }));

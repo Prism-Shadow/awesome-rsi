@@ -28,6 +28,7 @@ export default function MethodCard({ method, lang }) {
   const facets = methodTaxonomy[method.id];
   const dimensions = localizeMethodDimensions(methodFilterDimensions, lang);
   const summary = lang === "zh" ? method.summaryZh : method.summary;
+  const paperUrl = method.arxiv || method.pdf;
 
   return (
     <article className="paper-card method-card">
@@ -39,11 +40,11 @@ export default function MethodCard({ method, lang }) {
         <span className="paper-meta">
           <span>{method.venue}</span>
           <span>{formatDate(method.published, lang)}</span>
-          <span>arXiv:{method.id}</span>
+          {method.arxiv && <span>arXiv:{method.id}</span>}
         </span>
       </div>
       <h3 className="paper-title">
-        <a href={method.arxiv} target="_blank" rel="noreferrer">{method.title}</a>
+        <a href={paperUrl} target="_blank" rel="noreferrer">{method.title}</a>
       </h3>
       <p className="paper-authors">{formatAuthors(method, lang, copy)}</p>
       <p className="paper-institutions">
@@ -57,7 +58,7 @@ export default function MethodCard({ method, lang }) {
         ))}
       </div>
       <div className="paper-links">
-        <a href={method.arxiv} target="_blank" rel="noreferrer">arXiv</a>
+        <a href={paperUrl} target="_blank" rel="noreferrer">{method.arxiv ? "arXiv" : lang === "zh" ? "论文" : "Paper"}</a>
         <button
           className="abstract-toggle"
           type="button"
