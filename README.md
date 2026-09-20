@@ -18,7 +18,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**50 method papers · 29 benchmark papers · 3 systems**
+**50 method papers · 30 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -256,6 +256,7 @@ Experience accumulates during the task stream or repeated interaction, and later
 | [AutoLab: Can Frontier Models Solve Long-Horizon Auto Research and Engineering Tasks?](https://arxiv.org/abs/2606.05080) | 2026 | Context · Other artifacts |
 | [Can Generalist Agents Automate Data Curation?](https://arxiv.org/abs/2606.04261) | 2026 | Context · Other artifacts |
 | [EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective](https://arxiv.org/abs/2605.18421) | 2026 | Context · Memory |
+| [MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI](https://arxiv.org/abs/2605.08678) | 2026 | Context · Other artifacts |
 | [SkillLearnBench: Benchmarking Continual Learning Methods for Agent Skill Generation on Real-World Tasks](https://arxiv.org/abs/2604.20087) | 2026 | Skill |
 | [SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents](https://arxiv.org/abs/2604.17308) | 2026 | Context · Skill |
 | [Agent² RL-Bench: Can LLM Agents Engineer Agentic RL Post-Training?](https://arxiv.org/abs/2604.10547) | 2026 | Context · Other artifacts |
