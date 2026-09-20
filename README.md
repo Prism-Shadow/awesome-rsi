@@ -18,7 +18,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**57 method papers · 30 benchmark papers · 3 systems**
+**58 method papers · 30 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -67,6 +67,7 @@ The student's model parameters are updated to improve task performance. This inc
 | [P²O: Joint Policy and Prompt Optimization](https://arxiv.org/abs/2603.21877) | arXiv preprint |
 | [MM-Zero: Self-Evolving Multi-Model Vision Language Models From Zero Data](https://arxiv.org/abs/2603.09206) | EMNLP 2026 |
 | [TTCS: Test-Time Curriculum Synthesis for Self-Evolving](https://arxiv.org/abs/2601.22628) | arXiv preprint |
+| [Guided Self-Evolving LLMs with Minimal Human Supervision](https://arxiv.org/abs/2512.02472) | arXiv preprint |
 | [VisPlay: Self-Evolving Vision-Language Models from Images](https://arxiv.org/abs/2511.15661) | CVPR 2026 |
 | [R-Zero: Self-Evolving Reasoning LLM from Zero Data](https://arxiv.org/abs/2508.05004) | ICLR 2026 |
 | [Self-Adapting Language Models](https://arxiv.org/abs/2506.10943) | NeurIPS 2025 |
