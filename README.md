@@ -18,7 +18,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**59 method papers · 30 benchmark papers · 3 systems**
+**60 method papers · 30 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -58,6 +58,7 @@ The student's model parameters are updated to improve task performance. This inc
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [RISE: Recursive Improvement via Self-Extrapolating Policy Distillation](https://arxiv.org/abs/2609.05295) | arXiv preprint |
 | [Reef: Continual Learning Infrastructure for Self-Improving Agents](https://github.com/Human-Agent-Society/reef) | Project · v0.0.2 |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](https://arxiv.org/abs/2606.14249) | arXiv preprint |
