@@ -1,6 +1,111 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2605.08678",
+    "nickname": "MLS-Bench",
+    "title": "MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI",
+    "authors": [
+      "Bohan Lyu",
+      "Yucheng Yang",
+      "Siqiao Huang",
+      "Jiaru Zhang",
+      "Qixin Xu",
+      "Xinghan Li",
+      "Xinyang Han",
+      "Yicheng Zhang",
+      "Huaqing Zhang",
+      "Runhan Huang",
+      "Kaicheng Yang",
+      "Zitao Chen",
+      "Wentao Guo",
+      "Junlin Yang",
+      "Xinyue Ai",
+      "Wenhao Chai",
+      "Yadi Cao",
+      "Ziran Yang",
+      "Kun Wang",
+      "Dapeng Jiang",
+      "Huan-ang Gao",
+      "Shange Tang",
+      "Chengshuai Shi",
+      "Simon S. Du",
+      "Max Simchowitz",
+      "Jiantao Jiao",
+      "Dawn Song",
+      "Chi Jin"
+    ],
+    "published": "2026-05-09",
+    "year": 2026,
+    "tags": [
+      "Research Automation"
+    ],
+    "citations": 7,
+    "abstract": "Modern AI progress has been driven by ML methods that are generalizable across settings and scalable to larger regimes. As large language models demonstrate advanced capabilities in reasoning, coding, and engineering tasks, it is increasingly important to understand whether they can discover such methods rather than only apply existing ones. We introduce MLS-Bench, a benchmark for evaluating whether AI systems can invent generalizable and scalable ML methods. MLS-Bench contains 140 tasks across 12 domains, each requiring an agent to improve one targeted component of an ML system or algorithm and demonstrate that the improvement generalizes across controlled settings and scales. We find that current agents remain far from reliably surpassing human-designed methods, and that engineering-style tuning is easier for them than genuine method invention. We further study the effects of test-time scaling, adaptive compute allocation, and context provision on agents' discovery performance, together with case studies of their behavior. Our analyses suggest that the bottleneck is not only in proposing new methods, but also in the scientific insight needed to plan, validate, and scale claims about them. More search, compute, or context alone does not remove this bottleneck. We build and maintain a community platform for cumulative and comparable iteration, and release the data and code at https://mls-bench.com.",
+    "arxiv": "https://arxiv.org/abs/2605.08678",
+    "pdf": "https://arxiv.org/pdf/2605.08678"
+  },
+  {
+    "id": "2606.17546",
+    "title": "SEAGym: An Evaluation Environment for Self-Evolving LLM Agents",
+    "authors": [
+      "Congjie Zheng",
+      "Chuanyi Xue",
+      "Bin Liang",
+      "Jun Yang",
+      "Changshui Zhang"
+    ],
+    "published": "2026-06-16",
+    "nickname": "SEAGym",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "SEAGym adapts existing agent tasks into an environment for evaluating persistent self-updates. Agents receive training-task trajectories and visible feedback, update their harness state, and produce snapshots assessed without further changes. Separate views measure validation progress, held-out in-domain and out-of-domain performance, and retention on earlier tasks. The reported experiments combine Terminal-Bench and HLE tasks and compare memory-, skill-, and code-updating approaches. Configurable schedules support different update units, while recorded token usage, tool calls, and runtime expose the cost of evolution. The main evaluation uses isolated training and assessment splits.",
+    "arxiv": "https://arxiv.org/abs/2606.17546",
+    "pdf": "https://arxiv.org/pdf/2606.17546"
+  },
+  {
+    "id": "2608.31100",
+    "title": "S3Gym: Can LLMs Turn Self-Testing and Self-Judging into Self-Improvement?",
+    "authors": [
+      "Jiajun Shi",
+      "Siyuan Tao",
+      "Yuhao Wu",
+      "Zexuan Wang",
+      "Jingyuan Zhang",
+      "Jiaheng Liu",
+      "Xinping Lei",
+      "Xinrong Zhang",
+      "Siyuan Fang",
+      "Zhewen Tan",
+      "Tianle Cai",
+      "Junhao Fang",
+      "Jiameng Huang",
+      "Yueyang Wang",
+      "Jinkai Liu",
+      "Yuxuan Zhang",
+      "Jian Yang",
+      "Zhoujun Li",
+      "Shen Yan",
+      "Wenhao Huang",
+      "Ge Zhang"
+    ],
+    "published": "2026-08-31",
+    "nickname": "S3Gym",
+    "year": 2026,
+    "tags": [
+      "Self-Evolution",
+      "Memory",
+      "Continual Learning"
+    ],
+    "citations": 0,
+    "abstract": "S3Gym evaluates whether agents can turn exploration and self-judgment into improved behavior. Seven text-based games provide permissive exploration settings and stricter evaluation settings with disjoint random seeds. Experience is carried forward as full history, summarized memory, or parameter updates. During exploration, agents produce their own judgments while executable verifier outcomes remain benchmark-side information. Final evaluation uses those verifiers and does not feed evaluation trajectories back into learning. The experiments compare final performance, improvement over the starting agent, and the reliability of self-judgment across the three experience-reuse pathways.",
+    "arxiv": "https://arxiv.org/abs/2608.31100",
+    "pdf": "https://arxiv.org/pdf/2608.31100"
+  },
+  {
     "id": "2602.22480",
     "nickname": "VeRO",
     "title": "VeRO: A Harness for Agents to Optimize Agents",

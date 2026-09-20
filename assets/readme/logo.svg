@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="168" viewBox="0 0 720 168" role="img" aria-labelledby="title desc">
+  <title id="title">Awesome RSI</title>
+  <desc id="desc">Three connected stages form a recursive improvement loop beside the Awesome RSI wordmark.</desc>
+  <rect width="720" height="168" rx="24" fill="#ffffff"/>
+  <g transform="translate(30 22)">
+    <rect width="124" height="124" rx="34" fill="#e8f4ee"/>
+    <g fill="none" stroke="#0f6b4f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M37 38 A36 36 0 0 1 96 48"/><path d="m95 34 2 16-15-4"/>
+      <path d="M98 67 A36 36 0 0 1 62 99"/><path d="m74 107-15-8 12-9"/>
+      <path d="M44 94 A36 36 0 0 1 29 54"/><path d="m17 63 12-11 5 15"/>
+    </g>
+    <circle cx="62" cy="62" r="9" fill="#0f6b4f"/>
+  </g>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <text x="180" y="88" font-size="59" font-weight="750" letter-spacing="-2" fill="#0d0f1a">awesome <tspan fill="#0f6b4f">rsi</tspan></text>
+    <text x="183" y="124" font-size="19" font-weight="500" letter-spacing="1.3" fill="#41465a">RECURSIVE SELF-IMPROVEMENT</text>
+  </g>
+</svg>
