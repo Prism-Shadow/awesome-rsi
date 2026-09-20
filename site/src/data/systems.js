@@ -1,5 +1,32 @@
 export const systems = [
   {
+    id: "reme",
+    nickname: "ReMe",
+    title: "ReMe: A Local-First, Self-Evolving Personal Knowledge Base for AI Agents",
+    version: "v0.4.1.12",
+    released: "2026-09-14",
+    maintainers: "AgentScope Team",
+    summary: "An open-source, file-native memory system that turns conversations and resources into persistent Markdown memory shared across agents. Its Auto Dream pipeline incrementally distills changed daily notes into linked long-term knowledge, creating, corroborating, refining, or correcting digest nodes while keeping the durable state user-editable and the derived indexes rebuildable.",
+    summaryZh: "一个开源、文件原生的记忆系统，将对话和资源转化为可跨 Agent 共享的持久化 Markdown 记忆。其 Auto Dream 流程会增量地把发生变化的每日笔记沉淀为相互链接的长期知识，创建、佐证、完善或纠正 digest 节点，同时确保持久状态可由用户编辑、派生索引可随时重建。",
+    taxonomy: {
+      artifact: ["Non-parametric", "Memory", "Skill"],
+      mode: ["Online"],
+      topology: ["Sequential"],
+      selection: ["No validation"],
+      updater: ["Teacher"],
+      source: ["Environment", "LLM feedback"],
+      feedback: ["Non-score", "Other"],
+      frequency: ["Trajectory", "Batch"],
+      scope: ["General", "Specialized"],
+    },
+    links: [
+      { label: "GitHub", labelZh: "GitHub", url: "https://github.com/agentscope-ai/ReMe" },
+      { label: "v0.4.1.12 release", labelZh: "v0.4.1.12 版本", url: "https://github.com/agentscope-ai/ReMe/releases/tag/v0.4.1.12" },
+      { label: "Documentation", labelZh: "文档", url: "https://reme.agentscope.io/" },
+      { label: "Paper", labelZh: "论文", url: "https://aclanthology.org/2026.findings-acl.829/" },
+    ],
+  },
+  {
     id: "proteus",
     nickname: "Proteus",
     title: "Proteus: A Harness-Agnostic Self-Evolution Framework for AI Agents",

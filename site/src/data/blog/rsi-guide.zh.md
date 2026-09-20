@@ -32,6 +32,8 @@ $A_{t+1}=U(A_t,\tau_t,f_t)$
 
 参数进化把经验写回模型权重。它的优势是知识可以直接内化进模型，不必每次检索外部材料；代价是更新昂贵、难以定位和撤销，而且一次错误训练可能影响大量无关任务。
 
+这里以接受训练并执行任务的 Student 为进化主体，不要求它自己决定训练方案。Teacher 可以根据 Student 训练后的表现反馈，持续调整训练数据、学习目标或训练配置，再训练下一版 Student。每轮可以从初始模型重新训练，不必继承上一轮 Student 的参数；只要 Student 的表现反馈继续用于改进后续训练，就属于本文所说的参数 RSI。更新后的 Student 继续执行任务、积累经验，并在当前参数上接受下一轮更新，也属于这一范畴，不要求存在独立的 Teacher。
+
 **代表工作：**[**Self\-Adapting Language Models**](https://arxiv.org/abs/2506.10943)
 
 ![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
@@ -202,7 +204,7 @@ RSI 系统既要执行任务，也要根据任务轨迹和反馈完成更新。�
 
 ### 4\.2 教师更新
 
-教师更新中，执行任务的 Student 不直接修改后续会使用的持久产物，这一步由 Student 之外的 Teacher 完成。Teacher 可以读取示范、任务轨迹、评测结果或已有经验，并据此生成或整理新的记忆、Skill、工具或 Harness 代码。
+教师更新中，执行任务的 Student 不直接修改后续会使用的持久产物，这一步由 Student 之外的 Teacher 完成。Teacher 可以读取示范、任务轨迹、评测结果或已有经验，并据此生成或整理新的记忆、Skill、工具或 Harness 代码，也可以制定训练方案，通过训练程序更新 Student 的模型参数。
 
 这里的 Teacher 不一定是一个专门的 Agent，也可能是反思模块、优化器或带有验证规则的更新流程。不同方法中，Teacher 可能负责总结成功经验、分析失败原因，也可能合并、筛选或淘汰已有内容。需要注意的是，只提供分数或验收结果的模块不算 Teacher；Teacher 实际决定写回什么，以及怎样修改。
 
@@ -407,5 +409,4 @@ LLM 给出的标量仍属于分数；只有文字判断、解释或批评才归�
 13. Deng et al\.：[FinEvo\-Bench: A Longitudinal Benchmark for Self\-Evolving Agents in Professional Financial Workflows](https://arxiv.org/abs/2608.06144)（2026\-08\-06）
 
 14. Cheng et al\.：[Mem²Evolve: Towards Self\-Evolving Agents via Co\-Evolutionary Capability Expansion and Experience Distillation](https://arxiv.org/abs/2604.10923)（2026\-04\-13）
-
 

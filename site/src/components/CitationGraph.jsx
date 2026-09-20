@@ -460,7 +460,7 @@ export default function CitationGraph({
         <aside className="graph-inspector" aria-live="polite">
           {selectedPaper && (
             <>
-              <span className="inspector-index">arXiv:{selectedPaper.id}</span>
+              {selectedPaper.arxiv && <span className="inspector-index">arXiv:{selectedPaper.id}</span>}
               <h3>{selectedPaper.nickname}</h3>
               <p>{selectedPaper.title}</p>
               <div className="inspector-metrics">
@@ -470,7 +470,7 @@ export default function CitationGraph({
               </div>
               <RelationList title={copy.references} emptyText={copy.noReferences} edges={outgoing} paperById={fullPaperById} relationKey="target" onSelect={setSelectedId} copy={copy} />
               <RelationList title={copy.citedBy} emptyText={copy.noCitations} edges={incoming} paperById={fullPaperById} relationKey="source" onSelect={setSelectedId} copy={copy} />
-              <a className="inspector-link" href={selectedPaper.arxiv} target="_blank" rel="noreferrer">{copy.openArxiv}</a>
+              <a className="inspector-link" href={selectedPaper.arxiv || selectedPaper.pdf} target="_blank" rel="noreferrer">{selectedPaper.arxiv ? copy.openArxiv : copy.openPaper}</a>
             </>
           )}
         </aside>

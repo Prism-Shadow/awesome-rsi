@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="408" viewBox="0 0 1120 408" role="img" aria-labelledby="title desc">
+  <title id="title">The Awesome RSI benchmark map</title>
+  <desc id="desc">A left-to-right tree groups benchmarks by RSI mode. Online includes AgentStream, Evo-Memory, and LifelongAgentBench. Offline includes HarnessDev, GDPevo, and MemoryBench. Offline to Online includes SkillFlow.</desc>
+  <rect x="1" y="1" width="1118" height="406" rx="20" fill="#ffffff" stroke="#e7e8f0"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <text x="32" y="41" fill="#0d0f1a" font-size="22" font-weight="750">When does improvement happen?</text>
+    <text x="32" y="67" fill="#41465a" font-size="14">One reading path through our benchmarks</text>
+    <text x="640" y="67" fill="#41465a" font-size="12" letter-spacing="1.5">EXAMPLE BENCHMARKS</text>
+    <g fill="none" stroke="#b7cfc3" stroke-width="2">
+      <path d="M222 235h35V125h43M257 235h43M257 235v110h43"/>
+      <path d="M550 125h66M550 235h66M550 345h66"/>
+    </g>
+    <rect x="32" y="204" width="190" height="62" rx="13" fill="#0f6b4f"/>
+    <text x="127" y="230" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">RSI mode</text>
+    <text x="127" y="251" text-anchor="middle" fill="#d5efe1" font-size="12">When does it evolve?</text>
+    <g stroke="#e7e8f0">
+      <rect x="300" y="100" width="250" height="50" rx="12" fill="#e8f4ee"/>
+      <rect x="300" y="210" width="250" height="50" rx="12" fill="#e8eef6"/>
+      <rect x="300" y="320" width="250" height="50" rx="12" fill="#eceefd"/>
+    </g>
+    <g fill="#0d0f1a" font-size="18" font-weight="650">
+      <text x="322" y="131">Online</text>
+      <text x="322" y="241">Offline</text>
+      <text x="322" y="351">Offline → Online</text>
+    </g>
+    <g fill="#0d0f1a" font-size="16" font-weight="600">
+      <text x="640" y="122">AgentStream · Evo-Memory · LifelongAgentBench</text>
+      <text x="640" y="232">HarnessDev · GDPevo · MemoryBench</text>
+      <text x="640" y="342">SkillFlow</text>
+    </g>
+    <g fill="#41465a" font-size="14">
+      <text x="640" y="148">Learn during the task stream or repeated interaction</text>
+      <text x="640" y="258">Evolve first, then evaluate on held-out tasks</text>
+      <text x="640" y="368">Build offline, then keep improving during use</text>
+    </g>
+  </g>
+</svg>

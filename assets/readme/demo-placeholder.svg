@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="350" viewBox="0 0 1120 350" role="img" aria-labelledby="title desc">
+  <title id="title">Explore Awesome RSI — walkthrough coming soon</title>
+  <desc id="desc">A placeholder for the future demo video, with a schematic preview of paper filters and a citation graph.</desc>
+  <rect x="1" y="1" width="1118" height="348" rx="20" fill="#f6f7fb" stroke="#e7e8f0"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <rect x="44" y="42" width="207" height="30" rx="15" fill="#e8f4ee"/>
+    <text x="61" y="62" fill="#0a4b38" font-size="13" font-weight="700" letter-spacing="1">WEBSITE WALKTHROUGH</text>
+    <text x="44" y="125" fill="#0d0f1a" font-size="38" font-weight="750" letter-spacing="-1">Find your next RSI paper.</text>
+    <text x="46" y="166" fill="#41465a" font-size="18">Browse the collection. Compare the methods.</text>
+    <text x="46" y="195" fill="#41465a" font-size="18">Follow the connections.</text>
+    <circle cx="66" cy="265" r="22" fill="#0f6b4f"/>
+    <path d="m61 255 14 10-14 10z" fill="#ffffff"/>
+    <text x="104" y="272" fill="#0a4b38" font-size="19" font-weight="650">Video coming soon</text>
+    <rect x="595" y="38" width="482" height="274" rx="14" fill="#ffffff" stroke="#e7e8f0"/>
+    <path d="M595 81h482" stroke="#e7e8f0"/>
+    <text x="616" y="65" fill="#0f6b4f" font-size="16" font-weight="750">awesome rsi</text>
+    <text x="990" y="64" fill="#41465a" font-size="12">EN · ZH</text>
+    <rect x="615" y="98" width="178" height="28" rx="7" fill="#e8f4ee"/>
+    <text x="626" y="117" fill="#0a4b38" font-size="13" font-weight="650">Methods &amp; Systems</text>
+    <text x="823" y="117" fill="#41465a" font-size="13">Citation graph</text>
+    <rect x="615" y="142" width="64" height="24" rx="12" fill="#e8f4ee"/>
+    <rect x="687" y="142" width="75" height="24" rx="12" fill="#eceefd"/>
+    <rect x="770" y="142" width="77" height="24" rx="12" fill="#e8eef6"/>
+    <text x="632" y="158" fill="#0a4b38" font-size="12">Skill</text>
+    <text x="702" y="158" fill="#5b5f97" font-size="12">Online</text>
+    <text x="787" y="158" fill="#315f8f" font-size="12">Batch</text>
+    <rect x="615" y="183" width="205" height="107" rx="10" fill="#f6f7fb"/>
+    <text x="630" y="209" fill="#0d0f1a" font-size="15" font-weight="700">Evo-Harness</text>
+    <text x="630" y="232" fill="#41465a" font-size="11">From experience to reusable skills</text>
+    <path d="M630 250h170M630 261h133" stroke="#d8dce6" stroke-width="5" stroke-linecap="round"/>
+    <g fill="none" stroke="#b5d8c8" stroke-width="2"><path d="m855 258 67-49 57 57 50-76M922 209l107-19M922 209l-11 73M979 266l-68 16"/></g>
+    <g fill="#0f6b4f"><circle cx="855" cy="258" r="7"/><circle cx="922" cy="209" r="11"/><circle cx="979" cy="266" r="8"/></g>
+    <g fill="#315f8f"><circle cx="1029" cy="190" r="7"/><circle cx="911" cy="282" r="6"/></g>
+  </g>
+</svg>

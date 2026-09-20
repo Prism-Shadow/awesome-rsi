@@ -32,6 +32,8 @@ Different RSI methods may modify different parts of this system. Parameter evolu
 
 Parameter evolution writes experience back into model weights. Its advantage is that knowledge can be internalized directly by the model without retrieving external material each time. The tradeoff is that updates are expensive, difficult to locate and reverse, and one faulty training update may affect many unrelated tasks.
 
+Here, the Student being trained and performing tasks is the subject of improvement; it does not have to decide how it is trained. A Teacher may use feedback on the trained Student's performance to revise the training data, learning objective, or training settings before training the next Student version. Each round may restart from the initial model rather than inherit the previous Student's weights. We include this in parameter RSI when the Student's performance feedback informs subsequent training improvements. This category also includes an updated Student performing further tasks, gathering experience, and learning further from its current weights, without requiring a separate Teacher.
+
 **Representative work:** [**Self-Adapting Language Models**](https://arxiv.org/abs/2506.10943)
 
 ![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
@@ -202,7 +204,7 @@ This avoids communication between Agents, but the Student must interpret feedbac
 
 ### 4.2 Teacher Update
 
-In teacher update, the Student that performs the task does not directly modify the persistent artifact that will be used later. This step is carried out by a Teacher outside the Student. The Teacher may read demonstrations, task trajectories, evaluation results, or prior experience, then generate or organize new memories, Skills, tools, or Harness code.
+In teacher update, the Student that performs the task does not directly modify the persistent artifact that will be used later. This step is carried out by a Teacher outside the Student. The Teacher may read demonstrations, task trajectories, evaluation results, or prior experience, then generate or organize new memories, Skills, tools, or Harness code. It may also design a training plan that a training program uses to update the Student's model parameters.
 
 The Teacher does not have to be a dedicated Agent. It may instead be a reflection module, an optimizer, or an update process equipped with validation rules. Depending on the method, a Teacher may summarize successful experience and analyze failure causes, or merge, filter, and retire existing content. A module that only supplies a score or acceptance result is not a Teacher. To count as one, it must actually decide what is written back and how it is changed.
 

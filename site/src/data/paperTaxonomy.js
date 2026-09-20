@@ -125,6 +125,17 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  "2605.08678": {
+    origin: ["Original"],
+    mode: ["Online", "Repeated / iterative"],
+    artifact: ["Non-parametric", "Context", "Other artifact"],
+    construction: ["Headroom", "Diversity", "Generalization"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
+  "2606.17546": {"origin":["Composite"],"mode":["Offline"],"artifact":["Non-parametric","Harness code","Context","Memory","Skill"],"construction":["Diversity","Generalization"],"metric":["Accuracy","Gain","Cost","Latency"],"creation":["Human-in-the-loop"],"evaluation":["Rule-based"]},
+  "2608.31100": {"origin":["Composite"],"mode":["Offline"],"artifact":["Parametric","Non-parametric","Context","Memory"],"construction":["Diversity","Generalization"],"metric":["Accuracy","Gain"],"creation":["Human-in-the-loop"],"evaluation":["Rule-based"]},
   "2602.22480": {
     origin: ["Composite"],
     mode: ["Offline"],
