@@ -45,6 +45,67 @@ export const papers = [
     "pdf": "https://arxiv.org/pdf/2605.08678"
   },
   {
+    "id": "2606.17546",
+    "title": "SEAGym: An Evaluation Environment for Self-Evolving LLM Agents",
+    "authors": [
+      "Congjie Zheng",
+      "Chuanyi Xue",
+      "Bin Liang",
+      "Jun Yang",
+      "Changshui Zhang"
+    ],
+    "published": "2026-06-16",
+    "nickname": "SEAGym",
+    "year": 2026,
+    "tags": [
+      "Harness Optimization",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "SEAGym adapts existing agent tasks into an environment for evaluating persistent self-updates. Agents receive training-task trajectories and visible feedback, update their harness state, and produce snapshots assessed without further changes. Separate views measure validation progress, held-out in-domain and out-of-domain performance, and retention on earlier tasks. The reported experiments combine Terminal-Bench and HLE tasks and compare memory-, skill-, and code-updating approaches. Configurable schedules support different update units, while recorded token usage, tool calls, and runtime expose the cost of evolution. The main evaluation uses isolated training and assessment splits.",
+    "arxiv": "https://arxiv.org/abs/2606.17546",
+    "pdf": "https://arxiv.org/pdf/2606.17546"
+  },
+  {
+    "id": "2608.31100",
+    "title": "S3Gym: Can LLMs Turn Self-Testing and Self-Judging into Self-Improvement?",
+    "authors": [
+      "Jiajun Shi",
+      "Siyuan Tao",
+      "Yuhao Wu",
+      "Zexuan Wang",
+      "Jingyuan Zhang",
+      "Jiaheng Liu",
+      "Xinping Lei",
+      "Xinrong Zhang",
+      "Siyuan Fang",
+      "Zhewen Tan",
+      "Tianle Cai",
+      "Junhao Fang",
+      "Jiameng Huang",
+      "Yueyang Wang",
+      "Jinkai Liu",
+      "Yuxuan Zhang",
+      "Jian Yang",
+      "Zhoujun Li",
+      "Shen Yan",
+      "Wenhao Huang",
+      "Ge Zhang"
+    ],
+    "published": "2026-08-31",
+    "nickname": "S3Gym",
+    "year": 2026,
+    "tags": [
+      "Self-Evolution",
+      "Memory",
+      "Continual Learning"
+    ],
+    "citations": 0,
+    "abstract": "S3Gym evaluates whether agents can turn exploration and self-judgment into improved behavior. Seven text-based games provide permissive exploration settings and stricter evaluation settings with disjoint random seeds. Experience is carried forward as full history, summarized memory, or parameter updates. During exploration, agents produce their own judgments while executable verifier outcomes remain benchmark-side information. Final evaluation uses those verifiers and does not feed evaluation trajectories back into learning. The experiments compare final performance, improvement over the starting agent, and the reliability of self-judgment across the three experience-reuse pathways.",
+    "arxiv": "https://arxiv.org/abs/2608.31100",
+    "pdf": "https://arxiv.org/pdf/2608.31100"
+  },
+  {
     "id": "2602.22480",
     "nickname": "VeRO",
     "title": "VeRO: A Harness for Agents to Optimize Agents",

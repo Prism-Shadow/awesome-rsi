@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="176" viewBox="0 0 960 176" role="img" aria-labelledby="title desc">
+  <title id="title">Find your next RSI paper</title>
+  <desc id="desc">Enter the Awesome RSI website to browse papers, compare RSI dimensions, and explore citation graphs.</desc>
+  <rect x="1" y="1" width="958" height="174" rx="18" fill="#ffffff" stroke="#cddfd5" stroke-width="1.5"/>
+  <path d="M20 45v86" stroke="#0f6b4f" stroke-width="3" stroke-linecap="round"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <text x="40" y="66" fill="#0d0f1a" font-size="36" font-weight="750" letter-spacing="-0.8">Find your next <tspan fill="#0f6b4f">RSI paper.</tspan></text>
+    <text x="42" y="104" fill="#41465a" font-size="18">Compare methods. Explore benchmarks. Follow citations.</text>
+    <text x="42" y="139" fill="#0f6b4f" font-size="15">prism-shadow.github.io/awesome-rsi</text>
+    <rect x="714" y="61" width="210" height="54" rx="11" fill="#0f6b4f"/>
+    <text x="737" y="94" fill="#ffffff" font-size="18" font-weight="650">Explore website</text>
+  </g>
+  <path d="M885 88h17m-7-7 7 7-7 7" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

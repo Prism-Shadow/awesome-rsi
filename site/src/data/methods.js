@@ -1,5 +1,255 @@
 export const methods = [
   {
+    id: "dream-rsi",
+    nickname: "Dream-RSI",
+    title: "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
+    authors: ["Tong Zheng", "Xidong Wu", "Zheng Zhang"], authorCount: 17,
+    // Release date from the authors' CITATION.cff; an arXiv posting is still pending.
+    published: "2026-09-11", year: 2026, venue: "Preprint", status: "preprint",
+    arxiv: null,
+    pdf: "https://dream-rsi.com/assets/dream-rsi.pdf",
+    summary: "Replays recorded discovery trees to evaluate and revise exploration-policy code cheaply, then redeploys the selected policy to guide fresh searches and expand the history available for improvement.",
+    summaryZh: "把历史搜索树作为回放环境，以较低成本评估和修改探索策略代码，再将选出的策略投入新一轮真实搜索，持续积累后续改进可用的经验。",
+  },
+  {
+    id: "2609.08944",
+    nickname: "SkillAdam",
+    title: "SkillAdam: Stable and Efficient Skill Evolution for Agents",
+    authors: ["Gaoyuan Li", "Meihao Fan", "Yizhe Liu"], authorCount: 10,
+    published: "2026-09-08", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Revises skill documents using a persistent issue tracker and an adaptive edit budget, retaining changes when batch-level evaluation shows gains without unacceptable regressions.",
+    summaryZh: "用持续更新的问题记录指导 Skill 修改，根据近期改进的波动控制改动幅度，并通过批量评测保留有效且未明显损害已有表现的版本。",
+  },
+  {
+    id: "2609.02217",
+    nickname: "SkillGLoW",
+    title: "SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams",
+    authors: ["Ao Yan", "Zhang Xin", "Jiawei Du"], authorCount: 4,
+    published: "2026-09-02", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Groups task-local experience by shared solving procedure, consolidates it into reusable skill priors, and checks library revisions through execution before combining them with fresh local skills.",
+    summaryZh: "按共同的解题流程归纳任务中的局部经验，整理为可复用的 Skill，通过实际执行检验技能库更新，再与当前任务新生成的局部 Skill 配合使用。",
+  },
+  {
+    "id": "2510.04618",
+    "nickname": "ACE",
+    "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+    "authors": [
+      "Qizheng Zhang",
+      "Changran Hu",
+      "Shubhangi Upasani"
+    ],
+    "authorCount": 13,
+    "published": "2025-10-06",
+    "year": 2025,
+    "venue": "ICLR 2026",
+    "status": "accepted",
+    "summary": "Turns execution feedback into incremental updates to a structured playbook, preserving useful strategies while revising and deduplicating experience for later tasks.",
+    "summaryZh": "根据执行反馈增量更新结构化策略手册，保留有效策略、修订已有经验并清理重复内容，让后续任务继续使用。"
+  },
+  {
+    "id": "2507.19457",
+    "nickname": "GEPA",
+    "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+    "authors": [
+      "Lakshya A Agrawal",
+      "Shangyin Tan",
+      "Dilara Soylu"
+    ],
+    "authorCount": 17,
+    "published": "2025-07-25",
+    "year": 2025,
+    "venue": "ICLR 2026 Oral",
+    "status": "accepted",
+    "summary": "Reflects on execution traces and task feedback to revise prompts, then evaluates and recombines complementary candidates through Pareto-based search.",
+    "summaryZh": "读取执行轨迹和任务反馈来反思、修改 Prompt，再通过评测和 Pareto 搜索保留候选，并组合不同版本的互补改进。"
+  },
+  {
+    "id": "2504.07952",
+    "nickname": "Dynamic Cheatsheet",
+    "title": "Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory",
+    "authors": [
+      "Mirac Suzgun",
+      "Mert Yuksekgonul",
+      "Federico Bianchi"
+    ],
+    "authorCount": 5,
+    "published": "2025-04-10",
+    "year": 2025,
+    "venue": "EACL 2026",
+    "status": "accepted",
+    "summary": "Maintains a self-curated cheatsheet of strategies and code snippets across queries, updating memory from past attempts so later problems can reuse the accumulated experience.",
+    "summaryZh": "跨问题维护并更新一份包含策略和代码片段的经验小抄，从既往尝试中整理经验，供后续问题复用。"
+  },
+  {
+    "id": "2603.19461",
+    "nickname": "Hyperagents",
+    "title": "Hyperagents",
+    "authors": [
+      "Jenny Zhang",
+      "Bingchen Zhao",
+      "Wannan Yang"
+    ],
+    "authorCount": 8,
+    "published": "2026-03-19",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Makes both the task agent and its meta-agent editable, allowing archived agents to improve task-solving code and the procedure used to generate later modifications.",
+    "summaryZh": "把任务 Agent 和负责修改它的 Meta-Agent 放进同一个可编辑程序，让历史版本既能改进解题代码，也能修改生成后续改进的方法。"
+  },
+  {
+    "id": "2602.04837",
+    "nickname": "GEA",
+    "title": "Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing",
+    "authors": [
+      "Zhaotian Weng",
+      "Antonis Antoniades",
+      "Deepak Nathani"
+    ],
+    "authorCount": 6,
+    "published": "2026-02-04",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Pools code changes, execution traces, and outcomes across a group of archived agents, then uses the shared evidence to evolve each member’s harness.",
+    "summaryZh": "汇集一组历史 Agent 的代码修改、执行轨迹和任务结果，再用共享证据分别改进各自的 Harness，让不同分支能互相借鉴经验。"
+  },
+  {
+    "id": "2605.24785",
+    "nickname": "PANDO",
+    "title": "PANDO: Efficient Multimodal AI Agents via Online Skill Distillation",
+    "authors": [
+      "Yubo Li",
+      "Yidi Miao",
+      "Yuntian Shen"
+    ],
+    "authorCount": 4,
+    "published": "2026-05-24",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Distills completed web interactions into reusable rules and executable routines, then updates confidence, merges redundant skills, and demotes unreliable ones during continued use.",
+    "summaryZh": "从已完成的网页交互中提炼规则和可执行流程，在后续使用中更新置信度、合并重复 Skill，并淘汰反复失效的 Skill。"
+  },
+  {
+    "id": "2608.12486",
+    "nickname": "DIVE",
+    "title": "DIVE: Unlocking Self-Improvement in Frozen Language Models Through Diversity-Driven Skill Evolution",
+    "authors": [
+      "Siheng Xiong",
+      "Ali Payani",
+      "Oguzhan Gungordu"
+    ],
+    "authorCount": 4,
+    "published": "2026-08-12",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Evolves diverse skill populations with a frozen model, combines skills across parents, and adapts the operators that generate new skills using measured utility.",
+    "summaryZh": "用固定参数的模型演化多组 Skill，组合不同父代的有效做法，并根据实测收益调整生成新 Skill 的操作策略。"
+  },
+  {
+    "id": "2608.04968",
+    "nickname": "EvolveNet",
+    "title": "EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement",
+    "authors": [
+      "Jun Nie",
+      "Yonggang Zhang",
+      "Qianshu Cai"
+    ],
+    "authorCount": 6,
+    "published": "2026-08-05",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Evolves a shared harness on separate local workloads, combines evidence-backed changes with explicit scopes, and checks regressions before broadcasting the next version.",
+    "summaryZh": "让多个节点在各自的任务上改进同一 Harness，再按适用范围整合有证据支持的修改，通过回归检查后发布下一版。"
+  },
+  {
+    "id": "2608.07545",
+    "nickname": "DarwinX",
+    "title": "DarwinX: Evolving Agent Harnesses Through Natural Selection",
+    "authors": [
+      "Yifan Zhang",
+      "Yutong Dai",
+      "Juntao Tan"
+    ],
+    "authorCount": 12,
+    "published": "2026-07-31",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Branches and recombines harness versions, retaining complementary capabilities while using repeated evaluation and regression checks to control noisy improvements.",
+    "summaryZh": "对 Harness 版本进行分支演化和重组，保留不同版本的互补能力，并通过重复评测与回归检查筛掉不稳定的提升。"
+  },
+  {
+    "id": "2605.22794",
+    "nickname": "MOSS",
+    "title": "MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems",
+    "authors": [
+      "Qianshu Cai",
+      "Yonggang Zhang",
+      "Xianzhang Jia"
+    ],
+    "authorCount": 8,
+    "published": "2026-05-21",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Turns deployment failures into source-code revisions, tests rebuilt agents on captured tasks, and promotes fixes through consent and health-check gates.",
+    "summaryZh": "根据部署中的失败修改 Agent 源码，重建后回放相关任务，再通过用户确认和健康检查将修复应用到后续运行。"
+  },
+  {
+    "id": "2606.01139",
+    "nickname": "SkillRevise",
+    "title": "SkillRevise: Improving LLM-Authored Agent Skills via Trace-Conditioned Skill Revision",
+    "authors": [
+      "Yuxuan Liu",
+      "Zhaochen Su",
+      "Lingyun Xie"
+    ],
+    "authorCount": 14,
+    "published": "2026-05-31",
+    "year": 2026,
+    "venue": "Findings of EMNLP 2026",
+    "status": "accepted",
+    "summary": "Diagnoses skill defects from execution traces and verifier feedback, revises the skill with repair principles, and returns the best tested candidate within a bounded budget.",
+    "summaryZh": "根据执行轨迹和验证反馈诊断 Skill 的问题，借助修订原则改写 Skill，并在有限预算内保留实测表现最好的候选版本。"
+  },
+  {
+    "id": "2606.31191",
+    "nickname": "ISM",
+    "title": "ISM: Self-Improving Strategy Memory for Continual Mathematical Reasoning",
+    "authors": [
+      "Prakhar Dixit",
+      "Tim Oates"
+    ],
+    "authorCount": 2,
+    "published": "2026-06-30",
+    "year": 2026,
+    "venue": "ICML 2026 AI for Math Workshop",
+    "status": "accepted",
+    "summary": "Maintains a verified bank of mathematical strategies, using successes and failures to revise, merge, reinforce, and prune memories across isolated task episodes.",
+    "summaryZh": "维护经过验证的数学策略库，根据成功与失败持续修订、合并、强化或删除记忆，让不同任务之间通过显式策略积累经验。"
+  },
+  {
+    "id": "2605.30712",
+    "nickname": "ExpGraph",
+    "title": "ExpGraph: Model-Agnostic Experience Learning with Graph-Structured Memory for LLM Agents",
+    "authors": [
+      "Tao Feng",
+      "Chongrui Ye",
+      "Tianyang Luo"
+    ],
+    "authorCount": 11,
+    "published": "2026-05-29",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Converts task histories into a maintained experience graph and learns retrieval from measured gains over no-memory runs, while leaving the task executor frozen.",
+    "summaryZh": "把任务历史整理为持续维护的经验图谱，通过使用记忆与不使用记忆的实测差异学习检索策略，任务执行模型保持固定。"
+  },
+  {
     id: "2605.24539",
     nickname: "DemoEvolve",
     title: "DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations",
@@ -307,6 +557,6 @@ export const methods = [
   },
 ].map((method) => ({
   ...method,
-  arxiv: `https://arxiv.org/abs/${method.id}`,
-  pdf: `https://arxiv.org/pdf/${method.id}`,
+  arxiv: method.arxiv === null ? null : (method.arxiv ?? `https://arxiv.org/abs/${method.id}`),
+  pdf: method.pdf ?? `https://arxiv.org/pdf/${method.id}`,
 }));
