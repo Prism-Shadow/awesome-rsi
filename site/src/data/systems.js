@@ -16,7 +16,7 @@ export const systems = [
       updater: ["Teacher"],
       source: ["Environment", "LLM feedback"],
       feedback: ["Non-score", "Other"],
-      frequency: ["Batch"],
+      frequency: ["Trajectory", "Batch"],
       scope: ["General", "Specialized"],
     },
     links: [
