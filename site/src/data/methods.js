@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2605.08083",
+    nickname: "AutoTTS",
+    title: "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling",
+    authors: ["Tong Zheng", "Haolin Liu", "Chengsong Huang"], authorCount: 13,
+    published: "2026-05-08", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "An LLM agent discovers test-time scaling controllers for other LLMs inside an environment built from pre-collected reasoning trajectories and probe signals, using execution-trace feedback to revise controller programs that then transfer to held-out benchmarks and model scales.",
+    summaryZh: "让 LLM 智能体在由预先采集的推理轨迹和探测信号构成的环境中，为其他 LLM 自动发现测试时扩展控制器，并利用执行轨迹反馈修改控制程序，发现的策略可迁移到未见基准和其他模型规模。",
+  },
+  {
     id: "2608.19880",
     nickname: "EnvHarness",
     title: "EnvHarness: Awakening Static Worlds for Agent Learning",
