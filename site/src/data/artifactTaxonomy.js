@@ -1,6 +1,6 @@
 // Shared artifact options and definitions for benchmarks and methods.
 const artifacts = [
-  { value: "Parametric", zh: "参数", description: "Model parameters change, and the updated model participates in later tasks or improvement.", descriptionZh: "模型参数发生变化，更新后的模型继续参与后续任务或改进。" },
+  { value: "Parametric", zh: "参数", description: "The student's model parameters are updated to improve task performance. This includes a teacher using student performance feedback to refine successive training rounds, even when each round restarts from the initial model, as well as the updated student continuing to learn from later tasks.", descriptionZh: "更新 Student 的模型参数以提升任务表现。既包括 Teacher 根据 Student 的表现反馈持续改进训练方案、每轮可以从初始模型重新训练，也包括更新后的 Student 继续从后续任务中学习。" },
   { value: "Non-parametric", zh: "非参数", description: "Improvement is carried forward in the agent's external state or artifacts, including within a continuous run.", descriptionZh: "改进通过智能体的外部状态或产物保留和积累，也包括同一次连续运行中的积累。" },
   { value: "Harness code", zh: "Harness 代码", parent: "Non-parametric", description: "Executable agent, harness, control-flow, self-improvement, or tool code is modified.", descriptionZh: "修改智能体框架、Harness、控制流、自我改进机制或工具的可执行代码。" },
   { value: "Context", zh: "上下文", parent: "Non-parametric", description: "Prompts or working context are updated. Observations, feedback, and experience can accumulate or be reorganized during a continuous run to guide later actions or tasks.", descriptionZh: "更新 Prompt 或工作上下文，也包括在连续运行中积累、压缩或重组观察、反馈和经验，用于指导后续行动或任务。" },

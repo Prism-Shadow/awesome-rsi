@@ -54,7 +54,7 @@ Grouped by RSI artifact and ordered by first publication or project release date
 
 ### Model parameters
 
-Model parameters change, and the updated model participates in later tasks or improvement.
+The student's model parameters are updated to improve task performance. This includes a teacher using student performance feedback to refine successive training rounds, even when each round restarts from the initial model, as well as the updated student continuing to learn from later tasks.
 
 | Paper or project | Publication |
 | :--- | :--- |
