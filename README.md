@@ -8,9 +8,11 @@
   <img src="assets/readme/website-entry.svg" alt="Find your next RSI paper — Explore the Awesome RSI website" width="100%">
 </a>
 
-<!-- DEMO VIDEO: Add the GitHub-hosted walkthrough video URL here once the recording is ready. -->
-
 </div>
+
+<p align="center"><strong>Watch the walkthrough</strong> · 1 min</p>
+
+https://github.com/user-attachments/assets/70f488af-925c-4b93-ba03-5c84711b8dbf
 
 ## Start here
 
