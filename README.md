@@ -28,7 +28,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 | :--- | :--- |
 | An introduction to RSI | [Understanding RSI](https://prism-shadow.github.io/awesome-rsi/#blog/understanding-rsi) — an illustrated guide, available in English and Chinese. |
 | A method to build on | [Methods & Systems](https://prism-shadow.github.io/awesome-rsi/#methods) — filter by artifacts, topology, feedback, and more. |
-| A way to measure improvement | [Benchmarks](https://prism-shadow.github.io/awesome-rsi/) — compare artifacts and online, offline, or hybrid protocols. |
+| A way to measure improvement | [Benchmarks](https://prism-shadow.github.io/awesome-rsi/#benchmarks) — compare artifacts and online, offline, or hybrid protocols. |
 | Connections between papers | [Citation graphs](https://prism-shadow.github.io/awesome-rsi/#graph-methods) — switch between methods and benchmarks, search for a node, zoom, and pan. |
 | More background | [Books, courses, and learning materials](https://prism-shadow.github.io/awesome-rsi/#resources). |
 
@@ -291,7 +291,7 @@ Other artifacts evolve, such as data strategies, experiment configurations, or t
 
 ## Benchmarks
 
-[Compare benchmark dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/)
+[Compare benchmark dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/#benchmarks)
 
 Grouped by RSI mode, newest first. Benchmarks that support multiple protocols appear in each relevant group. Artifact labels describe what evolves in the evaluated workflow.
 

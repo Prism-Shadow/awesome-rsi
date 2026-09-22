@@ -43,7 +43,7 @@ export const blogPostsZh = [
           },
           {
             type: "p",
-            text: "这个定义有意保持宽泛。为了让它更精确，也为了比较不同类型的 RSI，我们重点说明最容易被误读的两个维度，再简要介绍其余维度。每篇论文的维度标签都可以在[基准论文列表](https://prism-shadow.github.io/awesome-rsi/)中查看。",
+            text: "这个定义有意保持宽泛。为了让它更精确，也为了比较不同类型的 RSI，我们重点说明最容易被误读的两个维度，再简要介绍其余维度。每篇论文的维度标签都可以在[基准论文列表](https://prism-shadow.github.io/awesome-rsi/#benchmarks)中查看。",
           },
           {
             type: "p",
