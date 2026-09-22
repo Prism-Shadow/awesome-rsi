@@ -7,7 +7,7 @@ import ResourcesTab from "./components/ResourcesTab.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
-const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", graph: "#graph-benchmark", papers: "" };
+const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", graph: "#graph-methods", papers: "" };
 
 function tabFromHash() {
   if (window.location.hash.startsWith("#blog")) return "blog";
@@ -135,16 +135,6 @@ export default function App() {
             {copy.tabs.blog}
           </button>
           <button
-            className={`tab${tab === "papers" ? " is-active" : ""}`}
-            role="tab"
-            id="tab-benchmark-papers"
-            aria-controls="panel-benchmark-papers"
-            aria-selected={tab === "papers"}
-            onClick={() => selectTab("papers")}
-          >
-            {copy.tabs.papers}
-          </button>
-          <button
             className={`tab${tab === "methods" ? " is-active" : ""}`}
             role="tab"
             id="tab-methods"
@@ -153,6 +143,16 @@ export default function App() {
             onClick={() => selectTab("methods")}
           >
             {copy.tabs.methods}
+          </button>
+          <button
+            className={`tab${tab === "papers" ? " is-active" : ""}`}
+            role="tab"
+            id="tab-benchmark-papers"
+            aria-controls="panel-benchmark-papers"
+            aria-selected={tab === "papers"}
+            onClick={() => selectTab("papers")}
+          >
+            {copy.tabs.papers}
           </button>
           <button
             className={`tab${tab === "graph" ? " is-active" : ""}`}
