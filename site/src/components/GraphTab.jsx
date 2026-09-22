@@ -13,9 +13,7 @@ const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
 const methodNodeWeight = (paper) => METHOD_INCOMING_COUNTS[paper.id] ?? 0;
 
 function graphKindFromHash() {
-  return window.location.hash === "#methods-graph" || window.location.hash === "#graph-methods"
-    ? "methods"
-    : "benchmark";
+  return window.location.hash === "#graph-benchmark" ? "benchmark" : "methods";
 }
 
 function searchableText(paper) {
@@ -97,20 +95,20 @@ export default function GraphTab({ lang }) {
           <button
             type="button"
             role="tab"
-            aria-selected={kind === "benchmark"}
-            className={kind === "benchmark" ? "is-active" : ""}
-            onClick={() => selectKind("benchmark")}
-          >
-            {copy.benchmark}
-          </button>
-          <button
-            type="button"
-            role="tab"
             aria-selected={kind === "methods"}
             className={kind === "methods" ? "is-active" : ""}
             onClick={() => selectKind("methods")}
           >
             {copy.methods}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={kind === "benchmark"}
+            className={kind === "benchmark" ? "is-active" : ""}
+            onClick={() => selectKind("benchmark")}
+          >
+            {copy.benchmark}
           </button>
         </div>
 
