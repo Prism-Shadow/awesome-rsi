@@ -1627,6 +1627,16 @@ a:hover {
 
 .graph-stage svg.is-panning { cursor: grabbing; }
 
+.citation-view--spacious .graph-stage svg {
+  height: auto;
+  aspect-ratio: var(--graph-ratio);
+}
+
+.citation-view--spacious .citation-node text { font-size: 12px; }
+.citation-view--spacious .citation-node.is-selected text { font-size: 12.5px; }
+.citation-view--spacious .citation-edges line.is-overview { opacity: 0.2; stroke-width: 1; }
+.citation-view--spacious .citation-edges line.is-muted { opacity: 0.035; }
+
 .graph-controls {
   position: absolute;
   top: 0.8rem;
@@ -2393,6 +2403,7 @@ a:hover {
   .graph-workspace { grid-template-columns: 1fr; }
   .graph-stage { min-height: 34rem; border-right: 0; border-bottom: 1px solid var(--line); }
   .graph-stage svg { height: 31rem; }
+  .citation-view--spacious .graph-stage svg { height: 38rem; aspect-ratio: auto; }
   .graph-interaction-hint { top: 3.25rem; left: 0.8rem; right: auto; }
   .graph-inspector { padding: 1rem; }
   .graph-legend { justify-content: flex-start; gap: 0.55rem 1rem; }

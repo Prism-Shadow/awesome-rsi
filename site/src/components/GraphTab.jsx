@@ -177,6 +177,7 @@ export default function GraphTab({ lang }) {
         meta={graphMeta}
         copyOverride={graphText}
         focusRequest={focusRequest}
+        spacious={kind === "methods"}
         nodeWeight={kind === "methods" ? methodNodeWeight : undefined}
         primaryMetric={kind === "methods" ? (paper) => paper.year : undefined}
         primaryMetricLabel={kind === "methods" ? graphText.primaryMetric : undefined}
