@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.24972",
+    nickname: "RRSI",
+    title: "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
+    authors: ["Peng Xia", "Rujun Han", "Zifeng Wang"], authorCount: 14,
+    published: "2026-09-21", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Regularizes harness evolution with shrinking edit budgets, history-guided proposals, leakage checks, and cost-aware selection to reduce overfitting to evolution tasks.",
+    summaryZh: "通过逐步收紧修改预算、利用历史证据、检查任务泄漏及约束执行成本，减少 Harness 进化对进化任务集的过拟合。",
+  },
+  {
     id: "2609.09153",
     nickname: "Procedural Graphs",
     title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents",

@@ -114,6 +114,8 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // A single incumbent is retained, but proposals use diffs and outcomes from multiple historical candidates (§3.2, Appendix C.2).
+  "2609.24972": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["General"] },
   "2609.09153": { artifact: ["Non-parametric","Context","Memory","Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation","Benchmark score"], updater: ["Teacher"], source: ["Train/dev set","Environment","LLM feedback"], feedback: ["Score","Binary","Non-binary","Non-score","Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2609.08919": { artifact: ["Parametric","Non-parametric","Context","Memory","Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Train/dev set","Environment","LLM feedback"], feedback: ["Score","Binary","Non-binary","Non-score","Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2609.08183": { artifact: ["Parametric"], mode: ["Offline"], topology: ["Sequential"], selection: ["No validation"], updater: ["Teacher"], source: ["Train/dev set","Environment","LLM feedback"], feedback: ["Score","Non-binary","Non-score","Ground truth","Other"], frequency: ["Batch"], scope: ["General"] },
