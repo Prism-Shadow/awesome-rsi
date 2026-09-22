@@ -1,6 +1,45 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2608.31111",
+    "nickname": "Aspire",
+    "title": "Aspire: Can Models Self-Evolve from Vague Goals?",
+    "authors": [
+      "Yuhao Wu",
+      "Jingyuan Zhang",
+      "Jiajun Shi",
+      "Yuxuan Zhang",
+      "Xinping Lei",
+      "Junting Zhou",
+      "Zexuan Wang",
+      "Yuchen Wu",
+      "Huan Zhou",
+      "Duo Wang",
+      "Yinzhu Piao",
+      "Yongchang Peng",
+      "Yunfeng Shi",
+      "Jin Chen",
+      "Zuo Wang",
+      "Jinkai Liu",
+      "Jiaheng Liu",
+      "Wenxuan Zhang",
+      "Shen Yan",
+      "Wenhao Huang",
+      "Ge Zhang"
+    ],
+    "published": "2026-08-31",
+    "year": 2026,
+    "tags": [
+      "Self-Evolution",
+      "Harness Optimization",
+      "Research Automation"
+    ],
+    "citations": 1,
+    "abstract": "Abstract summary: Aspire evaluates whether an agent can turn a vague capability goal into its own data, learning objective, validation procedure, and model or harness updates. Its main hidden evaluation set contains 520 expert-authored items across six goals. Weight evolution and harness evolution are tested separately, with the decision model fixed within each round. A final-only protocol withholds evaluation feedback until submission, while an adaptive-feedback protocol allows a bounded number of aggregate-score queries without revealing items, reference answers, or per-item results. The benchmark records candidate lineage and resource use and distinguishes the best evaluated candidate from the artifact retained under predeclared selection rules.",
+    "arxiv": "https://arxiv.org/abs/2608.31111",
+    "pdf": "https://arxiv.org/pdf/2608.31111"
+  },
+  {
     "id": "2605.08678",
     "nickname": "MLS-Bench",
     "title": "MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI",

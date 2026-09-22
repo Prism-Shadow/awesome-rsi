@@ -125,6 +125,7 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  "2608.31111": {"origin":["Original"],"mode":["Online","Repeated / iterative","Offline"],"artifact":["Parametric","Non-parametric","Harness code","Context","Memory"],"construction":["Headroom","Diversity","Generalization","Other criteria"],"metric":["Accuracy","Gain","Cost","Latency"],"creation":["Manual"],"evaluation":["Rule-based","LLM-as-a-judge"]},
   "2605.08678": {
     origin: ["Original"],
     mode: ["Online", "Repeated / iterative"],
