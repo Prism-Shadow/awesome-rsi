@@ -1,4 +1,5 @@
 export const methodInstitutions = {
+  "2510.21614": ["King Abdullah University of Science and Technology (KAUST)"],
   "2609.24972": ["Google Cloud AI Research", "University of North Carolina at Chapel Hill", "Stanford University", "Washington University in St. Louis"],
   "2609.09153": ["Google","Georgia Institute of Technology","Peking University"],
   "2609.08919": ["The Hong Kong Polytechnic University","Huawei","Renmin University of China"],

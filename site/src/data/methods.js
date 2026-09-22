@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2510.21614",
+    nickname: "HGM",
+    title: "Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine",
+    authors: ["Wenyi Wang", "Piotr Piękos", "Li Nanbo"], authorCount: 8,
+    published: "2025-10-24", year: 2025, venue: "ICLR 2026 Oral", status: "accepted",
+    summary: "Uses descendant performance to estimate a coding agent's self-improvement potential, guiding which archived agents rewrite themselves and which receive further evaluation.",
+    summaryZh: "根据后代版本的表现估计编码智能体的自我改进潜力，据此选择哪些历史版本继续修改自身代码、哪些版本值得追加评测。",
+  },
+  {
     id: "2609.24972",
     nickname: "RRSI",
     title: "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",

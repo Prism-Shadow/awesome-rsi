@@ -1,57 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
 import { graphCopy } from "../i18n.js";
+import { buildLayout, clamp, createGraphGeometry } from "../lib/citationLayout.js";
 
 const GRAPH_WIDTH = 920;
 const GRAPH_HEIGHT = 620;
 const MIN_ZOOM = 0.65;
 const MAX_ZOOM = 3;
-
-function clamp(value, minimum, maximum) {
-  return Math.min(maximum, Math.max(minimum, value));
-}
-
-function defaultCamera() {
-  return { x: GRAPH_WIDTH / 2, y: GRAPH_HEIGHT / 2, zoom: 1 };
-}
-
-function constrainCamera(camera) {
-  const halfWidth = GRAPH_WIDTH / camera.zoom / 2;
-  const halfHeight = GRAPH_HEIGHT / camera.zoom / 2;
-  const minimumVisible = 72;
-  return {
-    ...camera,
-    x: clamp(camera.x, minimumVisible - halfWidth, GRAPH_WIDTH - minimumVisible + halfWidth),
-    y: clamp(camera.y, minimumVisible - halfHeight, GRAPH_HEIGHT - minimumVisible + halfHeight),
-  };
-}
-
-function worldUnitsPerPixel(svg, zoom) {
-  const bounds = svg.getBoundingClientRect();
-  return Math.max(
-    GRAPH_WIDTH / zoom / Math.max(bounds.width, 1),
-    GRAPH_HEIGHT / zoom / Math.max(bounds.height, 1),
-  );
-}
-
-function worldPointAtClient(svg, camera, point) {
-  const bounds = svg.getBoundingClientRect();
-  const unitsPerPixel = worldUnitsPerPixel(svg, camera.zoom);
-  return {
-    x: camera.x + (point.x - bounds.left - bounds.width / 2) * unitsPerPixel,
-    y: camera.y + (point.y - bounds.top - bounds.height / 2) * unitsPerPixel,
-  };
-}
-
-function cameraFromAnchor(svg, zoom, anchor, clientPoint) {
-  const bounds = svg.getBoundingClientRect();
-  const unitsPerPixel = worldUnitsPerPixel(svg, zoom);
-  return constrainCamera({
-    zoom,
-    x: anchor.x - (clientPoint.x - bounds.left - bounds.width / 2) * unitsPerPixel,
-    y: anchor.y - (clientPoint.y - bounds.top - bounds.height / 2) * unitsPerPixel,
-  });
-}
 
 function pointerGeometry(pointers) {
   const points = [...pointers.values()];
@@ -63,80 +18,6 @@ function pointerGeometry(pointers) {
     ? Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)
     : 0;
   return { centroid, distance };
-}
-
-function nodeRadius(citations) {
-  return 10 + Math.sqrt(Math.max(citations, 0)) * 2.65;
-}
-
-function buildLayout(papers, edges, getNodeWeight) {
-  const nodes = papers.map((paper, index) => {
-    const angle = index * 2.3999632297;
-    const ring = 165 + (index % 4) * 34;
-    return {
-      ...paper,
-      x: GRAPH_WIDTH / 2 + Math.cos(angle) * ring,
-      y: GRAPH_HEIGHT / 2 + Math.sin(angle) * ring * 0.78,
-      vx: 0,
-      vy: 0,
-      radius: nodeRadius(getNodeWeight(paper)),
-    };
-  });
-  const byId = new Map(nodes.map((node) => [node.id, node]));
-
-  for (let iteration = 0; iteration < 460; iteration += 1) {
-    const alpha = 1 - iteration / 460;
-
-    for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
-      for (let rightIndex = leftIndex + 1; rightIndex < nodes.length; rightIndex += 1) {
-        const left = nodes[leftIndex];
-        const right = nodes[rightIndex];
-        let dx = right.x - left.x;
-        let dy = right.y - left.y;
-        let distanceSquared = dx * dx + dy * dy;
-        if (distanceSquared < 1) {
-          dx = 1;
-          dy = 0;
-          distanceSquared = 1;
-        }
-        const distance = Math.sqrt(distanceSquared);
-        const force = Math.min(3.2, 10500 / distanceSquared) * alpha;
-        const forceX = (dx / distance) * force;
-        const forceY = (dy / distance) * force;
-        left.vx -= forceX;
-        left.vy -= forceY;
-        right.vx += forceX;
-        right.vy += forceY;
-      }
-    }
-
-    for (const edge of edges) {
-      const source = byId.get(edge.source);
-      const target = byId.get(edge.target);
-      if (!source || !target) continue;
-      const dx = target.x - source.x;
-      const dy = target.y - source.y;
-      const distance = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
-      const force = (distance - 150) * 0.012 * alpha;
-      const forceX = (dx / distance) * force;
-      const forceY = (dy / distance) * force;
-      source.vx += forceX;
-      source.vy += forceY;
-      target.vx -= forceX;
-      target.vy -= forceY;
-    }
-
-    for (const node of nodes) {
-      node.vx += (GRAPH_WIDTH / 2 - node.x) * 0.0018 * alpha;
-      node.vy += (GRAPH_HEIGHT / 2 - node.y) * 0.0024 * alpha;
-      node.vx *= 0.79;
-      node.vy *= 0.79;
-      node.x = Math.max(70, Math.min(GRAPH_WIDTH - 70, node.x + node.vx));
-      node.y = Math.max(62, Math.min(GRAPH_HEIGHT - 62, node.y + node.vy));
-    }
-  }
-
-  return new Map(nodes.map((node) => [node.id, node]));
 }
 
 function edgeCoordinates(source, target) {
@@ -192,12 +73,16 @@ export default function CitationGraph({
   primaryMetricLabel,
   nodeAriaLabel,
   focusRequest,
+  spacious = false,
 }) {
+  const graphHeight = spacious ? Math.max(820, Math.round(620 * Math.sqrt(papers.length / 32))) : GRAPH_HEIGHT;
+  const geometry = useMemo(() => createGraphGeometry(GRAPH_WIDTH, graphHeight), [graphHeight]);
+  const { defaultCamera, constrainCamera, worldPointAtClient, cameraFromAnchor } = geometry;
   const fullPaperById = useMemo(() => new Map(papers.map((paper) => [paper.id, paper])), [papers]);
   const visibleIds = useMemo(() => new Set(papers.map((paper) => paper.id)), [papers]);
   const visibleEdges = useMemo(() => edges.filter((edge) =>
     visibleIds.has(edge.source) && visibleIds.has(edge.target)), [edges, visibleIds]);
-  const layout = useMemo(() => buildLayout(papers, visibleEdges, nodeWeight), [papers, visibleEdges, nodeWeight]);
+  const layout = useMemo(() => buildLayout(papers, visibleEdges, nodeWeight, { height: graphHeight, spacious }), [papers, visibleEdges, nodeWeight, graphHeight, spacious]);
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [camera, setCamera] = useState(defaultCamera);
@@ -222,7 +107,7 @@ export default function CitationGraph({
     gestureRef.current = null;
     setIsPanning(false);
     setCamera(nextCamera);
-  }, [layout]);
+  }, [layout, defaultCamera]);
 
   useEffect(() => {
     if (!focusRequest?.id) return;
@@ -231,7 +116,7 @@ export default function CitationGraph({
     setSelectedId(focusRequest.id);
     setHoveredId(null);
     updateCamera(constrainCamera({ x: node.x, y: node.y, zoom: 1.65 }));
-  }, [focusRequest, layout]);
+  }, [focusRequest, layout, constrainCamera]);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -254,7 +139,7 @@ export default function CitationGraph({
 
     svg.addEventListener("wheel", handleWheel, { passive: false });
     return () => svg.removeEventListener("wheel", handleWheel);
-  }, [papers.length]);
+  }, [geometry]);
 
   const selectedPaper = fullPaperById.get(selectedId) ?? papers[0] ?? null;
   const activeId = hoveredId ?? selectedId;
@@ -270,7 +155,7 @@ export default function CitationGraph({
   const minTime = times.length ? Math.min(...times) : 0;
   const maxTime = times.length ? Math.max(...times) : 0;
   const viewWidth = GRAPH_WIDTH / camera.zoom;
-  const viewHeight = GRAPH_HEIGHT / camera.zoom;
+  const viewHeight = graphHeight / camera.zoom;
   const viewBox = `${camera.x - viewWidth / 2} ${camera.y - viewHeight / 2} ${viewWidth} ${viewHeight}`;
 
   const beginGesture = (svg) => {
@@ -359,7 +244,7 @@ export default function CitationGraph({
   if (papers.length === 0) return null;
 
   return (
-    <section className="citation-view" aria-labelledby="citation-graph-title">
+    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} aria-labelledby="citation-graph-title">
       <div className="graph-heading">
         <div>
           <span className="graph-eyebrow">{copy.verifiedNetwork}</span>
@@ -407,8 +292,10 @@ export default function CitationGraph({
                 if (!source || !target) return null;
                 const coordinates = edgeCoordinates(source, target);
                 const key = `${edge.source}-${edge.target}`;
-                const emphasized = !activeId || activeEdges.has(key);
-                return <line key={key} {...coordinates} className={emphasized ? "is-active" : "is-muted"} markerEnd="url(#citation-arrow)" />;
+                const edgeClass = activeId
+                  ? (activeEdges.has(key) ? "is-active" : "is-muted")
+                  : (spacious ? "is-overview" : "is-active");
+                return <line key={key} {...coordinates} className={edgeClass} markerEnd="url(#citation-arrow)" />;
               })}
             </g>
             <g className="citation-nodes">

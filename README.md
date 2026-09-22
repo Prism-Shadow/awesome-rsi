@@ -20,7 +20,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**75 method papers · 31 benchmark papers · 3 systems**
+**76 method papers · 31 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -113,6 +113,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 | [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052) | arXiv preprint |
 | [Hyperagents](https://arxiv.org/abs/2603.19461) | arXiv preprint |
 | [Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing](https://arxiv.org/abs/2602.04837) | arXiv preprint |
+| [Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine](https://arxiv.org/abs/2510.21614) | ICLR 2026 Oral |
 | [Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents](https://arxiv.org/abs/2505.22954) | ICLR 2026 |
 | [Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement](https://arxiv.org/abs/2410.04444) | ACL 2025 |
 
@@ -175,6 +176,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [P²O: Joint Policy and Prompt Optimization](https://arxiv.org/abs/2603.21877) | arXiv preprint |
 | [Hyperagents](https://arxiv.org/abs/2603.19461) | arXiv preprint |
 | [Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing](https://arxiv.org/abs/2602.04837) | arXiv preprint |
+| [Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine](https://arxiv.org/abs/2510.21614) | ICLR 2026 Oral |
 | [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/abs/2510.04618) | ICLR 2026 |
 | [ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory](https://arxiv.org/abs/2509.25140) | ICLR 2026 |
 | [Memp: Exploring Agent Procedural Memory](https://arxiv.org/abs/2508.06433) | Findings of ACL 2026 |
