@@ -5,17 +5,9 @@ import MethodsTab from "./components/MethodsTab.jsx";
 import GraphTab from "./components/GraphTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
+import { TAB_HASHES, tabFromHash } from "./lib/navigation.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
-const TAB_HASHES = { blog: "#blog", resources: "#resources", methods: "#methods", graph: "#graph-methods", papers: "" };
-
-function tabFromHash() {
-  if (window.location.hash.startsWith("#blog")) return "blog";
-  if (window.location.hash === "#resources") return "resources";
-  if (window.location.hash.startsWith("#graph") || window.location.hash === "#methods-graph") return "graph";
-  if (window.location.hash.startsWith("#methods")) return "methods";
-  return "papers";
-}
 
 function useTheme() {
   const [theme, setTheme] = useState(
@@ -43,7 +35,7 @@ function useLanguage() {
 }
 
 export default function App() {
-  const [tab, setTab] = useState(tabFromHash);
+  const [tab, setTab] = useState(() => tabFromHash(window.location.hash));
   const [theme, toggleTheme] = useTheme();
   const [lang, setLang] = useLanguage();
   const copy = appCopy[lang];
@@ -54,7 +46,7 @@ export default function App() {
   }, [copy]);
 
   useEffect(() => {
-    const syncTab = () => setTab(tabFromHash());
+    const syncTab = () => setTab(tabFromHash(window.location.hash));
     window.addEventListener("hashchange", syncTab);
     return () => window.removeEventListener("hashchange", syncTab);
   }, []);

@@ -45,7 +45,7 @@ export const blogPosts = [
           },
           {
             type: "p",
-            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the two dimensions that are most often misread, then note the others in brief; every dimension is tagged on the [benchmark list](https://prism-shadow.github.io/awesome-rsi/).",
+            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the two dimensions that are most often misread, then note the others in brief; every dimension is tagged on the [benchmark list](https://prism-shadow.github.io/awesome-rsi/#benchmarks).",
           },
           {
             type: "p",
