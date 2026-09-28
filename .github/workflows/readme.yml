@@ -5,6 +5,8 @@ on:
     paths:
       - 'README.md'
       - 'scripts/generate-readme*'
+      - 'scripts/readme-themes.test.mjs'
+      - 'assets/readme/**'
       - 'site/src/data/**'
       - '.github/workflows/readme.yml'
   push:
@@ -12,6 +14,8 @@ on:
     paths:
       - 'README.md'
       - 'scripts/generate-readme*'
+      - 'scripts/readme-themes.test.mjs'
+      - 'assets/readme/**'
       - 'site/src/data/**'
       - '.github/workflows/readme.yml'
 
@@ -26,5 +30,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node --test scripts/generate-readme.test.mjs
+      - run: node --test scripts/generate-readme.test.mjs scripts/readme-themes.test.mjs
       - run: node scripts/generate-readme.mjs --check
+      - run: node scripts/generate-readme-themes.mjs --check
