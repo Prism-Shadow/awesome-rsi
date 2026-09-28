@@ -1,4 +1,11 @@
 export const methodInstitutions = {
+  "2609.29154": ["University of Chinese Academy of Sciences", "University of Science and Technology of China", "Meituan"],
+  "2609.22086": ["Adobe", "Brown University"],
+  "2609.15820": ["City University of Hong Kong", "Huawei Noah's Ark Lab", "Institute of Advanced Intelligence and Computing, A*STAR"],
+  "2608.26530": ["AllSpark Team"],
+  "2608.05628": ["Microsoft", "University of California, San Diego", "University of Science and Technology of China", "University of British Columbia"],
+  "2607.19592": ["California Institute of Technology"],
+  "2607.09521": ["Vanderbilt University", "Vanderbilt University Medical Center"],
   "2510.21614": ["King Abdullah University of Science and Technology (KAUST)"],
   "2609.24972": ["Google Cloud AI Research", "University of North Carolina at Chapel Hill", "Stanford University", "Washington University in St. Louis"],
   "2609.09153": ["Google","Georgia Institute of Technology","Peking University"],
