@@ -1,11 +1,17 @@
 <div align="center">
 
 <a href="https://prism-shadow.github.io/awesome-rsi/">
-  <img src="assets/readme/logo.svg" alt="Awesome RSI — Recursive Self-Improvement" width="520">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/logo-dark.svg">
+    <img src="assets/readme/logo.svg" alt="Awesome RSI — Recursive Self-Improvement" width="520">
+  </picture>
 </a>
 
 <a href="https://prism-shadow.github.io/awesome-rsi/">
-  <img src="assets/readme/website-entry.svg" alt="Find your next RSI paper — Explore the Awesome RSI website" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/website-entry-dark.svg">
+    <img src="assets/readme/website-entry.svg" alt="Find your next RSI paper — Explore the Awesome RSI website" width="100%">
+  </picture>
 </a>
 
 </div>
@@ -39,7 +45,10 @@ Each list in this README is organized along **one dimension**: **RSI artifact** 
 **What does the agent improve?** The tree below follows the RSI artifact dimension.
 
 <a href="assets/readme/paper-map.svg">
-  <img src="assets/readme/paper-map.svg" alt="Left-to-right paper tree: RSI artifact splits into Parametric and Non-parametric. Parametric covers model parameters; Non-parametric covers Harness code, Context, Memory, Skill, and Other artifacts. Each branch shows example papers. Open the full-size map for a closer look." width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/paper-map-dark.svg">
+    <img src="assets/readme/paper-map.svg" alt="Left-to-right paper tree: RSI artifact splits into Parametric and Non-parametric. Parametric covers model parameters; Non-parametric covers Harness code, Context, Memory, Skill, and Other artifacts. Each branch shows example papers. Open the full-size map for a closer look." width="100%">
+  </picture>
 </a>
 
 [Model parameters](#model-parameters) · [Harness code](#harness-code) · [Context](#context) · [Memory](#memory) · [Skill](#skill) · [Other artifacts](#other-artifacts) · [Benchmarks](#benchmarks)
@@ -317,7 +326,10 @@ Other artifacts evolve, such as data strategies, experiment configurations, or t
 Grouped by RSI mode, newest first. Benchmarks that support multiple protocols appear in each relevant group. Artifact labels describe what evolves in the evaluated workflow.
 
 <a href="assets/readme/benchmark-map.svg">
-  <img src="assets/readme/benchmark-map.svg" alt="Left-to-right benchmark tree: RSI mode branches into Online, Offline, and Offline to Online, with representative benchmarks for each protocol. Open the full-size map for a closer look." width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/benchmark-map-dark.svg">
+    <img src="assets/readme/benchmark-map.svg" alt="Left-to-right benchmark tree: RSI mode branches into Online, Offline, and Offline to Online, with representative benchmarks for each protocol. Open the full-size map for a closer look." width="100%">
+  </picture>
 </a>
 
 [Online](#online) · [Offline](#offline) · [Offline → Online](#offline-to-online)
