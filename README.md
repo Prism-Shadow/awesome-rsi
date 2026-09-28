@@ -20,7 +20,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**83 method papers · 31 benchmark papers · 3 systems**
+**84 method papers · 31 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -125,6 +125,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | :--- | :--- |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
+| [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
 | [Self Improvement via Fast Tree-search](https://arxiv.org/abs/2609.19526) | arXiv preprint |
 | [SkillAA: Attribution-Guided Skill-Graph Updating with Targeted Validation and Rollback](https://arxiv.org/abs/2609.20455) | arXiv preprint |
@@ -200,6 +201,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 | Paper or project | Publication |
 | :--- | :--- |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
+| [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
 | [SkillAA: Attribution-Guided Skill-Graph Updating with Targeted Validation and Rollback](https://arxiv.org/abs/2609.20455) | arXiv preprint |
 | [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](https://arxiv.org/abs/2609.17653) | arXiv preprint |
@@ -255,6 +257,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | :--- | :--- |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
+| [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
 | [SkillAA: Attribution-Guided Skill-Graph Updating with Targeted Validation and Rollback](https://arxiv.org/abs/2609.20455) | arXiv preprint |
 | [EvolveTrade: Experience-Driven Policy Refinement for Self-Evolving LLM Trading Agents](https://arxiv.org/abs/2609.17632) | arXiv preprint |
