@@ -114,6 +114,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // TTSE §§3.2/5, Appendices B.6–B.7/D: offline held-out and online deployment settings; one incremental bank, not version search.
+  // Induction writes new rules directly; failure attribution and outcome-based lifecycle decisions govern later retention.
+  "2609.24289": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline", "Online"], topology: ["Sequential"], selection: ["No validation", "Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Benchmark", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch", "Trajectory"], scope: ["Specialized"] },
   // SkillPivot §§Method/RQ1: cumulative test-group evolution; the two-score gate is an LLM review, not replayed regression tests.
   "2609.29154": { artifact: ["Non-parametric", "Context", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Benchmark", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // Designer-RSI §3: an offline skill-bank loop; admission compares task outcomes in matched replays, not absolute grader scores.

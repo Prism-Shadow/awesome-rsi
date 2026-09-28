@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.24289",
+    nickname: "TTSE",
+    title: "TTSE: A Two-Track Online Self-Evolution Framework",
+    authors: ["Ruimin Pei", "Yongkang Wu", "Shangyi Zheng"], authorCount: 8,
+    published: "2026-09-21", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Separates environmental facts from conditional procedures, then uses task feedback to retire misleading rules, resolve contradictions, and update both banks for later tasks; evaluated with a dual-track ablation on GDPevo.",
+    summaryZh: "将环境事实与条件化操作方法分别存储，依据任务反馈淘汰误导规则、整理冲突并更新两个规则库，供后续任务使用；在 GDPevo 上进行了双轨设计的消融实验。",
+  },
+  {
     id: "2609.29154",
     nickname: "SkillPivot",
     title: "A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents",

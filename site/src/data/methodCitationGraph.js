@@ -7,6 +7,7 @@ export const methodCitationGraphMeta = {
 };
 
 export const methodCitationEdges = [
+  { source: "2609.24289", target: "2508.06433", verifiedBy: "paper-pdf" },
   { source: "2609.29154", target: "2409.07429", verifiedBy: "paper-pdf" },
   { source: "2609.29154", target: "2606.09498", verifiedBy: "paper-pdf" },
   { source: "2609.22086", target: "2608.19880", verifiedBy: "paper-pdf" },
