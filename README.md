@@ -92,6 +92,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [Self Improvement via Fast Tree-search](https://arxiv.org/abs/2609.19526) | arXiv preprint |
 | [SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness](https://arxiv.org/abs/2609.20519) | arXiv preprint |
@@ -202,6 +203,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory](https://arxiv.org/abs/2504.07952) | EACL 2026 |
 | [Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement](https://arxiv.org/abs/2410.04444) | ACL 2025 |
 | [Cradle: Empowering Foundation Agents Towards General Computer Control](https://arxiv.org/abs/2403.03186) | ICML 2025 |
+| [Meta Context Engineering via Agentic Skill Evolution](https://arxiv.org/abs/2601.21557) | ICML 2026 |
 
 ### Memory
 
