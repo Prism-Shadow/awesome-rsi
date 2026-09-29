@@ -93,6 +93,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 | Paper or project | Publication |
 | :--- | :--- |
 | [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
+| [Harness-Zero (official implementation)](https://github.com/metaevo-ai/harness-zero) | Project |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [Self Improvement via Fast Tree-search](https://arxiv.org/abs/2609.19526) | arXiv preprint |
 | [SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness](https://arxiv.org/abs/2609.20519) | arXiv preprint |
