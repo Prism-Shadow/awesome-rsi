@@ -26,7 +26,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**86 method papers · 31 benchmark papers · 3 systems**
+**100 method papers · 31 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -69,6 +69,8 @@ The student's model parameters are updated to improve task performance. This inc
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Recursive Self-Improvement via On-Policy Distillation for Reasoning](https://arxiv.org/abs/2609.30652) | arXiv preprint |
+| [TISD: On-Policy Self-Distillation with Trajectory Intervention](https://arxiv.org/abs/2609.30878) | arXiv preprint |
 | [Experience Funnel: A State-Policy Alternating Loop for Self-Evolving Agents](https://arxiv.org/abs/2609.08919) | arXiv preprint |
 | [NeoHorse-1: Towards Recursive Self-Improvement via Agentic Post-Training with Routing Harness](https://arxiv.org/abs/2609.08183) | arXiv preprint |
 | [RISE: Recursive Improvement via Self-Extrapolating Policy Distillation](https://arxiv.org/abs/2609.05295) | arXiv preprint |
@@ -92,6 +94,12 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens](https://arxiv.org/abs/2609.30967) | NeurIPS 2026 |
+| [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
+| [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
+| [Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents](https://arxiv.org/abs/2609.26760) | arXiv preprint |
+| [Harness as a Language: A Minimalist Agent Framework With Maximal Expressivity](https://arxiv.org/abs/2609.26891) | arXiv preprint |
+| [Recursive self-improvement of AI research agents](https://arxiv.org/abs/2609.26457) | arXiv preprint |
 | [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [Self Improvement via Fast Tree-search](https://arxiv.org/abs/2609.19526) | arXiv preprint |
@@ -100,9 +108,11 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 | [ModularRSI: Modular and Generalizable Recursive Harness Self-Improvement](https://arxiv.org/abs/2609.14857) | arXiv preprint |
 | [Dream-RSI: Recursive Self-Improvement through Evolving Worlds](https://dream-rsi.com/assets/dream-rsi.pdf) | Preprint |
 | [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](https://arxiv.org/abs/2609.11677) | arXiv preprint |
+| [SimSkill: A Self-Evolving LLM Agent for Skill and Knowledge Accumulation in Traffic Simulation](https://arxiv.org/abs/2609.03753) | arXiv preprint |
 | [Reef: Continual Learning Infrastructure for Self-Improving Agents](https://github.com/Human-Agent-Society/reef) | Project · v0.0.2 |
 | [HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution](https://arxiv.org/abs/2609.00829) | arXiv preprint |
 | [Proteus: A Harness-Agnostic Self-Evolution Framework for AI Agents](https://github.com/proteus-evolve/Proteus) | Project · v0.3.0 |
+| [ForeDreamer: A Self-Evolving Dual-Agent Memory Architecture for Future Event Prediction](https://arxiv.org/abs/2608.20920) | Findings of EMNLP 2026 |
 | [Mendel Gödel Machine: Recursive Self-Improving Coding Agents via Comparative Evolution](https://arxiv.org/abs/2608.07645) | arXiv preprint |
 | [EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement](https://arxiv.org/abs/2608.04968) | arXiv preprint |
 | [DarwinX: Evolving Agent Harnesses Through Natural Selection](https://arxiv.org/abs/2608.07545) | arXiv preprint |
@@ -111,6 +121,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 | [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](https://arxiv.org/abs/2606.14249) | arXiv preprint |
 | [Self-Harness: Harnesses That Improve Themselves](https://arxiv.org/abs/2606.09498) | arXiv preprint |
 | [From Failed Trajectories to Reliable LLM Agents: Diagnosing and Repairing Harness Flaws](https://arxiv.org/abs/2606.06324) | arXiv preprint |
+| [OpenSkill: Open-World Self-Evolution for LLM Agents](https://arxiv.org/abs/2606.06741) | arXiv preprint |
 | [SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems](https://arxiv.org/abs/2606.01314) | arXiv preprint |
 | [PANDO: Efficient Multimodal AI Agents via Online Skill Distillation](https://arxiv.org/abs/2605.24785) | arXiv preprint |
 | [DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations](https://arxiv.org/abs/2605.24539) | arXiv preprint |
@@ -134,7 +145,16 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
+| [MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens](https://arxiv.org/abs/2609.30967) | NeurIPS 2026 |
+| [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
+| [SkillRefine: Cross-Source Skill Induction and Execution Validation for LLM Agents in Refinery Planning Software](https://arxiv.org/abs/2609.30674) | arXiv preprint |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
+| [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
+| [SEEK: Skill-Routed Evaluation with Evolvable Knowledge for Industrial Search](https://arxiv.org/abs/2609.29803) | arXiv preprint |
+| [Grow the Harness, Not the Context: From Strategy-Free Scaffolds to Reusable Specialist Agents](https://arxiv.org/abs/2609.26760) | arXiv preprint |
+| [Harness as a Language: A Minimalist Agent Framework With Maximal Expressivity](https://arxiv.org/abs/2609.26891) | arXiv preprint |
+| [Recursive self-improvement of AI research agents](https://arxiv.org/abs/2609.26457) | arXiv preprint |
 | [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
@@ -154,6 +174,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Experience Funnel: A State-Policy Alternating Loop for Self-Evolving Agents](https://arxiv.org/abs/2609.08919) | arXiv preprint |
 | [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](https://arxiv.org/abs/2609.09153) | arXiv preprint |
 | [SkillAdam: Stable and Efficient Skill Evolution for Agents](https://arxiv.org/abs/2609.08944) | arXiv preprint |
+| [SimSkill: A Self-Evolving LLM Agent for Skill and Knowledge Accumulation in Traffic Simulation](https://arxiv.org/abs/2609.03753) | arXiv preprint |
 | [CHIME: Credit-Aware Hierarchical Memory Evolution for Long-Horizon Agentic Planning](https://arxiv.org/abs/2609.02074) | arXiv preprint |
 | [Reef: Continual Learning Infrastructure for Self-Improving Agents](https://github.com/Human-Agent-Society/reef) | Project · v0.0.2 |
 | [SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams](https://arxiv.org/abs/2609.02217) | arXiv preprint |
@@ -166,6 +187,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Prime Agent: A Self-Improving RLM Harness](https://arxiv.org/abs/2608.23552) | arXiv preprint |
 | [Proteus: A Harness-Agnostic Self-Evolution Framework for AI Agents](https://github.com/proteus-evolve/Proteus) | Project · v0.3.0 |
 | [TRACE: A Self-Evolving Skill Bank for Consistent, Limit-Aware LLM Agents](https://arxiv.org/abs/2608.22793) | arXiv preprint |
+| [ForeDreamer: A Self-Evolving Dual-Agent Memory Architecture for Future Event Prediction](https://arxiv.org/abs/2608.20920) | Findings of EMNLP 2026 |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [HyperSkill: Self-Evolving LLM Agents via Hypergraph-Structured Skill Memory](https://arxiv.org/abs/2608.16114) | arXiv preprint |
 | [Evo-Harness: Context-to-Harness Skill Compilation for Self-Evolving Agents](https://arxiv.org/abs/2608.15071) | arXiv preprint |
@@ -183,6 +205,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](https://arxiv.org/abs/2606.14249) | arXiv preprint |
 | [Self-Harness: Harnesses That Improve Themselves](https://arxiv.org/abs/2606.09498) | arXiv preprint |
 | [From Failed Trajectories to Reliable LLM Agents: Diagnosing and Repairing Harness Flaws](https://arxiv.org/abs/2606.06324) | arXiv preprint |
+| [OpenSkill: Open-World Self-Evolution for LLM Agents](https://arxiv.org/abs/2606.06741) | arXiv preprint |
 | [SePO: Self-Evolving Prompt Agent for System Prompt Optimization](https://arxiv.org/abs/2606.04465) | arXiv preprint |
 | [SkillRevise: Improving LLM-Authored Agent Skills via Trace-Conditioned Skill Revision](https://arxiv.org/abs/2606.01139) | Findings of EMNLP 2026 |
 | [ExpGraph: Model-Agnostic Experience Learning with Graph-Structured Memory for LLM Agents](https://arxiv.org/abs/2605.30712) | arXiv preprint |
@@ -213,6 +236,11 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
+| [SkillRefine: Cross-Source Skill Induction and Execution Validation for LLM Agents in Refinery Planning Software](https://arxiv.org/abs/2609.30674) | arXiv preprint |
+| [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
+| [Harness as a Language: A Minimalist Agent Framework With Maximal Expressivity](https://arxiv.org/abs/2609.26891) | arXiv preprint |
+| [Recursive self-improvement of AI research agents](https://arxiv.org/abs/2609.26457) | arXiv preprint |
 | [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
@@ -228,6 +256,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 | [Experience Funnel: A State-Policy Alternating Loop for Self-Evolving Agents](https://arxiv.org/abs/2609.08919) | arXiv preprint |
 | [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](https://arxiv.org/abs/2609.09153) | arXiv preprint |
 | [SkillAdam: Stable and Efficient Skill Evolution for Agents](https://arxiv.org/abs/2609.08944) | arXiv preprint |
+| [SimSkill: A Self-Evolving LLM Agent for Skill and Knowledge Accumulation in Traffic Simulation](https://arxiv.org/abs/2609.03753) | arXiv preprint |
 | [CHIME: Credit-Aware Hierarchical Memory Evolution for Long-Horizon Agentic Planning](https://arxiv.org/abs/2609.02074) | arXiv preprint |
 | [SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams](https://arxiv.org/abs/2609.02217) | arXiv preprint |
 | [Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement](https://arxiv.org/abs/2609.01481) | arXiv preprint |
@@ -237,6 +266,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 | [MediSkill-Evo: Process-Constrained Self-Evolution for Evidence-Grounded Clinical Interaction](https://arxiv.org/abs/2608.23397) | arXiv preprint |
 | [Prime Agent: A Self-Improving RLM Harness](https://arxiv.org/abs/2608.23552) | arXiv preprint |
 | [Proteus: A Harness-Agnostic Self-Evolution Framework for AI Agents](https://github.com/proteus-evolve/Proteus) | Project · v0.3.0 |
+| [ForeDreamer: A Self-Evolving Dual-Agent Memory Architecture for Future Event Prediction](https://arxiv.org/abs/2608.20920) | Findings of EMNLP 2026 |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [HyperSkill: Self-Evolving LLM Agents via Hypergraph-Structured Skill Memory](https://arxiv.org/abs/2608.16114) | arXiv preprint |
 | [Knowledge-Centric Self-Improvement](https://arxiv.org/abs/2607.19592) | arXiv preprint |
@@ -270,7 +300,13 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
+| [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
+| [SkillRefine: Cross-Source Skill Induction and Execution Validation for LLM Agents in Refinery Planning Software](https://arxiv.org/abs/2609.30674) | arXiv preprint |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
+| [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
+| [SEEK: Skill-Routed Evaluation with Evolvable Knowledge for Industrial Search](https://arxiv.org/abs/2609.29803) | arXiv preprint |
+| [Harness as a Language: A Minimalist Agent Framework With Maximal Expressivity](https://arxiv.org/abs/2609.26891) | arXiv preprint |
 | [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
@@ -285,6 +321,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | [Experience Funnel: A State-Policy Alternating Loop for Self-Evolving Agents](https://arxiv.org/abs/2609.08919) | arXiv preprint |
 | [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](https://arxiv.org/abs/2609.09153) | arXiv preprint |
 | [SkillAdam: Stable and Efficient Skill Evolution for Agents](https://arxiv.org/abs/2609.08944) | arXiv preprint |
+| [SimSkill: A Self-Evolving LLM Agent for Skill and Knowledge Accumulation in Traffic Simulation](https://arxiv.org/abs/2609.03753) | arXiv preprint |
 | [Reef: Continual Learning Infrastructure for Self-Improving Agents](https://github.com/Human-Agent-Society/reef) | Project · v0.0.2 |
 | [SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams](https://arxiv.org/abs/2609.02217) | arXiv preprint |
 | [HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution](https://arxiv.org/abs/2609.00829) | arXiv preprint |
@@ -295,6 +332,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | [Prime Agent: A Self-Improving RLM Harness](https://arxiv.org/abs/2608.23552) | arXiv preprint |
 | [Proteus: A Harness-Agnostic Self-Evolution Framework for AI Agents](https://github.com/proteus-evolve/Proteus) | Project · v0.3.0 |
 | [TRACE: A Self-Evolving Skill Bank for Consistent, Limit-Aware LLM Agents](https://arxiv.org/abs/2608.22793) | arXiv preprint |
+| [ForeDreamer: A Self-Evolving Dual-Agent Memory Architecture for Future Event Prediction](https://arxiv.org/abs/2608.20920) | Findings of EMNLP 2026 |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [HyperSkill: Self-Evolving LLM Agents via Hypergraph-Structured Skill Memory](https://arxiv.org/abs/2608.16114) | arXiv preprint |
 | [Evo-Harness: Context-to-Harness Skill Compilation for Self-Evolving Agents](https://arxiv.org/abs/2608.15071) | arXiv preprint |
@@ -304,6 +342,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | [SAGEAgent: A Self-Evolving Agent for Cost-Aware Modality Acquisition in Multimodal Survival Prediction](https://arxiv.org/abs/2607.09521) | arXiv preprint |
 | [ISM: Self-Improving Strategy Memory for Continual Mathematical Reasoning](https://arxiv.org/abs/2606.31191) | ICML 2026 AI for Math Workshop |
 | [When Rules Learn: A Self-Evolving Agent for Legal Case Retrieval](https://arxiv.org/abs/2606.17220) | ACL 2026 |
+| [OpenSkill: Open-World Self-Evolution for LLM Agents](https://arxiv.org/abs/2606.06741) | arXiv preprint |
 | [SkillRevise: Improving LLM-Authored Agent Skills via Trace-Conditioned Skill Revision](https://arxiv.org/abs/2606.01139) | Findings of EMNLP 2026 |
 | [SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems](https://arxiv.org/abs/2606.01314) | arXiv preprint |
 | [ExpGraph: Model-Agnostic Experience Learning with Graph-Structured Memory for LLM Agents](https://arxiv.org/abs/2605.30712) | arXiv preprint |
