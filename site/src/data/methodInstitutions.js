@@ -1,4 +1,6 @@
 export const methodInstitutions = {
+  "2609.24974": ["Peking University", "Google", "The Hong Kong University of Science and Technology"],
+  "2601.21557": ["Peking University"],
   "2609.24289": ["Poisson Lab, Huawei"],
   "2609.29154": ["University of Chinese Academy of Sciences", "University of Science and Technology of China", "Meituan"],
   "2609.22086": ["Adobe", "Brown University"],

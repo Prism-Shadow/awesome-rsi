@@ -1,12 +1,29 @@
 // Verified against the bibliography text of the local paper PDFs.
 // Each edge points from the citing method to the method it references.
 export const methodCitationGraphMeta = {
-  snapshot: "2026-09-28",
+  snapshot: "2026-09-30",
   scope: "Current Methods & Systems corpus only",
   sourceName: "Original paper PDFs",
 };
 
 export const methodCitationEdges = [
+  { source: "2609.24974", target: "2601.21557", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2609.01481", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2507.19457", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2606.14249", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2607.13683", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2603.28052", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2604.25850", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2605.09998", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2606.09498", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2608.23552", verifiedBy: "paper-pdf" },
+  { source: "2609.24974", target: "2510.04618", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2507.19457", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2504.07952", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2505.22954", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2409.07429", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2502.12110", verifiedBy: "paper-pdf" },
+  { source: "2601.21557", target: "2510.04618", verifiedBy: "paper-pdf" },
   { source: "2609.24289", target: "2508.06433", verifiedBy: "paper-pdf" },
   { source: "2609.29154", target: "2409.07429", verifiedBy: "paper-pdf" },
   { source: "2609.29154", target: "2606.09498", verifiedBy: "paper-pdf" },

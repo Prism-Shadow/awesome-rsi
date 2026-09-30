@@ -1,5 +1,23 @@
 export const methods = [
   {
+    id: "2609.24974",
+    nickname: "Harness-Zero",
+    title: "Harness-Zero: Harness Distillation via Agent-as-Harness",
+    authors: ["Haoran Ye", "Yuxing Lu", "Haonan Dong", "Zhaochen Su", "Guojie Song"], authorCount: 5,
+    published: "2026-09-21", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Evolves a shared domain harness from recurring failures, then uses a harnessing agent to turn its guidance into reviewed trajectories for distillation into a standalone student.",
+    summaryZh: "根据反复出现的失败改进领域共享 Harness，再由审核智能体将其指导转为修正后的执行轨迹，通过蒸馏让学生在移除专用 Harness 后保留相关能力。",
+  },
+  {
+    id: "2601.21557",
+    nickname: "MCE",
+    title: "Meta Context Engineering via Agentic Skill Evolution",
+    authors: ["Haoran Ye", "Xuning He", "Vincent Arak", "Haonan Dong", "Guojie Song"], authorCount: 5,
+    published: "2026-01-29", year: 2026, venue: "ICML 2026", status: "accepted",
+    summary: "A meta-agent combines historical context-engineering skills, while a base agent applies them to revise reusable context files and retrieval code from task feedback; validation selects the best context.",
+    summaryZh: "元智能体参考并组合历史上下文工程 Skill，基础智能体依据任务反馈更新可复用的上下文文件和检索代码，再通过验证集选择表现更好的上下文。",
+  },
+  {
     id: "2609.24289",
     nickname: "TTSE",
     title: "TTSE: A Two-Track Online Self-Evolution Framework",
