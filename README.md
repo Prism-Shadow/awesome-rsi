@@ -26,7 +26,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**84 method papers · 31 benchmark papers · 3 systems**
+**86 method papers · 31 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -92,6 +92,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [Self Improvement via Fast Tree-search](https://arxiv.org/abs/2609.19526) | arXiv preprint |
 | [SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness](https://arxiv.org/abs/2609.20519) | arXiv preprint |
@@ -122,6 +123,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 | [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052) | arXiv preprint |
 | [Hyperagents](https://arxiv.org/abs/2603.19461) | arXiv preprint |
 | [Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing](https://arxiv.org/abs/2602.04837) | arXiv preprint |
+| [Meta Context Engineering via Agentic Skill Evolution](https://arxiv.org/abs/2601.21557) | ICML 2026 |
 | [Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine](https://arxiv.org/abs/2510.21614) | ICLR 2026 Oral |
 | [Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents](https://arxiv.org/abs/2505.22954) | ICLR 2026 |
 | [Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement](https://arxiv.org/abs/2410.04444) | ACL 2025 |
@@ -133,6 +135,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | Paper or project | Publication |
 | :--- | :--- |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
+| [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
@@ -193,6 +196,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [P²O: Joint Policy and Prompt Optimization](https://arxiv.org/abs/2603.21877) | arXiv preprint |
 | [Hyperagents](https://arxiv.org/abs/2603.19461) | arXiv preprint |
 | [Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing](https://arxiv.org/abs/2602.04837) | arXiv preprint |
+| [Meta Context Engineering via Agentic Skill Evolution](https://arxiv.org/abs/2601.21557) | ICML 2026 |
 | [Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine](https://arxiv.org/abs/2510.21614) | ICLR 2026 Oral |
 | [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/abs/2510.04618) | ICLR 2026 |
 | [ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory](https://arxiv.org/abs/2509.25140) | ICLR 2026 |
@@ -209,6 +213,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
@@ -250,6 +255,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 | [Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation](https://arxiv.org/abs/2604.10923) | ACL 2026 |
 | [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052) | arXiv preprint |
 | [Hyperagents](https://arxiv.org/abs/2603.19461) | arXiv preprint |
+| [Meta Context Engineering via Agentic Skill Evolution](https://arxiv.org/abs/2601.21557) | ICML 2026 |
 | [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/abs/2510.04618) | ICLR 2026 |
 | [ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory](https://arxiv.org/abs/2509.25140) | ICLR 2026 |
 | [Memp: Exploring Agent Procedural Memory](https://arxiv.org/abs/2508.06433) | Findings of ACL 2026 |
@@ -265,6 +271,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | Paper or project | Publication |
 | :--- | :--- |
 | [A Wrong Turn Does Not Ruin the Journey: Deviation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.29154) | arXiv preprint |
+| [Harness-Zero: Harness Distillation via Agent-as-Harness](https://arxiv.org/abs/2609.24974) | arXiv preprint |
 | [RRSI: Regularized Recursive Self-Improvement of Agent Harnesses](https://arxiv.org/abs/2609.24972) | arXiv preprint |
 | [TTSE: A Two-Track Online Self-Evolution Framework](https://arxiv.org/abs/2609.24289) | arXiv preprint |
 | [Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design](https://arxiv.org/abs/2609.22086) | arXiv preprint |
@@ -304,6 +311,7 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | [Continual Harness: Online Adaptation for Self-Improving Foundation Agents](https://arxiv.org/abs/2605.09998) | arXiv preprint |
 | [Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses](https://arxiv.org/abs/2604.25850) | arXiv preprint |
 | [Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation](https://arxiv.org/abs/2604.10923) | ACL 2026 |
+| [Meta Context Engineering via Agentic Skill Evolution](https://arxiv.org/abs/2601.21557) | ICML 2026 |
 | [Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models](https://arxiv.org/abs/2510.04618) | ICLR 2026 |
 | [Memp: Exploring Agent Procedural Memory](https://arxiv.org/abs/2508.06433) | Findings of ACL 2026 |
 | [Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory](https://arxiv.org/abs/2504.07952) | EACL 2026 |

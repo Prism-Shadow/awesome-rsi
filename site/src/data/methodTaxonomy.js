@@ -114,6 +114,11 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // Harness-Zero §3 and Appendix A: three rounds update one shared domain bank using failed-task traces and executable checks.
+  "2609.24974": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Benchmark", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  // MCE §§3–4: offline crossover uses multiple historical skills; separate online variants accumulate context with a fixed skill or none.
+  // The evaluated task generator is the student; both context-engineering roles are external updaters.
+  "2601.21557": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline", "Online"], topology: ["Graph", "Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Benchmark", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch", "Trajectory"], scope: ["Specialized"] },
   // TTSE §§3.2/5, Appendices B.6–B.7/D: offline held-out and online deployment settings; one incremental bank, not version search.
   // Induction writes new rules directly; failure attribution and outcome-based lifecycle decisions govern later retention.
   "2609.24289": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline", "Online"], topology: ["Sequential"], selection: ["No validation", "Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Benchmark", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch", "Trajectory"], scope: ["Specialized"] },
