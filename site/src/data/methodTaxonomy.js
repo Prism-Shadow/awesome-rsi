@@ -114,6 +114,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.1–3.5, Appendices A.4–A.6: the actor writes records and a consolidator revises house notes; benchmark truth is not agent-facing feedback.
+  // Completion checks annotate task outcomes, not acceptance of an evolved artifact; memory writes have no separate improvement gate.
+  "2609.34276": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Step", "Event", "Trajectory", "Batch"], scope: ["Specialized"] },
   // §3.2: proposals inspect multiple historical candidates; joint-reward improvement and executable gates select the incumbent.
   "2609.30967": {"artifact":["Non-parametric","Harness code","Context"],"mode":["Offline"],"topology":["Graph"],"selection":["Artifact validation","Combined metrics"],"updater":["Teacher"],"source":["Train/dev set","Executable verifier","LLM feedback"],"feedback":["Score","Binary","Non-binary","Non-score","Other"],"frequency":["Batch"],"scope":["Specialized"]},
   // §3: textual bank edits and procedural guide/tool evolution use an evolution-validation pool; compositional reuse adds cross-branch influence.

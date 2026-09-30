@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.34276",
+    nickname: "NavHarness",
+    title: "NavHarness: Towards Lifelong Embodied Navigation",
+    authors: ["Xunyi Zhao", "Jian Zhou", "Sihao Lin"], authorCount: 9,
+    published: "2026-09-28", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Carries navigation experience across fresh sessions through revisable spatial memory, task handovers, and consolidated house notes and skills, using observations and model-based completion checks.",
+    summaryZh: "利用环境观察与模型完成度检查，持续积累和修正空间记忆、任务交接记录，并整理房屋知识与导航 Skill，供后续新会话复用。",
+  },
+  {
     id: "2609.30967",
     nickname: "MoMHa",
     title: "MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens",
