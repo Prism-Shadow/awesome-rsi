@@ -114,6 +114,8 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.2–3.3, B.1, Algorithms 1–3: policy expectation records, evaluator verdicts, and distiller rules jointly form memory. The shared backbone has separate roles; mismatch checks guide retention, not acceptance of an improved bank. Experience is reused on retries of the same GUI task.
+  "2609.15457": {"artifact": ["Non-parametric", "Context", "Memory", "Skill"], "mode": ["Online"], "topology": ["Sequential"], "selection": ["No validation"], "updater": ["Joint"], "source": ["Environment", "LLM feedback"], "feedback": ["Score", "Binary", "Non-score", "LLM-as-a-judge", "Other"], "frequency": ["Step", "Trajectory"], "scope": ["Specialized"]},
   // §§3.1–3.5, Appendices A.4–A.6: the actor writes records and a consolidator revises house notes; benchmark truth is not agent-facing feedback.
   // Completion checks annotate task outcomes, not acceptance of an evolved artifact; memory writes have no separate improvement gate.
   "2609.34276": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Step", "Event", "Trajectory", "Batch"], scope: ["Specialized"] },

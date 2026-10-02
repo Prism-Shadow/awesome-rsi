@@ -1,5 +1,24 @@
 export const methods = [
   {
+    "id": "2609.15457",
+    "nickname": "AnchorGUI",
+    "title": "AnchorGUI: Asymmetric Memory for Dual-Scale Learning in GUI Navigation",
+    "authors": [
+      "Shengjie Jin",
+      "Zelong Sun",
+      "Hengbo Xu",
+      "Yanbiao Ma",
+      "Zhiwu Lu"
+    ],
+    "authorCount": 5,
+    "published": "2026-09-14",
+    "year": 2026,
+    "venue": "ECCV 2026",
+    "status": "accepted",
+    "summary": "Turns unexpected GUI outcomes into visual evidence for immediate correction and reusable strategies that help agents avoid repeating mistakes across attempts.",
+    "summaryZh": "将 GUI 中的意外结果转化为即时纠错所需的视觉证据和可复用策略，帮助 Agent 在后续尝试中避免重复犯错。"
+  },
+  {
     id: "2609.34276",
     nickname: "NavHarness",
     title: "NavHarness: Towards Lifelong Embodied Navigation",
