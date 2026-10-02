@@ -188,9 +188,10 @@ export function buildLayout(papers, edges, getNodeWeight, { height = 620, spacio
         placed.push(node);
         continue;
       }
+      // A finer slot grid finds narrow gaps in the expanded methods catalog.
       const candidates = [{ x: node.x, y: node.y, distance: 0 }];
-      for (let x = box.halfWidth + 24; x <= GRAPH_WIDTH - box.halfWidth - 24; x += 12) {
-        for (let y = box.halfHeight + 50; y <= GRAPH_HEIGHT - box.halfHeight - 80; y += 12) {
+      for (let x = box.halfWidth + 24; x <= GRAPH_WIDTH - box.halfWidth - 24; x += 6) {
+        for (let y = box.halfHeight + 50; y <= GRAPH_HEIGHT - box.halfHeight - 80; y += 6) {
           candidates.push({ x, y, distance: (x - node.x) ** 2 + (y - node.y) ** 2 });
         }
       }
