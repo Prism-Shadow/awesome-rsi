@@ -1,5 +1,24 @@
 export const methods = [
   {
+    "id": "2609.39306",
+    "nickname": "ReSAIL",
+    "title": "ReSAIL: Mitigating Collapse in Iterative Agent Self-Distillation",
+    "authors": [
+      "Shengjie Jin",
+      "Hengbo Xu",
+      "Zelong Sun",
+      "YuJie Guo",
+      "Zhiwu Lu"
+    ],
+    "authorCount": 5,
+    "published": "2026-09-30",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "status": "preprint",
+    "summary": "Mitigates performance collapse in iterative agent self-distillation by learning selectively from deployment experience and preserving the student's ability to supervise the next cycle.",
+    "summaryZh": "通过从部署经验中选择性学习，并保留学生模型为下一轮提供监督的能力，缓解 Agent 迭代自蒸馏中的性能坍塌。"
+  },
+  {
     id: "2609.34276",
     nickname: "NavHarness",
     title: "NavHarness: Towards Lifelong Embodied Navigation",

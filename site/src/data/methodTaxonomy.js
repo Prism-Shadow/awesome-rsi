@@ -114,6 +114,8 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.1–3.4, A.2, E.2: student response prefixes and frozen privileged-teacher distributions form batch updates; deployment outcomes and generated diagnoses supply feedback. Final students carry forward without a separate improvement gate.
+  "2609.39306": {"artifact": ["Parametric"], "mode": ["Offline"], "topology": ["Sequential"], "selection": ["No validation"], "updater": ["Joint"], "source": ["Train/dev set", "Environment", "LLM feedback"], "feedback": ["Score", "Binary", "Non-score", "LLM-as-a-judge", "Other"], "frequency": ["Batch"], "scope": ["Specialized"]},
   // §§3.1–3.5, Appendices A.4–A.6: the actor writes records and a consolidator revises house notes; benchmark truth is not agent-facing feedback.
   // Completion checks annotate task outcomes, not acceptance of an evolved artifact; memory writes have no separate improvement gate.
   "2609.34276": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Joint"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Step", "Event", "Trajectory", "Batch"], scope: ["Specialized"] },
