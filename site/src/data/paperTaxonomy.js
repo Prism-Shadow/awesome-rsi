@@ -125,6 +125,29 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  // Sections 3–4: Data/Joint update model weights; Harness/Joint revise code.
+  // Development exposes the final tasks, so the main protocol is not held-out.
+  "2610.10310": {
+    origin: ["Composite"],
+    mode: ["Online", "Repeated / iterative"],
+    artifact: ["Parametric", "Non-parametric", "Harness code", "Context", "Other artifact"],
+    construction: ["Diversity", "Other criteria"],
+    metric: ["Accuracy", "Gain", "Cost", "Latency"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
+  // Sections 2–3 and Appendix B: board games have held-out ID/OOD evaluations;
+  // NetHack reflects on each batch of fresh games before later games (online).
+  // The two protocols are separate, not an Offline → Online warm-start pipeline.
+  "2610.08902": {
+    origin: ["Composite"],
+    mode: ["Online", "Streaming", "Offline"],
+    artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"],
+    construction: ["Headroom", "Diversity", "Generalization", "Other criteria"],
+    metric: ["Accuracy", "Gain", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based"],
+  },
   "2608.31111": {"origin":["Original"],"mode":["Online","Repeated / iterative","Offline"],"artifact":["Parametric","Non-parametric","Harness code","Context","Memory"],"construction":["Headroom","Diversity","Generalization","Other criteria"],"metric":["Accuracy","Gain","Cost","Latency"],"creation":["Manual"],"evaluation":["Rule-based","LLM-as-a-judge"]},
   "2605.08678": {
     origin: ["Original"],

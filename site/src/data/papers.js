@@ -1,6 +1,64 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2610.10310",
+    "nickname": "RSIGym",
+    "title": "RSIGym: A Flexible Environment for Recursive Self-Improvement",
+    "authors": [
+      "Fanqing Meng",
+      "Lingxiao Du",
+      "Haocheng Lu",
+      "Qiguang Chen",
+      "Ziqi Zhao",
+      "Zijian Wu",
+      "Jiayuan Zhuo",
+      "Mengkang Hu",
+      "Michael Qizhe Shieh"
+    ],
+    "published": "2026-10-07",
+    "year": 2026,
+    "tags": [
+      "Self-Evolution",
+      "Harness Optimization",
+      "Post-Training & RL",
+      "Research Automation"
+    ],
+    "citations": 0,
+    "abstract": "Recursive self-improvement requires carrying accepted changes into later improvement cycles, while studying agent-proposed changes also requires substantial research infrastructure. Existing settings often leave agents to rebuild routine infrastructure or restrict exploration to individual components. We introduce RSIGym, an agent-native research environment based on Everything as a Service (EaaS). RSIGym exposes training, inference, rollout, evaluation, and sandbox execution through reusable services, with shared budget and permission controls supporting Data, Harness, and Joint improvement tracks. This design enables agents to investigate individual interventions and jointly optimize data, training settings, and execution harnesses within the same environment. We define RSI-Index as the mean fraction of the remaining performance gap closed across five benchmarks covering software engineering, terminal interaction, mathematics, scientific reasoning, and skill-based tasks. Comparing six frontier research models in independent Joint runs, Opus 5 achieves the highest RSI-Index of 0.4809 under a $500 platform-service budget per benchmark run. Its selected systems improve all five benchmarks, raising SWE-bench Verified from 17.67% to 50.33% and AIME from 31.67% to 97.78%. Additional experiments examine DSH-harness refinement, budget variation, and restricted network access, while recorded trajectories reveal how agents diagnose failures and select candidates. We open-source the full RSIGym codebase and results to support reproducibility and further research.",
+    "arxiv": "https://arxiv.org/abs/2610.10310",
+    "pdf": "https://arxiv.org/pdf/2610.10310"
+  },
+  {
+    "id": "2610.08902",
+    "nickname": "Agent Plasticity",
+    "title": "Agent Plasticity: Measuring Self-Improvement Through Experience",
+    "authors": [
+      "Harman Singh",
+      "Anton Bakhtin",
+      "Rulin Shao",
+      "Gabriel Synnaeve",
+      "Ilia Kulikov",
+      "Rob Fergus",
+      "Sanjeev Arora",
+      "Kurt Keutzer",
+      "Jason Weston",
+      "Anuj Mahajan",
+      "Anirudh Goyal"
+    ],
+    "published": "2026-10-06",
+    "year": 2026,
+    "tags": [
+      "Self-Evolution",
+      "Learning Dynamics",
+      "Skill Learning",
+      "Memory"
+    ],
+    "citations": 0,
+    "abstract": "AI agents increasingly operate in environments where they can diagnose failures and improve through experience, yet existing evaluations largely measure what an agent can do at a fixed point in time rather than how effectively it learns. Evaluating self-improvement requires answering three questions: does future performance improve and generalize beyond the interactions that enabled learning; how efficiently are new capabilities acquired; and where does the self-improvement process break down? To answer these questions, we study self-improvement in a controlled setting where agents amortize past experience into reusable artifacts that are inherited by future instances. At each checkpoint, we measure performance on training and held-out environment interactions while accounting for learning cost. We introduce agent plasticity, the efficiency with which an agent converts experience into gains in future held-out performance. Across multiple environments, frontier models exhibit sharply different improvement trajectories despite comparable opportunities to learn. Some achieve substantial and persistent gains, while others remain near or below their initial performance, and gains within the training regime often transfer only partially to out-of-distribution conditions. Endpoint capability and acquisition efficiency also diverge: the agent that ultimately performs best need not be the one that improves most efficiently. Tracing failures through the improvement loop further reveals different candidate bottlenecks. Agents with low plasticity often fail to reuse relevant artifacts, whereas more plastic agents may still fail despite reusing relevant artifacts, pointing to limitations in artifact quality, generalization, or application. Evaluating self-improving agents requires measuring not only what they can do, but how effectively they become better through experience.",
+    "arxiv": "https://arxiv.org/abs/2610.08902",
+    "pdf": "https://arxiv.org/pdf/2610.08902"
+  },
+  {
     "id": "2608.31111",
     "nickname": "Aspire",
     "title": "Aspire: Can Models Self-Evolve from Vague Goals?",
