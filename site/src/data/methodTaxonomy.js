@@ -114,6 +114,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.1–3.3, 4.1: external workers refine data strategies from student results; each LoRA candidate restarts from the same base. Shared worker memory is not a student Memory or Skill artifact.
+  // Cross-tree lessons create Graph influence. Search and final frozen-checkpoint verification share task IDs, so Offline does not imply held-out generalization.
+  "2609.36675": { artifact: ["Parametric"], mode: ["Offline"], topology: ["Graph"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // §§3–4: textual Task-Skills and Meta-Skills evolve on training tasks; records of accepted and rejected revisions inform later proposals. Distillation does not train weights.
   "2610.07979": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // §§4.1–4.3: trace-guided module refreshes follow batches of evaluations; executable checks admit modules, and validation scores select complete compositions.
