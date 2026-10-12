@@ -26,7 +26,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**101 method papers · 31 benchmark papers · 3 systems**
+**105 method papers · 31 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -95,6 +95,8 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [MESH-Harness: Self-Improving Agent Harnesses via Bandit-Guided Compositional Evolution](https://arxiv.org/abs/2610.05300) | arXiv preprint |
+| [Learning from Research: Toward Lifelong Agent Harness Evolution](https://arxiv.org/abs/2609.40169) | arXiv preprint |
 | [MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens](https://arxiv.org/abs/2609.30967) | NeurIPS 2026 |
 | [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
 | [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
@@ -146,6 +148,10 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Learning from Revision Consequences: Hindsight Meta-Experience Distillation for Self-Improving Agents](https://arxiv.org/abs/2610.07979) | arXiv preprint |
+| [EviSkill: Grounding Skill Evolution in Replayable Evidence](https://arxiv.org/abs/2610.05030) | arXiv preprint |
+| [MESH-Harness: Self-Improving Agent Harnesses via Bandit-Guided Compositional Evolution](https://arxiv.org/abs/2610.05300) | arXiv preprint |
+| [Learning from Research: Toward Lifelong Agent Harness Evolution](https://arxiv.org/abs/2609.40169) | arXiv preprint |
 | [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
 | [MoMHa: Multi-Objective Optimization of LLM Harnesses over Accuracy, Safety, and Tokens](https://arxiv.org/abs/2609.30967) | NeurIPS 2026 |
 | [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
@@ -237,6 +243,9 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Learning from Revision Consequences: Hindsight Meta-Experience Distillation for Self-Improving Agents](https://arxiv.org/abs/2610.07979) | arXiv preprint |
+| [EviSkill: Grounding Skill Evolution in Replayable Evidence](https://arxiv.org/abs/2610.05030) | arXiv preprint |
+| [Learning from Research: Toward Lifelong Agent Harness Evolution](https://arxiv.org/abs/2609.40169) | arXiv preprint |
 | [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
 | [SkillRefine: Cross-Source Skill Induction and Execution Validation for LLM Agents in Refinery Planning Software](https://arxiv.org/abs/2609.30674) | arXiv preprint |
 | [HarnessPAI: An Evolving Harness for Physical AI](https://arxiv.org/abs/2609.29166) | arXiv preprint |
@@ -301,6 +310,9 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Learning from Revision Consequences: Hindsight Meta-Experience Distillation for Self-Improving Agents](https://arxiv.org/abs/2610.07979) | arXiv preprint |
+| [EviSkill: Grounding Skill Evolution in Replayable Evidence](https://arxiv.org/abs/2610.05030) | arXiv preprint |
+| [Learning from Research: Toward Lifelong Agent Harness Evolution](https://arxiv.org/abs/2609.40169) | arXiv preprint |
 | [NavHarness: Towards Lifelong Embodied Navigation](https://arxiv.org/abs/2609.34276) | arXiv preprint |
 | [SkillEvoReg: Regularizing Agent Skill Evolution Against Overfitting](https://arxiv.org/abs/2609.30861) | arXiv preprint |
 | [SkillRefine: Cross-Source Skill Induction and Execution Validation for LLM Agents in Refinery Planning Software](https://arxiv.org/abs/2609.30674) | arXiv preprint |
