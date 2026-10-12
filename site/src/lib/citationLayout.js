@@ -175,9 +175,14 @@ export function buildLayout(papers, edges, getNodeWeight, { height = 620, spacio
       if (overlaps === 0) break;
     }
     // Dense hubs can trap the relaxation against the boundary. Place remaining
-    // rectangles in the nearest free slot, keeping large nodes stable first.
+    // Place the largest node + label footprints first, so long labels do not
+    // get trapped after smaller circles have occupied the remaining slots.
     const placed = [];
-    for (const node of [...nodes].sort((a, b) => b.radius - a.radius)) {
+    const footprint = (node) => {
+      const box = nodeBounds(node);
+      return box.halfWidth * box.halfHeight;
+    };
+    for (const node of [...nodes].sort((a, b) => footprint(b) - footprint(a))) {
       const box = nodeBounds(node);
       const isFree = (p) => placed.every((other) => {
         const otherBox = nodeBounds(other);
