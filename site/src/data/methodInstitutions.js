@@ -1,4 +1,5 @@
 export const methodInstitutions = {
+  "2609.36675": ["Evolvent AI", "The Hong Kong Polytechnic University", "National University of Singapore", "Columbia University"],
   "2610.07979": ["The Chinese University of Hong Kong", "Shanghai Jiao Tong University", "Shanghai Innovation Institute"],
   "2610.05300": ["The Chinese University of Hong Kong, Shenzhen", "The Chinese University of Hong Kong", "Nanyang Technological University", "Fudan University", "National University of Singapore", "DeepWisdom"],
   "2610.05030": ["Jilin University"],

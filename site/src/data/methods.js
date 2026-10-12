@@ -1,5 +1,14 @@
 export const methods = [
   {
+    id: "2609.36675",
+    nickname: "Gödel Forest",
+    title: "Gödel Forest: Balancing Search Depth and Breadth for Data-Centric Recursive Self-Improvement",
+    authors: ["Ziqi Zhao", "Fanqing Meng", "Haocheng Lu"], authorCount: 7,
+    published: "2026-09-29", year: 2026, venue: "arXiv preprint", status: "preprint",
+    summary: "Connects parallel searches for training-data strategies through shared lessons, using candidate models' scores and failure diagnostics to guide new LoRA training runs from the same initial model.",
+    summaryZh: "通过共享经验连接多棵训练数据策略搜索树，依据候选模型的得分和失败诊断改进后续方案，每个候选均从同一初始模型进行 LoRA 训练。",
+  },
+  {
     id: "2610.07979",
     nickname: "HMED",
     title: "Learning from Revision Consequences: Hindsight Meta-Experience Distillation for Self-Improving Agents",
