@@ -26,7 +26,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**106 method papers · 31 benchmark papers · 3 systems**
+**106 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -403,6 +403,8 @@ Experience accumulates during the task stream or repeated interaction, and later
 
 | Benchmark paper | Year | RSI artifact |
 | :--- | :--- | :--- |
+| [RSIGym: A Flexible Environment for Recursive Self-Improvement](https://arxiv.org/abs/2610.10310) | 2026 | Model parameters · Harness code · Context · Other artifacts |
+| [Agent Plasticity: Measuring Self-Improvement Through Experience](https://arxiv.org/abs/2610.08902) | 2026 | Harness code · Context · Memory · Skill |
 | [Aspire: Can Models Self-Evolve from Vague Goals?](https://arxiv.org/abs/2608.31111) | 2026 | Model parameters · Harness code · Context · Memory |
 | [FinEvo-Bench: A Longitudinal Benchmark for Self-Evolving Agents in Professional Financial Workflows](https://arxiv.org/abs/2608.06144) | 2026 | Memory · Skill |
 | [ContinualSkillBench: Can LLM Agents Truly Evolve Their Capabilities?](https://arxiv.org/abs/2608.03874) | 2026 | Context · Skill |
@@ -430,6 +432,7 @@ Evolution precedes a separate held-out evaluation.
 
 | Benchmark paper | Year | RSI artifact |
 | :--- | :--- | :--- |
+| [Agent Plasticity: Measuring Self-Improvement Through Experience](https://arxiv.org/abs/2610.08902) | 2026 | Harness code · Context · Memory · Skill |
 | [HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?](https://arxiv.org/abs/2609.01437) | 2026 | Harness code · Context |
 | [Aspire: Can Models Self-Evolve from Vague Goals?](https://arxiv.org/abs/2608.31111) | 2026 | Model parameters · Harness code · Context · Memory |
 | [S3Gym: Can LLMs Turn Self-Testing and Self-Judging into Self-Improvement?](https://arxiv.org/abs/2608.31100) | 2026 | Model parameters · Context · Memory |
