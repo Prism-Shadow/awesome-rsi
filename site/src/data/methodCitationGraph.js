@@ -33,6 +33,8 @@ export const methodCitationEdges = [
   { source: "2609.40169", target: "2604.25850", verifiedBy: "paper-pdf" },
   { source: "2609.40169", target: "2605.09998", verifiedBy: "paper-pdf" },
   { source: "2609.40169", target: "2608.15071", verifiedBy: "paper-pdf" },
+  { source: "2609.39306", target: "2510.04618", verifiedBy: "paper-pdf" },
+  { source: "2609.39306", target: "2509.25140", verifiedBy: "paper-pdf" },
   { source: "2609.34276", target: "2510.04618", verifiedBy: "paper-pdf" },
   { source: "2609.34276", target: "2502.12110", verifiedBy: "paper-pdf" },
   { source: "2609.30967", target: "2507.19457", verifiedBy: "paper-pdf" },

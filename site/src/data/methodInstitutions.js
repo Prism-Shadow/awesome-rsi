@@ -3,6 +3,7 @@ export const methodInstitutions = {
   "2610.05300": ["The Chinese University of Hong Kong, Shenzhen", "The Chinese University of Hong Kong", "Nanyang Technological University", "Fudan University", "National University of Singapore", "DeepWisdom"],
   "2610.05030": ["Jilin University"],
   "2609.40169": ["University of California, Santa Barbara", "Microsoft"],
+  "2609.39306": ["Renmin University of China"],
   "2609.34276": ["Adelaide University", "Responsible AI Research Centre, AIML", "CSIRO Data61"],
   "2609.30967": ["Adobe Research"],
   "2608.20920": ["Zhejiang University","Ant Group","National University of Singapore","Zhejiang University of Technology"],
