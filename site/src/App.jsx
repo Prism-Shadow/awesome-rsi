@@ -4,7 +4,6 @@ import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import GraphTab from "./components/GraphTab.jsx";
 import ResourcesTab from "./components/ResourcesTab.jsx";
-import SurveyFeature from "./components/SurveyFeature.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
 import { TAB_HASHES, tabFromHash } from "./lib/navigation.js";
 
@@ -100,7 +99,18 @@ export default function App() {
             {copy.heroTitleBefore}<em>{copy.heroTitleEmphasis}</em>{copy.heroTitleAfter}
           </h1>
           <p>{copy.heroBody}</p>
-          <SurveyFeature lang={lang} />
+          <a
+            className="hero-guide-link"
+            href="#blog/understanding-rsi"
+            onClick={() => window.setTimeout(
+              () => document.getElementById("panel-blog")?.scrollIntoView({ behavior: "smooth" }),
+              0,
+            )}
+          >
+            <span>{copy.guideEyebrow}</span>
+            {copy.guideLink}
+            <b aria-hidden="true">→</b>
+          </a>
         </div>
       </section>
 

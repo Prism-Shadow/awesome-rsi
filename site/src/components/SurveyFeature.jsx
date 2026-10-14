@@ -1,5 +1,5 @@
 import { surveyPaper } from "../data/survey.js";
-import { appCopy, surveyCopy } from "../i18n.js";
+import { surveyCopy } from "../i18n.js";
 
 export default function SurveyFeature({ lang }) {
   const copy = surveyCopy[lang];
@@ -15,11 +15,7 @@ export default function SurveyFeature({ lang }) {
     <section className="survey-feature" aria-labelledby="survey-title">
       <div className="survey-heading">
         <span className="survey-eyebrow">{copy.eyebrow}</span>
-        <span className="survey-meta">
-          <time dateTime={surveyPaper.published}>{date}</time>
-          <span aria-hidden="true"> · </span>
-          {copy.format(surveyPaper.pages)}
-        </span>
+        <time className="survey-meta" dateTime={surveyPaper.published}>{date}</time>
       </div>
       <h2 id="survey-title">
         <a href={pdfUrl} target="_blank" rel="noreferrer">
@@ -30,16 +26,6 @@ export default function SurveyFeature({ lang }) {
       <div className="survey-actions">
         <a className="survey-read-link" href={pdfUrl} target="_blank" rel="noreferrer">
           {copy.read} <span aria-hidden="true">↗</span>
-        </a>
-        <a
-          className="survey-guide-link"
-          href="#blog/understanding-rsi"
-          onClick={() => window.setTimeout(
-            () => document.getElementById("panel-blog")?.scrollIntoView({ behavior: "smooth" }),
-            0,
-          )}
-        >
-          {appCopy[lang].guideLink} <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>

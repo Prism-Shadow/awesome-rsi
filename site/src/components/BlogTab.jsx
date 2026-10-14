@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
+import SurveyFeature from "./SurveyFeature.jsx";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
 import { blogCopy } from "../i18n.js";
@@ -262,6 +263,7 @@ function ArticleBlock({ block }) {
 function BlogIndex({ onOpenPost, posts, lang, copy }) {
   return (
     <section className="blog-index" aria-label={copy.posts}>
+      <SurveyFeature lang={lang} />
       <div className="blog-post-list">
         {posts.map((post) => (
           <a
