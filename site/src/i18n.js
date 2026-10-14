@@ -12,7 +12,6 @@ export const appCopy = {
     heroTitleEmphasis: "Recursive Self-Improvement",
     heroTitleAfter: " research",
     heroBody: "Papers, books, and courses on agents that learn from their own experience — self-evolution, skill learning, memory, continual learning, and automated AI research. Filter by topic, search, and sort by recency or influence.",
-    guideEyebrow: "START HERE",
     guideLink: "New to RSI? Read the complete guide",
     tabs: {
       blog: "Blog",
@@ -37,7 +36,6 @@ export const appCopy = {
     heroTitleEmphasis: "精选图谱",
     heroTitleAfter: "",
     heroBody: "收录关于智能体从自身经验中学习的论文、书籍与课程，涵盖自我演化、技能学习、记忆、持续学习和自动化 AI 研究。你可以按主题筛选、搜索，并按时间或影响力排序。",
-    guideEyebrow: "从这里开始",
     guideLink: "初次了解 RSI？阅读完整导读",
     tabs: {
       blog: "博客",
@@ -48,6 +46,21 @@ export const appCopy = {
     },
     footerBefore: "本网站由 ",
     footerAfter: " 项目持续维护。论文元数据来自 arXiv，引用次数来自 Semantic Scholar。欢迎提交 PR，补充新的论文。",
+  },
+};
+
+export const surveyCopy = {
+  en: {
+    eyebrow: "Our survey",
+    summary: "A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.",
+    read: "Read the survey",
+    format: (pages) => `English PDF · ${pages} pages`,
+  },
+  zh: {
+    eyebrow: "我们的综述",
+    summary: "通过九维分类框架和传统深度学习机制，梳理已有 RSI 方法，探索新的研究思路。",
+    read: "阅读综述",
+    format: (pages) => `英文 PDF · ${pages} 页`,
   },
 };
 

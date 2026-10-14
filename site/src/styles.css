@@ -228,51 +228,94 @@ a:hover {
   font-size: 1.02rem;
 }
 
-.hero-guide-link {
-  width: fit-content;
-  margin-top: 1.15rem;
-  padding: 0.55rem 0.7rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
-  border-radius: 0.5rem;
-  background: color-mix(in srgb, var(--surface) 78%, transparent);
-  color: var(--ink);
-  font-size: 0.82rem;
-  font-weight: 720;
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+.survey-feature {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
 }
 
-.hero-guide-link span {
-  padding: 0.18rem 0.38rem;
-  border-radius: 0.28rem;
-  background: var(--accent-soft);
+.survey-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+}
+
+.survey-eyebrow {
   color: var(--accent-ink);
-  font: 750 0.58rem var(--mono);
-  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.hero-guide-link b {
-  color: var(--accent);
-  font-size: 1rem;
-  transition: transform 0.15s ease;
+.survey-meta {
+  color: var(--body);
+  font-size: 0.75rem;
 }
 
-.hero-guide-link:hover,
-.hero-guide-link:focus-visible {
-  border-color: var(--accent);
+.survey-feature h2 {
+  max-width: 53rem;
+  margin: 0.5rem 0;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+  font-weight: 750;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.survey-feature h2 a {
+  color: inherit;
+}
+
+.hero .survey-summary {
+  max-width: 58rem;
+  font-size: 0.92rem;
+}
+
+.survey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.survey-read-link,
+.survey-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.survey-read-link {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.45rem;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  transition: background 0.15s ease;
+}
+
+.survey-read-link:hover {
   background: var(--surface);
   text-decoration: none;
-  transform: translateY(-1px);
 }
 
-.hero-guide-link:hover b,
-.hero-guide-link:focus-visible b {
-  transform: translateX(0.18rem);
+.survey-guide-link {
+  color: var(--ink);
+}
+
+.survey-feature a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
 }
 
 /* ---------- tabs ---------- */
@@ -2376,7 +2419,8 @@ a:hover {
   .icon-btn-label { display: none; }
   .blog-post-card { padding: 1rem; }
   .blog-article { padding-top: 0.7rem; }
-  .hero-guide-link { align-items: flex-start; flex-wrap: wrap; }
+  .survey-feature { padding: 1rem; }
+  .survey-actions { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
   .blog-markdown h3 { margin-top: 2.2rem; padding-top: 1.35rem; }
   .blog-markdown p { font-size: 0.9rem; line-height: 1.75; }
   .search-sort-row { grid-template-columns: 1fr; }

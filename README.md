@@ -16,6 +16,16 @@
 
 </div>
 
+## Our survey
+
+**[From Existing Methods to New Research Ideas: Two Perspectives on Recursive Self-Improvement](site/public/papers/rsi-survey.pdf)**
+
+A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.
+
+**[Read the survey (PDF) →](site/public/papers/rsi-survey.pdf)** · October 9, 2026 · 46 pages
+
+---
+
 <p align="center"><strong>Watch the walkthrough</strong> · 1 min</p>
 
 https://github.com/user-attachments/assets/70f488af-925c-4b93-ba03-5c84711b8dbf
