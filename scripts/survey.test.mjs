@@ -27,6 +27,23 @@ test("README features the same survey before the video and catalog generation pr
   }
 });
 
+test("README shows a linked, full-width overview image before the survey title", async () => {
+  const imagePath = "assets/readme/survey-overview.png";
+  const image = await readFile(new URL(`../${imagePath}`, import.meta.url));
+  assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  const original = await readFile(new URL("../README.md", import.meta.url), "utf8");
+  for (const readme of [original, renderReadme(original)]) {
+    const section = readme.slice(readme.indexOf("## Our survey"), readme.indexOf("Watch the walkthrough"));
+    const imageStart = section.indexOf(`<a href="${imagePath}">`);
+    const titleStart = section.indexOf(`[${surveyPaper.title}]`);
+    assert.ok(imageStart >= 0 && imageStart < titleStart);
+    const imageMarkup = section.slice(imageStart, section.indexOf("</a>", imageStart));
+    assert.ok(imageMarkup.includes(`src="${imagePath}"`));
+    assert.match(imageMarkup, /width="100%"/);
+    assert.match(imageMarkup, /alt="[^\"]+"/);
+  }
+});
+
 test("both homepage languages have survey copy and identify the PDF as English", () => {
   assert.ok(surveyPaper.title.trim());
   assert.ok(surveyPaper.titleZh.trim());
