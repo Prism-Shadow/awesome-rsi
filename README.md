@@ -16,6 +16,18 @@
 
 </div>
 
+## Our survey
+
+**[From Existing Methods to New Research Ideas: Two Perspectives on Recursive Self-Improvement](site/public/papers/rsi-survey.pdf)**
+
+<a href="assets/readme/survey-overview.png">
+  <img src="assets/readme/survey-overview.png" alt="Survey overview: a tree connects agent resources, the RSI taxonomy, feedback-driven improvement, and insights from traditional deep learning." width="100%">
+</a>
+
+A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.
+
+---
+
 <p align="center"><strong>Watch the walkthrough</strong> · 1 min</p>
 
 https://github.com/user-attachments/assets/70f488af-925c-4b93-ba03-5c84711b8dbf

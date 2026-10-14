@@ -275,6 +275,90 @@ a:hover {
   transform: translateX(0.18rem);
 }
 
+/* ---------- survey notice ---------- */
+
+.survey-feature {
+  margin: 0 0 1.25rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.survey-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+}
+
+.survey-eyebrow {
+  color: var(--accent-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.survey-meta {
+  color: var(--body);
+  font-size: 0.75rem;
+}
+
+.survey-feature h2 {
+  max-width: 53rem;
+  margin: 0.5rem 0;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+  font-weight: 750;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.survey-feature h2 a {
+  color: inherit;
+}
+
+.survey-summary {
+  margin: 0;
+  max-width: 58rem;
+  font-size: 0.92rem;
+}
+
+.survey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.survey-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.45rem;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  transition: background 0.15s ease;
+}
+
+.survey-read-link:hover {
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.survey-feature a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
 /* ---------- tabs ---------- */
 
 .tabs {
@@ -2377,6 +2461,8 @@ a:hover {
   .blog-post-card { padding: 1rem; }
   .blog-article { padding-top: 0.7rem; }
   .hero-guide-link { align-items: flex-start; flex-wrap: wrap; }
+  .survey-feature { padding: 1rem; }
+  .survey-actions { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
   .blog-markdown h3 { margin-top: 2.2rem; padding-top: 1.35rem; }
   .blog-markdown p { font-size: 0.9rem; line-height: 1.75; }
   .search-sort-row { grid-template-columns: 1fr; }

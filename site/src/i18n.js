@@ -51,6 +51,19 @@ export const appCopy = {
   },
 };
 
+export const surveyCopy = {
+  en: {
+    eyebrow: "Our survey",
+    summary: "A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.",
+    read: "Read the survey",
+  },
+  zh: {
+    eyebrow: "我们的综述",
+    summary: "通过九维分类框架和传统深度学习机制，梳理已有 RSI 方法，探索新的研究思路。",
+    read: "阅读综述",
+  },
+};
+
 export const papersCopy = {
   en: {
     noPapers: "No papers found",
