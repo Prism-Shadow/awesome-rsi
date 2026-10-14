@@ -22,12 +22,12 @@ test("README features the same survey before the video and catalog generation pr
     assert.ok(start >= 0 && end > start);
     const section = readme.slice(start, end);
     assert.ok(section.includes(`[${surveyPaper.title}](site/public/${surveyPaper.pdf})`));
-    assert.ok(section.includes(`[Read the survey (PDF) →](site/public/${surveyPaper.pdf})`));
-    assert.ok(section.includes(`${surveyPaper.pages} pages`));
+    assert.equal(section.split(`](site/public/${surveyPaper.pdf})`).length - 1, 1);
+    assert.doesNotMatch(section, /\b\d+\s+pages\b/);
   }
 });
 
-test("README shows a linked, full-width overview image before the survey title", async () => {
+test("README shows a linked, full-width overview image after the survey title", async () => {
   const imagePath = "assets/readme/survey-overview.png";
   const image = await readFile(new URL(`../${imagePath}`, import.meta.url));
   assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -36,7 +36,7 @@ test("README shows a linked, full-width overview image before the survey title",
     const section = readme.slice(readme.indexOf("## Our survey"), readme.indexOf("Watch the walkthrough"));
     const imageStart = section.indexOf(`<a href="${imagePath}">`);
     const titleStart = section.indexOf(`[${surveyPaper.title}]`);
-    assert.ok(imageStart >= 0 && imageStart < titleStart);
+    assert.ok(titleStart >= 0 && imageStart > titleStart);
     const imageMarkup = section.slice(imageStart, section.indexOf("</a>", imageStart));
     assert.ok(imageMarkup.includes(`src="${imagePath}"`));
     assert.match(imageMarkup, /width="100%"/);
