@@ -82,6 +82,7 @@ function renderInline(text, keyPrefix = "inline") {
 function isMarkdownBlockStart(line) {
   const value = line.trim();
   return /^#{1,6}\s+/.test(value)
+    || /^---+$/.test(value)
     || /^!\[[^\]]*\]\([^)]+\)$/.test(value)
     || /^[-*]\s+/.test(value)
     || /^\d+\.\s+/.test(value)
@@ -104,6 +105,12 @@ function parseMarkdown(markdown) {
   while (index < lines.length) {
     const line = lines[index].trim();
     if (!line) {
+      index += 1;
+      continue;
+    }
+
+    if (/^---+$/.test(line)) {
+      blocks.push({ type: "divider" });
       index += 1;
       continue;
     }
@@ -170,6 +177,9 @@ function parseMarkdown(markdown) {
 
 function resolveBlogImage(src) {
   const normalized = unescapeMarkdown(src);
+  if (normalized.startsWith("blog/")) {
+    return `${import.meta.env.BASE_URL}${normalized}`;
+  }
   const sourcePrefix = "图片和附件/";
   if (normalized.startsWith(sourcePrefix)) {
     return `${import.meta.env.BASE_URL}blog/rsi-guide/${normalized.slice(sourcePrefix.length)}`;
@@ -177,7 +187,7 @@ function resolveBlogImage(src) {
   return normalized;
 }
 
-function MarkdownArticle({ markdown, copy }) {
+function MarkdownArticle({ markdown, copy, showImageCaptions = false }) {
   const blocks = parseMarkdown(markdown);
   const contents = blocks.filter(
     (block) => block.type === "heading" && (block.level === 2 || block.level === 3),
@@ -204,6 +214,9 @@ function MarkdownArticle({ markdown, copy }) {
       ) : null}
       <section className="blog-markdown">
         {blocks.map((block, index) => {
+          if (block.type === "divider") {
+            return <hr key={`divider-${index}`} />;
+          }
           if (block.type === "heading") {
             const Heading = block.level === 2 ? "h3" : "h4";
             return <Heading id={block.id} key={block.id}>{renderInline(block.text)}</Heading>;
@@ -215,6 +228,9 @@ function MarkdownArticle({ markdown, copy }) {
                 <a href={src} target="_blank" rel="noreferrer">
                   <img src={src} alt={unescapeMarkdown(block.alt)} loading="lazy" decoding="async" />
                 </a>
+                {showImageCaptions && block.alt ? (
+                  <figcaption>{renderInline(block.alt)}</figcaption>
+                ) : null}
               </figure>
             );
           }
@@ -305,7 +321,7 @@ function BlogArticle({ post, onBack, lang, copy }) {
       </div>
 
       {post.markdown
-        ? <MarkdownArticle markdown={post.markdown} copy={copy} />
+        ? <MarkdownArticle markdown={post.markdown} copy={copy} showImageCaptions={post.showImageCaptions} />
         : post.sections
         ? post.sections.map((section, index) => (
             <section className="blog-article-body" key={section.heading ?? index}>
