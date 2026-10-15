@@ -843,6 +843,14 @@ a:hover {
   display: block;
 }
 
+.blog-figure figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
 /* ---------- multi-dimensional filter board ---------- */
 
 .filter-shell {

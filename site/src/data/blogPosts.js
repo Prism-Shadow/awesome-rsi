@@ -1,6 +1,17 @@
+import rsiDeepLearning from "./blog/rsi-deep-learning.en.md?raw";
 import rsiGuide from "./blog/rsi-guide.en.md?raw";
 
 export const blogPosts = [
+  {
+    id: "rsi-deep-learning",
+    kind: "Essay",
+    title: "RSI Is Retracing the Path of Deep Learning",
+    published: "2026-10-14",
+    summary: "How recursive self-improvement borrows from eleven deep learning mechanisms, and what those connections suggest for future research.",
+    tags: ["RSI", "deep learning", "self-improvement", "research ideas"],
+    showImageCaptions: true,
+    markdown: rsiDeepLearning,
+  },
   {
     id: "understanding-rsi",
     kind: "Guide",

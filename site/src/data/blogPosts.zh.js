@@ -1,6 +1,17 @@
+import rsiDeepLearning from "./blog/rsi-deep-learning.zh.md?raw";
 import rsiGuide from "./blog/rsi-guide.zh.md?raw";
 
 export const blogPostsZh = [
+  {
+    id: "rsi-deep-learning",
+    kind: "文章",
+    title: "RSI，正在重走深度学习的老路",
+    published: "2026-10-14",
+    summary: "从十一种深度学习机制出发，理解现有 RSI 方法如何改进自身，并探索这些联系能启发哪些新研究方向。",
+    tags: ["RSI", "深度学习", "自我改进", "研究方向"],
+    showImageCaptions: true,
+    markdown: rsiDeepLearning,
+  },
   {
     id: "understanding-rsi",
     kind: "导读",
