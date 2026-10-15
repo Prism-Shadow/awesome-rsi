@@ -187,8 +187,6 @@ RSI also introduces something beyond ordinary deep learning: the system proposin
 
 There is much more to borrow. Learning-rate warmup, early stopping, curriculum learning, and many other deep learning techniques are worth exploring in RSI.
 
----
-
 This article draws on the survey [From Existing Methods to New Research Ideas: Two Perspectives on Recursive Self-Improvement](http://arxiv.org/abs/2610.14625). The curated list of RSI methods is available in the [Prism-Shadow/awesome-rsi](https://github.com/Prism-Shadow/awesome-rsi) GitHub repository.
 
 ## References

@@ -187,8 +187,6 @@ Freeze-Thaw 贝叶斯优化会根据已经看到的学习曲线，预测一次�
 
 当然，能借鉴的远不止这些。学习率预热、早停、课程学习……还有许多深度学习的方法值得搬到 RSI 里来。
 
----
-
 本文参考了综述 [From Existing Methods to New Research Ideas: Two Perspectives on Recursive Self-Improvement](http://arxiv.org/abs/2610.14625) 。整理的 RSI 方法列表也已经放在 GitHub 仓库 [Prism-Shadow/awesome-rsi](https://github.com/Prism-Shadow/awesome-rsi)。
 
 ## 参考文献
