@@ -496,10 +496,10 @@ If this collection is useful in your work, please cite it:
 
 Scan the QR code to join the Awesome RSI discussion group.
 
-<!-- Refresh this image when the group QR code expires; the current image shows a validity date of September 21. -->
+<!-- Refresh this image when the group QR code expires. -->
 <p align="center">
-  <a href="assets/readme/wechat-group.png">
-    <img src="assets/readme/wechat-group.png" alt="Awesome RSI WeChat discussion group QR code" width="420">
+  <a href="assets/readme/wechat-group.jpg">
+    <img src="assets/readme/wechat-group.jpg" alt="Awesome RSI WeChat Group 2 QR code" width="420">
   </a>
 </p>
 
