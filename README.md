@@ -492,6 +492,13 @@ If this collection is useful in your work, please cite it:
 }
 ```
 
+## Related Lists
+
+- [Awesome Self-Improving Coding Agents](https://github.com/vicfei/awesome-self-improving-coding-agents) - Vertical companion: RSI × software engineering, with evidence labels and a daily arXiv radar. (2026)
+- [Awesome Agentic ML](https://github.com/vicfei/awesome-agentic-ml) - Vertical companion: RSI × models and data — automated training runs, distillation, synthetic data. (2026)
+- [Awesome AI Agents](https://github.com/e2b-dev/awesome-ai-agents) - Broad directory of autonomous-agent projects and infrastructure. (2023)
+- [Awesome Self-Improving Agents](https://github.com/selfimproving-agent/awesome-Self-Improving-Agents) - Focused bibliography of self-improving foundation-model agents. (2024)
+
 ## WeChat Group
 
 Scan the QR code to join the Awesome RSI discussion group.
