@@ -51,6 +51,7 @@ const methodTaxonomyZh = {
       "Train/dev set": ["训练／验证集", "使用与最终测试分离的进化任务或数据划分。"],
       Environment: ["环境", "使用状态变化、Observation、原生 Reward 或执行结果。"],
       "Executable verifier": ["可执行验证器", "使用单元测试、编译器、容器或形式检查器。"],
+      "LLM-generated tests": ["LLM 生成测试", "由 LLM 生成可执行测试，用实际运行结果为进化提供反馈。"],
       "LLM feedback": ["LLM 反馈", "由 Student、Teacher、Judge 或其他模型通过评审、自我批评、自洽性或辩论产生反馈。"],
       Human: ["人工", "使用人工标签、偏好、审核或干预。"],
     },

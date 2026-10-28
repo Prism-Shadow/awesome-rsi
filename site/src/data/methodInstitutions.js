@@ -1,4 +1,11 @@
 export const methodInstitutions = {
+  "2610.26770": ["Tsinghua University","Z.AI","Shanghai Jiao Tong University","University of Warwick","Kling AI"],
+  "2610.12789": ["Tulane University","Amazon"],
+  // Affiliation from the official project page: https://lab.noematrix.ai/blog/2-roborsi/
+  "2610.12424": ["Noematrix Lab"],
+  "2610.12086": ["King Abdullah University of Science and Technology","Sakana AI"],
+  "2610.02616": ["Massachusetts Institute of Technology","Amazon"],
+  "2609.09468": ["Google"],
   "2609.36675": ["Evolvent AI", "The Hong Kong Polytechnic University", "National University of Singapore", "Columbia University"],
   "2610.07979": ["The Chinese University of Hong Kong", "Shanghai Jiao Tong University", "Shanghai Innovation Institute"],
   "2610.05300": ["The Chinese University of Hong Kong, Shenzhen", "The Chinese University of Hong Kong", "Nanyang Technological University", "Fudan University", "National University of Singapore", "DeepWisdom"],
