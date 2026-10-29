@@ -28,6 +28,6 @@ After the first deploy, enable GitHub Pages in the repo settings (Settings → P
 
 ## Featured survey
 
-- `public/papers/rsi-survey.pdf` — the original survey PDF, shared by the README and website. Vite publishes it at `/awesome-rsi/papers/rsi-survey.pdf`; keep this path stable when replacing the file.
-- `src/data/survey.js` — the paper title, date, and page count. Update these when publishing a revised PDF.
+- `src/data/survey.js` — the paper title, date, page count, and arXiv PDF URL used by the website. The main README links to the same arXiv version.
+- `public/papers/rsi-survey.pdf` — the original PDF retained for existing direct links; the featured survey now points to arXiv.
 - `src/components/SurveyFeature.jsx` and `src/i18n.js` — the survey entry at the top of the Blog index and its English and Chinese copy. Both languages link to the same English PDF. The entry is hidden on individual articles and other tabs.

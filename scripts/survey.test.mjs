@@ -5,11 +5,12 @@ import { surveyPaper } from "../site/src/data/survey.js";
 import { appCopy, surveyCopy } from "../site/src/i18n.js";
 import { renderReadme } from "./generate-readme.mjs";
 
-test("the featured survey points to a real PDF in the public papers directory", async () => {
-  assert.match(surveyPaper.pdf, /^papers\/[a-z0-9-]+\.pdf$/);
-  const pdf = await readFile(new URL(`../site/public/${surveyPaper.pdf}`, import.meta.url));
-  assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.match(pdf.subarray(-1024).toString(), /%%EOF/);
+test("the featured survey links directly to its arXiv PDF", async () => {
+  assert.equal(surveyPaper.pdf, "https://arxiv.org/pdf/2610.14625");
+  const feature = await readFile(new URL("../site/src/components/SurveyFeature.jsx", import.meta.url), "utf8");
+  assert.match(feature, /const pdfUrl = surveyPaper\.pdf;/);
+  assert.doesNotMatch(feature, /import\.meta\.env\.BASE_URL/);
+  assert.equal(feature.match(/href=\{pdfUrl\}/g)?.length, 2);
   assert.ok(Number.isInteger(surveyPaper.pages) && surveyPaper.pages > 0);
   assert.match(surveyPaper.published, /^\d{4}-\d{2}-\d{2}$/);
 });
@@ -21,8 +22,8 @@ test("README features the same survey before the video and catalog generation pr
     const end = readme.indexOf("Watch the walkthrough");
     assert.ok(start >= 0 && end > start);
     const section = readme.slice(start, end);
-    assert.ok(section.includes(`[${surveyPaper.title}](site/public/${surveyPaper.pdf})`));
-    assert.equal(section.split(`](site/public/${surveyPaper.pdf})`).length - 1, 1);
+    assert.ok(section.includes(`[${surveyPaper.title}](${surveyPaper.pdf})`));
+    assert.equal(section.split(`](${surveyPaper.pdf})`).length - 1, 1);
     assert.doesNotMatch(section, /\b\d+\s+pages\b/);
   }
 });
