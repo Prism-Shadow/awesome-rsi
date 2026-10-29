@@ -511,13 +511,6 @@ If this collection is useful in your work, please cite it:
 
 ## WeChat Group
 
-Scan the QR code to join the Awesome RSI discussion group.
-
-<!-- Refresh this image when the group QR code expires. -->
-<p align="center">
-  <a href="assets/readme/wechat-group.jpg">
-    <img src="assets/readme/wechat-group.jpg" alt="Awesome RSI WeChat Group 2 QR code" width="420">
-  </a>
-</p>
+[View the QR code to join our WeChat group →](https://github.com/Prism-Shadow/penguin-harness-community/blob/main/wechat/rsi.jpg)
 
 [Back to top ↑](#)
