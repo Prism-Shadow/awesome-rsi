@@ -3,7 +3,7 @@ import { surveyCopy } from "../i18n.js";
 
 export default function SurveyFeature({ lang }) {
   const copy = surveyCopy[lang];
-  const pdfUrl = `${import.meta.env.BASE_URL}${surveyPaper.pdf}`;
+  const pdfUrl = surveyPaper.pdf;
   const date = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
     year: "numeric",
     month: "short",
