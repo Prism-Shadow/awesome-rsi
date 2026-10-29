@@ -19,4 +19,5 @@ to the full-size image; do not recolor it for dark mode.
 
 The WeChat QR code is maintained in
 [penguin-harness-community](https://github.com/Prism-Shadow/penguin-harness-community/blob/main/wechat/rsi.jpg).
-The main README links to it instead of storing an image here.
+The main README displays the externally hosted image and links to its source;
+no QR image is stored here.

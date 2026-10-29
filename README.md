@@ -511,6 +511,12 @@ If this collection is useful in your work, please cite it:
 
 ## WeChat Group
 
-[View the QR code to join our WeChat group →](https://github.com/Prism-Shadow/penguin-harness-community/blob/main/wechat/rsi.jpg)
+Scan the QR code to join the Awesome RSI discussion group.
+
+<p align="center">
+  <a href="https://github.com/Prism-Shadow/penguin-harness-community/blob/main/wechat/rsi.jpg">
+    <img src="https://raw.githubusercontent.com/Prism-Shadow/penguin-harness-community/main/wechat/rsi.jpg" alt="Awesome RSI WeChat group QR code" width="420">
+  </a>
+</p>
 
 [Back to top ↑](#)
