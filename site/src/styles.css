@@ -1845,37 +1845,6 @@ html[lang="zh-Hans"] .graph-heading h2 {
   font-weight: 700;
 }
 
-.graph-provenance {
-  margin-top: 0.75rem;
-  padding: 0.75rem 0.9rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
-  border-radius: 0.55rem;
-  background: var(--accent-soft);
-}
-
-.verified-mark {
-  width: 1.25rem;
-  height: 1.25rem;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--accent);
-  color: white;
-  font-size: 0.66rem;
-  font-weight: 800;
-}
-
-.graph-provenance p {
-  margin: 0;
-  color: var(--body);
-  font-size: 0.7rem;
-  line-height: 1.5;
-}
-
 @keyframes node-pulse {
   0%, 100% { opacity: 0.45; transform: scale(0.95); }
   50% { opacity: 1; transform: scale(1.08); }
