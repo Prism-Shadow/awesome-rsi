@@ -148,10 +148,9 @@ function FromTheBlog({ copy, lang }) {
                 <h3><a href={href}>{post.title}</a></h3>
                 <p>{post.summary}</p>
               </div>
-              {/* The title already links to the post, so the cover is a pointer-only duplicate. */}
-              <a className={`entry-cover${cover ? "" : " entry-cover--mark"}`} href={href} tabIndex={-1} aria-hidden="true">
+              <span className={`entry-cover${cover ? "" : " entry-cover--mark"}`} aria-hidden="true">
                 {cover ? <img src={cover} alt="" loading="lazy" decoding="async" /> : <BrandMark />}
-              </a>
+              </span>
             </li>
           );
         })}
