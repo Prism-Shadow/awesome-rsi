@@ -10,6 +10,7 @@ export const blogPosts = [
     summary: "How recursive self-improvement borrows from eleven deep learning mechanisms, and what those connections suggest for future research.",
     tags: ["RSI", "deep learning", "self-improvement", "research ideas"],
     showImageCaptions: true,
+    cover: "blog/rsi-deep-learning/cover.webp",
     markdown: rsiDeepLearning,
   },
   {
@@ -20,6 +21,7 @@ export const blogPosts = [
     summary:
       "A structured introduction to recursive self-improvement, covering what agents evolve, how versions relate, who performs the update, when evolution happens, and how feedback and experience shape the process.",
     tags: ["guide", "RSI", "self-evolution", "taxonomy"],
+    cover: "blog/rsi-guide/cover-en.webp",
     markdown: rsiGuide,
   },
   {

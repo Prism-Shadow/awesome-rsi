@@ -5,9 +5,11 @@ import { papers } from "../data/papers.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
+import { blogCover } from "../lib/blogMarkdown.js";
 import { buildLayout } from "../lib/citationLayout.js";
 import { recentlyAdded } from "../lib/recentlyAdded.js";
 import { homeCopy, localizedValue } from "../i18n.js";
+import BrandMark from "./BrandMark.jsx";
 import SurveyFeature from "./SurveyFeature.jsx";
 
 // The method citation network, laid out once with the same layout as the Citation Graph page.
@@ -133,16 +135,26 @@ function FromTheBlog({ copy, lang }) {
         <h2 id="blog-title">{copy.blogTitle}</h2>
       </div>
       <ol className="entry-list entry-list--posts">
-        {posts.map((post) => (
-          <li className="entry" key={post.id}>
-            <div className="entry-meta">
-              <span>{post.kind}</span>
-              <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
-            </div>
-            <h3><a href={`#blog/${encodeURIComponent(post.id)}`}>{post.title}</a></h3>
-            <p>{post.summary}</p>
-          </li>
-        ))}
+        {posts.map((post) => {
+          const href = `#blog/${encodeURIComponent(post.id)}`;
+          const cover = blogCover(post);
+          return (
+            <li className="entry entry--post" key={post.id}>
+              <div className="entry-text">
+                <div className="entry-meta">
+                  <span>{post.kind}</span>
+                  <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
+                </div>
+                <h3><a href={href}>{post.title}</a></h3>
+                <p>{post.summary}</p>
+              </div>
+              {/* The title already links to the post, so the cover is a pointer-only duplicate. */}
+              <a className={`entry-cover${cover ? "" : " entry-cover--mark"}`} href={href} tabIndex={-1} aria-hidden="true">
+                {cover ? <img src={cover} alt="" loading="lazy" decoding="async" /> : <BrandMark />}
+              </a>
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
