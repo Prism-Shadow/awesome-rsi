@@ -7,6 +7,7 @@ on:
       - 'scripts/generate-readme*'
       - 'scripts/readme-themes.test.mjs'
       - 'scripts/survey.test.mjs'
+      - 'scripts/recently-added.test.mjs'
       - 'assets/readme/**'
       - 'site/public/papers/**'
       - 'site/src/data/**'
@@ -19,6 +20,7 @@ on:
       - 'scripts/generate-readme*'
       - 'scripts/readme-themes.test.mjs'
       - 'scripts/survey.test.mjs'
+      - 'scripts/recently-added.test.mjs'
       - 'assets/readme/**'
       - 'site/public/papers/**'
       - 'site/src/data/**'
@@ -36,6 +38,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node --test scripts/generate-readme.test.mjs scripts/readme-themes.test.mjs scripts/survey.test.mjs
+      - run: node --test scripts/generate-readme.test.mjs scripts/readme-themes.test.mjs scripts/survey.test.mjs scripts/recently-added.test.mjs
       - run: node scripts/generate-readme.mjs --check
       - run: node scripts/generate-readme-themes.mjs --check

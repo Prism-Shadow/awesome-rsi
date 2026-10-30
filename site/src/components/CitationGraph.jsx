@@ -37,8 +37,8 @@ function edgeCoordinates(source, target) {
 function getFreshnessColor(paper, minTime, maxTime) {
   const time = new Date(`${paper.published}T00:00:00Z`).getTime();
   const ratio = maxTime === minTime ? 0.5 : (time - minTime) / (maxTime - minTime);
-  const lightness = 70 - ratio * 37;
-  return `hsl(158 48% ${lightness}%)`;
+  const lightness = 78 - ratio * 36;
+  return `hsl(217 82% ${lightness}%)`;
 }
 
 function RelationList({ title, emptyText, edges, paperById, relationKey, onSelect, copy }) {

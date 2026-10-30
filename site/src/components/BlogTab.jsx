@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
-import SurveyFeature from "./SurveyFeature.jsx";
+import BrandMark from "./BrandMark.jsx";
+import PageHead from "./PageHead.jsx";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
-import { blogCopy } from "../i18n.js";
+import { appCopy, blogCopy } from "../i18n.js";
+import { blogCover, resolveBlogImage, unescapeMarkdown } from "../lib/blogMarkdown.js";
 
 function formatDate(value, lang) {
   return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
@@ -18,10 +20,6 @@ function formatDate(value, lang) {
 function postIdFromHash() {
   const match = window.location.hash.match(/^#blog\/(.+)$/);
   return match ? decodeURIComponent(match[1]) : null;
-}
-
-function unescapeMarkdown(text) {
-  return text.replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, "$1");
 }
 
 function MathMarkup({ expression, displayMode = false, className }) {
@@ -175,18 +173,6 @@ function parseMarkdown(markdown) {
   return blocks;
 }
 
-function resolveBlogImage(src) {
-  const normalized = unescapeMarkdown(src);
-  if (normalized.startsWith("blog/")) {
-    return `${import.meta.env.BASE_URL}${normalized}`;
-  }
-  const sourcePrefix = "图片和附件/";
-  if (normalized.startsWith(sourcePrefix)) {
-    return `${import.meta.env.BASE_URL}blog/rsi-guide/${normalized.slice(sourcePrefix.length)}`;
-  }
-  return normalized;
-}
-
 function MarkdownArticle({ markdown, copy, showImageCaptions = false }) {
   const blocks = parseMarkdown(markdown);
   const contents = blocks.filter(
@@ -276,30 +262,53 @@ function ArticleBlock({ block }) {
   return <p>{renderInline(block.text)}</p>;
 }
 
+function PostCover({ post }) {
+  const cover = blogCover(post);
+  return (
+    <span className={`post-cover${cover ? "" : " post-cover--mark"}`}>
+      {cover ? <img src={cover} alt="" loading="lazy" decoding="async" /> : <BrandMark />}
+    </span>
+  );
+}
+
 function BlogIndex({ onOpenPost, posts, lang, copy }) {
+  const [lead, ...rest] = posts;
+  const open = (postId) => (event) => {
+    event.preventDefault();
+    onOpenPost(postId);
+  };
+  const meta = (post) => (
+    <span className="post-meta">
+      <span>{post.kind}</span>
+      <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
+    </span>
+  );
+  const tags = (post) => (
+    <span className="blog-post-tags" aria-label={copy.tags}>
+      {post.tags.map((tag) => <span key={tag}>{tag}</span>)}
+    </span>
+  );
+
   return (
     <section className="blog-index" aria-label={copy.posts}>
-      <SurveyFeature lang={lang} />
+      <PageHead title={appCopy[lang].tabs.blog} description={appCopy[lang].pageHeads.blog} />
+      <a className="blog-lead-post" href={`#blog/${encodeURIComponent(lead.id)}`} onClick={open(lead.id)}>
+        <PostCover post={lead} />
+        <span className="blog-lead-text">
+          {meta(lead)}
+          <h2>{lead.title}</h2>
+          <p>{lead.summary}</p>
+          {tags(lead)}
+        </span>
+      </a>
       <div className="blog-post-list">
-        {posts.map((post) => (
-          <a
-            className="blog-post-card"
-            href={`#blog/${encodeURIComponent(post.id)}`}
-            key={post.id}
-            onClick={(event) => {
-              event.preventDefault();
-              onOpenPost(post.id);
-            }}
-          >
-            <span className="blog-post-meta">
-              <span>{post.kind}</span>
-              <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
-            </span>
+        {rest.map((post) => (
+          <a className="blog-post-card" href={`#blog/${encodeURIComponent(post.id)}`} key={post.id} onClick={open(post.id)}>
+            <PostCover post={post} />
+            {meta(post)}
             <h3>{post.title}</h3>
             <p>{post.summary}</p>
-            <span className="blog-post-tags" aria-label={copy.tags}>
-              {post.tags.map((tag) => <code key={tag}>{tag}</code>)}
-            </span>
+            {tags(post)}
           </a>
         ))}
       </div>
@@ -316,7 +325,7 @@ function BlogArticle({ post, onBack, lang, copy }) {
           <span>{post.kind}</span>
           <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
         </div>
-        <h2 id="blog-article-title">{post.title}</h2>
+        <h1 id="blog-article-title">{post.title}</h1>
         <p className="blog-article-lead">{post.summary}</p>
       </div>
 
