@@ -498,14 +498,17 @@ The site supports **English and Chinese**, with the language switch in the upper
 
 ## Citation
 
-If this collection is useful in your work, please cite it:
+If you find this collection useful, please cite our survey:
 
 ```bibtex
-@misc{awesomersi2026,
-  title        = {Awesome RSI: A Curated Collection of Recursive Self-Improvement Benchmarks and Methods},
-  author       = {Prism-Shadow},
-  year         = {2026},
-  howpublished = {\url{https://github.com/Prism-Shadow/awesome-rsi}},
+@misc{zhou2026existingmethodsnewresearch,
+  title         = {From Existing Methods to New Research Ideas: Two Perspectives on Recursive Self-Improvement},
+  author        = {Leijun Zhou and Yanke Yu and Zhihao Liu and Qu Xiang and Tiancheng Hu and Yiru Dong and Yihan Wu and Yangxi Xiang and Xuejun Wu and Xi Chen and Buyue Qian and Yaowei Zheng and Junhao Hu},
+  year          = {2026},
+  eprint        = {2610.14625},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2610.14625},
 }
 ```
 
@@ -514,8 +517,8 @@ If this collection is useful in your work, please cite it:
 Scan the QR code to join the Awesome RSI discussion group.
 
 <p align="center">
-  <a href="https://github.com/Prism-Shadow/penguin-harness-community/blob/main/wechat/rsi.jpg">
-    <img src="https://raw.githubusercontent.com/Prism-Shadow/penguin-harness-community/main/wechat/rsi.jpg" alt="Awesome RSI WeChat group QR code" width="420">
+  <a href="https://github.com/Prism-Shadow/penguin-harness-community/blob/main/assets/wechat/rsi.jpg">
+    <img src="https://raw.githubusercontent.com/Prism-Shadow/penguin-harness-community/main/assets/wechat/rsi.jpg" alt="Awesome RSI WeChat group QR code" width="420">
   </a>
 </p>
 
