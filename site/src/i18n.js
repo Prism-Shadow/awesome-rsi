@@ -26,7 +26,6 @@ export const appCopy = {
       ["Cite this collection", "#citation"],
       ["WeChat group", "#wechat-group"],
     ],
-    footerNote: "Paper metadata from arXiv; citation counts from Semantic Scholar.",
   },
   zh: {
     pageTitle: "Awesome RSI — 递归自我改进研究",
@@ -55,7 +54,6 @@ export const appCopy = {
       ["引用本合集", "#citation"],
       ["微信群", "#wechat-group"],
     ],
-    footerNote: "论文元数据来自 arXiv，引用次数来自 Semantic Scholar。",
   },
 };
 
