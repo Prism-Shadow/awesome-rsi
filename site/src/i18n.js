@@ -214,7 +214,7 @@ export const graphCopy = {
     semanticScholar: "Semantic Scholar",
     openArxiv: "Open paper on arXiv ↗",
     openPaper: "Open paper ↗",
-    pageIntro: (papers, edges) => `Arrows run from a benchmark paper to the papers it cites. ${papers} papers and ${edges} verified citations.`,
+    pageIntro: (papers, edges) => `Arrows run from a benchmark paper to the papers it cites. ${papers} papers and ${edges} citations.`,
   },
   zh: {
     verifiedNetwork: "经核验的文献引用网络",
@@ -245,7 +245,7 @@ export const graphCopy = {
     semanticScholar: "Semantic Scholar",
     openArxiv: "在 arXiv 查看论文 ↗",
     openPaper: "查看论文 ↗",
-    pageIntro: (papers, edges) => `箭头从基准论文指向它引用的论文。共 ${papers} 篇论文、${edges} 条已核验引用。`,
+    pageIntro: (papers, edges) => `箭头从基准论文指向它引用的论文。共 ${papers} 篇论文、${edges} 条引用。`,
   },
 };
 
@@ -260,7 +260,7 @@ export const methodGraphCopy = {
     nodeSize: "Node size = citations inside this collection",
     primaryMetric: "first posted",
     corpusCitations: "in-corpus citations",
-    pageIntro: (papers, edges) => `Arrows run from a method to the methods it cites. ${papers} papers and ${edges} citations, each checked against the citing paper's bibliography.`,
+    pageIntro: (papers, edges) => `Arrows run from a method to the methods it cites. ${papers} papers and ${edges} citations.`,
   },
   zh: {
     ...graphCopy.zh,
@@ -272,7 +272,7 @@ export const methodGraphCopy = {
     nodeSize: "节点大小代表在本合集内被引用的次数",
     primaryMetric: "首次公开",
     corpusCitations: "合集内引用",
-    pageIntro: (papers, edges) => `箭头从方法指向它引用的方法。共 ${papers} 篇论文、${edges} 条引用，均已对照施引论文的参考文献核验。`,
+    pageIntro: (papers, edges) => `箭头从方法指向它引用的方法。共 ${papers} 篇论文、${edges} 条引用。`,
   },
 };
 
