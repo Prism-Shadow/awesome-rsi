@@ -45,14 +45,14 @@ test("README shows a linked, full-width overview image after the survey title", 
   }
 });
 
-test("the survey has its own home page band between Recently added and the blog, not in articles", async () => {
+test("the survey sits on the home page between Recently added and the blog, not in articles", async () => {
   const app = await readFile(new URL("../site/src/App.jsx", import.meta.url), "utf8");
   const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
   const blog = await readFile(new URL("../site/src/components/BlogTab.jsx", import.meta.url), "utf8");
   assert.doesNotMatch(app, /SurveyFeature/);
   assert.doesNotMatch(blog, /SurveyFeature/);
   const page = home.slice(home.indexOf("export default function HomePage("));
-  assert.match(page, /<section className="survey-band">\s*<div className="container">\s*<SurveyFeature lang=\{lang\} \/>/);
+  assert.match(page, /<SurveyFeature lang=\{lang\} \/>/);
   assert.ok(page.indexOf("<RecentlyAdded") < page.indexOf("<SurveyFeature"));
   assert.ok(page.indexOf("<SurveyFeature") < page.indexOf("<FromTheBlog"));
   assert.equal(home.match(/<SurveyFeature\b/g)?.length, 1);
@@ -60,9 +60,9 @@ test("the survey has its own home page band between Recently added and the blog,
 
 test("the survey styles stay independent of the hero and avoid a one-sided accent border", async () => {
   const css = await readFile(new URL("../site/src/styles.css", import.meta.url), "utf8");
-  const feature = css.match(/\.survey-feature\s*\{([^}]+)\}/)?.[1];
-  assert.ok(feature);
-  assert.doesNotMatch(feature, /border-(?:left|inline-start)/);
+  for (const [, rule] of css.matchAll(/\.survey-[a-z-]+\s*\{([^}]+)\}/g)) {
+    assert.doesNotMatch(rule, /border-(?:left|inline-start)/);
+  }
   assert.doesNotMatch(css, /\.home-hero\s+\.survey-summary/);
   assert.match(css, /\.survey-summary\s*\{[^}]*margin:\s*0;/);
 });

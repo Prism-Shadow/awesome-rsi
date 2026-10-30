@@ -20,11 +20,11 @@ export default function SurveyFeature({ lang }) {
           <span className="survey-eyebrow">{copy.eyebrow}</span>
           <time className="survey-meta" dateTime={surveyPaper.published}>{date}</time>
         </div>
-        <h3 id="survey-title">
+        <h2 id="survey-title">
           <a href={pdfUrl} target="_blank" rel="noreferrer">
             {lang === "zh" ? surveyPaper.titleZh : surveyPaper.title}
           </a>
-        </h3>
+        </h2>
         <p className="survey-summary">{copy.summary}</p>
         <div className="survey-actions">
           <a className="btn btn-primary btn-sm" href={pdfUrl} target="_blank" rel="noreferrer">

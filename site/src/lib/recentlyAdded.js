@@ -5,6 +5,12 @@ import { systems } from "../data/systems.js";
 import { papers } from "../data/papers.js";
 import { methodTaxonomy } from "../data/methodTaxonomy.js";
 import { paperTaxonomy } from "../data/paperTaxonomy.js";
+import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
+
+// Benchmarks have no one-line summary, so the feed uses the first sentence of the abstract.
+function firstSentence(text = "") {
+  return text.match(/^.+?[.!?。！？](?=\s|$)/)?.[0] ?? text;
+}
 
 export const collectionEntries = [
   ...methods.map((method) => ({
@@ -15,6 +21,8 @@ export const collectionEntries = [
     published: method.published,
     added: method.added,
     url: method.arxiv ?? method.pdf,
+    summary: method.summary,
+    summaryZh: method.summaryZh,
     artifact: methodTaxonomy[method.id].artifact,
   })),
   ...systems.map((system) => ({
@@ -25,6 +33,8 @@ export const collectionEntries = [
     published: system.released,
     added: system.added,
     url: system.links[0]?.url,
+    summary: system.summary,
+    summaryZh: system.summaryZh,
     artifact: system.taxonomy.artifact,
   })),
   ...papers.map((paper) => ({
@@ -35,6 +45,8 @@ export const collectionEntries = [
     published: paper.published,
     added: paper.added,
     url: paper.arxiv,
+    summary: firstSentence(paper.abstract),
+    summaryZh: firstSentence(paperAbstractsZh[paper.id]),
     mode: paperTaxonomy[paper.id].mode,
   })),
 ];
