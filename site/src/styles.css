@@ -1890,8 +1890,12 @@ html[lang="zh-Hans"] .graph-heading h2 {
   text-underline-offset: 0.18em;
 }
 
+/* Hovering an entry tints its title; only the title link itself, the real target, gets the underline. */
 .paper-card:hover .paper-title a {
   color: var(--accent);
+}
+
+.paper-title a:hover {
   text-decoration: underline;
 }
 
