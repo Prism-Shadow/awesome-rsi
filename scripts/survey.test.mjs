@@ -45,25 +45,25 @@ test("README shows a linked, full-width overview image after the survey title", 
   }
 });
 
-test("the survey entry sits on the home page next to the blog posts, not in articles", async () => {
+test("the survey has its own home page band between Recently added and the blog, not in articles", async () => {
   const app = await readFile(new URL("../site/src/App.jsx", import.meta.url), "utf8");
   const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
   const blog = await readFile(new URL("../site/src/components/BlogTab.jsx", import.meta.url), "utf8");
   assert.doesNotMatch(app, /SurveyFeature/);
   assert.doesNotMatch(blog, /SurveyFeature/);
-  const writing = home.slice(home.indexOf("function SurveyAndBlog("), home.indexOf("function DistributionRow("));
-  assert.match(writing, /<SurveyFeature lang=\{lang\} \/>/);
-  assert.ok(writing.indexOf("<SurveyFeature") < writing.indexOf('className="writing-posts"'));
+  const page = home.slice(home.indexOf("export default function HomePage("));
+  assert.match(page, /<section className="survey-band">\s*<div className="container">\s*<SurveyFeature lang=\{lang\} \/>/);
+  assert.ok(page.indexOf("<RecentlyAdded") < page.indexOf("<SurveyFeature"));
+  assert.ok(page.indexOf("<SurveyFeature") < page.indexOf("<FromTheBlog"));
   assert.equal(home.match(/<SurveyFeature\b/g)?.length, 1);
 });
 
-test("the survey uses an even border and summary styles independent of the hero", async () => {
+test("the survey styles stay independent of the hero and avoid a one-sided accent border", async () => {
   const css = await readFile(new URL("../site/src/styles.css", import.meta.url), "utf8");
   const feature = css.match(/\.survey-feature\s*\{([^}]+)\}/)?.[1];
   assert.ok(feature);
-  assert.match(feature, /border:\s*1px solid var\(--line\)/);
   assert.doesNotMatch(feature, /border-(?:left|inline-start)/);
-  assert.doesNotMatch(css, /\.hero\s+\.survey-summary/);
+  assert.doesNotMatch(css, /\.home-hero\s+\.survey-summary/);
   assert.match(css, /\.survey-summary\s*\{[^}]*margin:\s*0;/);
 });
 
@@ -71,9 +71,9 @@ test("the complete guide stays one click away from the home hero, separate from 
   const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
   const feature = await readFile(new URL("../site/src/components/SurveyFeature.jsx", import.meta.url), "utf8");
   const hero = home.slice(home.indexOf("function HomeHero("), home.indexOf("function RecentlyAdded("));
-  assert.match(hero, /href="#blog\/understanding-rsi">\{copy\.guide\}<\/a>/);
-  assert.equal(homeCopy.en.guide, "New to RSI? Read the guide");
-  assert.equal(homeCopy.zh.guide, "初次了解 RSI？阅读导读");
+  assert.match(hero, /<a href="#blog\/understanding-rsi">\{copy\.guide\}<\/a>/);
+  assert.equal(homeCopy.en.guide, "New to RSI? Read the guide →");
+  assert.equal(homeCopy.zh.guide, "初次了解 RSI？阅读导读 →");
   assert.doesNotMatch(feature, /survey-guide-link|#blog\/understanding-rsi/);
 });
 
