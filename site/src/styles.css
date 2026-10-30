@@ -392,13 +392,6 @@ html[lang="zh-Hans"] .survey-feature h2 {
   font-size: 1.05rem;
 }
 
-.survey-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.4rem;
-}
-
 .survey-feature a:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
@@ -2358,7 +2351,6 @@ html[lang="zh-Hans"] .home-hero h1 {
 }
 
 html[lang="zh-Hans"] .home-hero h1 em {
-  display: block;
   font-style: normal;
 }
 
@@ -2372,11 +2364,6 @@ html[lang="zh-Hans"] .home-hero h1 em {
 html[lang="zh-Hans"] .home-lede {
   font-size: 1.05rem;
   line-height: 1.85;
-}
-
-.home-lede a {
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .home-stats {

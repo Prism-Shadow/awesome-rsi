@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { surveyPaper } from "../site/src/data/survey.js";
-import { homeCopy, surveyCopy } from "../site/src/i18n.js";
+import { surveyCopy } from "../site/src/i18n.js";
 import { renderReadme } from "./generate-readme.mjs";
 
 test("the featured survey links directly to its arXiv PDF", async () => {
@@ -10,7 +10,7 @@ test("the featured survey links directly to its arXiv PDF", async () => {
   const feature = await readFile(new URL("../site/src/components/SurveyFeature.jsx", import.meta.url), "utf8");
   assert.match(feature, /const pdfUrl = surveyPaper\.pdf;/);
   assert.doesNotMatch(feature, /import\.meta\.env\.BASE_URL/);
-  assert.equal(feature.match(/href=\{pdfUrl\}/g)?.length, 2);
+  assert.equal(feature.match(/href=\{pdfUrl\}/g)?.length, 1);
   assert.ok(Number.isInteger(surveyPaper.pages) && surveyPaper.pages > 0);
   assert.match(surveyPaper.published, /^\d{4}-\d{2}-\d{2}$/);
 });
@@ -67,13 +67,8 @@ test("the survey styles stay independent of the hero and avoid a one-sided accen
   assert.match(css, /\.survey-summary\s*\{[^}]*margin:\s*0;/);
 });
 
-test("the complete guide stays one click away from the home hero, separate from the survey", async () => {
-  const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
+test("the survey entry links only to the paper, not to the guide", async () => {
   const feature = await readFile(new URL("../site/src/components/SurveyFeature.jsx", import.meta.url), "utf8");
-  const hero = home.slice(home.indexOf("function HomeHero("), home.indexOf("function RecentlyAdded("));
-  assert.match(hero, /<a href="#blog\/understanding-rsi">\{copy\.guide\}<\/a>/);
-  assert.equal(homeCopy.en.guide, "New to RSI? Read the guide →");
-  assert.equal(homeCopy.zh.guide, "初次了解 RSI？阅读导读 →");
   assert.doesNotMatch(feature, /survey-guide-link|#blog\/understanding-rsi/);
 });
 
@@ -87,7 +82,7 @@ test("both languages have survey copy", () => {
   assert.ok(surveyPaper.title.trim());
   assert.ok(surveyPaper.titleZh.trim());
   for (const lang of ["en", "zh"]) {
-    for (const field of ["eyebrow", "summary", "read", "imageAlt"]) {
+    for (const field of ["eyebrow", "summary", "imageAlt"]) {
       assert.ok(surveyCopy[lang][field].trim(), `${lang}.${field}`);
     }
   }

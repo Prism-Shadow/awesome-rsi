@@ -61,8 +61,7 @@ export const homeCopy = {
   en: {
     // The middle phrase never wraps, so the headline breaks as "Recursive / self-improvement, / mapped."
     title: { before: "Recursive ", keep: "self-improvement,", gap: " ", emphasis: "mapped", after: "." },
-    lede: "An agent performs tasks, learns from trajectories and feedback, updates its own state, and carries that state into later work. We collect the papers that study this loop and classify every method along nine dimensions.",
-    guide: "New to RSI? Read the guide →",
+    lede: "Every RSI method, classified along nine dimensions.",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",
     allMethods: "Methods & Systems",
@@ -71,9 +70,8 @@ export const homeCopy = {
     blogTitle: "From the blog",
   },
   zh: {
-    title: { before: "", keep: "递归自我改进", gap: "", emphasis: "研究图谱", after: "" },
-    lede: "智能体执行任务，从轨迹和反馈中学习，更新自身状态，再把更新后的状态带到后续工作中。我们收录研究这一闭环的论文，并按九个维度为每个方法分类。",
-    guide: "初次了解 RSI？阅读导读 →",
+    title: { before: "", keep: "RSI", gap: " ", emphasis: "研究图谱", after: "" },
+    lede: "按照九个维度为所有 RSI 方法分类。",
     stats: { methods: "个方法", systems: "个系统", benchmarks: "篇基准论文", citations: "条引用关系" },
     recentTitle: "最新收录",
     allMethods: "方法与系统",
@@ -87,13 +85,11 @@ export const surveyCopy = {
   en: {
     eyebrow: "Our survey",
     summary: "A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.",
-    read: "Read the survey",
     imageAlt: "Survey overview: a tree connects agent resources, the RSI taxonomy, feedback-driven improvement, and insights from traditional deep learning.",
   },
   zh: {
     eyebrow: "我们的综述",
     summary: "通过九维分类框架和传统深度学习机制，梳理已有 RSI 方法，探索新的研究思路。",
-    read: "阅读综述",
     imageAlt: "综述概览：一棵树连接智能体资源、RSI 分类框架、反馈驱动的改进，以及来自传统深度学习的启发。",
   },
 };
