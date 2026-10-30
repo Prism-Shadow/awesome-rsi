@@ -417,9 +417,11 @@ html[lang="zh-Hans"] .survey-feature h2 {
   max-width: var(--content-max);
 }
 
+/* Guides keep the table of contents inside the page column, aligned with the site header;
+   the article header lines up with the body text to its right. */
 .blog-article--guide .blog-article-header {
   max-width: 52rem;
-  margin: 0 auto;
+  margin: 0 0 0 16.5rem;
 }
 
 .blog-back-link {
@@ -541,10 +543,8 @@ html[lang="zh-Hans"] .blog-article h1 {
 
 .blog-guide-layout {
   display: grid;
-  grid-template-columns: 15rem minmax(0, 52rem);
-  column-gap: 1.5rem;
-  width: 68.5rem;
-  margin-left: calc(50% - 42.5rem);
+  grid-template-columns: 14rem minmax(0, 52rem);
+  column-gap: 2.5rem;
   align-items: start;
 }
 
@@ -2236,8 +2236,9 @@ html[lang="zh-Hans"] .method-status {
   color: var(--ink);
 }
 
-@media (max-width: 1280px) {
-  .blog-guide-layout { display: block; width: auto; margin-left: 0; }
+@media (max-width: 1080px) {
+  .blog-article--guide .blog-article-header { margin: 0; }
+  .blog-guide-layout { display: block; }
   .blog-toc { position: static; height: auto; min-height: 0; margin-bottom: 2rem; overflow: visible; }
 }
 
