@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
-import BrandMark from "./BrandMark.jsx";
-import PageHead from "./PageHead.jsx";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
-import { appCopy, blogCopy } from "../i18n.js";
-import { blogCover, resolveBlogImage, unescapeMarkdown } from "../lib/blogMarkdown.js";
+import { blogCopy } from "../i18n.js";
+import { resolveBlogImage, unescapeMarkdown } from "../lib/blogMarkdown.js";
 
 function formatDate(value, lang) {
   return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
@@ -262,60 +260,6 @@ function ArticleBlock({ block }) {
   return <p>{renderInline(block.text)}</p>;
 }
 
-function PostCover({ post }) {
-  const cover = blogCover(post);
-  return (
-    <span className={`post-cover${cover ? "" : " post-cover--mark"}`}>
-      {cover ? <img src={cover} alt="" loading="lazy" decoding="async" /> : <BrandMark />}
-    </span>
-  );
-}
-
-function BlogIndex({ onOpenPost, posts, lang, copy }) {
-  const [lead, ...rest] = posts;
-  const open = (postId) => (event) => {
-    event.preventDefault();
-    onOpenPost(postId);
-  };
-  const meta = (post) => (
-    <span className="post-meta">
-      <span>{post.kind}</span>
-      <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
-    </span>
-  );
-  const tags = (post) => (
-    <span className="blog-post-tags" aria-label={copy.tags}>
-      {post.tags.map((tag) => <span key={tag}>{tag}</span>)}
-    </span>
-  );
-
-  return (
-    <section className="blog-index" aria-label={copy.posts}>
-      <PageHead title={appCopy[lang].tabs.blog} description={appCopy[lang].pageHeads.blog} />
-      <a className="blog-lead-post" href={`#blog/${encodeURIComponent(lead.id)}`} onClick={open(lead.id)}>
-        <PostCover post={lead} />
-        <span className="blog-lead-text">
-          {meta(lead)}
-          <h2>{lead.title}</h2>
-          <p>{lead.summary}</p>
-          {tags(lead)}
-        </span>
-      </a>
-      <div className="blog-post-list">
-        {rest.map((post) => (
-          <a className="blog-post-card" href={`#blog/${encodeURIComponent(post.id)}`} key={post.id} onClick={open(post.id)}>
-            <PostCover post={post} />
-            {meta(post)}
-            <h3>{post.title}</h3>
-            <p>{post.summary}</p>
-            {tags(post)}
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function BlogArticle({ post, onBack, lang, copy }) {
   return (
     <article className={`blog-article${post.markdown ? " blog-article--guide" : ""}`} aria-labelledby="blog-article-title">
@@ -356,6 +300,7 @@ export default function BlogTab({ lang }) {
   const [activePostId, setActivePostId] = useState(postIdFromHash);
   const posts = lang === "zh" ? blogPostsZh : blogPosts;
   const copy = blogCopy[lang];
+  const activePost = posts.find((post) => post.id === activePostId);
 
   useEffect(() => {
     const handleHashChange = () => setActivePostId(postIdFromHash());
@@ -367,18 +312,19 @@ export default function BlogTab({ lang }) {
     };
   }, []);
 
-  const activePost = posts.find((post) => post.id === activePostId);
-  const openPost = (postId) => {
-    window.history.pushState(null, "", `#blog/${encodeURIComponent(postId)}`);
-    setActivePostId(postId);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  const closePost = () => {
-    window.history.pushState(null, "", "#blog");
-    setActivePostId(null);
+  // Links between posts change only the article, so start each one at the top.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePostId]);
+
+  // An unknown post falls back to the post list on the home page.
+  useEffect(() => {
+    if (!activePost) window.location.replace("#blog");
+  }, [activePost]);
+
+  const backToPosts = () => {
+    window.location.hash = "blog";
   };
 
-  return activePost
-    ? <BlogArticle post={activePost} onBack={closePost} lang={lang} copy={copy} />
-    : <BlogIndex onOpenPost={openPost} posts={posts} lang={lang} copy={copy} />;
+  return activePost ? <BlogArticle post={activePost} onBack={backToPosts} lang={lang} copy={copy} /> : null;
 }

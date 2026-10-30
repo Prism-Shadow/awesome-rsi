@@ -78,9 +78,11 @@ export default function App() {
     };
   }, []);
 
-  // Each page opens at the top; anchors within the same page keep the browser's own scrolling.
+  // A hash that names a section (#recently-added, #blog) scrolls to it; other page changes start at the top.
   useEffect(() => {
-    if (previousTab.current !== tab) window.scrollTo(0, 0);
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target) target.scrollIntoView();
+    else if (previousTab.current !== tab) window.scrollTo(0, 0);
     previousTab.current = tab;
   }, [tab]);
 

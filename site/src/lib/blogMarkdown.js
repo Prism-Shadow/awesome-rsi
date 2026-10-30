@@ -13,9 +13,3 @@ export function resolveBlogImage(src) {
   }
   return normalized;
 }
-
-// Blog cards use the first figure in a post as its cover; posts without figures get none.
-export function blogCover(post) {
-  const src = post.markdown?.match(/^!\[[^\]]*\]\(([^)]+)\)$/m)?.[1];
-  return src ? resolveBlogImage(src) : null;
-}
