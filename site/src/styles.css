@@ -1852,26 +1852,15 @@ html[lang="zh-Hans"] .graph-heading h2 {
 
 /* ---------- paper cards ---------- */
 
+/* Entries are separated by rules, without a surrounding frame. */
 .paper-list {
   margin-bottom: 1rem;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  border-top: 1px solid var(--line);
 }
 
 .paper-card {
-  padding: 1.35rem 1.6rem;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--line);
-  transition: background 0.15s ease;
-}
-
-.paper-card:last-child {
-  border-bottom: 0;
-}
-
-.paper-card:hover {
-  background: var(--surface-2);
 }
 
 .paper-top {
@@ -2787,7 +2776,7 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
   }
 
   .paper-card {
-    padding: 1.1rem 1.1rem 1.2rem;
+    padding: 1.25rem 0;
   }
 
   .paper-title {
