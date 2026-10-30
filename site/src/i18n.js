@@ -23,7 +23,7 @@ export const appCopy = {
     footerLinks: [
       ["GitHub repository", ""],
       ["Suggest a paper", "/issues"],
-      ["Cite this collection", "#citation"],
+      ["Cite the survey", "#citation"],
       ["WeChat group", "#wechat-group"],
     ],
   },
@@ -51,7 +51,7 @@ export const appCopy = {
     footerLinks: [
       ["GitHub 仓库", ""],
       ["推荐论文", "/issues"],
-      ["引用本合集", "#citation"],
+      ["引用综述", "#citation"],
       ["微信群", "#wechat-group"],
     ],
   },
