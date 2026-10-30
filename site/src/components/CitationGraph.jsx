@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
+import { citationEdges } from "../data/citationGraph.js";
 import { graphCopy } from "../i18n.js";
 import { buildLayout, clamp, createGraphGeometry } from "../lib/citationLayout.js";
 
@@ -37,8 +37,8 @@ function edgeCoordinates(source, target) {
 function getFreshnessColor(paper, minTime, maxTime) {
   const time = new Date(`${paper.published}T00:00:00Z`).getTime();
   const ratio = maxTime === minTime ? 0.5 : (time - minTime) / (maxTime - minTime);
-  const lightness = 70 - ratio * 37;
-  return `hsl(158 48% ${lightness}%)`;
+  const lightness = 78 - ratio * 36;
+  return `hsl(217 82% ${lightness}%)`;
 }
 
 function RelationList({ title, emptyText, edges, paperById, relationKey, onSelect, copy }) {
@@ -66,7 +66,6 @@ export default function CitationGraph({
   papers,
   lang,
   edges = citationEdges,
-  meta = citationGraphMeta,
   copyOverride,
   nodeWeight = defaultNodeWeight,
   primaryMetric = defaultPrimaryMetric,
@@ -74,6 +73,7 @@ export default function CitationGraph({
   nodeAriaLabel,
   focusRequest,
   spacious = false,
+  showHeading = true,
 }) {
   const graphHeight = spacious ? Math.max(820, Math.round(620 * Math.sqrt(papers.length / 32))) : GRAPH_HEIGHT;
   const geometry = useMemo(() => createGraphGeometry(GRAPH_WIDTH, graphHeight), [graphHeight]);
@@ -244,8 +244,8 @@ export default function CitationGraph({
   if (papers.length === 0) return null;
 
   return (
-    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} aria-labelledby="citation-graph-title">
-      <div className="graph-heading">
+    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} {...(showHeading ? { "aria-labelledby": "citation-graph-title" } : { "aria-label": copy.title })}>
+      {showHeading && <div className="graph-heading">
         <div>
           <span className="graph-eyebrow">{copy.verifiedNetwork}</span>
           <h2 id="citation-graph-title">{copy.title}</h2>
@@ -255,7 +255,7 @@ export default function CitationGraph({
           <span><b>{papers.length}</b> {copy.visiblePapers}</span>
           <span><b>{visibleEdges.length}</b> {copy.verifiedEdges}</span>
         </div>
-      </div>
+      </div>}
 
       <div className="graph-workspace">
         <div className="graph-stage">
@@ -361,19 +361,6 @@ export default function CitationGraph({
             </>
           )}
         </aside>
-      </div>
-
-      <div className="graph-provenance">
-        <span className="verified-mark">✓</span>
-        {lang === "zh" ? (
-          <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot}{meta.snapshot}。
-          </p>
-        ) : (
-          <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot} {meta.snapshot}.
-          </p>
-        )}
       </div>
     </section>
   );

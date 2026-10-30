@@ -16,6 +16,7 @@ export const papers = [
       "Michael Qizhe Shieh"
     ],
     "published": "2026-10-07",
+    "added": "2026-10-12",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -46,6 +47,7 @@ export const papers = [
       "Anirudh Goyal"
     ],
     "published": "2026-10-06",
+    "added": "2026-10-12",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -86,6 +88,7 @@ export const papers = [
       "Ge Zhang"
     ],
     "published": "2026-08-31",
+    "added": "2026-09-22",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -132,6 +135,7 @@ export const papers = [
       "Chi Jin"
     ],
     "published": "2026-05-09",
+    "added": "2026-09-20",
     "year": 2026,
     "tags": [
       "Research Automation"
@@ -152,6 +156,7 @@ export const papers = [
       "Changshui Zhang"
     ],
     "published": "2026-06-16",
+    "added": "2026-09-15",
     "nickname": "SEAGym",
     "year": 2026,
     "tags": [
@@ -190,6 +195,7 @@ export const papers = [
       "Ge Zhang"
     ],
     "published": "2026-08-31",
+    "added": "2026-09-15",
     "nickname": "S3Gym",
     "year": 2026,
     "tags": [
@@ -214,6 +220,7 @@ export const papers = [
       "Samuel Marc Denton"
     ],
     "published": "2026-02-25",
+    "added": "2026-09-07",
     "year": 2026,
     "tags": [
       "Harness Optimization",
@@ -250,6 +257,7 @@ export const papers = [
       "Wenxuan Zhang"
     ],
     "published": "2026-09-01",
+    "added": "2026-09-07",
     "year": 2026,
     "tags": [
       "Harness Optimization",
@@ -276,6 +284,7 @@ export const papers = [
       "Tao Zhang"
     ],
     "published": "2026-08-10",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Harness Optimization",
@@ -302,6 +311,7 @@ export const papers = [
       "Chi Zhang"
     ],
     "published": "2026-08-06",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -326,6 +336,7 @@ export const papers = [
       "Yuan Xue"
     ],
     "published": "2026-08-06",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Harness Optimization"
@@ -354,6 +365,7 @@ export const papers = [
       "Junhao Hu"
     ],
     "published": "2026-08-04",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -380,6 +392,7 @@ export const papers = [
       "Ling Yang"
     ],
     "published": "2026-08-04",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -405,6 +418,7 @@ export const papers = [
       "Muhan Zhang"
     ],
     "published": "2026-08-04",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Skill Learning",
@@ -432,6 +446,7 @@ export const papers = [
       "Xiangfeng Wang"
     ],
     "published": "2026-08-02",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Continual Learning",
@@ -456,6 +471,7 @@ export const papers = [
       "Tieniu Tan"
     ],
     "published": "2026-07-31",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -480,6 +496,7 @@ export const papers = [
       "Michael Qizhe Shieh"
     ],
     "published": "2026-07-28",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Data-Centric",
@@ -509,6 +526,7 @@ export const papers = [
       "Teng Li"
     ],
     "published": "2026-07-06",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Self-Evolution",
@@ -573,6 +591,7 @@ export const papers = [
       "Guang Shi"
     ],
     "published": "2026-07-06",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Learning Dynamics",
@@ -600,6 +619,7 @@ export const papers = [
       "Joseph E. Gonzalez"
     ],
     "published": "2026-06-04",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Continual Learning",
@@ -636,6 +656,7 @@ export const papers = [
       "Zichen Chen"
     ],
     "published": "2026-06-03",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Research Automation"
@@ -663,6 +684,7 @@ export const papers = [
       "Le Sun"
     ],
     "published": "2026-06-03",
+    "added": "2026-09-07",
     "year": 2026,
     "tags": [
       "Harness Optimization",
@@ -689,6 +711,7 @@ export const papers = [
       "Ruoxi Jia"
     ],
     "published": "2026-06-02",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Data-Centric",
@@ -716,6 +739,7 @@ export const papers = [
       "Jia Li"
     ],
     "published": "2026-05-18",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Memory",
@@ -743,6 +767,7 @@ export const papers = [
       "Chenyan Xiong"
     ],
     "published": "2026-04-22",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Skill Learning",
@@ -776,6 +801,7 @@ export const papers = [
       "Feng Zhao"
     ],
     "published": "2026-04-19",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Skill Learning",
@@ -803,6 +829,7 @@ export const papers = [
       "Jiang Bian"
     ],
     "published": "2026-04-12",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Post-Training & RL",
@@ -827,6 +854,7 @@ export const papers = [
       "Maksym Andriushchenko"
     ],
     "published": "2026-03-09",
+    "added": "2026-08-19",
     "year": 2026,
     "tags": [
       "Post-Training & RL",
@@ -859,6 +887,7 @@ export const papers = [
       "Derek Zhiyuan Cheng"
     ],
     "published": "2025-11-25",
+    "added": "2026-08-19",
     "year": 2025,
     "tags": [
       "Self-Evolution",
@@ -883,6 +912,7 @@ export const papers = [
       "Yiqun Liu"
     ],
     "published": "2025-10-20",
+    "added": "2026-08-19",
     "year": 2025,
     "tags": [
       "Memory",
@@ -918,6 +948,7 @@ export const papers = [
       "Liang He"
     ],
     "published": "2025-08-26",
+    "added": "2026-08-19",
     "year": 2025,
     "tags": [
       "Self-Evolution",
@@ -940,6 +971,7 @@ export const papers = [
       "Julian McAuley"
     ],
     "published": "2025-07-07",
+    "added": "2026-08-19",
     "year": 2025,
     "tags": [
       "Memory",
@@ -966,6 +998,7 @@ export const papers = [
       "Qianli Ma"
     ],
     "published": "2025-05-17",
+    "added": "2026-08-19",
     "year": 2025,
     "tags": [
       "Continual Learning",

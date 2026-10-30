@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
-import SurveyFeature from "./SurveyFeature.jsx";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
 import { blogCopy } from "../i18n.js";
+import { resolveBlogImage, unescapeMarkdown } from "../lib/blogMarkdown.js";
 
 function formatDate(value, lang) {
   return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
@@ -18,10 +18,6 @@ function formatDate(value, lang) {
 function postIdFromHash() {
   const match = window.location.hash.match(/^#blog\/(.+)$/);
   return match ? decodeURIComponent(match[1]) : null;
-}
-
-function unescapeMarkdown(text) {
-  return text.replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, "$1");
 }
 
 function MathMarkup({ expression, displayMode = false, className }) {
@@ -175,18 +171,6 @@ function parseMarkdown(markdown) {
   return blocks;
 }
 
-function resolveBlogImage(src) {
-  const normalized = unescapeMarkdown(src);
-  if (normalized.startsWith("blog/")) {
-    return `${import.meta.env.BASE_URL}${normalized}`;
-  }
-  const sourcePrefix = "图片和附件/";
-  if (normalized.startsWith(sourcePrefix)) {
-    return `${import.meta.env.BASE_URL}blog/rsi-guide/${normalized.slice(sourcePrefix.length)}`;
-  }
-  return normalized;
-}
-
 function MarkdownArticle({ markdown, copy, showImageCaptions = false }) {
   const blocks = parseMarkdown(markdown);
   const contents = blocks.filter(
@@ -276,37 +260,6 @@ function ArticleBlock({ block }) {
   return <p>{renderInline(block.text)}</p>;
 }
 
-function BlogIndex({ onOpenPost, posts, lang, copy }) {
-  return (
-    <section className="blog-index" aria-label={copy.posts}>
-      <SurveyFeature lang={lang} />
-      <div className="blog-post-list">
-        {posts.map((post) => (
-          <a
-            className="blog-post-card"
-            href={`#blog/${encodeURIComponent(post.id)}`}
-            key={post.id}
-            onClick={(event) => {
-              event.preventDefault();
-              onOpenPost(post.id);
-            }}
-          >
-            <span className="blog-post-meta">
-              <span>{post.kind}</span>
-              <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
-            </span>
-            <h3>{post.title}</h3>
-            <p>{post.summary}</p>
-            <span className="blog-post-tags" aria-label={copy.tags}>
-              {post.tags.map((tag) => <code key={tag}>{tag}</code>)}
-            </span>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function BlogArticle({ post, onBack, lang, copy }) {
   return (
     <article className={`blog-article${post.markdown ? " blog-article--guide" : ""}`} aria-labelledby="blog-article-title">
@@ -316,7 +269,7 @@ function BlogArticle({ post, onBack, lang, copy }) {
           <span>{post.kind}</span>
           <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
         </div>
-        <h2 id="blog-article-title">{post.title}</h2>
+        <h1 id="blog-article-title">{post.title}</h1>
         <p className="blog-article-lead">{post.summary}</p>
       </div>
 
@@ -347,6 +300,7 @@ export default function BlogTab({ lang }) {
   const [activePostId, setActivePostId] = useState(postIdFromHash);
   const posts = lang === "zh" ? blogPostsZh : blogPosts;
   const copy = blogCopy[lang];
+  const activePost = posts.find((post) => post.id === activePostId);
 
   useEffect(() => {
     const handleHashChange = () => setActivePostId(postIdFromHash());
@@ -358,18 +312,19 @@ export default function BlogTab({ lang }) {
     };
   }, []);
 
-  const activePost = posts.find((post) => post.id === activePostId);
-  const openPost = (postId) => {
-    window.history.pushState(null, "", `#blog/${encodeURIComponent(postId)}`);
-    setActivePostId(postId);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  const closePost = () => {
-    window.history.pushState(null, "", "#blog");
-    setActivePostId(null);
+  // Links between posts change only the article, so start each one at the top.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePostId]);
+
+  // An unknown post falls back to the post list on the home page.
+  useEffect(() => {
+    if (!activePost) window.location.replace("#blog");
+  }, [activePost]);
+
+  const backToPosts = () => {
+    window.location.hash = "blog";
   };
 
-  return activePost
-    ? <BlogArticle post={activePost} onBack={closePost} lang={lang} copy={copy} />
-    : <BlogIndex onOpenPost={openPost} posts={posts} lang={lang} copy={copy} />;
+  return activePost ? <BlogArticle post={activePost} onBack={backToPosts} lang={lang} copy={copy} /> : null;
 }

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { surveyPaper } from "../site/src/data/survey.js";
-import { appCopy, surveyCopy } from "../site/src/i18n.js";
+import { homeCopy, surveyCopy } from "../site/src/i18n.js";
 import { renderReadme } from "./generate-readme.mjs";
 
 test("the featured survey links directly to its arXiv PDF", async () => {
@@ -45,38 +45,35 @@ test("README shows a linked, full-width overview image after the survey title", 
   }
 });
 
-test("the survey entry belongs to the Blog index, not the global hero or individual articles", async () => {
+test("the survey sits on the home page between Recently added and the blog, not in articles", async () => {
   const app = await readFile(new URL("../site/src/App.jsx", import.meta.url), "utf8");
+  const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
   const blog = await readFile(new URL("../site/src/components/BlogTab.jsx", import.meta.url), "utf8");
   assert.doesNotMatch(app, /SurveyFeature/);
-  const index = blog.slice(blog.indexOf("function BlogIndex("), blog.indexOf("function BlogArticle("));
-  assert.match(index, /<SurveyFeature lang=\{lang\} \/>/);
-  assert.ok(index.indexOf("<SurveyFeature") < index.indexOf('className="blog-post-list"'));
-  assert.equal(blog.match(/<SurveyFeature\b/g)?.length, 1);
+  assert.doesNotMatch(blog, /SurveyFeature/);
+  const page = home.slice(home.indexOf("export default function HomePage("));
+  assert.match(page, /<SurveyFeature lang=\{lang\} \/>/);
+  assert.ok(page.indexOf("<RecentlyAdded") < page.indexOf("<SurveyFeature"));
+  assert.ok(page.indexOf("<SurveyFeature") < page.indexOf("<FromTheBlog"));
+  assert.equal(home.match(/<SurveyFeature\b/g)?.length, 1);
 });
 
-test("the survey uses an even border and summary styles independent of the hero", async () => {
+test("the survey styles stay independent of the hero and avoid a one-sided accent border", async () => {
   const css = await readFile(new URL("../site/src/styles.css", import.meta.url), "utf8");
-  const feature = css.match(/\.survey-feature\s*\{([^}]+)\}/)?.[1];
-  assert.ok(feature);
-  assert.match(feature, /border:\s*1px solid var\(--line\)/);
-  assert.doesNotMatch(feature, /border-(?:left|inline-start)/);
-  assert.doesNotMatch(css, /\.hero\s+\.survey-summary/);
+  for (const [, rule] of css.matchAll(/\.survey-[a-z-]+\s*\{([^}]+)\}/g)) {
+    assert.doesNotMatch(rule, /border-(?:left|inline-start)/);
+  }
+  assert.doesNotMatch(css, /\.home-hero\s+\.survey-summary/);
   assert.match(css, /\.survey-summary\s*\{[^}]*margin:\s*0;/);
 });
 
-test("the complete guide keeps its original hero entry, separate from the survey notice", async () => {
-  const app = await readFile(new URL("../site/src/App.jsx", import.meta.url), "utf8");
+test("the complete guide stays one click away from the home hero, separate from the survey", async () => {
+  const home = await readFile(new URL("../site/src/components/HomePage.jsx", import.meta.url), "utf8");
   const feature = await readFile(new URL("../site/src/components/SurveyFeature.jsx", import.meta.url), "utf8");
-  const hero = app.slice(app.indexOf('<section className="hero">'), app.indexOf("</section>"));
-  assert.match(hero, /className="hero-guide-link"/);
-  assert.match(hero, /href="#blog\/understanding-rsi"/);
-  assert.match(hero, /<span>\{copy.guideEyebrow\}<\/span>/);
-  assert.match(hero, /\{copy.guideLink\}/);
-  assert.equal(appCopy.en.guideEyebrow, "START HERE");
-  assert.equal(appCopy.en.guideLink, "New to RSI? Read the complete guide");
-  assert.equal(appCopy.zh.guideEyebrow, "从这里开始");
-  assert.equal(appCopy.zh.guideLink, "初次了解 RSI？阅读完整导读");
+  const hero = home.slice(home.indexOf("function HomeHero("), home.indexOf("function RecentlyAdded("));
+  assert.match(hero, /<a href="#blog\/understanding-rsi">\{copy\.guide\}<\/a>/);
+  assert.equal(homeCopy.en.guide, "New to RSI? Read the guide →");
+  assert.equal(homeCopy.zh.guide, "初次了解 RSI？阅读导读 →");
   assert.doesNotMatch(feature, /survey-guide-link|#blog\/understanding-rsi/);
 });
 
@@ -86,11 +83,11 @@ test("the survey notice shows the date without PDF language or page-count metada
   assert.doesNotMatch(feature, /surveyPaper\.pages|copy\.format\(/);
 });
 
-test("both Blog languages have survey copy", () => {
+test("both languages have survey copy", () => {
   assert.ok(surveyPaper.title.trim());
   assert.ok(surveyPaper.titleZh.trim());
   for (const lang of ["en", "zh"]) {
-    for (const field of ["eyebrow", "summary", "read"]) {
+    for (const field of ["eyebrow", "summary", "read", "imageAlt"]) {
       assert.ok(surveyCopy[lang][field].trim(), `${lang}.${field}`);
     }
   }
