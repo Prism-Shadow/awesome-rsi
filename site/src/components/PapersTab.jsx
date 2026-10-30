@@ -101,7 +101,7 @@ export default function PapersTab({ lang }) {
 
   return (
     <>
-      <PageHead title={appCopy[lang].tabs.papers} description={appCopy[lang].pageHeads.papers}>
+      <PageHead title={appCopy[lang].tabs.papers} description={appCopy[lang].pageHeads.papers(papers.length)}>
         <SearchField value={query} onChange={setQuery} placeholder={filterText.searchPlaceholder} />
       </PageHead>
       <div className="catalog">

@@ -14,8 +14,8 @@ export const appCopy = {
       graph: "Citation Graph",
     },
     pageHeads: {
-      methods: "Methods and open-source systems that improve their own parameters, harness code, context, memory, or skills. Combine filters across nine dimensions.",
-      papers: "Benchmarks that test whether agents improve with experience: how tasks arrive, what the agent may update, and how improvement is scored.",
+      methods: (count) => `${count} methods and open-source systems, each labeled on nine dimensions, from what improves to where feedback comes from`,
+      papers: (count) => `${count} benchmark papers, each labeled on seven dimensions, from how experience arrives to how improvement is scored`,
     },
     footerTagline: "A curated collection of benchmarks, methods, and systems for Recursive Self-Improvement.",
     footerExplore: "Explore",
@@ -42,8 +42,8 @@ export const appCopy = {
       graph: "引用图谱",
     },
     pageHeads: {
-      methods: "收录改进自身参数、Harness 代码、上下文、记忆或技能的方法与开源系统，可以组合九个维度筛选。",
-      papers: "检验智能体能否随经验改进的基准：任务如何到达、允许更新什么，以及如何评估改进。",
+      methods: (count) => `${count} 项方法与开源系统，按改进对象、反馈来源等九个维度逐一标注`,
+      papers: (count) => `${count} 篇基准论文，按经验获取方式、评分方式等七个维度逐一标注`,
     },
     footerTagline: "递归自我改进（RSI）基准、方法与系统精选合集。",
     footerExplore: "浏览",
@@ -61,7 +61,7 @@ export const homeCopy = {
   en: {
     // The middle phrase never wraps, so the headline breaks as "Recursive / self-improvement, / mapped."
     title: { before: "Recursive ", keep: "self-improvement,", gap: " ", emphasis: "mapped", after: "." },
-    lede: "Nine dimensions to read every RSI method",
+    lede: "Every RSI method, taken apart along nine dimensions",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",
     allMethods: "Methods & Systems",
@@ -71,7 +71,7 @@ export const homeCopy = {
   },
   zh: {
     title: { before: "", keep: "RSI", gap: " ", emphasis: "研究图谱", after: "" },
-    lede: "九个维度，读懂每一种 RSI 方法",
+    lede: "用九个维度，拆解每一种 RSI 方法",
     stats: { methods: "个方法", systems: "个系统", benchmarks: "篇基准论文", citations: "条引用关系" },
     recentTitle: "最新收录",
     allMethods: "方法与系统",
