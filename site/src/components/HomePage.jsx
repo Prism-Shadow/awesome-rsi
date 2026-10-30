@@ -83,9 +83,7 @@ function HomeHero({ copy }) {
       <div className="container">
         <div className="home-hero-copy">
           <h1>{before}<span>{keep}</span>{gap}<em>{emphasis}</em>{after}</h1>
-          <p className="home-lede">
-            {copy.lede} <a href="#blog/understanding-rsi">{copy.guide}</a>
-          </p>
+          <p className="home-lede">{copy.lede}</p>
           <div className="home-stats">
             {stats.map(([count, label, href]) => (
               <a href={href} key={label}>

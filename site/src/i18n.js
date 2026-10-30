@@ -13,10 +13,6 @@ export const appCopy = {
       papers: "Benchmarks",
       graph: "Citation Graph",
     },
-    pageHeads: {
-      methods: "Methods and open-source systems that improve their own parameters, harness code, context, memory, or skills. Combine filters across nine dimensions.",
-      papers: "Benchmarks that test whether agents improve with experience: how tasks arrive, what the agent may update, and how improvement is scored.",
-    },
     footerTagline: "A curated collection of benchmarks, methods, and systems for Recursive Self-Improvement.",
     footerExplore: "Explore",
     footerProject: "Project",
@@ -41,10 +37,6 @@ export const appCopy = {
       papers: "基准论文",
       graph: "引用图谱",
     },
-    pageHeads: {
-      methods: "收录改进自身参数、Harness 代码、上下文、记忆或技能的方法与开源系统，可以组合九个维度筛选。",
-      papers: "检验智能体能否随经验改进的基准：任务如何到达、允许更新什么，以及如何评估改进。",
-    },
     footerTagline: "递归自我改进（RSI）基准、方法与系统精选合集。",
     footerExplore: "浏览",
     footerProject: "项目",
@@ -59,10 +51,8 @@ export const appCopy = {
 
 export const homeCopy = {
   en: {
-    // The middle phrase never wraps, so the headline breaks as "Recursive / self-improvement, / mapped."
-    title: { before: "Recursive ", keep: "self-improvement,", gap: " ", emphasis: "mapped", after: "." },
-    lede: "An agent performs tasks, learns from trajectories and feedback, updates its own state, and carries that state into later work. We collect the papers that study this loop and classify every method along nine dimensions.",
-    guide: "New to RSI? Read the guide →",
+    title: { before: "", keep: "RSI,", gap: " ", emphasis: "mapped", after: "." },
+    lede: "Every RSI method, taken apart along nine dimensions",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",
     allMethods: "Methods & Systems",
@@ -71,9 +61,8 @@ export const homeCopy = {
     blogTitle: "From the blog",
   },
   zh: {
-    title: { before: "", keep: "递归自我改进", gap: "", emphasis: "研究图谱", after: "" },
-    lede: "智能体执行任务，从轨迹和反馈中学习，更新自身状态，再把更新后的状态带到后续工作中。我们收录研究这一闭环的论文，并按九个维度为每个方法分类。",
-    guide: "初次了解 RSI？阅读导读 →",
+    title: { before: "", keep: "RSI", gap: " ", emphasis: "研究图谱", after: "" },
+    lede: "用九个维度，拆解每一种 RSI 方法",
     stats: { methods: "个方法", systems: "个系统", benchmarks: "篇基准论文", citations: "条引用关系" },
     recentTitle: "最新收录",
     allMethods: "方法与系统",
@@ -87,13 +76,11 @@ export const surveyCopy = {
   en: {
     eyebrow: "Our survey",
     summary: "A nine-dimension taxonomy of RSI methods and insights from traditional deep learning to inspire new research.",
-    read: "Read the survey",
     imageAlt: "Survey overview: a tree connects agent resources, the RSI taxonomy, feedback-driven improvement, and insights from traditional deep learning.",
   },
   zh: {
     eyebrow: "我们的综述",
     summary: "通过九维分类框架和传统深度学习机制，梳理已有 RSI 方法，探索新的研究思路。",
-    read: "阅读综述",
     imageAlt: "综述概览：一棵树连接智能体资源、RSI 分类框架、反馈驱动的改进，以及来自传统深度学习的启发。",
   },
 };
@@ -227,7 +214,7 @@ export const graphCopy = {
     semanticScholar: "Semantic Scholar",
     openArxiv: "Open paper on arXiv ↗",
     openPaper: "Open paper ↗",
-    pageIntro: (papers, edges) => `Arrows run from a benchmark paper to the papers it cites. ${papers} papers and ${edges} verified citations.`,
+    pageIntro: (papers, edges) => `Arrows run from a benchmark paper to the papers it cites. ${papers} papers and ${edges} citations.`,
   },
   zh: {
     verifiedNetwork: "经核验的文献引用网络",
@@ -258,7 +245,7 @@ export const graphCopy = {
     semanticScholar: "Semantic Scholar",
     openArxiv: "在 arXiv 查看论文 ↗",
     openPaper: "查看论文 ↗",
-    pageIntro: (papers, edges) => `箭头从基准论文指向它引用的论文。共 ${papers} 篇论文、${edges} 条已核验引用。`,
+    pageIntro: (papers, edges) => `箭头从基准论文指向它引用的论文。共 ${papers} 篇论文、${edges} 条引用。`,
   },
 };
 
@@ -273,7 +260,7 @@ export const methodGraphCopy = {
     nodeSize: "Node size = citations inside this collection",
     primaryMetric: "first posted",
     corpusCitations: "in-corpus citations",
-    pageIntro: (papers, edges) => `Arrows run from a method to the methods it cites. ${papers} papers and ${edges} citations, each checked against the citing paper's bibliography.`,
+    pageIntro: (papers, edges) => `Arrows run from a method to the methods it cites. ${papers} papers and ${edges} citations.`,
   },
   zh: {
     ...graphCopy.zh,
@@ -285,7 +272,7 @@ export const methodGraphCopy = {
     nodeSize: "节点大小代表在本合集内被引用的次数",
     primaryMetric: "首次公开",
     corpusCitations: "合集内引用",
-    pageIntro: (papers, edges) => `箭头从方法指向它引用的方法。共 ${papers} 篇论文、${edges} 条引用，均已对照施引论文的参考文献核验。`,
+    pageIntro: (papers, edges) => `箭头从方法指向它引用的方法。共 ${papers} 篇论文、${edges} 条引用。`,
   },
 };
 

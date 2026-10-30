@@ -26,11 +26,6 @@ export default function SurveyFeature({ lang }) {
           </a>
         </h2>
         <p className="survey-summary">{copy.summary}</p>
-        <div className="survey-actions">
-          <a className="btn btn-primary btn-sm" href={pdfUrl} target="_blank" rel="noreferrer">
-            {copy.read} <span aria-hidden="true">↗</span>
-          </a>
-        </div>
       </div>
     </section>
   );
