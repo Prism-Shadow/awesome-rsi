@@ -71,26 +71,28 @@ export default function PaperCard({ paper, lang }) {
         <strong>{copy.institutions}</strong>
         <span>{paperInstitutions[paper.id].join(" · ")}</span>
       </p>
-      <div className="paper-tags">
-        {paper.tags.map((tag) => {
-          const [ink, bg] = TAG_COLORS[tag] ?? [];
-          return (
-            <span key={tag} className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }}>
-              {lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}
-            </span>
-          );
-        })}
-      </div>
-      <div className="paper-links">
-        <a href={paper.arxiv} target="_blank" rel="noreferrer">
-          arXiv
-        </a>
-        <button className="abstract-toggle" onClick={() => setShowAbstract((v) => !v)}>
-          {showAbstract ? copy.hideAbstract : copy.showAbstract}
-        </button>
-        <button className="abstract-toggle" onClick={() => setShowProfile((v) => !v)} aria-expanded={showProfile}>
-          {showProfile ? copy.hideProfile : copy.showProfile}
-        </button>
+      <div className="paper-foot">
+        <div className="paper-tags">
+          {paper.tags.map((tag) => {
+            const [ink, bg] = TAG_COLORS[tag] ?? [];
+            return (
+              <span key={tag} className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }}>
+                {lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}
+              </span>
+            );
+          })}
+        </div>
+        <div className="paper-links">
+          <a href={paper.arxiv} target="_blank" rel="noreferrer">
+            arXiv
+          </a>
+          <button className="abstract-toggle" onClick={() => setShowAbstract((v) => !v)}>
+            {showAbstract ? copy.hideAbstract : copy.showAbstract}
+          </button>
+          <button className="abstract-toggle" onClick={() => setShowProfile((v) => !v)} aria-expanded={showProfile}>
+            {showProfile ? copy.hideProfile : copy.showProfile}
+          </button>
+        </div>
       </div>
       {showAbstract && <p className="paper-abstract">{abstract}</p>}
       {showProfile && (

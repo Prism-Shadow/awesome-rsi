@@ -74,6 +74,7 @@ export default function CitationGraph({
   nodeAriaLabel,
   focusRequest,
   spacious = false,
+  showHeading = true,
 }) {
   const graphHeight = spacious ? Math.max(820, Math.round(620 * Math.sqrt(papers.length / 32))) : GRAPH_HEIGHT;
   const geometry = useMemo(() => createGraphGeometry(GRAPH_WIDTH, graphHeight), [graphHeight]);
@@ -244,8 +245,8 @@ export default function CitationGraph({
   if (papers.length === 0) return null;
 
   return (
-    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} aria-labelledby="citation-graph-title">
-      <div className="graph-heading">
+    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} {...(showHeading ? { "aria-labelledby": "citation-graph-title" } : { "aria-label": copy.title })}>
+      {showHeading && <div className="graph-heading">
         <div>
           <span className="graph-eyebrow">{copy.verifiedNetwork}</span>
           <h2 id="citation-graph-title">{copy.title}</h2>
@@ -255,7 +256,7 @@ export default function CitationGraph({
           <span><b>{papers.length}</b> {copy.visiblePapers}</span>
           <span><b>{visibleEdges.length}</b> {copy.verifiedEdges}</span>
         </div>
-      </div>
+      </div>}
 
       <div className="graph-workspace">
         <div className="graph-stage">

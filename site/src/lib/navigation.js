@@ -5,14 +5,12 @@ export const TAB_HASHES = {
   papers: "#benchmarks",
   graph: "#graph-methods",
   blog: "#blog",
-  resources: "#resources",
 };
 
-export const NAV_TABS = ["home", "methods", "papers", "graph", "blog", "resources"];
+export const NAV_TABS = ["home", "methods", "papers", "graph", "blog"];
 
 export function tabFromHash(hash = "") {
   if (hash.startsWith("#blog")) return "blog";
-  if (hash === "#resources") return "resources";
   if (hash.startsWith("#graph") || hash === "#methods-graph") return "graph";
   if (hash.startsWith("#methods")) return "methods";
   if (hash === "#benchmarks" || hash === "#papers") return "papers";

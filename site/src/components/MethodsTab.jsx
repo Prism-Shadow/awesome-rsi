@@ -4,10 +4,11 @@ import { systems } from "../data/systems.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { methodFilterDimensions, methodTaxonomy } from "../data/methodTaxonomy.js";
 import { localizeMethodDimensions } from "../data/methodTaxonomyZh.js";
-import FilterBar from "./FilterBar.jsx";
+import { FacetSidebar, ResultsBar, SearchField, activeFilterPills } from "./FilterBar.jsx";
+import PageHead from "./PageHead.jsx";
 import MethodCard from "./MethodCard.jsx";
 import SystemCard from "./SystemCard.jsx";
-import { methodFilterCopy, methodsCopy } from "../i18n.js";
+import { appCopy, methodFilterCopy, methodsCopy } from "../i18n.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(methodFilterDimensions.map(({ id }) => [id, []]));
 const methodEntries = [
@@ -79,54 +80,58 @@ export default function MethodsTab({ lang }) {
       : [...current[dimensionId], optionValue],
   }));
 
-  const clearDimension = (dimensionId) => setSelections((current) => ({ ...current, [dimensionId]: [] }));
   const clearFilters = () => {
     setSelections(INITIAL_SELECTIONS);
     setYearRange(YEAR_BOUNDS);
     setQuery("");
   };
 
+  const ranges = [{ label: filterText.publicationYear, bounds: YEAR_BOUNDS, value: yearRange, onChange: setYearRange }];
+  const sortOptions = [
+    { value: "date", label: filterText.newest },
+    { value: "citations", label: filterText.mostCited },
+  ];
+
   return (
-    <section className="methods-index" aria-label={filterText.filterPapers}>
-      <FilterBar
-        dimensions={dimensions}
-        selections={selections}
-        facetCounts={facetCounts}
-        onToggle={toggleOption}
-        onClearDimension={clearDimension}
-        yearBounds={YEAR_BOUNDS}
-        yearRange={yearRange}
-        onYearRangeChange={setYearRange}
-        citationBounds={null}
-        citationRange={null}
-        onCitationRangeChange={() => {}}
-        query={query}
-        onQueryChange={setQuery}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-        resultCount={visible.length}
-        totalCount={methodEntries.length}
-        onClear={clearFilters}
-        lang={lang}
-        copyOverride={filterText}
-        sortOptions={[
-          { value: "date", label: filterText.newest },
-          { value: "citations", label: filterText.mostCited },
-        ]}
-      />
-      {visible.length === 0 ? (
-        <div className="empty-state">
-          <b>{copy.noMethods}</b>
-          <span>{copy.noMethodsHint}</span>
-          <button onClick={clearFilters}>{copy.reset}</button>
-        </div>
-      ) : (
-        <div className="paper-list method-list">
-          {visible.map((method) => method.entryType === "system"
-            ? <SystemCard system={method} lang={lang} key={method.id} />
-            : <MethodCard method={method} lang={lang} key={method.id} />)}
-          </div>
-      )}
-    </section>
+    <>
+      <PageHead title={appCopy[lang].tabs.methods} description={appCopy[lang].pageHeads.methods}>
+        <SearchField value={query} onChange={setQuery} placeholder={filterText.searchPlaceholder} />
+      </PageHead>
+      <div className="catalog">
+        <FacetSidebar
+          dimensions={dimensions}
+          selections={selections}
+          facetCounts={facetCounts}
+          onToggle={toggleOption}
+          ranges={ranges}
+          copy={filterText}
+        />
+        <section className="catalog-results" aria-label={filterText.filterPapers}>
+          <ResultsBar
+            resultCount={visible.length}
+            totalCount={methodEntries.length}
+            activeFilters={activeFilterPills({ dimensions, selections, onToggle: toggleOption, ranges })}
+            onClear={clearFilters}
+            sortBy={sortBy}
+            sortOptions={sortOptions}
+            onSortChange={setSortBy}
+            copy={filterText}
+          />
+          {visible.length === 0 ? (
+            <div className="empty-state">
+              <b>{copy.noMethods}</b>
+              <span>{copy.noMethodsHint}</span>
+              <button onClick={clearFilters}>{copy.reset}</button>
+            </div>
+          ) : (
+            <div className="paper-list method-list">
+              {visible.map((method) => method.entryType === "system"
+                ? <SystemCard system={method} lang={lang} key={method.id} />
+                : <MethodCard method={method} lang={lang} key={method.id} />)}
+            </div>
+          )}
+        </section>
+      </div>
+    </>
   );
 }

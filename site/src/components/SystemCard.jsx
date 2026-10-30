@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { methodFilterDimensions } from "../data/methodTaxonomy.js";
 import { localizeMethodDimensions, localizeMethodValue } from "../data/methodTaxonomyZh.js";
+import { leafArtifacts } from "../data/artifactTaxonomy.js";
 import { systemCardCopy } from "../i18n.js";
 
 function formatDate(iso, lang) {
@@ -35,25 +36,27 @@ export default function SystemCard({ system, lang }) {
         <strong>{copy.maintainers}</strong> {system.maintainers}
       </p>
       <p className="method-summary">{summary}</p>
-      <div className="method-artifacts" aria-label={dimensions.find(({ id }) => id === "artifact")?.label}>
-        {system.taxonomy.artifact.map((value) => (
-          <span className="tag" key={value}>{localizeMethodValue("artifact", value, lang)}</span>
-        ))}
-      </div>
-      <div className="paper-links">
-        {system.links.map((link) => (
-          <a href={link.url} target="_blank" rel="noreferrer" key={link.url}>
-            {lang === "zh" ? link.labelZh : link.label}
-          </a>
-        ))}
-        <button
-          className="abstract-toggle"
-          type="button"
-          aria-expanded={showProfile}
-          onClick={() => setShowProfile((value) => !value)}
-        >
-          {showProfile ? copy.hideProfile : copy.showProfile}
-        </button>
+      <div className="paper-foot">
+        <div className="method-artifacts" aria-label={dimensions.find(({ id }) => id === "artifact")?.label}>
+          {leafArtifacts(system.taxonomy.artifact).map((value) => (
+            <span className="tag" key={value}>{localizeMethodValue("artifact", value, lang)}</span>
+          ))}
+        </div>
+        <div className="paper-links">
+          {system.links.map((link) => (
+            <a href={link.url} target="_blank" rel="noreferrer" key={link.url}>
+              {lang === "zh" ? link.labelZh : link.label}
+            </a>
+          ))}
+          <button
+            className="abstract-toggle"
+            type="button"
+            aria-expanded={showProfile}
+            onClick={() => setShowProfile((value) => !value)}
+          >
+            {showProfile ? copy.hideProfile : copy.showProfile}
+          </button>
+        </div>
       </div>
       {showProfile && (
         <section className="taxonomy-profile" aria-label={copy.profileLabel}>
