@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
+import { citationEdges } from "../data/citationGraph.js";
 import { graphCopy } from "../i18n.js";
 import { buildLayout, clamp, createGraphGeometry } from "../lib/citationLayout.js";
 
@@ -66,7 +66,6 @@ export default function CitationGraph({
   papers,
   lang,
   edges = citationEdges,
-  meta = citationGraphMeta,
   copyOverride,
   nodeWeight = defaultNodeWeight,
   primaryMetric = defaultPrimaryMetric,
@@ -362,19 +361,6 @@ export default function CitationGraph({
             </>
           )}
         </aside>
-      </div>
-
-      <div className="graph-provenance">
-        <span className="verified-mark">✓</span>
-        {lang === "zh" ? (
-          <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot}{meta.snapshot}。
-          </p>
-        ) : (
-          <p>
-            <b>{copy.provenanceLead}</b> {copy.snapshot} {meta.snapshot}.
-          </p>
-        )}
       </div>
     </section>
   );

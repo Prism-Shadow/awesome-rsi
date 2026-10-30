@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { papers } from "../data/papers.js";
-import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
+import { citationEdges } from "../data/citationGraph.js";
 import { methods } from "../data/methods.js";
-import { methodCitationEdges, methodCitationGraphMeta } from "../data/methodCitationGraph.js";
+import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { appCopy, graphCopy, graphExplorerCopy, methodGraphCopy } from "../i18n.js";
 import CitationGraph from "./CitationGraph.jsx";
 import PageHead from "./PageHead.jsx";
@@ -34,7 +34,6 @@ export default function GraphTab({ lang }) {
   const graphText = kind === "methods" ? methodGraphCopy[lang] : graphCopy[lang];
   const graphPapers = kind === "methods" ? methods : papers;
   const graphEdges = kind === "methods" ? methodCitationEdges : citationEdges;
-  const graphMeta = kind === "methods" ? methodCitationGraphMeta : citationGraphMeta;
   const edgeCount = useMemo(() => {
     const ids = new Set(graphPapers.map((paper) => paper.id));
     return graphEdges.filter((edge) => ids.has(edge.source) && ids.has(edge.target)).length;
@@ -183,7 +182,6 @@ export default function GraphTab({ lang }) {
           papers={graphPapers}
           lang={lang}
           edges={graphEdges}
-          meta={graphMeta}
           copyOverride={graphText}
           focusRequest={focusRequest}
           spacious={kind === "methods"}
