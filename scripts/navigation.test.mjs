@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { NAV_TABS, TAB_HASHES, tabFromHash } from "../site/src/lib/navigation.js";
 
-test("the root URL and unknown fragments open the home page", () => {
-  for (const hash of [undefined, "", "#", "#unknown", "#recently-added"]) {
+test("the root URL, home sections, and retired pages open the home page", () => {
+  for (const hash of [undefined, "", "#", "#unknown", "#recently-added", "#blog", "#resources"]) {
     assert.equal(tabFromHash(hash), "home");
   }
   assert.equal(TAB_HASHES.home, "");
@@ -21,8 +21,8 @@ test("each page has a persistent direct link that restores the same page", () =>
 });
 
 test("article links and both citation graph datasets keep their routes", () => {
-  assert.equal(tabFromHash("#blog"), "blog");
   assert.equal(tabFromHash("#blog/understanding-rsi"), "blog");
+  assert.ok(!NAV_TABS.includes("blog"));
   for (const hash of ["#graph", "#graph-methods", "#graph-benchmark", "#methods-graph"]) {
     assert.equal(tabFromHash(hash), "graph");
   }

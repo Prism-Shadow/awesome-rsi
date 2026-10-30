@@ -128,10 +128,9 @@ function RecentlyAdded({ copy, lang }) {
 function FromTheBlog({ copy, lang }) {
   const posts = lang === "zh" ? blogPostsZh : blogPosts;
   return (
-    <section className="home-block" aria-labelledby="blog-title">
+    <section className="home-block" id="blog" aria-labelledby="blog-title">
       <div className="section-head">
         <h2 id="blog-title">{copy.blogTitle}</h2>
-        <p><a href="#blog">{copy.allPosts} →</a></p>
       </div>
       <ol className="entry-list entry-list--posts">
         {posts.map((post) => (

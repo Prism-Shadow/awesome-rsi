@@ -12,12 +12,10 @@ export const appCopy = {
       methods: "Methods & Systems",
       papers: "Benchmarks",
       graph: "Citation Graph",
-      blog: "Blog",
     },
     pageHeads: {
       methods: "Methods and open-source systems that improve their own parameters, harness code, context, memory, or skills. Combine filters across nine dimensions.",
       papers: "Benchmarks that test whether agents improve with experience: how tasks arrive, what the agent may update, and how improvement is scored.",
-      blog: "Guides, essays, and announcements from the Awesome RSI maintainers, in English and Chinese.",
     },
     footerTagline: "A curated collection of benchmarks, methods, and systems for Recursive Self-Improvement.",
     footerExplore: "Explore",
@@ -43,12 +41,10 @@ export const appCopy = {
       methods: "方法与系统",
       papers: "基准论文",
       graph: "引用图谱",
-      blog: "博客",
     },
     pageHeads: {
       methods: "收录改进自身参数、Harness 代码、上下文、记忆或技能的方法与开源系统，可以组合九个维度筛选。",
       papers: "检验智能体能否随经验改进的基准：任务如何到达、允许更新什么，以及如何评估改进。",
-      blog: "Awesome RSI 维护者撰写的导读、随笔和项目介绍，提供中英文版本。",
     },
     footerTagline: "递归自我改进（RSI）基准、方法与系统精选合集。",
     footerExplore: "浏览",
@@ -75,7 +71,6 @@ export const homeCopy = {
     allBenchmarks: "Benchmarks",
     kinds: { method: "Method", system: "System", benchmark: "Benchmark" },
     blogTitle: "From the blog",
-    allPosts: "All posts",
   },
   zh: {
     title: { before: "", keep: "递归自我改进", gap: "", emphasis: "研究图谱", after: "" },
@@ -87,7 +82,6 @@ export const homeCopy = {
     allBenchmarks: "基准论文",
     kinds: { method: "方法", system: "系统", benchmark: "基准" },
     blogTitle: "博客",
-    allPosts: "全部文章",
   },
 };
 
@@ -442,16 +436,12 @@ export const methodCardCopy = {
 
 export const blogCopy = {
   en: {
-    posts: "Blog posts",
-    tags: "Post tags",
-    back: "← Back to blog",
+    back: "← All posts",
     included: "What’s included",
     contents: "In this guide",
   },
   zh: {
-    posts: "博客文章",
-    tags: "文章标签",
-    back: "← 返回博客列表",
+    back: "← 全部文章",
     included: "本次更新内容",
     contents: "本文目录",
   },
