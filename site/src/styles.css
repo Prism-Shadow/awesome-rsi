@@ -848,13 +848,19 @@ html[lang="zh-Hans"] .blog-article h1 {
   align-items: start;
 }
 
+/* The sidebar scrolls on its own when it is taller than the window, without a visible scrollbar. */
 .facets {
   position: sticky;
   top: 5.25rem;
   max-height: calc(100vh - 6.5rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding-right: 0.35rem;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+
+.facets::-webkit-scrollbar {
+  display: none;
 }
 
 .facets-toggle {
