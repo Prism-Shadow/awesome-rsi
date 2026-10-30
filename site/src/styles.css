@@ -1886,11 +1886,13 @@ html[lang="zh-Hans"] .graph-heading h2 {
 
 .paper-title a {
   color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
-.paper-title a:hover {
+.paper-card:hover .paper-title a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .paper-meta {
@@ -2458,9 +2460,38 @@ html[lang="zh-Hans"] .section-head h2 {
   list-style: none;
 }
 
+/* The title link stretches over the whole entry, so the entry reads and clicks as one link. */
 .entry {
+  position: relative;
+  isolation: isolate;
   padding: 1.6rem 0;
   border-bottom: 1px solid var(--line);
+}
+
+.entry::before {
+  content: "";
+  position: absolute;
+  inset: 0.4rem -1rem;
+  z-index: -1;
+  border-radius: 0.75rem;
+  background: var(--accent-wash);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.entry:hover::before,
+.entry:focus-within::before {
+  opacity: 1;
+}
+
+.entry h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.entry h3 a:focus-visible {
+  outline: none;
 }
 
 .entry-meta {
@@ -2500,7 +2531,8 @@ html[lang="zh-Hans"] .entry-meta > span {
   transition: color 0.15s ease;
 }
 
-.entry h3 a:hover {
+.entry:hover h3 a,
+.entry h3 a:focus-visible {
   color: var(--accent);
   text-decoration: none;
 }
@@ -2677,6 +2709,10 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
 
   .entry h3 {
     font-size: 1.25rem;
+  }
+
+  .entry::before {
+    inset: 0.4rem -0.6rem;
   }
 
   .entry-list--posts h3 {
