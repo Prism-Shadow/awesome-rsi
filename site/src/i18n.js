@@ -13,10 +13,6 @@ export const appCopy = {
       papers: "Benchmarks",
       graph: "Citation Graph",
     },
-    pageHeads: {
-      methods: (count) => `${count} methods and open-source systems, each labeled on nine dimensions, from what improves to where feedback comes from`,
-      papers: (count) => `${count} benchmark papers, each labeled on seven dimensions, from how experience arrives to how improvement is scored`,
-    },
     footerTagline: "A curated collection of benchmarks, methods, and systems for Recursive Self-Improvement.",
     footerExplore: "Explore",
     footerProject: "Project",
@@ -41,10 +37,6 @@ export const appCopy = {
       papers: "基准论文",
       graph: "引用图谱",
     },
-    pageHeads: {
-      methods: (count) => `${count} 项方法与开源系统，按改进对象、反馈来源等九个维度逐一标注`,
-      papers: (count) => `${count} 篇基准论文，按经验获取方式、评分方式等七个维度逐一标注`,
-    },
     footerTagline: "递归自我改进（RSI）基准、方法与系统精选合集。",
     footerExplore: "浏览",
     footerProject: "项目",
@@ -59,8 +51,7 @@ export const appCopy = {
 
 export const homeCopy = {
   en: {
-    // The middle phrase never wraps, so the headline breaks as "Recursive / self-improvement, / mapped."
-    title: { before: "Recursive ", keep: "self-improvement,", gap: " ", emphasis: "mapped", after: "." },
+    title: { before: "", keep: "RSI,", gap: " ", emphasis: "mapped", after: "." },
     lede: "Every RSI method, taken apart along nine dimensions",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",

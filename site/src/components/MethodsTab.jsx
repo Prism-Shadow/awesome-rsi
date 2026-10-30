@@ -94,7 +94,7 @@ export default function MethodsTab({ lang }) {
 
   return (
     <>
-      <PageHead title={appCopy[lang].tabs.methods} description={appCopy[lang].pageHeads.methods(methodEntries.length)}>
+      <PageHead title={appCopy[lang].tabs.methods}>
         <SearchField value={query} onChange={setQuery} placeholder={filterText.searchPlaceholder} />
       </PageHead>
       <div className="catalog">

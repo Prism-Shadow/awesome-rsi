@@ -2325,19 +2325,27 @@ html[lang="zh-Hans"] .method-status {
   stroke-linejoin: round;
 }
 
+/* A fixed minimum height keeps the network the same size whatever the headline length. */
+.home-hero {
+  display: grid;
+  align-items: center;
+  min-height: 34rem;
+}
+
 .home-hero .container {
   position: relative;
+  width: 100%;
 }
 
 .home-hero-copy {
   max-width: 36rem;
-  padding: 6rem 0 6.25rem;
+  padding: 4rem 0;
 }
 
 .home-hero h1 {
   margin: 0 0 1.4rem;
   color: var(--ink);
-  font: 500 3.9rem/1.03 var(--serif);
+  font: 500 4.75rem/1.03 var(--serif);
   letter-spacing: -0.025em;
 }
 
@@ -2351,7 +2359,7 @@ html[lang="zh-Hans"] .method-status {
 
 html[lang="zh-Hans"] .home-hero h1 {
   font-weight: 600;
-  font-size: 3.4rem;
+  font-size: 4.25rem;
   line-height: 1.18;
   letter-spacing: 0;
 }
@@ -2628,6 +2636,7 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
   .home-hero {
     display: flex;
     flex-direction: column;
+    min-height: 0;
   }
 
   .home-hero .container {
@@ -2670,11 +2679,11 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
   }
 
   .home-hero h1 {
-    font-size: 2.9rem;
+    font-size: 3.25rem;
   }
 
   html[lang="zh-Hans"] .home-hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.9rem;
   }
 
   .home-lede {
