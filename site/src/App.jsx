@@ -187,7 +187,6 @@ export default function App() {
               </ul>
             </div>
           </div>
-          <p className="footer-note">{copy.footerNote}</p>
         </div>
       </footer>
     </>

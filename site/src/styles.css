@@ -2201,7 +2201,7 @@ html[lang="zh-Hans"] .method-status {
 /* ---------- footer ---------- */
 
 .site-footer {
-  padding: 3rem 0 2rem;
+  padding: 3rem 0;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.875rem;
@@ -2239,14 +2239,6 @@ html[lang="zh-Hans"] .method-status {
 
 .footer-grid ul a:hover {
   color: var(--ink);
-}
-
-.footer-note {
-  margin: 2.25rem 0 0;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--line);
-  color: var(--faint);
-  font-size: 0.78rem;
 }
 
 @media (max-width: 1280px) {
