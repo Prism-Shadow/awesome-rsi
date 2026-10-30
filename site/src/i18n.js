@@ -61,7 +61,7 @@ export const homeCopy = {
   en: {
     // The middle phrase never wraps, so the headline breaks as "Recursive / self-improvement, / mapped."
     title: { before: "Recursive ", keep: "self-improvement,", gap: " ", emphasis: "mapped", after: "." },
-    lede: "Every RSI method, classified along nine dimensions.",
+    lede: "Nine dimensions to read every RSI method",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",
     allMethods: "Methods & Systems",
@@ -71,7 +71,7 @@ export const homeCopy = {
   },
   zh: {
     title: { before: "", keep: "RSI", gap: " ", emphasis: "研究图谱", after: "" },
-    lede: "按照九个维度为所有 RSI 方法分类。",
+    lede: "九个维度，读懂每一种 RSI 方法",
     stats: { methods: "个方法", systems: "个系统", benchmarks: "篇基准论文", citations: "条引用关系" },
     recentTitle: "最新收录",
     allMethods: "方法与系统",
