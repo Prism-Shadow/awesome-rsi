@@ -13,3 +13,9 @@ export function resolveBlogImage(src) {
   }
   return normalized;
 }
+
+// The cover shown in post lists: a small image set on the post, else the first figure in its Markdown.
+export function blogCover(post) {
+  const src = post.cover ?? post.markdown?.match(/^!\[[^\]]*\]\(([^)]+)\)$/m)?.[1];
+  return src ? resolveBlogImage(src) : null;
+}

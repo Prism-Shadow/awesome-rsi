@@ -2571,6 +2571,55 @@ html[lang="zh-Hans"] .entry-meta > span {
   line-height: 1.2;
 }
 
+/* Blog entries carry a cover on the right, top-aligned with the meta line. */
+.entry--post {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 11.25rem;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.entry-text {
+  min-width: 0;
+}
+
+.entry-cover {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.625rem;
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+
+.entry-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.entry--post:hover .entry-cover {
+  border-color: var(--accent);
+}
+
+.entry--post:hover .entry-cover img {
+  transform: scale(1.03);
+}
+
+.entry-cover--mark {
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+}
+
+.entry-cover--mark svg {
+  width: 38%;
+  height: auto;
+}
+
 html[lang="zh-Hans"] .entry-list--posts h3 {
   font-weight: 600;
   font-size: 1.5rem;
@@ -2681,7 +2730,17 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
   }
 
   .entry-list--posts h3 {
-    font-size: 1.45rem;
+    font-size: 1.3rem;
+  }
+
+  .entry--post {
+    grid-template-columns: minmax(0, 1fr) 5.5rem;
+    gap: 1rem;
+  }
+
+  .entry--post .entry-cover {
+    aspect-ratio: 1;
+    margin-top: 1.6rem;
   }
 
   .entry p {
