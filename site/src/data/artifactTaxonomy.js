@@ -35,3 +35,9 @@ export const artifactTranslationZh = {
     return label ? [[value, translation], [label, translation]] : [[value, translation]];
   })),
 };
+
+// Drops a parent artifact such as "Non-parametric" when a more specific child already implies it.
+export function leafArtifacts(values) {
+  const parents = new Set(values.map((value) => artifacts.find((artifact) => artifact.value === value)?.parent).filter(Boolean));
+  return values.filter((value) => !parents.has(value));
+}

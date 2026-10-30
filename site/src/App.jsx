@@ -4,9 +4,7 @@ import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import GraphTab from "./components/GraphTab.jsx";
-import ResourcesTab from "./components/ResourcesTab.jsx";
 import BrandMark from "./components/BrandMark.jsx";
-import PageHead from "./components/PageHead.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
 import { NAV_TABS, TAB_HASHES, tabFromHash } from "./lib/navigation.js";
 
@@ -96,9 +94,6 @@ export default function App() {
     setTab(nextTab);
   };
 
-  // The blog renders its own head so that articles open without the index introduction.
-  const pageHead = tab === "blog" ? null : copy.pageHeads[tab];
-
   return (
     <>
       <header className="site-header">
@@ -150,16 +145,13 @@ export default function App() {
           <HomePage lang={lang} />
         ) : (
           <div className="container page-body">
-            {pageHead ? <PageHead title={copy.tabs[tab]} description={pageHead} /> : null}
             {tab === "blog"
               ? <BlogTab lang={lang} />
               : tab === "papers"
                 ? <PapersTab lang={lang} />
                 : tab === "methods"
                   ? <MethodsTab lang={lang} />
-                  : tab === "graph"
-                    ? <GraphTab lang={lang} />
-                    : <ResourcesTab lang={lang} />}
+                  : <GraphTab lang={lang} />}
           </div>
         )}
       </main>

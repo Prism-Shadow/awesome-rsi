@@ -48,7 +48,6 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 | A method to build on | [Methods & Systems](https://prism-shadow.github.io/awesome-rsi/#methods) — filter by artifacts, topology, feedback, and more. |
 | A way to measure improvement | [Benchmarks](https://prism-shadow.github.io/awesome-rsi/#benchmarks) — compare artifacts and online, offline, or hybrid protocols. |
 | Connections between papers | [Citation graphs](https://prism-shadow.github.io/awesome-rsi/#graph-methods) — switch between methods and benchmarks, search for a node, zoom, and pan. |
-| More background | [Books, courses, and learning materials](https://prism-shadow.github.io/awesome-rsi/#resources). |
 
 ## Paper map
 

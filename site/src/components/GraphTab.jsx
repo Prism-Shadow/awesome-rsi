@@ -3,8 +3,9 @@ import { papers } from "../data/papers.js";
 import { citationEdges, citationGraphMeta } from "../data/citationGraph.js";
 import { methods } from "../data/methods.js";
 import { methodCitationEdges, methodCitationGraphMeta } from "../data/methodCitationGraph.js";
-import { graphCopy, graphExplorerCopy, methodGraphCopy } from "../i18n.js";
+import { appCopy, graphCopy, graphExplorerCopy, methodGraphCopy } from "../i18n.js";
 import CitationGraph from "./CitationGraph.jsx";
+import PageHead from "./PageHead.jsx";
 
 const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
   method.id,
@@ -34,6 +35,10 @@ export default function GraphTab({ lang }) {
   const graphPapers = kind === "methods" ? methods : papers;
   const graphEdges = kind === "methods" ? methodCitationEdges : citationEdges;
   const graphMeta = kind === "methods" ? methodCitationGraphMeta : citationGraphMeta;
+  const edgeCount = useMemo(() => {
+    const ids = new Set(graphPapers.map((paper) => paper.id));
+    return graphEdges.filter((edge) => ids.has(edge.source) && ids.has(edge.target)).length;
+  }, [graphPapers, graphEdges]);
 
   useEffect(() => {
     const syncKindFromHash = () => {
@@ -89,100 +94,108 @@ export default function GraphTab({ lang }) {
   };
 
   return (
-    <section className="graph-explorer" aria-label={copy.title}>
-      <div className="graph-explorer-toolbar">
-        <div className="graph-dataset-switch" role="tablist" aria-label={copy.datasetLabel}>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={kind === "methods"}
-            className={kind === "methods" ? "is-active" : ""}
-            onClick={() => selectKind("methods")}
-          >
-            {copy.methods}
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={kind === "benchmark"}
-            className={kind === "benchmark" ? "is-active" : ""}
-            onClick={() => selectKind("benchmark")}
-          >
-            {copy.benchmark}
-          </button>
-        </div>
-
-        <div
-          className="graph-node-search"
-          onBlur={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget)) setResultsOpen(false);
-          }}
-        >
-          <label htmlFor="graph-node-query">{copy.searchLabel}</label>
-          <div className="graph-node-search-field">
-            <span aria-hidden="true">⌕</span>
-            <input
-              id="graph-node-query"
-              type="search"
-              value={query}
-              placeholder={copy.searchPlaceholder}
-              autoComplete="off"
-              role="combobox"
-              aria-autocomplete="list"
-              aria-expanded={resultsOpen && query.trim() !== ""}
-              aria-controls="graph-node-results"
-              aria-activedescendant={resultsOpen && matches[activeResult] ? `graph-result-${matches[activeResult].id}` : undefined}
-              onFocus={() => setResultsOpen(true)}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setResultsOpen(true);
-                setActiveResult(0);
-              }}
-              onKeyDown={handleSearchKeyDown}
-            />
+    <>
+      <PageHead title={appCopy[lang].tabs.graph} description={graphText.pageIntro(graphPapers.length, edgeCount)}>
+        <div className="graph-explorer-toolbar">
+          <div className="graph-dataset-switch" role="tablist" aria-label={copy.datasetLabel}>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={kind === "methods"}
+              className={kind === "methods" ? "is-active" : ""}
+              onClick={() => selectKind("methods")}
+            >
+              {copy.methods}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={kind === "benchmark"}
+              className={kind === "benchmark" ? "is-active" : ""}
+              onClick={() => selectKind("benchmark")}
+            >
+              {copy.benchmark}
+            </button>
           </div>
-          {resultsOpen && query.trim() !== "" && (
-            <div id="graph-node-results" className="graph-search-results" role="listbox">
-              {matches.length === 0 ? (
-                <p>{copy.noResults}</p>
-              ) : matches.map((paper, index) => (
-                <button
-                  id={`graph-result-${paper.id}`}
-                  type="button"
-                  role="option"
-                  aria-selected={index === activeResult}
-                  className={index === activeResult ? "is-active" : ""}
-                  onMouseEnter={() => setActiveResult(index)}
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => focusPaper(paper)}
-                  key={paper.id}
-                >
-                  <span>{paper.nickname}</span>
-                  <strong>{paper.title}</strong>
-                  <small>{paper.arxiv ? `arXiv:${paper.id} · ` : ""}{(paper.authors ?? []).slice(0, 2).join(", ")}</small>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
 
-      <CitationGraph
-        key={kind}
-        papers={graphPapers}
-        lang={lang}
-        edges={graphEdges}
-        meta={graphMeta}
-        copyOverride={graphText}
-        focusRequest={focusRequest}
-        spacious={kind === "methods"}
-        nodeWeight={kind === "methods" ? methodNodeWeight : undefined}
-        primaryMetric={kind === "methods" ? (paper) => paper.year : undefined}
-        primaryMetricLabel={kind === "methods" ? graphText.primaryMetric : undefined}
-        nodeAriaLabel={kind === "methods"
-          ? (paper, count) => `${paper.nickname}, ${count} ${graphText.corpusCitations}`
-          : undefined}
-      />
-    </section>
+          <div
+            className="graph-node-search"
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setResultsOpen(false);
+            }}
+          >
+            <label htmlFor="graph-node-query">{copy.searchLabel}</label>
+            <div className="graph-node-search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input
+                id="graph-node-query"
+                type="search"
+                value={query}
+                placeholder={copy.searchPlaceholder}
+                autoComplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded={resultsOpen && query.trim() !== ""}
+                aria-controls="graph-node-results"
+                aria-activedescendant={resultsOpen && matches[activeResult] ? `graph-result-${matches[activeResult].id}` : undefined}
+                onFocus={() => setResultsOpen(true)}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setResultsOpen(true);
+                  setActiveResult(0);
+                }}
+                onKeyDown={handleSearchKeyDown}
+              />
+            </div>
+            {resultsOpen && query.trim() !== "" && (
+              <div id="graph-node-results" className="graph-search-results" role="listbox">
+                {matches.length === 0 ? (
+                  <p>{copy.noResults}</p>
+                ) : matches.map((paper, index) => (
+                  <button
+                    id={`graph-result-${paper.id}`}
+                    type="button"
+                    role="option"
+                    aria-selected={index === activeResult}
+                    className={index === activeResult ? "is-active" : ""}
+                    onMouseEnter={() => setActiveResult(index)}
+                    onMouseDown={(event) => event.preventDefault()}
+                    onClick={() => focusPaper(paper)}
+                    key={paper.id}
+                  >
+                    <span>{paper.nickname}</span>
+                    <strong>{paper.title}</strong>
+                    <small>{paper.arxiv ? `arXiv:${paper.id} · ` : ""}{(paper.authors ?? []).slice(0, 2).join(", ")}</small>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </PageHead>
+
+      <section className="graph-explorer" aria-label={copy.title}>
+        <CitationGraph
+          key={kind}
+          papers={graphPapers}
+          lang={lang}
+          edges={graphEdges}
+          meta={graphMeta}
+          copyOverride={graphText}
+          focusRequest={focusRequest}
+          spacious={kind === "methods"}
+          nodeWeight={kind === "methods" ? methodNodeWeight : undefined}
+          primaryMetric={kind === "methods" ? (paper) => paper.year : undefined}
+          primaryMetricLabel={kind === "methods" ? graphText.primaryMetric : undefined}
+          nodeAriaLabel={kind === "methods"
+            ? (paper, count) => `${paper.nickname}, ${count} ${graphText.corpusCitations}`
+            : undefined}
+          showHeading={false}
+        />
+      </section>
+    </>
   );
 }

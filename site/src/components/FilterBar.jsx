@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { filterCopy } from "../i18n.js";
 
 function RangeFilter({ label, min, max, value, onChange, copy, suffix = "" }) {
   const [low, high] = value;
@@ -90,197 +89,208 @@ function DimensionHelp({ id, label, help, copy }) {
   );
 }
 
-function DimensionTitle({ label, helpId, helpOpen, onHelpToggle, copy }) {
+function Facet({ id, label, help, selectedCount, open, onOpenToggle, helpOpen, onHelpToggle, copy, children }) {
+  const helpId = `dimension-help-${id}`;
   return (
-    <div className="dimension-title">
-      <span>{label}</span>
-      <button
-        type="button"
-        className={`dimension-help-trigger${helpOpen ? " is-active" : ""}`}
-        aria-label={copy.explain(label)}
-        aria-expanded={helpOpen}
-        aria-controls={helpId}
-        title={copy.explain(label)}
-        onClick={onHelpToggle}
-      >
-        ?
-      </button>
-    </div>
+    <section className={`facet${open ? " is-open" : ""}`}>
+      <div className="facet-head">
+        <button type="button" className="facet-title" aria-expanded={open} onClick={onOpenToggle}>
+          <span>{label}</span>
+          {selectedCount > 0 && <b>{selectedCount}</b>}
+        </button>
+        <button
+          type="button"
+          className={`facet-help${helpOpen ? " is-active" : ""}`}
+          aria-label={copy.explain(label)}
+          aria-expanded={helpOpen}
+          aria-controls={helpId}
+          title={copy.explain(label)}
+          onClick={onHelpToggle}
+        >
+          ?
+        </button>
+        <button type="button" className="facet-disclosure" aria-hidden="true" tabIndex={-1} onClick={onOpenToggle}>
+          {open ? "−" : "+"}
+        </button>
+      </div>
+      {helpOpen && <DimensionHelp id={helpId} label={label} help={help} copy={copy} />}
+      {open && children}
+    </section>
   );
 }
 
-function FilterDimension({ dimension, selected, counts, onToggle, onClear, helpOpen, onHelpToggle, copy }) {
-  const visibleOptions = dimension.options.filter((option) => {
-    if (!option.parent) return true;
-    const siblingValues = dimension.options
-      .filter(({ parent }) => parent === option.parent)
-      .map(({ value }) => value);
-    return selected.includes(option.parent) || siblingValues.some((value) => selected.includes(value));
-  });
-  const helpId = `dimension-help-${dimension.id}`;
-
-  return (
-    <div className={`dimension-row${helpOpen ? " has-help-open" : ""}`}>
-      <div className="dimension-label">
-        <DimensionTitle label={dimension.label} helpId={helpId} helpOpen={helpOpen} onHelpToggle={onHelpToggle} copy={copy} />
-      </div>
-      <div className="dimension-content">
-        <div className="dimension-options">
-          <button
-            className={`filter-option filter-option-all${selected.length === 0 ? " is-active" : ""}`}
-            onClick={onClear}
-          >
-            {copy.all}
-          </button>
-          {visibleOptions.map((option) => {
-            const active = selected.includes(option.value);
-            const childValues = dimension.options
-              .filter(({ parent }) => parent === option.value)
-              .map(({ value }) => value);
-            const expanded = childValues.length > 0
-              && (active || childValues.some((value) => selected.includes(value)));
-            return (
-              <button
-                key={option.value}
-                className={`filter-option${option.parent ? " is-child" : ""}${childValues.length > 0 ? " has-children" : ""}${expanded ? " is-expanded" : ""}${active ? " is-active" : ""}`}
-                aria-pressed={active}
-                aria-expanded={childValues.length > 0 ? expanded : undefined}
-                aria-label={option.parent ? `${option.parentLabel ?? option.parent}：${option.label}` : option.label}
-                onClick={() => onToggle(option.value)}
-              >
-                <span className="option-check" aria-hidden="true">{active ? "✓" : "+"}</span>
-                {option.parent && <span className="option-parent">{option.parentLabel ?? option.parent}</span>}
-                <span>{option.label}</span>
-                <span className="option-count">{counts[option.value] ?? 0}</span>
-                {childValues.length > 0 && <span className="option-disclosure" aria-hidden="true">⌄</span>}
-              </button>
-            );
-          })}
-        </div>
-        {helpOpen && <DimensionHelp id={helpId} label={dimension.label} help={dimension.help} copy={copy} />}
-      </div>
-    </div>
-  );
-}
-
-export default function FilterBar({
-  dimensions,
-  selections,
-  facetCounts,
-  onToggle,
-  onClearDimension,
-  yearBounds,
-  yearRange,
-  onYearRangeChange,
-  citationBounds,
-  citationRange,
-  onCitationRangeChange,
-  query,
-  onQueryChange,
-  sortBy,
-  onSortChange,
-  resultCount,
-  totalCount,
-  onClear,
-  lang,
-  copyOverride,
-  sortOptions,
-}) {
-  const searchRef = useRef(null);
-  const [openHelpId, setOpenHelpId] = useState(null);
-  const copy = copyOverride ?? filterCopy[lang];
-  const countCopy = copy.resultCount(resultCount, totalCount);
-  const resolvedSortOptions = sortOptions ?? [
-    { value: "date", label: copy.newest },
-    { value: "citations", label: copy.mostCited },
-  ];
-  const hasNumericFilters = Boolean(yearBounds || citationBounds);
+export function SearchField({ value, onChange, placeholder }) {
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName ?? "");
+      if (((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") || (event.key === "/" && !typing)) {
         event.preventDefault();
-        searchRef.current?.focus();
+        inputRef.current?.focus();
       }
-      if (event.key === "Escape") setOpenHelpId(null);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
-    <section className="filter-shell" aria-label={copy.filterPapers}>
-      <div className="filter-board">
-        <div className="filter-board-head">
-          <span className="filter-status">
-            {countCopy.before}<b>{countCopy.visible}</b>{countCopy.middle}{countCopy.total}{countCopy.after}
-          </span>
-        </div>
-
-        {dimensions.map((dimension) => (
-          <FilterDimension
-            key={dimension.id}
-            dimension={dimension}
-            selected={selections[dimension.id]}
-            counts={facetCounts[dimension.id]}
-            onToggle={(option) => onToggle(dimension.id, option)}
-            onClear={() => onClearDimension(dimension.id)}
-            helpOpen={openHelpId === dimension.id}
-            onHelpToggle={() => setOpenHelpId((current) => current === dimension.id ? null : dimension.id)}
-            copy={copy}
-          />
-        ))}
-
-        {hasNumericFilters && <div className={`dimension-row number-row${openHelpId === "numeric" ? " has-help-open" : ""}`}>
-          <div className="dimension-label">
-            <DimensionTitle
-              label={copy.numericRange}
-              helpId="dimension-help-numeric"
-              helpOpen={openHelpId === "numeric"}
-              onHelpToggle={() => setOpenHelpId((current) => current === "numeric" ? null : "numeric")}
-              copy={copy}
-            />
-          </div>
-          <div className="dimension-content">
-            <div className="range-grid">
-              {yearBounds && <RangeFilter label={copy.publicationYear} min={yearBounds[0]} max={yearBounds[1]} value={yearRange} onChange={onYearRangeChange} copy={copy} />}
-              {citationBounds && <RangeFilter label={copy.citations} min={citationBounds[0]} max={citationBounds[1]} value={citationRange} onChange={onCitationRangeChange} copy={copy} />}
-            </div>
-            {openHelpId === "numeric" && <DimensionHelp id="dimension-help-numeric" label={copy.numericRange} help={copy.numericHelp} copy={copy} />}
-          </div>
-        </div>}
-
-        <div className="filter-board-foot">
-          <span><i className="logic-dot" /> {copy.logic} <b>+</b> {copy.logicAnd}</span>
-          <button className="clear-btn" onClick={onClear}>{copy.reset}</button>
-        </div>
-      </div>
-
-      <div className="search-sort-row">
-        <label className="search-field">
-          <span className="search-icon" aria-hidden="true">⌕</span>
-          <input
-            ref={searchRef}
-            type="search"
-            placeholder={copy.searchPlaceholder}
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-          />
-          <kbd>⌘ K</kbd>
-        </label>
-        <div className="sort-group" role="group" aria-label={copy.sortPapers}>
-          <span className="sort-label">{copy.sort}</span>
-          {resolvedSortOptions.map((option) => (
-            <button
-              key={option.value}
-              className={`sort-btn${sortBy === option.value ? " is-active" : ""}`}
-              onClick={() => onSortChange(option.value)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </section>
+    <label className="search-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+      <input
+        ref={inputRef}
+        type="search"
+        placeholder={placeholder}
+        aria-label={placeholder}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+      <kbd>/</kbd>
+    </label>
   );
+}
+
+export function FacetSidebar({ dimensions, selections, facetCounts, onToggle, ranges, copy }) {
+  const [openIds, setOpenIds] = useState(() => new Set(dimensions.slice(0, 3).map(({ id }) => id)));
+  const [helpId, setHelpId] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const activeCount = dimensions.reduce((total, { id }) => total + selections[id].length, 0);
+
+  useEffect(() => {
+    const closeHelp = (event) => { if (event.key === "Escape") setHelpId(null); };
+    window.addEventListener("keydown", closeHelp);
+    return () => window.removeEventListener("keydown", closeHelp);
+  }, []);
+
+  const toggleOpen = (id) => setOpenIds((current) => {
+    const next = new Set(current);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    return next;
+  });
+  const toggleHelp = (id) => setHelpId((current) => (current === id ? null : id));
+
+  return (
+    <aside className="facets" aria-label={copy.filterPapers}>
+      <button type="button" className="facets-toggle" aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>
+        {copy.filters}{activeCount > 0 ? ` · ${activeCount}` : ""}
+        <span aria-hidden="true">{mobileOpen ? "−" : "+"}</span>
+      </button>
+      <div className={`facets-body${mobileOpen ? " is-open" : ""}`}>
+        {dimensions.map((dimension) => {
+          const selected = selections[dimension.id];
+          return (
+            <Facet
+              key={dimension.id}
+              id={dimension.id}
+              label={dimension.label}
+              help={dimension.help}
+              selectedCount={selected.length}
+              open={openIds.has(dimension.id) || selected.length > 0}
+              onOpenToggle={() => toggleOpen(dimension.id)}
+              helpOpen={helpId === dimension.id}
+              onHelpToggle={() => toggleHelp(dimension.id)}
+              copy={copy}
+            >
+              <ul className="facet-options">
+                {dimension.options.map((option) => (
+                  <li key={option.value}>
+                    <label className={`facet-option${option.parent ? " is-child" : ""}`}>
+                      <input
+                        type="checkbox"
+                        checked={selected.includes(option.value)}
+                        aria-label={option.parent ? `${option.parentLabel ?? option.parent}: ${option.label}` : option.label}
+                        onChange={() => onToggle(dimension.id, option.value)}
+                      />
+                      <span>{option.label}</span>
+                      <small>{facetCounts[dimension.id][option.value] ?? 0}</small>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </Facet>
+          );
+        })}
+        {ranges.length > 0 && (
+          <Facet
+            id="numeric"
+            label={copy.numericRange}
+            help={copy.numericHelp}
+            selectedCount={0}
+            open={openIds.has("numeric")}
+            onOpenToggle={() => toggleOpen("numeric")}
+            helpOpen={helpId === "numeric"}
+            onHelpToggle={() => toggleHelp("numeric")}
+            copy={copy}
+          >
+            <div className="facet-ranges">
+              {ranges.map((range) => (
+                <RangeFilter
+                  key={range.label}
+                  label={range.label}
+                  min={range.bounds[0]}
+                  max={range.bounds[1]}
+                  value={range.value}
+                  onChange={range.onChange}
+                  copy={copy}
+                />
+              ))}
+            </div>
+          </Facet>
+        )}
+      </div>
+    </aside>
+  );
+}
+
+export function ResultsBar({ resultCount, totalCount, activeFilters, onClear, sortBy, sortOptions, onSortChange, copy }) {
+  const count = copy.resultCount(resultCount, totalCount);
+  return (
+    <div className="results-bar">
+      <div className="results-summary">
+        <span className="results-count">
+          {count.before}<b>{count.visible}</b>{count.middle}{count.total}{count.after}
+        </span>
+        {activeFilters.map((filter) => (
+          <button
+            type="button"
+            className="filter-pill"
+            onClick={filter.onRemove}
+            aria-label={copy.removeFilter(filter.label)}
+            key={filter.key}
+          >
+            {filter.label}<span aria-hidden="true">×</span>
+          </button>
+        ))}
+        {activeFilters.length > 0 && (
+          <button type="button" className="clear-link" onClick={onClear}>{copy.clearAll}</button>
+        )}
+      </div>
+      <label className="sort-select">
+        <span>{copy.sort}</span>
+        <select value={sortBy} aria-label={copy.sortPapers} onChange={(event) => onSortChange(event.target.value)}>
+          {sortOptions.map((option) => <option value={option.value} key={option.value}>{option.label}</option>)}
+        </select>
+      </label>
+    </div>
+  );
+}
+
+// Pills for the filters currently narrowing the list, each removable on its own.
+export function activeFilterPills({ dimensions, selections, onToggle, ranges }) {
+  const pills = dimensions.flatMap((dimension) => selections[dimension.id].map((value) => ({
+    key: `${dimension.id}:${value}`,
+    label: dimension.options.find((option) => option.value === value)?.label ?? value,
+    onRemove: () => onToggle(dimension.id, value),
+  })));
+  for (const range of ranges) {
+    const [low, high] = range.value;
+    if (low !== range.bounds[0] || high !== range.bounds[1]) {
+      const span = low === high ? `${low}` : `${low}–${high}`;
+      pills.push({ key: range.label, label: `${range.label} ${span}`, onRemove: () => range.onChange(range.bounds) });
+    }
+  }
+  return pills;
 }

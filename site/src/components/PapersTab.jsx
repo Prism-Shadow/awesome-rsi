@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { papers } from "../data/papers.js";
 import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
-import FilterBar from "./FilterBar.jsx";
+import { FacetSidebar, ResultsBar, SearchField, activeFilterPills } from "./FilterBar.jsx";
+import PageHead from "./PageHead.jsx";
 import PaperCard from "./PaperCard.jsx";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
-import { papersCopy } from "../i18n.js";
+import { appCopy, filterCopy, papersCopy } from "../i18n.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(filterDimensions.map(({ id }) => [id, []]));
 const YEARS = papers.map((paper) => paper.year);
@@ -22,6 +23,7 @@ export default function PapersTab({ lang }) {
   const [sortBy, setSortBy] = useState("date");
   const dimensions = useMemo(() => localizeFilterDimensions(filterDimensions, lang), [lang]);
   const copy = papersCopy[lang];
+  const filterText = filterCopy[lang];
 
   const facetCounts = useMemo(() => Object.fromEntries(dimensions.map((dimension) => [
     dimension.id,
@@ -81,8 +83,6 @@ export default function PapersTab({ lang }) {
     };
   });
 
-  const clearDimension = (dimensionId) => setSelections((current) => ({ ...current, [dimensionId]: [] }));
-
   const clearFilters = () => {
     setSelections(INITIAL_SELECTIONS);
     setYearRange(YEAR_BOUNDS);
@@ -90,40 +90,53 @@ export default function PapersTab({ lang }) {
     setQuery("");
   };
 
+  const ranges = [
+    { label: filterText.publicationYear, bounds: YEAR_BOUNDS, value: yearRange, onChange: setYearRange },
+    { label: filterText.citations, bounds: CITATION_BOUNDS, value: citationRange, onChange: setCitationRange },
+  ];
+  const sortOptions = [
+    { value: "date", label: filterText.newest },
+    { value: "citations", label: filterText.mostCited },
+  ];
+
   return (
     <>
-      <FilterBar
-        dimensions={dimensions}
-        selections={selections}
-        facetCounts={facetCounts}
-        onToggle={toggleOption}
-        onClearDimension={clearDimension}
-        yearBounds={YEAR_BOUNDS}
-        yearRange={yearRange}
-        onYearRangeChange={setYearRange}
-        citationBounds={CITATION_BOUNDS}
-        citationRange={citationRange}
-        onCitationRangeChange={setCitationRange}
-        query={query}
-        onQueryChange={setQuery}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-        resultCount={visible.length}
-        totalCount={papers.length}
-        onClear={clearFilters}
-        lang={lang}
-      />
-      {visible.length === 0 ? (
-        <div className="empty-state">
-          <b>{copy.noPapers}</b>
-          <span>{copy.noPapersHint}</span>
-          <button onClick={clearFilters}>{copy.reset}</button>
-        </div>
-      ) : (
-        <div className="paper-list">
-          {visible.map((paper) => <PaperCard key={paper.id} paper={paper} lang={lang} />)}
-        </div>
-      )}
+      <PageHead title={appCopy[lang].tabs.papers} description={appCopy[lang].pageHeads.papers}>
+        <SearchField value={query} onChange={setQuery} placeholder={filterText.searchPlaceholder} />
+      </PageHead>
+      <div className="catalog">
+        <FacetSidebar
+          dimensions={dimensions}
+          selections={selections}
+          facetCounts={facetCounts}
+          onToggle={toggleOption}
+          ranges={ranges}
+          copy={filterText}
+        />
+        <section className="catalog-results" aria-label={filterText.filterPapers}>
+          <ResultsBar
+            resultCount={visible.length}
+            totalCount={papers.length}
+            activeFilters={activeFilterPills({ dimensions, selections, onToggle: toggleOption, ranges })}
+            onClear={clearFilters}
+            sortBy={sortBy}
+            sortOptions={sortOptions}
+            onSortChange={setSortBy}
+            copy={filterText}
+          />
+          {visible.length === 0 ? (
+            <div className="empty-state">
+              <b>{copy.noPapers}</b>
+              <span>{copy.noPapersHint}</span>
+              <button onClick={clearFilters}>{copy.reset}</button>
+            </div>
+          ) : (
+            <div className="paper-list">
+              {visible.map((paper) => <PaperCard key={paper.id} paper={paper} lang={lang} />)}
+            </div>
+          )}
+        </section>
+      </div>
     </>
   );
 }
