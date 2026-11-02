@@ -116,6 +116,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.1–3.3 and Appendix A (arXiv v4): a separate consolidation agent curates textual skills on training tasks; student weights and held-out evaluation skills stay fixed.
+  // Candidate patches are tested through student reruns. Trace-linked evidence from earlier edits informs consolidation; each benchmark has its own library.
+  "2607.28048": { artifact: ["Non-parametric", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Instance result"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // §§3.2–3.4 and Appendix G: a separate meta agent optimizes the task agent's skills; its rewrites of its own meta-skill are teacher-side and not recorded, as for VERSE.
   // Candidates branch from one parent, but diagnosis reads the archive and earlier children. The meta agent reads training tests and reference solutions; reviews gate selection.
   "2610.35434": { artifact: ["Non-parametric", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },

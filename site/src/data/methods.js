@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2607.28048",
+    nickname: "SKILL-KD",
+    title: "SKILL-KD: Contrastive Skill Distillation for LLM Agents",
+    authors: ["Qiming Shi", "Yibo Dou", "Jiawen Zhu", "Yulong Tao", "Linbo Jin", "Zhaolu Kang", "Yunfan Zhou", "Di Weng"], authorCount: 8,
+    published: "2026-07-30", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-02",
+    summary: "Distills teacher-student trajectory contrasts into reusable skills validated by frozen-student reruns, and uses a trace-linked consolidation agent to mitigate case-specific, skill-bloat, and destructive-update drift during persistent skill updates.",
+    summaryZh: "对比教师与学生轨迹蒸馏可复用技能，通过冻结学生重跑验证，并用可追溯历史轨迹的整理智能体缓解技能持续更新中的案例特化、技能膨胀和破坏性更新三类漂移。",
+  },
+  {
     id: "2610.35434",
     nickname: "Skill∞",
     title: "Skill∞: Recursive Self-Improvement for Agent Skill Optimization",
