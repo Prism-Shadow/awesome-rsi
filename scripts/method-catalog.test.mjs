@@ -97,3 +97,12 @@ test('Harness² and Skill∞ have original abstracts and are represented in the 
     assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
   }
 });
+
+test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
+  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
+  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  // HGM reuses DGM's self-modification step: a separate diagnosis call directs the agent's edits to its own code.
+  assert.deepEqual(methodTaxonomy['2510.21614'].updater, methodTaxonomy['2505.22954'].updater);
+});
