@@ -39,9 +39,9 @@ function luminance(hex) {
 
 test('both palettes maintain readable text contrast, including tree labels and buttons', () => {
   const pairs = [
-    ['#0d0f1a', '#ffffff'], ['#41465a', '#ffffff'], ['#0f6b4f', '#ffffff'],
-    ['#ffffff', '#0f6b4f'], ['#d5efe1', '#0f6b4f'], ['#0a4b38', '#e8f4ee'],
-    ...['#e8f4ee', '#e8eef6', '#eceefd', '#e3f5f2', '#f6eddc'].map((bg) => ['#0d0f1a', bg]),
+    ['#0d0f1a', '#ffffff'], ['#41465a', '#ffffff'], ['#0b57d0', '#ffffff'],
+    ['#ffffff', '#0b57d0'], ['#d3e3fd', '#0b57d0'], ['#0842a0', '#e8f0fe'],
+    ...['#e8f0fe', '#f3f7fe'].map((bg) => ['#0d0f1a', bg]), ['#41465a', '#f3f7fe'],
   ];
   for (const palette of [(color) => color, (color) => darkPalette[color]]) {
     for (const pair of pairs) {

@@ -5,22 +5,19 @@ import { fileURLToPath } from 'node:url';
 export const themedAssets = ['logo', 'website-entry', 'paper-map', 'benchmark-map'];
 
 // Existing light SVGs remain the editable source of truth for text and geometry.
-// Keep the green identity, using brighter accents and quiet tinted panels at night.
+// Keep the blue identity of the website, using its dark-mode accents and quiet tinted panels at night.
 export const darkPalette = {
-  '#ffffff': '#0d1117', // canvas; dark text/icons on the bright green button/root
+  '#ffffff': '#0d1117', // canvas; dark text/icons on the bright blue button/root
   '#0d0f1a': '#e6edf3', // primary text
   '#41465a': '#adbac7', // secondary text
-  '#0f6b4f': '#6bd5aa', // green accent and primary button/root
-  '#0a4b38': '#a1e8cb', // green text on tinted panels
-  '#d5efe1': '#153d2e', // secondary text on the bright green root
-  '#e8f4ee': '#18382d', // green panel
-  '#e8eef6': '#1d3044', // blue panel
-  '#eceefd': '#2a2c49', // violet panel
-  '#e3f5f2': '#173c39', // teal panel
-  '#f6eddc': '#3d3321', // amber panel
+  '#0b57d0': '#8ab4f8', // blue accent and primary button/root
+  '#0842a0': '#aecbfa', // blue text on tinted panels
+  '#d3e3fd': '#173463', // secondary text on the bright blue root
+  '#e8f0fe': '#18304f', // blue panel
+  '#f3f7fe': '#161d29', // leaf panel
   '#e7e8f0': '#33434c', // panel border
-  '#cddfd5': '#3b5b4d', // entry border
-  '#b7cfc3': '#638b79', // tree connections
+  '#c6dafc': '#2f4a74', // entry border
+  '#a9c4ef': '#56739f', // tree connections
 };
 
 export function renderDarkSvg(lightSvg) {
