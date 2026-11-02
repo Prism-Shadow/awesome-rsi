@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2610.35434",
+    nickname: "Skill∞",
+    title: "Skill∞: Recursive Self-Improvement for Agent Skill Optimization",
+    authors: ["Wangcheng Tao","Zhanglu Yan","Han Wu","Weng-Fai Wong"], authorCount: 4,
+    published: "2026-10-26", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-01",
+    summary: "A meta agent follows a meta-skill to diagnose rollouts, propose and review task-skill revisions, and allocate its search budget, then optimizes the meta-skill itself with the same procedure.",
+    summaryZh: "元智能体按照元技能诊断执行轨迹、提出并评审任务技能修改、自主分配搜索预算，再用同一流程优化元技能本身。",
+  },
+  {
+    id: "2610.14224",
+    nickname: "Harness²",
+    title: "Harness²: Recursive Agent Harnessing for an Open World",
+    authors: ["Ruiyao Xu","Yanfei Chen","Zhongying CuiZhu","Bhavana Dalvi Mishra","Yifei Ming","Han Yu","Rujun Han","Chen-Yu Lee","Tomas Pfister"], authorCount: 9,
+    published: "2026-10-09", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-01",
+    summary: "Refines the agent harness for each new task by probing candidate edits against a reference run without ground-truth verifiers, then stores adopted harnesses and lessons in a library that guides later tasks.",
+    summaryZh: "每个新任务都先将候选 Harness 修改与参考执行对比试跑，在没有标准答案的情况下组合有效改动，再把采纳的 Harness 和经验存入库中，指导后续任务。",
+  },
+  {
     id: "2610.26770",
     nickname: "HarnessPro",
     title: "HarnessPro: Recursive Harness Self-Improvement with Pareto Optimization for Performance-Cost Trade-offs",

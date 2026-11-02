@@ -59,6 +59,7 @@ export const methodFilterDimensions = [
       ["Teacher", "A separate teacher forms the update from the student's experience."],
       ["Joint", "The student actively proposes or revises an update, and the teacher further curates, selects, or modifies it."],
     ],
+    "Updates that only evolve the teacher are not recorded, including an optimizer rewriting its own procedure.",
   ),
   dimension(
     "source",
@@ -115,6 +116,12 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.2–3.4 and Appendix G: a separate meta agent optimizes the task agent's skills; its rewrites of its own meta-skill are teacher-side and not recorded, as for VERSE.
+  // Candidates branch from one parent, but diagnosis reads the archive and earlier children. The meta agent reads training tests and reference solutions; reviews gate selection.
+  "2610.35434": { artifact: ["Non-parametric", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
+  // §§2.2–2.3 and Appendix D: a separate editor composes harness edits from behavioral contrasts on the current task; a guard withholds grader verdicts, rubrics, and scores.
+  // The editor's library of adopted harnesses and lessons grows after every task, but its stage instructions stay fixed, so the updater remains Teacher. Invalid trees are retried with validator messages.
+  "2610.14224": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Graph"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Environment", "Executable verifier", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
   // §4 and Appendix D: train/validation tests are synthesized once and frozen; official tests are reserved for final evaluation.
   // Planning reads other candidates' diffs as well as the parent's code; selection trades off validation pass rate and cost.
   "2610.26770": { artifact: ["Non-parametric", "Harness code", "Context", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM-generated tests", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
@@ -202,7 +209,8 @@ export const methodTaxonomy = {
   // SAGEAgent §§2.3/3.2: episode memory and periodic rule reflection evolve on training patients; auxiliary model fitting is not agent parameter RSI.
   "2607.09521": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Trajectory", "Batch"], scope: ["Specialized"] },
   // Appendix Listings 1–2: the self-modification trace creates tests/test_error_diagnosis.py and records its pytest execution results.
-  "2510.21614": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Benchmark score"], updater: ["Self"], source: ["Benchmark", "Executable verifier", "LLM-generated tests", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
+  // §4 and Appendix C.1 reuse DGM's setup: a separate diagnosis call writes the problem statement and the agent implements it in its own code, so the updater is Joint as for DGM.
+  "2510.21614": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Benchmark score"], updater: ["Joint"], source: ["Benchmark", "Executable verifier", "LLM-generated tests", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
   // A single incumbent is retained, but proposals use diffs and outcomes from multiple historical candidates (§3.2, Appendix C.2).
   "2609.24972": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["General"] },
   "2609.09153": { artifact: ["Non-parametric","Context","Memory","Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation","Benchmark score"], updater: ["Teacher"], source: ["Train/dev set","Environment","LLM feedback"], feedback: ["Score","Binary","Non-binary","Non-score","Other"], frequency: ["Batch"], scope: ["Specialized"] },
@@ -268,7 +276,8 @@ export const methodTaxonomy = {
   "2605.09998": { artifact: ["Parametric", "Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["No validation"], updater: ["Self", "Teacher"], source: ["Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Step", "Batch"], scope: ["Specialized"] },
   // §§3.4, 3.6: tool lifecycle operations produce code and unit tests; unit, integration, and regression results gate proposals.
   "2606.01314": { artifact: ["Non-parametric", "Harness code", "Memory", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Executable verifier", "LLM-generated tests", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["General"] },
-  "2606.04465": { artifact: ["Non-parametric", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Benchmark score"], updater: ["Self", "Teacher"], source: ["Train/dev set", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary"], frequency: ["Batch"], scope: ["General", "Specialized"] },
+  // SePO: the prompt agent edits task agents' system prompts; evolving its own system prompt is teacher-side and not recorded.
+  "2606.04465": { artifact: ["Non-parametric", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary"], frequency: ["Batch"], scope: ["General", "Specialized"] },
   "2606.06324": { artifact: ["Non-parametric", "Harness code", "Context", "Memory"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Benchmark", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2606.09498": { artifact: ["Non-parametric", "Harness code", "Context", "Memory"], mode: ["Offline"], topology: ["Graph"], selection: ["Combined metrics"], updater: ["Self"], source: ["Benchmark", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2606.26294": { artifact: ["Non-parametric", "Harness code", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Benchmark", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge"], frequency: ["Batch"], scope: ["General"] },

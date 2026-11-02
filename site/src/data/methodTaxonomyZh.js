@@ -36,6 +36,7 @@ const methodTaxonomyZh = {
   updater: {
     label: "产物更新者",
     summary: "由谁参与形成 Student 后续会继续使用的持久产物更新。",
+    note: "不记录只演化 Teacher 自身的更新，包括优化器改写自己的流程。",
     items: {
       Self: ["自身", "由 Student 自己形成更新。"],
       Teacher: ["教师", "由独立 Teacher 根据 Student 的经验形成更新。"],

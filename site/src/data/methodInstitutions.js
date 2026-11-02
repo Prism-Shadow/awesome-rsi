@@ -1,4 +1,6 @@
 export const methodInstitutions = {
+  "2610.35434": ["National University of Singapore","City University of Hong Kong"],
+  "2610.14224": ["Northwestern University","Google Cloud AI Research"],
   "2610.26770": ["Tsinghua University","Z.AI","Shanghai Jiao Tong University","University of Warwick","Kling AI"],
   "2610.12789": ["Tulane University","Amazon"],
   // Affiliation from the official project page: https://lab.noematrix.ai/blog/2-roborsi/
