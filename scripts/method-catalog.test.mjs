@@ -89,3 +89,11 @@ test('the six new method papers have original abstracts and are represented in t
     assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
   }
 });
+
+test('Harness² and Skill∞ have original abstracts and are represented in the citation graph', () => {
+  for (const id of ['2610.14224', '2610.35434']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+});

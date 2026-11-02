@@ -115,6 +115,12 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.2–3.4 and Appendix G: a separate meta agent optimizes the task agent's skills; its rewrites of its own meta-skill are teacher-side and not recorded, as for VERSE.
+  // Candidates branch from one parent, but diagnosis reads the archive and earlier children. The meta agent reads training tests and reference solutions; reviews gate selection.
+  "2610.35434": { artifact: ["Non-parametric", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
+  // §§2.2–2.3 and Appendix D: a separate editor composes harness edits from behavioral contrasts on the current task; a guard withholds grader verdicts, rubrics, and scores.
+  // The editor's library of adopted harnesses and lessons grows after every task, but its stage instructions stay fixed, so the updater remains Teacher. Invalid trees are retried with validator messages.
+  "2610.14224": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Graph"], selection: ["Artifact validation", "Instance result"], updater: ["Teacher"], source: ["Environment", "Executable verifier", "LLM feedback"], feedback: ["Non-score", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },
   // §4 and Appendix D: train/validation tests are synthesized once and frozen; official tests are reserved for final evaluation.
   // Planning reads other candidates' diffs as well as the parent's code; selection trades off validation pass rate and cost.
   "2610.26770": { artifact: ["Non-parametric", "Harness code", "Context", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM-generated tests", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
