@@ -2387,6 +2387,20 @@ html[lang="zh-Hans"] .method-status {
   height: 92%;
 }
 
+.home-hero-network svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The hovered node is redrawn above the hero text, which never blocks it. */
+.home-hero-network .network-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .home-hero-network .network-graph {
   mask: url(#hero-network-mask-side);
 }
@@ -2811,6 +2825,10 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
     top: auto;
     right: auto;
     width: 100%;
+    height: auto;
+  }
+
+  .home-hero-network .network-canvas {
     height: auto;
   }
 

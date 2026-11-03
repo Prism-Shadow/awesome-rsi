@@ -153,13 +153,14 @@ function nodeGroups(nearNodes) {
 }
 
 function CitationNetwork() {
-  const svgRef = useRef(null);
+  const rootRef = useRef(null);
+  const canvasRef = useRef(null);
   const focusRef = useRef(null);
   const [focus, setFocus] = useState(null);
 
   useEffect(() => {
     if (REDUCED_MOTION) return undefined;
-    const svg = svgRef.current;
+    const svg = rootRef.current;
     const sparks = svg.querySelectorAll(".network-pulses circle");
     const pulses = [...sparks].map(() => ({ link: -1, start: 0 }));
     let frame = 0;
@@ -233,97 +234,104 @@ function CitationNetwork() {
     };
   }, []);
 
-  const updateFocus = (next) => {
-    if (next === focusRef.current) return;
-    focusRef.current = next;
-    setFocus(next);
-  };
-
-  const handlePointerMove = (event) => {
-    if (event.pointerType === "touch") return;
-    const svg = svgRef.current;
-    const matrix = svg.getScreenCTM();
-    if (!matrix) return;
-    const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
-    const reach = 14 / matrix.a;
-    let nearest = null;
-    let nearestDistance = Infinity;
-    networkNodes.forEach((node, index) => {
-      const distance = Math.hypot(positions[index * 2] - point.x, positions[index * 2 + 1] - point.y);
-      if (distance < node.radius * 0.55 + reach && distance < nearestDistance) {
-        nearest = index;
-        nearestDistance = distance;
-      }
-    });
-    updateFocus(nearest);
-  };
+  // Hover is tracked over the whole hero, so a node under the headline or stats still shows its name;
+  // the text above keeps its own selection and links.
+  useEffect(() => {
+    const hero = rootRef.current.parentElement;
+    const updateFocus = (next) => {
+      if (next === focusRef.current) return;
+      focusRef.current = next;
+      setFocus(next);
+    };
+    const handlePointerMove = (event) => {
+      if (event.pointerType === "touch") return;
+      const matrix = canvasRef.current.getScreenCTM();
+      const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+      const reach = 14 / matrix.a;
+      let nearest = null;
+      let nearestDistance = Infinity;
+      networkNodes.forEach((node, index) => {
+        const distance = Math.hypot(positions[index * 2] - point.x, positions[index * 2 + 1] - point.y);
+        if (distance < node.radius * 0.55 + reach && distance < nearestDistance) {
+          nearest = index;
+          nearestDistance = distance;
+        }
+      });
+      updateFocus(nearest);
+    };
+    const clearFocus = () => updateFocus(null);
+    hero.addEventListener("pointermove", handlePointerMove);
+    hero.addEventListener("pointerleave", clearFocus);
+    return () => {
+      hero.removeEventListener("pointermove", handlePointerMove);
+      hero.removeEventListener("pointerleave", clearFocus);
+    };
+  }, []);
 
   const near = neighborhood(focus);
   const groups = nodeGroups(near.nodes);
 
+  const viewBox = `0 20 ${HERO_WIDTH} 560`;
   return (
-    <svg
-      ref={svgRef}
-      className={`home-hero-network${focus === null ? "" : " has-focus"}`}
-      viewBox={`0 20 ${HERO_WIDTH} 560`}
-      preserveAspectRatio="xMaxYMid meet"
-      aria-hidden="true"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={() => updateFocus(null)}
-    >
-      {/* The network fades out toward the headline; the hovered node is drawn above the fade. */}
-      <defs>
-        <linearGradient id="hero-network-fade-side" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.12" />
-          <stop offset="0.55" stopColor="#fff" stopOpacity="0.5" />
-          <stop offset="1" stopColor="#fff" />
-        </linearGradient>
-        <linearGradient id="hero-network-fade-bottom" gradientUnits="userSpaceOnUse" x1="0" y1="412" x2="0" y2="580">
-          <stop offset="0" stopColor="#fff" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <mask id="hero-network-mask-side" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
-          <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-side)" />
-        </mask>
-        <mask id="hero-network-mask-bottom" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
-          <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-bottom)" />
-        </mask>
-      </defs>
-      <g className="network-graph">
-        <path className="network-links" data-links="all" d={linksPath(allLinks)} />
-        {focus !== null && <path className="network-links is-near" data-links="near" d={linksPath(near.links)} />}
-        {Object.entries(groups).map(([style, nodes]) => (
-          <path className={`network-nodes ${style}`.trim()} data-nodes={style} d={nodesPath(nodes)} key={style || "plain"} />
-        ))}
-        <g className="network-pulses">
-          {Array.from({ length: PULSE_COUNT }, (_, slot) => (
-            <circle r="2.2" opacity="0" key={slot} />
+    <div ref={rootRef} className={`home-hero-network${focus === null ? "" : " has-focus"}`} aria-hidden="true">
+      {/* The network fades out toward the headline. */}
+      <svg ref={canvasRef} className="network-canvas" viewBox={viewBox} preserveAspectRatio="xMaxYMid meet">
+        <defs>
+          <linearGradient id="hero-network-fade-side" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0">
+            <stop offset="0" stopColor="#fff" stopOpacity="0.12" />
+            <stop offset="0.55" stopColor="#fff" stopOpacity="0.5" />
+            <stop offset="1" stopColor="#fff" />
+          </linearGradient>
+          <linearGradient id="hero-network-fade-bottom" gradientUnits="userSpaceOnUse" x1="0" y1="412" x2="0" y2="580">
+            <stop offset="0" stopColor="#fff" />
+            <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          </linearGradient>
+          <mask id="hero-network-mask-side" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
+            <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-side)" />
+          </mask>
+          <mask id="hero-network-mask-bottom" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
+            <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-bottom)" />
+          </mask>
+        </defs>
+        <g className="network-graph">
+          <path className="network-links" data-links="all" d={linksPath(allLinks)} />
+          {focus !== null && <path className="network-links is-near" data-links="near" d={linksPath(near.links)} />}
+          {Object.entries(groups).map(([style, nodes]) => (
+            <path className={`network-nodes ${style}`.trim()} data-nodes={style} d={nodesPath(nodes)} key={style || "plain"} />
           ))}
+          <g className="network-pulses">
+            {Array.from({ length: PULSE_COUNT }, (_, slot) => (
+              <circle r="2.2" opacity="0" key={slot} />
+            ))}
+          </g>
+          <g className="network-labels">
+            {labeledHubs.filter((index) => index !== focus).map((index) => (
+              <text
+                className={near.nodes.has(index) ? "is-near" : undefined}
+                data-index={index}
+                x={positions[index * 2]}
+                y={labelY(index)}
+                textAnchor="middle"
+                key={networkNodes[index].id}
+              >
+                {networkNodes[index].nickname}
+              </text>
+            ))}
+          </g>
         </g>
-        <g className="network-labels">
-          {labeledHubs.filter((index) => index !== focus).map((index) => (
-            <text
-              className={near.nodes.has(index) ? "is-near" : undefined}
-              data-index={index}
-              x={positions[index * 2]}
-              y={labelY(index)}
-              textAnchor="middle"
-              key={networkNodes[index].id}
-            >
-              {networkNodes[index].nickname}
+      </svg>
+      {/* The hovered node and its name sit above the fade and the hero text. */}
+      <svg className="network-overlay" viewBox={viewBox} preserveAspectRatio="xMaxYMid meet">
+        {focus !== null && (
+          <g className="network-focus">
+            <circle data-index={focus} cx={positions[focus * 2]} cy={positions[focus * 2 + 1]} r={networkNodes[focus].radius * 0.55} />
+            <text data-index={focus} x={positions[focus * 2]} y={labelY(focus)} textAnchor="middle">
+              {networkNodes[focus].nickname}
             </text>
-          ))}
-        </g>
-      </g>
-      {focus !== null && (
-        <g className="network-focus">
-          <circle data-index={focus} cx={positions[focus * 2]} cy={positions[focus * 2 + 1]} r={networkNodes[focus].radius * 0.55} />
-          <text data-index={focus} x={positions[focus * 2]} y={labelY(focus)} textAnchor="middle">
-            {networkNodes[focus].nickname}
-          </text>
-        </g>
-      )}
-    </svg>
+          </g>
+        )}
+      </svg>
+    </div>
   );
 }
 
