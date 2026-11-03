@@ -6,8 +6,8 @@ export const methods = [
     authors: ["Haichuan Hu", "Guoqing Xie", "Quanjun Zhang", "Jiawei Liu", "Shengcheng Yu", "Chunrong Fang", "Zhenyu Chen", "Liang Xiao"], authorCount: 8,
     published: "2026-05-28", year: 2026, venue: "ICSE 2027", status: "accepted",
     added: "2026-11-03",
-    summary: "Retrieves repair experience, distills new trajectories, and uses quality scores to retain or merge experience-bank entries for later vulnerability repairs.",
-    summaryZh: "检索历史修复经验，将新轨迹提炼为经验，通过质量评分保留或融合经验库条目，供后续漏洞修复复用。",
+    summary: "Retrieves past repair experience to guide each vulnerability repair, distills every repair trajectory into a structured experience, and keeps, replaces, or merges bank entries by their LLM-judged quality.",
+    summaryZh: "检索过往修复经验指导每次漏洞修复，把每条修复轨迹提炼成结构化经验，并按 LLM 评判的质量保留、替换或融合经验库条目。",
   },
   {
     id: "2607.28048",
