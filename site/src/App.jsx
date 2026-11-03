@@ -4,9 +4,12 @@ import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import GraphTab from "./components/GraphTab.jsx";
+import PaperDetail from "./components/PaperDetail.jsx";
 import BrandMark from "./components/BrandMark.jsx";
+import PageHead from "./components/PageHead.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
-import { NAV_TABS, TAB_HASHES, tabFromHash } from "./lib/navigation.js";
+import { NAV_TABS, TAB_PATHS, routeFromPath } from "./lib/navigation.js";
+import { LOCATION_CHANGE, inPageLink, navigate } from "./lib/router.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
 
@@ -56,62 +59,90 @@ function GitHubIcon() {
   );
 }
 
+function readLocation() {
+  const { pathname, search, hash } = window.location;
+  return { pathname, search, hash };
+}
+
+function NotFound({ copy }) {
+  return (
+    <PageHead title={copy.notFound} description={copy.notFoundHint}>
+      <a className="detail-action" href={TAB_PATHS.home}>{copy.tabs.home}</a>
+    </PageHead>
+  );
+}
+
 export default function App() {
-  const [tab, setTab] = useState(() => tabFromHash(window.location.hash));
+  const [location, setLocation] = useState(readLocation);
+  const route = routeFromPath(location.pathname);
+  const { tab, detail } = route;
   const [theme, toggleTheme] = useTheme();
   const [lang, setLang] = useLanguage();
   const copy = appCopy[lang];
-  const previousTab = useRef(tab);
+  const previousPath = useRef(location.pathname);
+  // Where each list page was scrolled to, so returning from a detail page lands in the same place.
+  const listScroll = useRef({});
+  const onList = useRef(!detail);
+  onList.current = !detail;
 
+  // Detail pages title the tab with their paper instead.
+  const onDetail = Boolean(detail);
   useEffect(() => {
-    document.title = copy.pageTitle;
+    if (!onDetail) document.title = copy.pageTitle;
     document.querySelector('meta[name="description"]')?.setAttribute("content", copy.pageDescription);
-  }, [copy]);
+  }, [copy, onDetail]);
 
   useEffect(() => {
-    const syncTab = () => setTab(tabFromHash(window.location.hash));
-    window.addEventListener("hashchange", syncTab);
-    window.addEventListener("popstate", syncTab);
+    const sync = () => setLocation(readLocation());
+    const rememberScroll = () => {
+      if (onList.current) listScroll.current[routeFromPath(window.location.pathname).tab] = window.scrollY;
+    };
+    const followLink = (event) => {
+      const url = inPageLink(event);
+      if (!url) return;
+      event.preventDefault();
+      navigate(`${url.pathname}${url.search}${url.hash}`);
+    };
+    window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
+    window.addEventListener(LOCATION_CHANGE, sync);
+    window.addEventListener("scroll", rememberScroll, { passive: true });
+    document.addEventListener("click", followLink);
     return () => {
-      window.removeEventListener("hashchange", syncTab);
-      window.removeEventListener("popstate", syncTab);
+      window.removeEventListener("popstate", sync);
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener(LOCATION_CHANGE, sync);
+      window.removeEventListener("scroll", rememberScroll);
+      document.removeEventListener("click", followLink);
     };
   }, []);
 
-  // A hash that names a section (#recently-added, #blog) scrolls to it; other page changes start at the top.
+  // A hash that names a home section (#recently-added, #blog) scrolls to it. Detail pages and lists
+  // opened with a filter start at the top, leaving a detail page returns its list to where it was,
+  // and other page changes start at the top.
   useEffect(() => {
-    const target = document.getElementById(window.location.hash.slice(1));
+    const before = routeFromPath(previousPath.current);
+    const samePage = previousPath.current === location.pathname;
+    previousPath.current = location.pathname;
+    const target = location.hash && document.getElementById(location.hash.slice(1));
     if (target) target.scrollIntoView();
-    else if (previousTab.current !== tab) window.scrollTo(0, 0);
-    previousTab.current = tab;
-  }, [tab]);
-
-  const hrefFor = (target) => TAB_HASHES[target] || import.meta.env.BASE_URL;
-  const selectTab = (event, nextTab) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    const nextUrl = TAB_HASHES[nextTab] || `${window.location.pathname}${window.location.search}`;
-    window.history.pushState(null, "", nextUrl);
-    window.dispatchEvent(new Event("hashchange"));
-    setTab(nextTab);
-  };
+    else if (samePage) return;
+    else if (detail || location.search) window.scrollTo(0, 0);
+    else if (before.detail && before.tab === tab) window.scrollTo(0, listScroll.current[tab] ?? 0);
+    else if (before.tab !== tab) window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <>
       <header className="site-header">
         <div className="header-inner">
-          <a className="brand" href={hrefFor("home")} onClick={(event) => selectTab(event, "home")}>
+          <a className="brand" href={TAB_PATHS.home}>
             <BrandMark />
             <span>awesome <b>rsi</b></span>
           </a>
           <nav className="site-nav" aria-label={copy.navigation}>
             {NAV_TABS.map((target) => (
-              <a
-                href={hrefFor(target)}
-                aria-current={tab === target ? "page" : undefined}
-                onClick={(event) => selectTab(event, target)}
-                key={target}
-              >
+              <a href={TAB_PATHS[target]} aria-current={tab === target ? "page" : undefined} key={target}>
                 {copy.tabs[target]}
               </a>
             ))}
@@ -147,13 +178,20 @@ export default function App() {
           <HomePage lang={lang} />
         ) : (
           <div className="container page-body">
-            {tab === "blog"
-              ? <BlogTab lang={lang} />
-              : tab === "papers"
-                ? <PapersTab lang={lang} />
-                : tab === "methods"
-                  ? <MethodsTab lang={lang} />
-                  : <GraphTab lang={lang} />}
+            {tab === "blog" ? <BlogTab lang={lang} postId={route.postId} />
+              : tab === "graph" ? <GraphTab lang={lang} kind={route.graphKind} focusId={new URLSearchParams(location.search).get("paper")} />
+                : tab === "notFound" ? <NotFound copy={copy} />
+                  : (
+                    <>
+                      {/* The list stays mounted under a detail page, so its filters survive the round trip. */}
+                      <div hidden={Boolean(detail)}>
+                        {tab === "papers"
+                          ? <PapersTab lang={lang} search={detail ? "" : location.search} />
+                          : <MethodsTab lang={lang} search={detail ? "" : location.search} />}
+                      </div>
+                      {detail && <PaperDetail collection={detail.collection} id={detail.id} lang={lang} />}
+                    </>
+                  )}
           </div>
         )}
       </main>
@@ -162,7 +200,7 @@ export default function App() {
         <div className="container">
           <div className="footer-grid">
             <div>
-              <a className="brand" href={hrefFor("home")} onClick={(event) => selectTab(event, "home")}>
+              <a className="brand" href={TAB_PATHS.home}>
                 <BrandMark />
                 <span>awesome <b>rsi</b></span>
               </a>
@@ -173,7 +211,7 @@ export default function App() {
               <ul>
                 {NAV_TABS.filter((target) => target !== "home").map((target) => (
                   <li key={target}>
-                    <a href={hrefFor(target)} onClick={(event) => selectTab(event, target)}>{copy.tabs[target]}</a>
+                    <a href={TAB_PATHS[target]}>{copy.tabs[target]}</a>
                   </li>
                 ))}
               </ul>

@@ -5,6 +5,7 @@ import { methodInstitutions } from "../data/methodInstitutions.js";
 import { localizeMethodDimensions, localizeMethodValue } from "../data/methodTaxonomyZh.js";
 import { leafArtifacts } from "../data/artifactTaxonomy.js";
 import { methodCardCopy } from "../i18n.js";
+import { detailPath } from "../lib/navigation.js";
 
 function formatDate(iso, lang) {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString(lang === "zh" ? "zh-CN" : "en-US", {
@@ -45,7 +46,7 @@ export default function MethodCard({ method, lang }) {
         </span>
       </div>
       <h3 className="paper-title">
-        <a href={paperUrl} target="_blank" rel="noreferrer">{method.title}</a>
+        <a href={detailPath("methods", method.id)}>{method.title}</a>
       </h3>
       <p className="paper-authors">{formatAuthors(method, lang, copy)}</p>
       <p className="paper-institutions">

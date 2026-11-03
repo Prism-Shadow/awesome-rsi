@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
+import { blogMarkdown } from "../data/blogMarkdown.js";
 import { blogCopy } from "../i18n.js";
 import { resolveBlogImage, unescapeMarkdown } from "../lib/blogMarkdown.js";
+import { BASE } from "../lib/navigation.js";
+import { navigate } from "../lib/router.js";
 
 function formatDate(value, lang) {
   return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
@@ -15,10 +18,8 @@ function formatDate(value, lang) {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
-function postIdFromHash() {
-  const match = window.location.hash.match(/^#blog\/(.+)$/);
-  return match ? decodeURIComponent(match[1]) : null;
-}
+// The post list is a section of the home page.
+const POST_LIST = `${BASE}#blog`;
 
 function MathMarkup({ expression, displayMode = false, className }) {
   const Tag = displayMode ? "div" : "span";
@@ -260,11 +261,12 @@ function ArticleBlock({ block }) {
   return <p>{renderInline(block.text)}</p>;
 }
 
-function BlogArticle({ post, onBack, lang, copy }) {
+function BlogArticle({ post, lang, copy }) {
+  const markdown = blogMarkdown[lang][post.id];
   return (
-    <article className={`blog-article${post.markdown ? " blog-article--guide" : ""}`} aria-labelledby="blog-article-title">
+    <article className={`blog-article${markdown ? " blog-article--guide" : ""}`} aria-labelledby="blog-article-title">
       <div className="blog-article-header">
-        <button className="blog-back-link" type="button" onClick={onBack}>{copy.back}</button>
+        <a className="blog-back-link" href={POST_LIST}>{copy.back}</a>
         <div className="blog-article-meta">
           <span>{post.kind}</span>
           <time dateTime={post.published}>{formatDate(post.published, lang)}</time>
@@ -273,8 +275,8 @@ function BlogArticle({ post, onBack, lang, copy }) {
         <p className="blog-article-lead">{post.summary}</p>
       </div>
 
-      {post.markdown
-        ? <MarkdownArticle markdown={post.markdown} copy={copy} showImageCaptions={post.showImageCaptions} />
+      {markdown
+        ? <MarkdownArticle markdown={markdown} copy={copy} showImageCaptions={post.showImageCaptions} />
         : post.sections
         ? post.sections.map((section, index) => (
             <section className="blog-article-body" key={section.heading ?? index}>
@@ -296,35 +298,20 @@ function BlogArticle({ post, onBack, lang, copy }) {
   );
 }
 
-export default function BlogTab({ lang }) {
-  const [activePostId, setActivePostId] = useState(postIdFromHash);
+export default function BlogTab({ lang, postId }) {
   const posts = lang === "zh" ? blogPostsZh : blogPosts;
   const copy = blogCopy[lang];
-  const activePost = posts.find((post) => post.id === activePostId);
-
-  useEffect(() => {
-    const handleHashChange = () => setActivePostId(postIdFromHash());
-    window.addEventListener("hashchange", handleHashChange);
-    window.addEventListener("popstate", handleHashChange);
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("popstate", handleHashChange);
-    };
-  }, []);
+  const activePost = posts.find((post) => post.id === postId);
 
   // Links between posts change only the article, so start each one at the top.
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [activePostId]);
+  }, [postId]);
 
   // An unknown post falls back to the post list on the home page.
   useEffect(() => {
-    if (!activePost) window.location.replace("#blog");
+    if (!activePost) navigate(POST_LIST, { replace: true });
   }, [activePost]);
 
-  const backToPosts = () => {
-    window.location.hash = "blog";
-  };
-
-  return activePost ? <BlogArticle post={activePost} onBack={backToPosts} lang={lang} copy={copy} /> : null;
+  return activePost ? <BlogArticle post={activePost} lang={lang} copy={copy} /> : null;
 }

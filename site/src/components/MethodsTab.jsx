@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { methods } from "../data/methods.js";
 import { systems } from "../data/systems.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
@@ -9,6 +9,8 @@ import PageHead from "./PageHead.jsx";
 import MethodCard from "./MethodCard.jsx";
 import SystemCard from "./SystemCard.jsx";
 import { appCopy, methodFilterCopy, methodsCopy } from "../i18n.js";
+import { TAB_PATHS } from "../lib/navigation.js";
+import { navigate } from "../lib/router.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(methodFilterDimensions.map(({ id }) => [id, []]));
 const methodEntries = [
@@ -32,7 +34,7 @@ const methodEntries = [
 const YEARS = methodEntries.map((method) => method.year);
 const YEAR_BOUNDS = [Math.min(...YEARS), Math.max(...YEARS)];
 
-export default function MethodsTab({ lang }) {
+export default function MethodsTab({ lang, search = "" }) {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
   const [yearRange, setYearRange] = useState(YEAR_BOUNDS);
   const [query, setQuery] = useState("");
@@ -40,6 +42,24 @@ export default function MethodsTab({ lang }) {
   const dimensions = useMemo(() => localizeMethodDimensions(methodFilterDimensions, lang), [lang]);
   const copy = methodsCopy[lang];
   const filterText = methodFilterCopy[lang];
+
+  // A link such as methods/?artifact=Memory, from a detail page, opens the list with only that filter.
+  // The address then drops the query, so later filter changes are not misdescribed by it.
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const requested = methodFilterDimensions.filter(({ id }) => params.has(id));
+    if (requested.length === 0) return;
+    setSelections({
+      ...INITIAL_SELECTIONS,
+      ...Object.fromEntries(requested.map(({ id, options }) => [
+        id,
+        params.getAll(id).filter((value) => options.some((option) => option.value === value)),
+      ])),
+    });
+    setYearRange(YEAR_BOUNDS);
+    setQuery("");
+    navigate(TAB_PATHS.methods, { replace: true });
+  }, [search]);
 
   const facetCounts = useMemo(() => Object.fromEntries(methodFilterDimensions.map((dimension) => [
     dimension.id,

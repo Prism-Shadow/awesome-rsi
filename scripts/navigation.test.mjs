@@ -1,30 +1,36 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { NAV_TABS, TAB_HASHES, tabFromHash } from "../site/src/lib/navigation.js";
+import { BASE, NAV_TABS, TAB_PATHS, detailPath, filterPath, graphPath, postPath, routeFromPath } from "../site/src/lib/navigation.js";
 
-test("the root URL, home sections, and retired pages open the home page", () => {
-  for (const hash of [undefined, "", "#", "#unknown", "#recently-added", "#blog", "#resources"]) {
-    assert.equal(tabFromHash(hash), "home");
+test("each nav page has a real path that routes back to it", () => {
+  assert.equal(BASE, "/awesome-rsi/");
+  assert.deepEqual([...NAV_TABS].sort(), Object.keys(TAB_PATHS).sort());
+  for (const [tab, path] of Object.entries(TAB_PATHS)) {
+    assert.ok(path.startsWith(BASE) && path.endsWith("/"), path);
+    assert.equal(routeFromPath(path).tab, tab, path);
   }
-  assert.equal(TAB_HASHES.home, "");
+  assert.equal(TAB_PATHS.papers, "/awesome-rsi/benchmarks/");
+  assert.equal(routeFromPath("/awesome-rsi").tab, "home");
+  assert.equal(routeFromPath("/awesome-rsi/methods").tab, "methods");
 });
 
-test("each page has a persistent direct link that restores the same page", () => {
-  for (const [tab, hash] of Object.entries(TAB_HASHES)) {
-    if (tab === "home") continue;
-    assert(hash.startsWith("#"));
-    assert.equal(tabFromHash(hash), tab);
-  }
-  assert.equal(TAB_HASHES.papers, "#benchmarks");
-  assert.equal(TAB_HASHES.graph, "#graph-methods");
-  assert.deepEqual([...NAV_TABS].sort(), Object.keys(TAB_HASHES).sort());
+test("detail pages sit under their list", () => {
+  assert.deepEqual(routeFromPath(detailPath("methods", "2605.30105")), { tab: "methods", detail: { collection: "methods", id: "2605.30105" } });
+  assert.deepEqual(routeFromPath(detailPath("methods", "reme")), { tab: "methods", detail: { collection: "methods", id: "reme" } });
+  assert.deepEqual(routeFromPath(detailPath("benchmarks", "2610.10310")), { tab: "papers", detail: { collection: "benchmarks", id: "2610.10310" } });
+  assert.equal(detailPath("methods", "2605.30105"), "/awesome-rsi/methods/2605.30105/");
 });
 
-test("article links and both citation graph datasets keep their routes", () => {
-  assert.equal(tabFromHash("#blog/understanding-rsi"), "blog");
-  assert.ok(!NAV_TABS.includes("blog"));
-  for (const hash of ["#graph", "#graph-methods", "#graph-benchmark", "#methods-graph"]) {
-    assert.equal(tabFromHash(hash), "graph");
+test("blog posts, both citation graphs, and filtered lists have their own addresses", () => {
+  assert.deepEqual(routeFromPath(postPath("understanding-rsi")), { tab: "blog", postId: "understanding-rsi" });
+  assert.deepEqual(routeFromPath(graphPath()), { tab: "graph", graphKind: "methods" });
+  assert.deepEqual(routeFromPath(graphPath("benchmark")), { tab: "graph", graphKind: "benchmark" });
+  assert.equal(graphPath("methods", "2505.22954"), "/awesome-rsi/graph/?paper=2505.22954");
+  assert.equal(filterPath("methods", "artifact", "Harness code"), "/awesome-rsi/methods/?artifact=Harness+code");
+});
+
+test("unknown paths are not found, including the retired hash pages' paths", () => {
+  for (const path of ["/awesome-rsi/resources/", "/awesome-rsi/blog/", "/awesome-rsi/graph/other/", "/awesome-rsi/methods/a/b/", "/other/"]) {
+    assert.equal(routeFromPath(path).tab, "notFound", path);
   }
-  assert.equal(tabFromHash("#papers"), "papers");
 });
