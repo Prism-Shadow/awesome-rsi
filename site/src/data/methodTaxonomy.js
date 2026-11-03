@@ -116,6 +116,10 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§III-C1, III-C3–4: retrieved experience from multiple vulnerabilities informs later trajectories; a separate extractor/judge writes and scores memory.
+  // Quality scores gate replacement or fusion of bank entries. Executable benchmark feedback evaluates repairs; the outer updater and model weights remain fixed.
+  // §§III-C2 and IV-D: the agent runs the benchmark's own PoC and unit-test scripts while repairing, and the official oracle decides which vulnerabilities are retried, so Benchmark is a source.
+  "2605.30105": { artifact: ["Non-parametric", "Memory"], mode: ["Online"], topology: ["Graph"], selection: ["Artifact validation"], updater: ["Teacher"], source: ["Benchmark", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §§3.1–3.3 and Appendix A (arXiv v4): a separate consolidation agent curates textual skills on training tasks; student weights and held-out evaluation skills stay fixed.
   // Candidate patches are tested through student reruns. Trace-linked evidence from earlier edits informs consolidation; each benchmark has its own library.
   // §3.2: a student failure triggers distillation, and a patch is committed as soon as a rerun succeeds, before the next instance, so the frequency is Event.
