@@ -1,5 +1,6 @@
 :root {
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Latin text always renders in Inter or Newsreader; only Chinese characters fall through to Noto. */
+  --sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: "Newsreader", "Noto Serif SC", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
@@ -94,7 +95,6 @@ body {
 }
 
 html[lang="zh-Hans"] body {
-  font-family: "Noto Sans SC", var(--sans);
   letter-spacing: 0.002em;
 }
 
@@ -2138,33 +2138,104 @@ html[lang="zh-Hans"] .method-status {
 .detail-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.4rem;
+  align-items: center;
+  gap: 0.6rem 1.4rem;
+  margin-top: 1.5rem;
 }
 
+/* The paper's own links share one dark pill, split by a hairline. */
+.detail-paper-links {
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.detail-paper-links a,
+a.detail-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.5rem;
+  padding: 0 1.05rem;
+  color: var(--btn-fg);
+  font: 600 0.875rem var(--sans);
+  transition: background 0.15s ease;
+}
+
+.detail-paper-links a + a {
+  border-left: 1px solid color-mix(in srgb, var(--btn-fg) 22%, transparent);
+}
+
+.detail-paper-links a:hover,
+a.detail-project-link:hover {
+  background: color-mix(in srgb, var(--btn-fg) 12%, var(--btn-bg));
+  text-decoration: none;
+}
+
+.detail-paper-links svg,
+.detail-tool svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.detail-paper-links svg:last-child:not(:first-child) {
+  width: 0.8rem;
+  height: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Tools for working with the paper are quiet text links. */
+.detail-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--body);
+  font: 600 0.875rem var(--sans);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.detail-tool svg {
+  color: var(--accent);
+}
+
+.detail-tool:hover,
+.detail-tool[aria-expanded="true"] {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.detail-tool span {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.2s ease;
+}
+
+.detail-tool:hover span {
+  background-size: 100% 1px;
+}
+
+/* The not-found page's single way home. */
 .detail-action {
   display: inline-flex;
   align-items: center;
   height: 2.25rem;
-  padding: 0 0.95rem;
-  border: 1px solid var(--line-2);
-  border-radius: 0.5rem;
-  background: var(--surface);
-  color: var(--ink);
+  padding: 0 1rem;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   font: 600 0.875rem var(--sans);
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .detail-action:hover {
-  border-color: var(--ink);
   text-decoration: none;
-}
-
-.detail-action.is-primary {
-  border-color: var(--btn-bg);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
+  opacity: 0.9;
 }
 
 .detail-bibtex {
@@ -2341,12 +2412,13 @@ html[lang="zh-Hans"] .method-status {
   mask-image: linear-gradient(to bottom, #000 55%, transparent);
 }
 
-/* A large network on the right that fades out toward the headline. */
+/* A large network on the right that fades out toward the headline. Beyond 1440px it stays with
+   the centered content instead of the window edge, so it sits as close to the headline as at 1440px. */
 .home-hero-network {
   position: absolute;
   top: 4%;
-  right: 16px;
-  width: 64%;
+  right: max(16px, calc((100% - 1440px) / 2 + 16px));
+  width: 70%;
   height: 92%;
 }
 
@@ -2473,15 +2545,14 @@ html[lang="zh-Hans"] .method-status {
   color: var(--accent);
 }
 
-html[lang="zh-Hans"] .home-hero h1 {
-  font-weight: 600;
-  font-size: 4.25rem;
-  line-height: 1.18;
-  letter-spacing: 0;
-}
-
+/* "RSI" on the first line stays identical in both languages; only the Chinese line is adjusted, and
+   its line box matches the English one (1.03 / 0.895) so the vertically centered copy does not move. */
 html[lang="zh-Hans"] .home-hero h1 em {
   font-style: normal;
+  font-weight: 600;
+  font-size: 0.895em;
+  line-height: 1.151;
+  letter-spacing: 0;
 }
 
 .home-lede {
@@ -2492,9 +2563,10 @@ html[lang="zh-Hans"] .home-hero h1 em {
   line-height: 1.62;
 }
 
+/* The same line height in pixels as the English lede (1.125rem × 1.62). */
 html[lang="zh-Hans"] .home-lede {
   font-size: 1.05rem;
-  line-height: 1.85;
+  line-height: 1.736;
 }
 
 .home-stats {
@@ -2800,10 +2872,6 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
 
   .home-hero h1 {
     font-size: 3.25rem;
-  }
-
-  html[lang="zh-Hans"] .home-hero h1 {
-    font-size: 2.9rem;
   }
 
   .home-lede {

@@ -7,6 +7,7 @@ import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { bibtex, citationNeighbors, entryHref, entryTitle, findEntry, similarEntries } from "../lib/catalog.js";
 import { appCopy, detailCopy, methodCardCopy, systemCardCopy, tagLabelsZh } from "../i18n.js";
 import { TAG_COLORS } from "../lib/tagColors.js";
+import { CiteIcon, DownloadIcon, ExternalIcon, GitHubIcon, GraphIcon, LinkIcon, PaperIcon } from "./Icons.jsx";
 import { TAB_PATHS, filterPath, graphPath } from "../lib/navigation.js";
 
 const ABSTRACT_SUMMARY = "Abstract summary: ";
@@ -159,18 +160,42 @@ export default function PaperDetail({ collection, id, lang }) {
               <a className="tag" href={filterPath(collection, "artifact", value)} key={value}>{localizeMethodValue("artifact", value, lang)}</a>
             ))}
         </div>
+        {/* The paper itself leads as one pill; tools for working with it follow as quiet text links. */}
         <div className="detail-actions">
-          {entry.arxiv && <a className="detail-action is-primary" href={entry.arxiv} target="_blank" rel="noreferrer">arXiv</a>}
-          {entry.pdf && <a className="detail-action" href={entry.pdf} target="_blank" rel="noreferrer">{entry.arxiv ? "PDF" : copy.paper}</a>}
-          {entry.links?.map((link) => (
-            <a className="detail-action" href={link.url} target="_blank" rel="noreferrer" key={link.url}>{lang === "zh" ? link.labelZh : link.label}</a>
+          {(entry.arxiv || entry.pdf) && (
+            <div className="detail-paper-links">
+              <a href={entry.arxiv ?? entry.pdf} target="_blank" rel="noreferrer">
+                <PaperIcon />
+                <span>{entry.arxiv ? "arXiv" : copy.paper}</span>
+                <ExternalIcon />
+              </a>
+              {entry.arxiv && entry.pdf && (
+                <a href={entry.pdf} target="_blank" rel="noreferrer">
+                  <DownloadIcon />
+                  <span>PDF</span>
+                </a>
+              )}
+            </div>
+          )}
+          {entry.links?.map((link, index) => (
+            <a className={index === 0 ? "detail-paper-links detail-project-link" : "detail-tool"} href={link.url} target="_blank" rel="noreferrer" key={link.url}>
+              {index === 0 ? <GitHubIcon /> : <LinkIcon />}
+              <span>{lang === "zh" ? link.labelZh : link.label}</span>
+              {index === 0 && <ExternalIcon />}
+            </a>
           ))}
           {record && (
-            <button className="detail-action" type="button" aria-expanded={showBibtex} onClick={() => setShowBibtex((value) => !value)}>
-              {copy.bibtex}
+            <button className="detail-tool" type="button" aria-expanded={showBibtex} onClick={() => setShowBibtex((value) => !value)}>
+              <CiteIcon />
+              <span>{copy.bibtex}</span>
             </button>
           )}
-          {graphHref && <a className="detail-action" href={graphHref}>{copy.graph}</a>}
+          {graphHref && (
+            <a className="detail-tool" href={graphHref}>
+              <GraphIcon />
+              <span>{copy.graph}</span>
+            </a>
+          )}
         </div>
         {showBibtex && <BibtexBlock record={record} copy={copy} />}
       </header>

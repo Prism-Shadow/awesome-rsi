@@ -3,11 +3,16 @@
 import { buildLayout, clamp } from "./citationLayout.js";
 
 const WIDTH = 920;
+// The hero canvas is wider than the Citation Graph's, so the network reaches toward the headline.
+export const HERO_WIDTH = 1040;
+const STRETCH = HERO_WIDTH / WIDTH;
 // The headline covers the network left of this x.
 const HEADLINE_EDGE = 150;
 export const HUB_COUNT = 12;
 // Where the labeled hubs may sit: right of the headline, with room for a label under each node.
-export const HUB_AREA = { left: HEADLINE_EDGE + 40, right: 860, top: 80, bottom: 510 };
+const LAYOUT_HUB_AREA = { left: HEADLINE_EDGE + 40, right: 860, top: 80, bottom: 510 };
+// The same area once the layout is stretched to the hero canvas.
+export const HUB_AREA = { ...LAYOUT_HUB_AREA, left: LAYOUT_HUB_AREA.left * STRETCH, right: LAYOUT_HUB_AREA.right * STRETCH };
 const LLOYD_ROUNDS = 6;
 const SAMPLE_STEP = 8;
 // How far a hub's move carries the nodes around it.
@@ -26,7 +31,7 @@ export function buildHeroNetwork(papers, edges) {
   const mirrored = visibleCitations((node) => WIDTH - node.x) > visibleCitations((node) => node.x);
   const nodes = laidOut.map((node) => ({ ...node, x: mirrored ? WIDTH - node.x : node.x }));
   spreadHubs(nodes, hubIds);
-  return { nodes, hubIds };
+  return { nodes: nodes.map((node) => ({ ...node, x: node.x * STRETCH })), hubIds };
 }
 
 // Lloyd relaxation: each hub moves to the centroid of the part of the hub area nearest to it, which
@@ -36,12 +41,12 @@ function spreadHubs(nodes, hubIds) {
   const hubs = nodes.filter((node) => hubIds.has(node.id));
   const start = hubs.map(({ x, y }) => ({ x, y }));
   const samples = [];
-  for (let x = HUB_AREA.left; x <= HUB_AREA.right; x += SAMPLE_STEP) {
-    for (let y = HUB_AREA.top; y <= HUB_AREA.bottom; y += SAMPLE_STEP) samples.push([x, y]);
+  for (let x = LAYOUT_HUB_AREA.left; x <= LAYOUT_HUB_AREA.right; x += SAMPLE_STEP) {
+    for (let y = LAYOUT_HUB_AREA.top; y <= LAYOUT_HUB_AREA.bottom; y += SAMPLE_STEP) samples.push([x, y]);
   }
   for (const hub of hubs) {
-    hub.x = clamp(hub.x, HUB_AREA.left, HUB_AREA.right);
-    hub.y = clamp(hub.y, HUB_AREA.top, HUB_AREA.bottom);
+    hub.x = clamp(hub.x, LAYOUT_HUB_AREA.left, LAYOUT_HUB_AREA.right);
+    hub.y = clamp(hub.y, LAYOUT_HUB_AREA.top, LAYOUT_HUB_AREA.bottom);
   }
   for (let round = 0; round < LLOYD_ROUNDS; round += 1) {
     const cells = hubs.map(() => ({ x: 0, y: 0, count: 0 }));

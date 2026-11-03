@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildHeroNetwork, HUB_AREA, HUB_COUNT } from "../site/src/lib/heroNetwork.js";
+import { buildHeroNetwork, HERO_WIDTH, HUB_AREA, HUB_COUNT } from "../site/src/lib/heroNetwork.js";
 import { methods } from "../site/src/data/methods.js";
 import { methodCitationEdges } from "../site/src/data/methodCitationGraph.js";
 
@@ -45,7 +45,7 @@ test("hero hubs are spread out and their labels stay clear of each other", () =>
 test("the hero network keeps every node in the canvas, is deterministic, and leaves the data untouched", () => {
   const before = structuredClone(methods);
   for (const node of nodes) {
-    assert.ok(node.x >= 0 && node.x <= 920 && node.y >= 20 && node.y <= 580, node.nickname);
+    assert.ok(node.x >= 0 && node.x <= HERO_WIDTH && node.y >= 20 && node.y <= 580, node.nickname);
   }
   assert.deepEqual(buildHeroNetwork(methods, methodCitationEdges).nodes, nodes);
   assert.deepEqual(methods, before);
