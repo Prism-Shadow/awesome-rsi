@@ -2529,7 +2529,8 @@ html[lang="zh-Hans"] .section-head h2 {
 }
 
 /* The title link stretches over the whole entry, so the entry reads and clicks as one link.
-   Hovering or focusing one entry dims the others in the same list. */
+   Hovering one entry, or reaching it with the keyboard, dims the others in the same list.
+   Keyboard focus only: a clicked link keeps focus, which would leave the others dimmed. */
 .entry {
   position: relative;
   padding: 1.6rem 0;
@@ -2538,7 +2539,7 @@ html[lang="zh-Hans"] .section-head h2 {
 }
 
 .entry-list:has(.entry:hover) .entry:not(:hover),
-.entry-list:has(.entry:focus-within) .entry:not(:focus-within) {
+.entry-list:has(.entry a:focus-visible) .entry:not(:has(a:focus-visible)) {
   opacity: 0.35;
 }
 
