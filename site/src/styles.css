@@ -2504,16 +2504,17 @@ html[lang="zh-Hans"] .method-status {
   white-space: nowrap;
 }
 
-/* The title takes two lines so it covers less of the network. */
+/* The title takes two lines so it covers less of the network. The second line is set upright like
+   the first, so the two read as one typeface; only the color sets it apart. */
 .home-hero h1 em {
   display: block;
   color: var(--accent);
+  font-style: normal;
 }
 
 /* "RSI" on the first line stays identical in both languages; only the Chinese line is adjusted, and
    its line box matches the English one (1.03 / 0.895) so the vertically centered copy does not move. */
 html[lang="zh-Hans"] .home-hero h1 em {
-  font-style: normal;
   font-weight: 600;
   font-size: 0.895em;
   line-height: 1.151;
