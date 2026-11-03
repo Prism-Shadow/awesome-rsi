@@ -116,6 +116,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§III-C1, III-C3–4: retrieved experience from multiple vulnerabilities informs later trajectories; a separate extractor/judge writes and scores memory.
+  // Quality scores gate replacement or fusion of bank entries. Executable benchmark feedback evaluates repairs; the outer updater and model weights remain fixed.
+  "2605.30105": { artifact: ["Non-parametric", "Memory"], mode: ["Online"], topology: ["Graph"], selection: ["Artifact validation"], updater: ["Teacher"], source: ["Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §§3.2–3.4 and Appendix G: a separate meta agent optimizes the task agent's skills; its rewrites of its own meta-skill are teacher-side and not recorded, as for VERSE.
   // Candidates branch from one parent, but diagnosis reads the archive and earlier children. The meta agent reads training tests and reference solutions; reviews gate selection.
   "2610.35434": { artifact: ["Non-parametric", "Skill"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["General", "Specialized"] },

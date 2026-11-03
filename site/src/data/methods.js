@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2605.30105",
+    nickname: "EvoRepair",
+    title: "Learning from Repair Experience: Self-Evolving Agents for Automated Vulnerability Repair",
+    authors: ["Haichuan Hu", "Guoqing Xie", "Quanjun Zhang", "Jiawei Liu", "Shengcheng Yu", "Chunrong Fang", "Zhenyu Chen", "Liang Xiao"], authorCount: 8,
+    published: "2026-05-28", year: 2026, venue: "ICSE 2027", status: "accepted",
+    added: "2026-11-03",
+    summary: "Retrieves repair experience, distills new trajectories, and uses quality scores to retain or merge experience-bank entries for later vulnerability repairs.",
+    summaryZh: "检索历史修复经验，将新轨迹提炼为经验，通过质量评分保留或融合经验库条目，供后续漏洞修复复用。",
+  },
+  {
     id: "2610.35434",
     nickname: "Skill∞",
     title: "Skill∞: Recursive Self-Improvement for Agent Skill Optimization",
