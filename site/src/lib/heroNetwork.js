@@ -4,7 +4,7 @@ import { buildLayout, clamp } from "./citationLayout.js";
 
 const WIDTH = 920;
 // The headline covers the network left of this x.
-export const HEADLINE_EDGE = 150;
+const HEADLINE_EDGE = 150;
 export const HUB_COUNT = 12;
 // Where the labeled hubs may sit: right of the headline, with room for a label under each node.
 export const HUB_AREA = { left: HEADLINE_EDGE + 40, right: 860, top: 80, bottom: 510 };

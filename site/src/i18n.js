@@ -1,7 +1,7 @@
 export const appCopy = {
   en: {
     pageTitle: "Awesome RSI — Recursive Self-Improvement Papers",
-    pageDescription: "A curated, filterable collection of papers, books, and courses on Recursive Self-Improvement.",
+    pageDescription: "A curated, filterable collection of benchmarks, methods, and systems for Recursive Self-Improvement.",
     themeToggle: "Toggle theme",
     notFound: "Page not found",
     notFoundHint: "This page may have moved. Start again from the home page or one of the lists above.",
@@ -27,7 +27,7 @@ export const appCopy = {
   },
   zh: {
     pageTitle: "Awesome RSI — 递归自我改进研究",
-    pageDescription: "一个可筛选、可检索的递归自我改进论文、书籍与课程精选合集。",
+    pageDescription: "一个可筛选、可检索的递归自我改进基准、方法与系统精选合集。",
     themeToggle: "切换主题",
     notFound: "页面不存在",
     notFoundHint: "这个页面可能已经移动，可以从首页或上方的列表重新开始。",
@@ -190,11 +190,7 @@ export const paperCardCopy = {
 
 export const graphCopy = {
   en: {
-    verifiedNetwork: "Verified bibliography network",
     title: "Citation topology",
-    intro: "Arrows run from the citing paper to the paper it references. Search for a node to locate it without removing the surrounding network.",
-    visiblePapers: "papers",
-    verifiedEdges: "verified edges",
     controls: "Graph zoom controls",
     zoomIn: "Zoom in",
     zoomOut: "Zoom out",
@@ -222,11 +218,7 @@ export const graphCopy = {
     pageIntro: (papers, edges) => `Arrows run from a benchmark paper to the papers it cites. ${papers} papers and ${edges} citations.`,
   },
   zh: {
-    verifiedNetwork: "经核验的文献引用网络",
     title: "引用关系图谱",
-    intro: "箭头从引用方指向被引用论文。搜索节点可以定位目标，同时保留完整的关系网络。",
-    visiblePapers: "篇论文",
-    verifiedEdges: "条已核验引用",
     controls: "图谱缩放控制",
     zoomIn: "放大",
     zoomOut: "缩小",
@@ -258,10 +250,7 @@ export const graphCopy = {
 export const methodGraphCopy = {
   en: {
     ...graphCopy.en,
-    verifiedNetwork: "Verified method bibliography network",
     title: "Method citation topology",
-    intro: "Arrows run from a method paper to another method paper in its bibliography. Search for a node to locate it without removing the surrounding network.",
-    visiblePapers: "method papers",
     networkLabel: (papers, edges) => `Method citation network with ${papers} papers and ${edges} verified citation relationships`,
     nodeSize: "Node size = citations inside this collection",
     primaryMetric: "first posted",
@@ -270,10 +259,7 @@ export const methodGraphCopy = {
   },
   zh: {
     ...graphCopy.zh,
-    verifiedNetwork: "经核验的方法论文引用网络",
     title: "方法引用图谱",
-    intro: "箭头从引用方指向其参考文献中的另一篇方法论文。搜索节点可以定位目标，同时保留完整的关系网络。",
-    visiblePapers: "篇方法论文",
     networkLabel: (papers, edges) => `包含 ${papers} 篇方法论文和 ${edges} 条已核验引用关系的图谱`,
     nodeSize: "节点大小代表在本合集内被引用的次数",
     primaryMetric: "首次公开",
@@ -346,7 +332,6 @@ export const methodFilterCopy = {
     maximum: (label) => `${label} maximum`,
     numericRange: "Publication range",
     publicationYear: "First posted",
-    citations: "Citations",
     filters: "Filters",
     clearAll: "Clear all",
     removeFilter: (label) => `Remove filter: ${label}`,
@@ -375,7 +360,6 @@ export const methodFilterCopy = {
     maximum: (label) => `${label}上限`,
     numericRange: "发表时间",
     publicationYear: "首次公开年份",
-    citations: "引用次数",
     filters: "筛选",
     clearAll: "清除全部",
     removeFilter: (label) => `移除筛选：${label}`,
@@ -471,12 +455,10 @@ export const detailCopy = {
 export const blogCopy = {
   en: {
     back: "← All posts",
-    included: "What’s included",
     contents: "In this guide",
   },
   zh: {
     back: "← 全部文章",
-    included: "本次更新内容",
     contents: "本文目录",
   },
 };
@@ -499,9 +481,9 @@ export function getInitialLanguage() {
     const saved = localStorage.getItem("awesome-rsi-lang");
     if (saved === "en" || saved === "zh") return saved;
   } catch {}
-  return navigator.language?.toLowerCase().startsWith("zh") ? "zh" : "en";
+  return navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
 }
 
 export function localizedValue(item, field, lang) {
-  return lang === "zh" ? item[`${field}Zh`] ?? item[field] : item[field];
+  return item[lang === "zh" ? `${field}Zh` : field];
 }

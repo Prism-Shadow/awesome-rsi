@@ -5,20 +5,7 @@ import { paperInstitutions } from "../data/paperInstitutions.js";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperCardCopy, tagLabelsZh } from "../i18n.js";
 import { detailPath } from "../lib/navigation.js";
-
-// Tag hues reuse the GDPevo domain palette (see styles.css variables).
-export const TAG_COLORS = {
-  "Self-Evolution": ["var(--accent-ink)", "var(--accent-soft)"],
-  "Skill Learning": ["var(--blue)", "var(--blue-soft)"],
-  Memory: ["var(--purple)", "var(--purple-soft)"],
-  "Continual Learning": ["var(--teal)", "var(--teal-soft)"],
-  "Data-Centric": ["var(--gold)", "var(--gold-soft)"],
-  "Post-Training & RL": ["var(--amber)", "var(--amber-soft)"],
-  "Harness Optimization": ["var(--blue)", "var(--blue-soft)"],
-  "Research Automation": ["var(--purple)", "var(--purple-soft)"],
-  "Learning Dynamics": ["var(--teal)", "var(--teal-soft)"],
-  "Finance & Business": ["var(--amber)", "var(--amber-soft)"],
-};
+import { TAG_COLORS } from "../lib/tagColors.js";
 
 function formatAuthors(authors, lang, copy) {
   if (authors.length <= 4) return authors.join(", ");
@@ -39,7 +26,7 @@ export default function PaperCard({ paper, lang }) {
   const [showAbstract, setShowAbstract] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const copy = paperCardCopy[lang];
-  const abstract = lang === "zh" ? paperAbstractsZh[paper.id] ?? paper.abstract : paper.abstract;
+  const abstract = lang === "zh" ? paperAbstractsZh[paper.id] : paper.abstract;
   const dimensions = localizeFilterDimensions(filterDimensions, lang);
   const facets = paperTaxonomy[paper.id];
   const labels = Object.fromEntries(dimensions.map((dimension) => [
@@ -73,10 +60,10 @@ export default function PaperCard({ paper, lang }) {
       <div className="paper-foot">
         <div className="paper-tags">
           {paper.tags.map((tag) => {
-            const [ink, bg] = TAG_COLORS[tag] ?? [];
+            const [ink, bg] = TAG_COLORS[tag];
             return (
               <span key={tag} className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }}>
-                {lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}
+                {lang === "zh" ? tagLabelsZh[tag] : tag}
               </span>
             );
           })}
@@ -101,7 +88,7 @@ export default function PaperCard({ paper, lang }) {
               <strong>{labels[dimension.id].label}</strong>
               <div>
                 {facets[dimension.id].map((value) => (
-                  <span key={value}>{labels[dimension.id].values[value] ?? value}</span>
+                  <span key={value}>{labels[dimension.id].values[value]}</span>
                 ))}
               </div>
             </div>

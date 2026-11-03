@@ -38,7 +38,7 @@ export default function SystemCard({ system, lang }) {
       </p>
       <p className="method-summary">{summary}</p>
       <div className="paper-foot">
-        <div className="method-artifacts" aria-label={dimensions.find(({ id }) => id === "artifact")?.label}>
+        <div className="method-artifacts" aria-label={dimensions.find(({ id }) => id === "artifact").label}>
           {leafArtifacts(system.taxonomy.artifact).map((value) => (
             <span className="tag" key={value}>{localizeMethodValue("artifact", value, lang)}</span>
           ))}

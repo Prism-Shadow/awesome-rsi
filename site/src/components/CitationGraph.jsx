@@ -1,6 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { citationEdges } from "../data/citationGraph.js";
-import { graphCopy } from "../i18n.js";
 import { buildLayout, clamp, createGraphGeometry } from "../lib/citationLayout.js";
 
 const GRAPH_WIDTH = 920;
@@ -59,22 +57,20 @@ function RelationList({ title, emptyText, edges, paperById, relationKey, onSelec
   );
 }
 
-const defaultNodeWeight = (paper) => paper.citations ?? 0;
-const defaultPrimaryMetric = (paper) => paper.citations ?? 0;
+// Benchmark nodes are sized and summarized by their Semantic Scholar citations.
+const byCitations = (paper) => paper.citations;
 
 export default function CitationGraph({
   papers,
-  lang,
-  edges = citationEdges,
-  copyOverride,
-  nodeWeight = defaultNodeWeight,
-  primaryMetric = defaultPrimaryMetric,
+  edges,
+  copy,
+  nodeWeight = byCitations,
+  primaryMetric = byCitations,
   primaryMetricLabel,
   nodeAriaLabel,
   focusRequest,
   detailHref,
   spacious = false,
-  showHeading = true,
 }) {
   const graphHeight = spacious ? Math.max(820, Math.round(620 * Math.sqrt(papers.length / 32))) : GRAPH_HEIGHT;
   const geometry = useMemo(() => createGraphGeometry(GRAPH_WIDTH, graphHeight), [graphHeight]);
@@ -94,7 +90,6 @@ export default function CitationGraph({
   const gestureRef = useRef(null);
   const gestureMovedRef = useRef(false);
   const suppressClickUntilRef = useRef(0);
-  const copy = copyOverride ?? graphCopy[lang];
 
   const updateCamera = (nextCamera) => {
     cameraRef.current = nextCamera;
@@ -142,7 +137,7 @@ export default function CitationGraph({
     return () => svg.removeEventListener("wheel", handleWheel);
   }, [geometry]);
 
-  const selectedPaper = fullPaperById.get(selectedId) ?? papers[0] ?? null;
+  const selectedPaper = fullPaperById.get(selectedId) ?? papers[0];
   const activeId = hoveredId ?? selectedId;
   const incoming = selectedPaper ? visibleEdges.filter((edge) => edge.target === selectedPaper.id) : [];
   const outgoing = selectedPaper ? visibleEdges.filter((edge) => edge.source === selectedPaper.id) : [];
@@ -242,21 +237,8 @@ export default function CitationGraph({
 
   const resetView = () => updateCamera(defaultCamera());
 
-  if (papers.length === 0) return null;
-
   return (
-    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} {...(showHeading ? { "aria-labelledby": "citation-graph-title" } : { "aria-label": copy.title })}>
-      {showHeading && <div className="graph-heading">
-        <div>
-          <span className="graph-eyebrow">{copy.verifiedNetwork}</span>
-          <h2 id="citation-graph-title">{copy.title}</h2>
-          <p>{copy.intro}</p>
-        </div>
-        <div className="graph-summary">
-          <span><b>{papers.length}</b> {copy.visiblePapers}</span>
-          <span><b>{visibleEdges.length}</b> {copy.verifiedEdges}</span>
-        </div>
-      </div>}
+    <section className={`citation-view${spacious ? " citation-view--spacious" : ""}`} style={{ "--graph-ratio": `${GRAPH_WIDTH} / ${graphHeight}` }} aria-label={copy.title}>
 
       <div className="graph-workspace">
         <div className="graph-stage">

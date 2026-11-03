@@ -6,15 +6,15 @@ RSI（Recursive Self\-Improvement）这个概念最近热度很高。与之相�
 
 本文参考了 [Awesome RSI 仓库](https://github.com/Prism-Shadow/awesome-rsi)（[网站](https://prism-shadow.github.io/awesome-rsi/)），尝试从分类的视角整理现有 RSI 工作。我们将从多个维度出发，分析不同自进化工作之间的联系和区别。读完本文后，你可以进一步理解 RSI 这个概念，也能建立一套分析 RSI 的坐标系：再遇到新的自进化工作时，可以迅速判断它与已有工作的联系和区别。
 
-![codex\-rsi\-taxonomy\-overview\-gpt\-preview\-v1\.png](图片和附件/codex-rsi-taxonomy-overview-gpt-preview-v1.png)
+![codex\-rsi\-taxonomy\-overview\-gpt\-preview\-v1\.png](blog/rsi-guide/codex-rsi-taxonomy-overview-gpt-preview-v1.png)
 
-![codex\-rsi\-artifact\-mode\-matrix\-v1\.png](图片和附件/codex-rsi-artifact-mode-matrix-v1.png)
+![codex\-rsi\-artifact\-mode\-matrix\-v1\.png](blog/rsi-guide/codex-rsi-artifact-mode-matrix-v1.png)
 
 ## 1 RSI 到底是什么
 
 本文把 RSI 定义为：Agent 在与环境交互后，利用任务轨迹与反馈，通过更新机制修改自身状态，并让更新后的状态参与后续任务，以提升未来表现。
 
-![codex\-rsi\-loop\-v5\.png](图片和附件/codex-rsi-loop-v5.png)
+![codex\-rsi\-loop\-v5\.png](blog/rsi-guide/codex-rsi-loop-v5.png)
 
 $A_{t+1}=U(A_t,\tau_t,f_t)$
 
@@ -26,7 +26,7 @@ $A_{t+1}=U(A_t,\tau_t,f_t)$
 
 不同的 RSI 方法可能修改其中不同的部分：参数进化修改 Model；上下文、记忆和 Skill 进化修改 Harness 中可持续积累的状态；工具与 Harness 代码进化则改变 Agent 的动作空间和控制流程。
 
-![codex\-agent\-anatomy\-v3\.png](图片和附件/codex-agent-anatomy-v3.png)
+![codex\-agent\-anatomy\-v3\.png](blog/rsi-guide/codex-agent-anatomy-v3.png)
 
 ### 2\.1 参数进化
 
@@ -36,7 +36,7 @@ $A_{t+1}=U(A_t,\tau_t,f_t)$
 
 **代表工作：**[**Self\-Adapting Language Models**](https://arxiv.org/abs/2506.10943)
 
-![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
+![01\-seal\-fig1\.png](blog/rsi-guide/01-seal-fig1.png)
 
 SEAL 的出发点是：语言模型部署后会不断遇到新知识和新任务，但权重通常保持静止。作者希望模型不依赖单独的适配网络，而是自己决定“应该怎样训练自己”。为此，模型面对新输入时不只生成答案，还生成 self\-edit。self\-edit 是一份自我更新方案，可以重组原始信息、生成训练样本、指定优化超参数，或者调用工具做数据增强和梯度更新。
 
@@ -54,7 +54,7 @@ SEAL 的出发点是：语言模型部署后会不断遇到新知识和新任务
 
 **代表工作：**[**Prime Agent: A Self\-Improving RLM Harness**](https://arxiv.org/abs/2608.23552)
 
-![02\-prime\-agent\-fig1\.png](图片和附件/02-prime-agent-fig1.png)
+![02\-prime\-agent\-fig1\.png](blog/rsi-guide/02-prime-agent-fig1.png)
 
 长程任务的困难不只在于问题本身复杂，还在于任务持续时间可能远远超过一次模型调用。以大型软件开发为例，Agent 可能需要连续工作数小时，其间反复阅读代码、运行测试、记录结果并修改方案。但模型每次能够直接读取的上下文有限：保留全部历史很快就会超出窗口，丢掉历史又会让模型忘记任务进展。
 
@@ -70,7 +70,7 @@ Prime Agent 不更新模型参数。它把任务历史和中间结果保存在�
 
 **代表工作：**[**ReasoningBank: Scaling Agent Self\-Evolving with Reasoning Memory**](https://arxiv.org/abs/2509.25140)
 
-![03\-reasoningbank\-fig2\.png](图片和附件/03-reasoningbank-fig2.png)
+![03\-reasoningbank\-fig2\.png](blog/rsi-guide/03-reasoningbank-fig2.png)
 
 ReasoningBank 面向持续任务：Agent 在执行任务时可能产生可复用的经验，但传统系统通常在任务结束后丢弃这些信息，下一次又重复相同错误。直接保存整条轨迹也不理想，因为原始轨迹很长，还包含大量琐碎细节。因此，ReasoningBank 将成功和失败轨迹整理成简短、可复用的经验。
 
@@ -86,7 +86,7 @@ ReasoningBank 面向持续任务：Agent 在执行任务时可能产生可复用
 
 **代表工作：**[**TRACE: A Self\-Evolving Skill Bank for Consistent, Limit\-Aware LLM Agents**](https://arxiv.org/abs/2608.22793)
 
-![04\-trace\-fig2\.png](图片和附件/04-trace-fig2.png)
+![04\-trace\-fig2\.png](blog/rsi-guide/04-trace-fig2.png)
 
 TRACE 关注车载助手能否稳定完成任务。在 CAR\-bench 中，模拟用户会提出信息不完整或含糊的请求。Agent 需要先通过多轮对话确认用户意图，再调用工具完成操作，同时遵守车辆领域的安全规则。很多模型偶尔能够完成任务，但重复执行时并不稳定。
 
@@ -100,7 +100,7 @@ Harness 代码负责组织模型接收到的上下文，并把模型的决策转
 
 **代表工作：**[**SkillSmith: Co\-Evolving Skills and Tools for Self\-Improving Agent Systems**](https://arxiv.org/abs/2606.01314)
 
-![05\-skillsmith\-fig2\.png](图片和附件/05-skillsmith-fig2.png)
+![05\-skillsmith\-fig2\.png](blog/rsi-guide/05-skillsmith-fig2.png)
 
 许多 Skill 进化方法默认工具保持不变。如果任务失败是因为工具能力不足，那么反复修改工具的说明文字也无法解决问题。因此，SkillSmith 允许系统同时修改 Skill 和工具。发现能力缺口后，反思模块会生成一组配套修改：一边调整 Skill，一边编辑、组合、拆分或停用相关工具。
 
@@ -120,7 +120,7 @@ Harness 代码负责组织模型接收到的上下文，并把模型的决策转
 
 3. 图式进化则允许多个任务、版本或谱系的经验在一次更新中汇合。
 
-![codex\-evolution\-topologies\-v1\.png](图片和附件/codex-evolution-topologies-v1.png)
+![codex\-evolution\-topologies\-v1\.png](blog/rsi-guide/codex-evolution-topologies-v1.png)
 
 ### 3\.1 链
 
@@ -128,7 +128,7 @@ Harness 代码负责组织模型接收到的上下文，并把模型的决策转
 
 **代表工作：**[**SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents**](https://arxiv.org/abs/2604.17308)
 
-![10\-skillflow\-fig1\.png](图片和附件/10-skillflow-fig1.png)
+![10\-skillflow\-fig1\.png](blog/rsi-guide/10-skillflow-fig1.png)
 
 SkillFlow 采用典型的链式更新。每个任务族从一个空的 Skill 库开始。Agent 完成任务后，模型根据执行轨迹和验证反馈生成 Skill patch，用来新增、改写或删除 Skill 和辅助脚本。更新后的 Skill 库直接用于下一项任务，依次形成 $S_0\rightarrow S_1\rightarrow S_2\rightarrow\cdots$。整个过程中始终只有一个当前版本，不会同时产生多个候选分支。
 
@@ -144,7 +144,7 @@ SkillFlow 用这套流程考察 Agent 能否从任务经历中生成 Skill、在
 
 **代表工作：**[**Darwin Gödel Machine: Open\-Ended Evolution of Self\-Improving Agents**](https://arxiv.org/abs/2505.22954)
 
-![10\-dgm\-fig3\.png](图片和附件/10-dgm-fig3.png)
+![10\-dgm\-fig3\.png](blog/rsi-guide/10-dgm-fig3.png)
 
 
 
@@ -164,7 +164,7 @@ DGM 的名字来自 Gödel Machine。Gödel Machine 是一种理论上的自修�
 
 **代表工作：**[**Mendel Gödel Machine: Recursive Self\-Improving Coding Agents via Comparative Evolution**](https://arxiv.org/abs/2608.07645)
 
-![11\-mgm\-fig1\.png](图片和附件/11-mgm-fig1.png)
+![11\-mgm\-fig1\.png](blog/rsi-guide/11-mgm-fig1.png)
 
 MGM 延续了 DGM 的版本树，但改变了生成新版本时使用信息的方式。DGM 一般根据某个 Agent 在一项任务中的失败轨迹修改代码。单次失败可能同时受到任务内容、工具使用和工作流程等因素影响，只看这一条轨迹，很难确定真正需要修改的部分。因此，MGM 利用版本集合中已经积累的其他轨迹进行比较。
 
@@ -198,7 +198,7 @@ RSI 系统既要执行任务，也要根据任务轨迹和反馈完成更新。�
 
 自身更新中，执行任务和完成修改的是同一个 Student。环境可以提供得分、错误信息或其他反馈，但没有另一个 Agent 负责分析轨迹或编写更新。Student 根据反馈决定保留哪些经验，并修改后续任务会继续使用的记忆、Skill、规则或代码。
 
-![codex\-self\-update\-v1\.png](图片和附件/codex-self-update-v1.png)
+![codex\-self\-update\-v1\.png](blog/rsi-guide/codex-self-update-v1.png)
 
 它省去了 Agent 之间的信息传递，但 Student 必须自己理解反馈并完成修改。如果 Student 错误理解出错，错误也可能被写入长期产物，并继续影响后面的任务。
 
@@ -208,11 +208,11 @@ RSI 系统既要执行任务，也要根据任务轨迹和反馈完成更新。�
 
 这里的 Teacher 不一定是一个专门的 Agent，也可能是反思模块、优化器或带有验证规则的更新流程。不同方法中，Teacher 可能负责总结成功经验、分析失败原因，也可能合并、筛选或淘汰已有内容。需要注意的是，只提供分数或验收结果的模块不算 Teacher；Teacher 实际决定写回什么，以及怎样修改。
 
-![codex\-teacher\-update\-v1\.png](图片和附件/codex-teacher-update-v1.png)
+![codex\-teacher\-update\-v1\.png](blog/rsi-guide/codex-teacher-update-v1.png)
 
 **代表工作：**[**Recursive Experiential\-Working Memory Evolution for Long\-Horizon Agent Harnesses**](https://arxiv.org/abs/2608.24876)
 
-![13\-recuris\-fig3\.png](图片和附件/13-recuris-fig3.png)
+![13\-recuris\-fig3\.png](blog/rsi-guide/13-recuris-fig3.png)
 
 Recuris 是教师更新的一种具体实现。论文中，Agent 负责执行长程任务；固定的 Meta\-Agent 汇总多个任务中的失败记录，并修改 Agent 后续使用的 Skill Memory。这里的 Agent 可以对应本章的 Student，而 Meta\-Agent 可以对应本章的 Teacher。
 
@@ -226,11 +226,11 @@ Recuris 在四个长程 Benchmark 和十种模型上进行了测试。在 37 个
 
 联合更新中，Student 和 Teacher 都会参与修改，但两者的分工没有固定形式。Student 可以先从任务中总结候选经验，再由 Teacher 筛选和写入；也可以由 Teacher 诊断问题，再由 Student 实现修改。判断联合更新的依据，是两者是否都影响了最终写回的内容。Student 只负责执行任务，或者 Teacher 只负责评分，都不属于联合更新。
 
-![codex\-joint\-update\-v1\.png](图片和附件/codex-joint-update-v1.png)
+![codex\-joint\-update\-v1\.png](blog/rsi-guide/codex-joint-update-v1.png)
 
 **代表工作：**[**Evo\-Harness: Context\-to\-Harness Skill Compilation for Self\-Evolving Agents**](https://arxiv.org/abs/2608.15071)
 
-![14\-evo\-harness\-fig3\.png](图片和附件/14-evo-harness-fig3.png)
+![14\-evo\-harness\-fig3\.png](blog/rsi-guide/14-evo-harness-fig3.png)
 
 在 Evo\-Harness 中，Solver 相当于 Student，Evolver 相当于 Teacher。Solver 先总结候选经验，Evolver 再筛选、整理并写入 Harness。Solver 不只负责执行任务，还会根据本次执行过程总结候选经验；Evolver 再检查这些经验，并决定如何修改现有的 Skill Harness。最终写入的内容由两者共同产生。
 
@@ -254,7 +254,7 @@ RSI 还可以按照更新发生的时间分类。即使修改的都是记忆或 
 
 3. 混合模式先在离线阶段建立初始版本，上线后再根据新任务继续调整。
 
-![codex\-rsi\-update\-timing\-v1\.png](图片和附件/codex-rsi-update-timing-v1.png)
+![codex\-rsi\-update\-timing\-v1\.png](blog/rsi-guide/codex-rsi-update-timing-v1.png)
 
 ### 5\.1 离线 RSI
 
@@ -262,7 +262,7 @@ RSI 还可以按照更新发生的时间分类。即使修改的都是记忆或 
 
 **代表工作：**[**GDPevo: Evaluating Agent Self\-Evolution on Real Business Tasks**](https://arxiv.org/abs/2608.03764)
 
-![06\-gdpevo\-fig1\.png](图片和附件/06-gdpevo-fig1.png)
+![06\-gdpevo\-fig1\.png](blog/rsi-guide/06-gdpevo-fig1.png)
 
 GDPevo 是一套专门评测离线 RSI 的 Benchmark。现有评测通常没有清楚说明训练题与测试题之间有什么联系，因此分数提高后，很难判断 Agent 是学会了复用经验，还是曾经见过相似题目。GDPevo 从 CRM、ERP、金融、医疗、法律和数据处理等真实业务中选取任务，再把每个业务流程拆成更小的规则。
 
@@ -278,7 +278,7 @@ GDPevo 包含 12 组任务，每组由五个训练任务和五个测试任务组
 
 **代表工作：**[**FinEvo\-Bench: A Longitudinal Benchmark for Self\-Evolving Agents in Professional Financial Workflows**](https://arxiv.org/abs/2608.06144)
 
-![09\-finevo\-bench\-fig2\.png](图片和附件/09-finevo-bench-fig2.png)
+![09\-finevo\-bench\-fig2\.png](blog/rsi-guide/09-finevo-bench-fig2.png)
 
 FinEvo\-Bench 是一个面向在线 RSI 的 Benchmark，它将 120 个金融任务组织成一条连续任务流。Agent 完成当前任务后保留经验，并在后续任务中继续使用。Benchmark 覆盖六个领域和 20 个业务场景；每个场景包含六个任务，这些任务采用同一流程，但数据和具体问题不同。
 
@@ -296,7 +296,7 @@ FinEvo\-Bench 是一个面向在线 RSI 的 Benchmark，它将 120 个金融任�
 
 **代表工作：**[**Mem²Evolve: Towards Self\-Evolving Agents via Co\-Evolutionary Capability Expansion and Experience Distillation**](https://arxiv.org/abs/2604.10923)
 
-![08\-mem2evolve\-fig2\.png](图片和附件/08-mem2evolve-fig2.png)
+![08\-mem2evolve\-fig2\.png](blog/rsi-guide/08-mem2evolve-fig2.png)
 
 
 

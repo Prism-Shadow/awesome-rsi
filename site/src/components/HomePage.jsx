@@ -5,7 +5,6 @@ import { papers } from "../data/papers.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
-import { blogMarkdown } from "../data/blogMarkdown.js";
 import { blogCover } from "../lib/blogMarkdown.js";
 import { TAB_PATHS, postPath } from "../lib/navigation.js";
 import { recentlyAdded } from "../lib/recentlyAdded.js";
@@ -384,7 +383,7 @@ function FromTheBlog({ copy, lang }) {
       <ol className="entry-list entry-list--posts">
         {posts.map((post) => {
           const href = postPath(post.id);
-          const cover = blogCover(post, blogMarkdown[lang][post.id]);
+          const cover = blogCover(post);
           return (
             <li className="entry entry--post" key={post.id}>
               <div className="entry-text">

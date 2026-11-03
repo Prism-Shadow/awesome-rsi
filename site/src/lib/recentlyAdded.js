@@ -31,7 +31,7 @@ export const collectionEntries = [
     title: system.title,
     published: system.released,
     added: system.added,
-    url: system.links[0]?.url,
+    url: system.links[0].url,
     href: detailPath("methods", system.id),
     summary: system.summary,
     summaryZh: system.summaryZh,

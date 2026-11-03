@@ -16,7 +16,7 @@ const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
 const methodNodeWeight = (paper) => METHOD_INCOMING_COUNTS[paper.id] ?? 0;
 
 function searchableText(paper) {
-  return [paper.id, paper.nickname, paper.title, ...(paper.authors ?? [])]
+  return [paper.id, paper.nickname, paper.title, ...paper.authors]
     .join(" ")
     .toLowerCase();
 }
@@ -154,7 +154,7 @@ export default function GraphTab({ lang, kind = "methods", focusId }) {
                   >
                     <span>{paper.nickname}</span>
                     <strong>{paper.title}</strong>
-                    <small>{paper.arxiv ? `arXiv:${paper.id} · ` : ""}{(paper.authors ?? []).slice(0, 2).join(", ")}</small>
+                    <small>{paper.arxiv ? `arXiv:${paper.id} · ` : ""}{paper.authors.slice(0, 2).join(", ")}</small>
                   </button>
                 ))}
               </div>
@@ -167,9 +167,8 @@ export default function GraphTab({ lang, kind = "methods", focusId }) {
         <CitationGraph
           key={kind}
           papers={graphPapers}
-          lang={lang}
           edges={graphEdges}
-          copyOverride={graphText}
+          copy={graphText}
           focusRequest={focusRequest}
           detailHref={(paper) => detailPath(kind === "methods" ? "methods" : "benchmarks", paper.id)}
           spacious={kind === "methods"}
@@ -179,7 +178,6 @@ export default function GraphTab({ lang, kind = "methods", focusId }) {
           nodeAriaLabel={kind === "methods"
             ? (paper, count) => `${paper.nickname}, ${count} ${graphText.corpusCitations}`
             : undefined}
-          showHeading={false}
         />
       </section>
     </>

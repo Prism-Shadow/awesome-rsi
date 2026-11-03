@@ -6,15 +6,15 @@ The field is still developing rapidly and has yet to converge on a single techni
 
 Drawing on the [Awesome RSI repository](https://github.com/Prism-Shadow/awesome-rsi) ([website](https://prism-shadow.github.io/awesome-rsi/)), this article organizes existing RSI work from a taxonomic perspective. We compare the connections and differences among self-evolving systems across several dimensions. By the end, you should have a clearer understanding of RSI and a framework for analyzing it: when you encounter a new self-evolving system, you will be able to quickly identify how it relates to and differs from existing work.
 
-![An RSI taxonomy](图片和附件/codex-rsi-taxonomy-overview-gpt-en.png)
+![An RSI taxonomy](blog/rsi-guide/codex-rsi-taxonomy-overview-gpt-en.png)
 
-![RSI works by improvement target and update timing](图片和附件/codex-rsi-artifact-mode-matrix-en.png)
+![RSI works by improvement target and update timing](blog/rsi-guide/codex-rsi-artifact-mode-matrix-en.png)
 
 ## 1 What Exactly Is RSI?
 
 This article defines RSI as follows: after interacting with an environment, an Agent uses task trajectories and feedback to modify its own state through an update mechanism, and the updated state then participates in later tasks to improve future performance.
 
-![The basic RSI loop](图片和附件/codex-rsi-loop-en.png)
+![The basic RSI loop](blog/rsi-guide/codex-rsi-loop-en.png)
 
 $A_{t+1}=U(A_t,\tau_t,f_t)$
 
@@ -26,7 +26,7 @@ A modern intelligent agent can be abstracted as **Agent = Model + Harness**. The
 
 Different RSI methods may modify different parts of this system. Parameter evolution changes the Model. Context, memory, and Skill evolution modify persistent state within the Harness. Tool and Harness-code evolution changes the Agent's action space and control flow.
 
-![Agent anatomy and major improvement targets](图片和附件/codex-agent-anatomy-en.png)
+![Agent anatomy and major improvement targets](blog/rsi-guide/codex-agent-anatomy-en.png)
 
 ### 2.1 Parameter Evolution
 
@@ -36,7 +36,7 @@ Here, the Student being trained and performing tasks is the subject of improveme
 
 **Representative work:** [**Self-Adapting Language Models**](https://arxiv.org/abs/2506.10943)
 
-![01\-seal\-fig1\.png](图片和附件/01-seal-fig1.png)
+![01\-seal\-fig1\.png](blog/rsi-guide/01-seal-fig1.png)
 
 SEAL starts from a practical problem: language models continually encounter new knowledge and tasks after deployment, while their weights usually remain fixed. The authors want the model to decide for itself "how it should train itself," without relying on a separate adaptation network. To do this, the model generates not only an answer but also a self-edit for each new input. A self-edit is a self-update plan that may reorganize the original information, generate training examples, specify optimization hyperparameters, or call tools for data augmentation and gradient updates.
 
@@ -54,7 +54,7 @@ The distinction between context and memory is that memory is information stored 
 
 **Representative work:** [**Prime Agent: A Self-Improving RLM Harness**](https://arxiv.org/abs/2608.23552)
 
-![02\-prime\-agent\-fig1\.png](图片和附件/02-prime-agent-fig1.png)
+![02\-prime\-agent\-fig1\.png](blog/rsi-guide/02-prime-agent-fig1.png)
 
 Long-horizon tasks are difficult not only because the problems themselves are complex, but also because they may continue far beyond a single model call. In large-scale software development, for example, an Agent may work for hours, repeatedly reading code, running tests, recording results, and revising its plan. Yet the context that a model can read directly on each call is limited: retaining the entire history soon exceeds the context window, while discarding it causes the model to forget its progress.
 
@@ -70,7 +70,7 @@ Memory evolution writes experience into a separate long-term store and retrieves
 
 **Representative work:** [**ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory**](https://arxiv.org/abs/2509.25140)
 
-![03\-reasoningbank\-fig2\.png](图片和附件/03-reasoningbank-fig2.png)
+![03\-reasoningbank\-fig2\.png](blog/rsi-guide/03-reasoningbank-fig2.png)
 
 ReasoningBank targets continual tasks. An Agent may produce reusable experience while completing a task, but traditional systems usually discard this information afterward and then repeat the same mistakes on the next task. Saving an entire trajectory is also unsatisfactory because raw trajectories are long and contain many incidental details. ReasoningBank therefore turns successful and failed trajectories into concise, reusable experiences.
 
@@ -86,7 +86,7 @@ A single memory records what happened in a particular task, while a Skill summar
 
 **Representative work:** [**TRACE: A Self-Evolving Skill Bank for Consistent, Limit-Aware LLM Agents**](https://arxiv.org/abs/2608.22793)
 
-![04\-trace\-fig2\.png](图片和附件/04-trace-fig2.png)
+![04\-trace\-fig2\.png](blog/rsi-guide/04-trace-fig2.png)
 
 TRACE studies whether an in-vehicle assistant can complete tasks reliably. In CAR-bench, simulated users make requests that are incomplete or ambiguous. The Agent must first clarify the user's intent through multi-turn dialogue, then call tools to complete the operation while obeying safety rules for the automotive domain. Many models can occasionally complete a task, but their behavior is inconsistent across repeated runs.
 
@@ -100,7 +100,7 @@ Harness code organizes the context received by the model and translates the mode
 
 **Representative work:** [**SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems**](https://arxiv.org/abs/2606.01314)
 
-![05\-skillsmith\-fig2\.png](图片和附件/05-skillsmith-fig2.png)
+![05\-skillsmith\-fig2\.png](blog/rsi-guide/05-skillsmith-fig2.png)
 
 Many Skill-evolution methods assume that tools remain fixed. If a task fails because a tool lacks the necessary capability, repeatedly revising the tool's instructions cannot solve the problem. SkillSmith therefore allows the system to modify both Skills and tools. After detecting a capability gap, its reflection module generates a coordinated set of changes: it adjusts the Skill while editing, composing, splitting, or retiring the relevant tools.
 
@@ -120,7 +120,7 @@ The previous section discussed which parts of an Agent can be modified. This sec
 
 3. Graph evolution allows experience from multiple tasks, versions, or lineages to converge in one update.
 
-![Chain, tree, and graph evolution topologies](图片和附件/codex-evolution-topologies-en.png)
+![Chain, tree, and graph evolution topologies](blog/rsi-guide/codex-evolution-topologies-en.png)
 
 ### 3.1 Chain
 
@@ -128,7 +128,7 @@ Chain evolution maintains only one active version. The system modifies the curre
 
 **Representative work:** [**SkillFlow: Benchmarking Lifelong Skill Discovery and Evolution for Autonomous Agents**](https://arxiv.org/abs/2604.17308)
 
-![10\-skillflow\-fig1\.png](图片和附件/10-skillflow-fig1.png)
+![10\-skillflow\-fig1\.png](blog/rsi-guide/10-skillflow-fig1.png)
 
 SkillFlow uses a typical chain update process. Each task family starts with an empty Skill library. After the Agent completes a task, the model generates a Skill patch from the execution trajectory and verification feedback. The patch may add, revise, or delete Skills and helper scripts. The updated Skill library is then used directly for the next task, forming $S_0\rightarrow S_1\rightarrow S_2\rightarrow\cdots$. There is only one current version throughout the process, and the system never creates multiple candidate branches at the same time.
 
@@ -144,7 +144,7 @@ Tree evolution preserves multiple Agent versions that have already been created.
 
 **Representative work:** [**Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents**](https://arxiv.org/abs/2505.22954)
 
-![10\-dgm\-fig3\.png](图片和附件/10-dgm-fig3.png)
+![10\-dgm\-fig3\.png](blog/rsi-guide/10-dgm-fig3.png)
 
 
 
@@ -164,7 +164,7 @@ In tree evolution, a new version descends from one parent, and the evidence used
 
 **Representative work:** [**Mendel Gödel Machine: Recursive Self-Improving Coding Agents via Comparative Evolution**](https://arxiv.org/abs/2608.07645)
 
-![11\-mgm\-fig1\.png](图片和附件/11-mgm-fig1.png)
+![11\-mgm\-fig1\.png](blog/rsi-guide/11-mgm-fig1.png)
 
 MGM retains DGM's version tree but changes what information is used to generate a new version. DGM generally modifies code based on one Agent's failed trajectory on a single task. A single failure may be shaped by the task itself, tool use, workflow, and several other factors at once, making it difficult to identify what truly needs to change. MGM therefore compares that trajectory with other trajectories already accumulated in the version collection.
 
@@ -198,7 +198,7 @@ RSI systems can be divided into three categories according to who carries out th
 
 In self-update, the same Student both performs the task and carries out the modification. The environment may provide scores, errors, or other feedback, but no separate Agent analyzes the trajectory or writes the update. The Student decides which experiences to retain and modifies the memory, Skills, rules, or code that will be used in future tasks.
 
-![Self-update](图片和附件/codex-self-update-en.png)
+![Self-update](blog/rsi-guide/codex-self-update-en.png)
 
 This avoids communication between Agents, but the Student must interpret feedback and implement the modification itself. If the Student misunderstands what went wrong, that error may be written into a persistent artifact and continue to affect later tasks.
 
@@ -208,11 +208,11 @@ In teacher update, the Student that performs the task does not directly modify t
 
 The Teacher does not have to be a dedicated Agent. It may instead be a reflection module, an optimizer, or an update process equipped with validation rules. Depending on the method, a Teacher may summarize successful experience and analyze failure causes, or merge, filter, and retire existing content. A module that only supplies a score or acceptance result is not a Teacher. To count as one, it must actually decide what is written back and how it is changed.
 
-![Teacher update](图片和附件/codex-teacher-update-en.png)
+![Teacher update](blog/rsi-guide/codex-teacher-update-en.png)
 
 **Representative work:** [**Recursive Experiential-Working Memory Evolution for Long-Horizon Agent Harnesses**](https://arxiv.org/abs/2608.24876)
 
-![13\-recuris\-fig3\.png](图片和附件/13-recuris-fig3.png)
+![13\-recuris\-fig3\.png](blog/rsi-guide/13-recuris-fig3.png)
 
 In Recuris, an Agent performs long-horizon tasks, while a fixed Meta-Agent aggregates failure records from multiple tasks and modifies the Skill Memory used by the Agent in the future. In this section's terminology, the Agent is the Student and the Meta-Agent is the Teacher.
 
@@ -226,11 +226,11 @@ Recuris is evaluated on four long-horizon Benchmarks and ten models. It improves
 
 In joint update, both the Student and Teacher participate in modification, although their roles are not fixed. The Student may first summarize candidate experience from a task and the Teacher may then filter and write it back; alternatively, the Teacher may diagnose the problem and the Student may implement the change. Both parties must influence the final content written back. A Student that only performs tasks, or a Teacher that only assigns scores, does not constitute joint updating.
 
-![Joint update](图片和附件/codex-joint-update-en.png)
+![Joint update](blog/rsi-guide/codex-joint-update-en.png)
 
 **Representative work:** [**Evo-Harness: Context-to-Harness Skill Compilation for Self-Evolving Agents**](https://arxiv.org/abs/2608.15071)
 
-![14\-evo\-harness\-fig3\.png](图片和附件/14-evo-harness-fig3.png)
+![14\-evo\-harness\-fig3\.png](blog/rsi-guide/14-evo-harness-fig3.png)
 
 In Evo-Harness, the Solver corresponds to the Student and the Evolver to the Teacher. The Solver first summarizes candidate experiences, after which the Evolver filters, organizes, and writes them into the Harness. The Solver does more than perform tasks: it also summarizes candidate experience from each execution. The Evolver then reviews those experiences and decides how to modify the existing Skill Harness. The final content written back is jointly produced by the two roles.
 
@@ -254,7 +254,7 @@ Based on the temporal relationship between task execution and experience updates
 
 3. Hybrid Mode first builds an initial version offline and then continues adapting to new tasks after deployment.
 
-![Offline, online, and hybrid RSI](图片和附件/codex-rsi-update-timing-en.png)
+![Offline, online, and hybrid RSI](blog/rsi-guide/codex-rsi-update-timing-en.png)
 
 ### 5.1 Offline RSI
 
@@ -262,7 +262,7 @@ Offline RSI separates updating from testing. The system first accumulates experi
 
 **Representative work:** [**GDPevo: Evaluating Agent Self-Evolution on Real Business Tasks**](https://arxiv.org/abs/2608.03764)
 
-![06\-gdpevo\-fig1\.png](图片和附件/06-gdpevo-fig1.png)
+![06\-gdpevo\-fig1\.png](blog/rsi-guide/06-gdpevo-fig1.png)
 
 GDPevo is a Benchmark designed specifically to evaluate offline RSI. Existing evaluations often do not clearly explain how training and test tasks relate. When a score rises, it is therefore difficult to tell whether the Agent learned to reuse experience or had previously seen a similar task. GDPevo selects tasks from real business workflows in CRM, ERP, finance, healthcare, law, and data processing, then decomposes each workflow into smaller rules.
 
@@ -278,7 +278,7 @@ Online RSI arranges tasks into a continual sequence. After completing the curren
 
 **Representative work:** [**FinEvo-Bench: A Longitudinal Benchmark for Self-Evolving Agents in Professional Financial Workflows**](https://arxiv.org/abs/2608.06144)
 
-![09\-finevo\-bench\-fig2\.png](图片和附件/09-finevo-bench-fig2.png)
+![09\-finevo\-bench\-fig2\.png](blog/rsi-guide/09-finevo-bench-fig2.png)
 
 FinEvo-Bench is a Benchmark for online RSI that organizes 120 financial tasks into one continual stream. The Agent retains experience after completing each task and uses it on subsequent tasks. The Benchmark covers six domains and 20 business scenarios. Each scenario contains six tasks that follow the same procedure but use different data and ask different specific questions.
 
@@ -296,7 +296,7 @@ Hybrid Mode first builds a body of initial experience from demonstrations or tra
 
 **Representative work:** [**Mem²Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation**](https://arxiv.org/abs/2604.10923)
 
-![08\-mem2evolve\-fig2\.png](图片和附件/08-mem2evolve-fig2.png)
+![08\-mem2evolve\-fig2\.png](blog/rsi-guide/08-mem2evolve-fig2.png)
 
 
 
