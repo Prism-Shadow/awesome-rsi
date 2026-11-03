@@ -6,7 +6,7 @@ import { filterDimensions } from "../data/paperTaxonomy.js";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { bibtex, citationNeighbors, entryHref, entryTitle, findEntry, similarEntries } from "../lib/catalog.js";
 import { appCopy, detailCopy, methodCardCopy, systemCardCopy, tagLabelsZh } from "../i18n.js";
-import { TAG_COLORS } from "./PaperCard.jsx";
+import { TAG_COLORS } from "../lib/tagColors.js";
 import { TAB_PATHS, filterPath, graphPath } from "../lib/navigation.js";
 
 const ABSTRACT_SUMMARY = "Abstract summary: ";
@@ -29,22 +29,22 @@ function formatAuthors(entry, lang) {
   return lang === "zh" ? `${names} 等（${total}）` : `${names}, et al. (${total})`;
 }
 
-function useCopied() {
-  const [copied, setCopied] = useState(null);
+// The BibTeX record, with a copy button that confirms for a moment.
+function BibtexBlock({ record, copy }) {
+  const [copied, setCopied] = useState(false);
   useEffect(() => {
     if (!copied) return undefined;
-    const timer = setTimeout(() => setCopied(null), 1800);
+    const timer = setTimeout(() => setCopied(false), 1800);
     return () => clearTimeout(timer);
   }, [copied]);
-  const copy = async (key, text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(key);
-    } catch {
-      window.prompt("", text);
-    }
-  };
-  return [copied, copy];
+  return (
+    <div className="detail-bibtex">
+      <pre>{record}</pre>
+      <button type="button" onClick={() => navigator.clipboard.writeText(record).then(() => setCopied(true))}>
+        {copied ? copy.copied : copy.copyBibtex}
+      </button>
+    </div>
+  );
 }
 
 // Each label links to its list filtered by that label.
@@ -55,7 +55,7 @@ function profileRows(entry, lang) {
       return {
         id: dimension.id,
         label: dimension.label,
-        values: entry.facets[dimension.id].map((value) => ({ value, label: labels[value] ?? value })),
+        values: entry.facets[dimension.id].map((value) => ({ value, label: labels[value] })),
       };
     });
   }
@@ -96,7 +96,6 @@ function EntryList({ title, entries, copy }) {
 export default function PaperDetail({ collection, id, lang }) {
   const entry = findEntry(collection, id);
   const copy = detailCopy[lang];
-  const [copied, copyText] = useCopied();
   const [showBibtex, setShowBibtex] = useState(false);
   const [showOriginal, setShowOriginal] = useState(false);
   const listLabel = appCopy[lang].tabs[collection === "methods" ? "methods" : "papers"];
@@ -153,8 +152,8 @@ export default function PaperDetail({ collection, id, lang }) {
         <div className="detail-tags">
           {entry.kind === "benchmark"
             ? entry.tags.map((tag) => {
-              const [ink, bg] = TAG_COLORS[tag] ?? [];
-              return <span className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }} key={tag}>{lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}</span>;
+              const [ink, bg] = TAG_COLORS[tag];
+              return <span className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }} key={tag}>{lang === "zh" ? tagLabelsZh[tag] : tag}</span>;
             })
             : leafArtifacts(entry.facets.artifact).map((value) => (
               <a className="tag" href={filterPath(collection, "artifact", value)} key={value}>{localizeMethodValue("artifact", value, lang)}</a>
@@ -173,14 +172,7 @@ export default function PaperDetail({ collection, id, lang }) {
           )}
           {graphHref && <a className="detail-action" href={graphHref}>{copy.graph}</a>}
         </div>
-        {showBibtex && record && (
-          <div className="detail-bibtex">
-            <pre>{record}</pre>
-            <button type="button" onClick={() => copyText("bibtex", record)}>
-              {copied === "bibtex" ? copy.copied : copy.copyBibtex}
-            </button>
-          </div>
-        )}
+        {showBibtex && <BibtexBlock record={record} copy={copy} />}
       </header>
 
       <div className="detail-grid">

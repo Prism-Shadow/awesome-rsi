@@ -53,7 +53,7 @@ export function createGraphGeometry(width = 920, height = 620) {
 
 export function nodeBounds(node) {
   return {
-    halfWidth: Math.max(node.radius + 12, (node.nickname?.length ?? 0) * 3.5 + 12),
+    halfWidth: Math.max(node.radius + 12, node.nickname.length * 3.5 + 12),
     halfHeight: node.radius + 16,
   };
 }
@@ -174,9 +174,9 @@ export function buildLayout(papers, edges, getNodeWeight, { height = 620, spacio
       }
       if (overlaps === 0) break;
     }
-    // Dense hubs can trap the relaxation against the boundary. Place remaining
-    // Place the largest node + label footprints first, so long labels do not
-    // get trapped after smaller circles have occupied the remaining slots.
+    // Dense hubs can trap the relaxation against the boundary, so place any nodes
+    // that still overlap on a grid, largest node + label footprints first, so long
+    // labels do not get trapped after smaller circles have occupied the free slots.
     const placed = [];
     const footprint = (node) => {
       const box = nodeBounds(node);

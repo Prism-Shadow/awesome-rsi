@@ -188,7 +188,7 @@ function MarkdownArticle({ markdown, copy, showImageCaptions = false }) {
               <li className={`blog-toc-item blog-toc-item--level-${item.level}`} key={item.id}>
                 <button
                   type="button"
-                  onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={() => document.getElementById(item.id).scrollIntoView({ behavior: "smooth" })}
                 >
                   {renderInline(item.text)}
                 </button>
@@ -277,23 +277,14 @@ function BlogArticle({ post, lang, copy }) {
 
       {markdown
         ? <MarkdownArticle markdown={markdown} copy={copy} showImageCaptions={post.showImageCaptions} />
-        : post.sections
-        ? post.sections.map((section, index) => (
-            <section className="blog-article-body" key={section.heading ?? index}>
-              {section.heading ? <h3>{section.heading}</h3> : null}
-              {section.blocks.map((block, blockIndex) => (
-                <ArticleBlock block={block} key={blockIndex} />
-              ))}
-            </section>
-          ))
-        : (
-          <section className="blog-article-body" aria-labelledby="release-highlights-title">
-            <h3 id="release-highlights-title">{copy.included}</h3>
-            <ul>
-              {post.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-            </ul>
+        : post.sections.map((section, index) => (
+          <section className="blog-article-body" key={section.heading ?? index}>
+            {section.heading ? <h3>{section.heading}</h3> : null}
+            {section.blocks.map((block, blockIndex) => (
+              <ArticleBlock block={block} key={blockIndex} />
+            ))}
           </section>
-        )}
+        ))}
     </article>
   );
 }

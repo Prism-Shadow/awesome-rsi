@@ -205,7 +205,7 @@ export function FacetSidebar({ dimensions, selections, facetCounts, onToggle, ra
                         onChange={() => onToggle(dimension.id, option.value)}
                       />
                       <span>{option.label}</span>
-                      <small>{facetCounts[dimension.id][option.value] ?? 0}</small>
+                      <small>{facetCounts[dimension.id][option.value]}</small>
                     </label>
                   </li>
                 ))}
@@ -282,7 +282,7 @@ export function ResultsBar({ resultCount, totalCount, activeFilters, onClear, so
 export function activeFilterPills({ dimensions, selections, onToggle, ranges }) {
   const pills = dimensions.flatMap((dimension) => selections[dimension.id].map((value) => ({
     key: `${dimension.id}:${value}`,
-    label: dimension.options.find((option) => option.value === value)?.label ?? value,
+    label: dimension.options.find((option) => option.value === value).label,
     onRemove: () => onToggle(dimension.id, value),
   })));
   for (const range of ranges) {

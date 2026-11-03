@@ -9,7 +9,7 @@ import { appCopy } from "../i18n.js";
 import { catalogEntries, entryTitle } from "./catalog.js";
 import { TAB_PATHS, detailPath, graphPath, postPath } from "./navigation.js";
 
-export const SITE_ORIGIN = "https://prism-shadow.github.io";
+const SITE_ORIGIN = "https://prism-shadow.github.io";
 
 const ENTITIES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 const escapeHtml = (text) => text.replace(/[&<>"']/g, (character) => ENTITIES[character]);

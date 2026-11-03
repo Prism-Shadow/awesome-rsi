@@ -105,8 +105,8 @@ export function citationNeighbors(entry) {
   const lookup = (id) => findEntry(graph.collection, id);
   const newestFirst = (a, b) => b.published.localeCompare(a.published);
   return {
-    references: graph.edges.filter((edge) => edge.source === entry.id).map((edge) => lookup(edge.target)).filter(Boolean).sort(newestFirst),
-    citedBy: graph.edges.filter((edge) => edge.target === entry.id).map((edge) => lookup(edge.source)).filter(Boolean).sort(newestFirst),
+    references: graph.edges.filter((edge) => edge.source === entry.id).map((edge) => lookup(edge.target)).sort(newestFirst),
+    citedBy: graph.edges.filter((edge) => edge.target === entry.id).map((edge) => lookup(edge.source)).sort(newestFirst),
   };
 }
 
@@ -132,7 +132,7 @@ export function similarEntries(entry, limit = 5) {
 // A BibTeX record for papers on arXiv; other entries have no stable record to cite here.
 export function bibtex(entry) {
   if (!entry.arxiv) return null;
-  const surname = (entry.authors[0] ?? "anon").split(" ").pop().normalize("NFD").replace(/[^A-Za-z]/g, "").toLowerCase();
+  const surname = entry.authors[0].split(" ").pop().normalize("NFD").replace(/[^A-Za-z]/g, "").toLowerCase();
   const titleWord = entry.title.split(/[^A-Za-z]+/).find((word) => word.length > 3)?.toLowerCase() ?? "paper";
   const authors = [...entry.authors, ...(entry.authorCount > entry.authors.length ? ["others"] : [])].join(" and ");
   const fields = [

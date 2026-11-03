@@ -15,7 +15,7 @@ const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
 
 function useTheme() {
   const [theme, setTheme] = useState(
-    () => document.documentElement.getAttribute("data-theme") ?? "light",
+    () => document.documentElement.getAttribute("data-theme"),
   );
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -89,7 +89,7 @@ export default function App() {
   const onDetail = Boolean(detail);
   useEffect(() => {
     if (!onDetail) document.title = copy.pageTitle;
-    document.querySelector('meta[name="description"]')?.setAttribute("content", copy.pageDescription);
+    document.querySelector('meta[name="description"]').setAttribute("content", copy.pageDescription);
   }, [copy, onDetail]);
 
   useEffect(() => {
