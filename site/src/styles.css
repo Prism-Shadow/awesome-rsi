@@ -2349,7 +2349,8 @@ html[lang="zh-Hans"] .method-status {
   letter-spacing: -0.025em;
 }
 
-.home-hero h1 span {
+.home-hero h1 span,
+.home-hero h1 em {
   white-space: nowrap;
 }
 
