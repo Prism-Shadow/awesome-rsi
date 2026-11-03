@@ -55,7 +55,7 @@ export const appCopy = {
 
 export const homeCopy = {
   en: {
-    title: { before: "", keep: "RSI", gap: " ", emphasis: "research map", after: "" },
+    title: { before: "", keep: "RSI", gap: " ", emphasis: "Research Map", after: "" },
     lede: "Every RSI method, taken apart along 9 dimensions",
     stats: { methods: "methods", systems: "systems", benchmarks: "benchmarks", citations: "citation links" },
     recentTitle: "Recently added",
