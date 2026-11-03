@@ -7,7 +7,7 @@ import { methodTaxonomy } from "../data/methodTaxonomy.js";
 import { paperTaxonomy } from "../data/paperTaxonomy.js";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
 import { firstSentence } from "./catalog.js";
-import { detailHash } from "./navigation.js";
+import { detailPath } from "./navigation.js";
 
 
 export const collectionEntries = [
@@ -19,7 +19,7 @@ export const collectionEntries = [
     published: method.published,
     added: method.added,
     url: method.arxiv ?? method.pdf,
-    href: detailHash("methods", method.id),
+    href: detailPath("methods", method.id),
     summary: method.summary,
     summaryZh: method.summaryZh,
     artifact: methodTaxonomy[method.id].artifact,
@@ -32,7 +32,7 @@ export const collectionEntries = [
     published: system.released,
     added: system.added,
     url: system.links[0]?.url,
-    href: detailHash("methods", system.id),
+    href: detailPath("methods", system.id),
     summary: system.summary,
     summaryZh: system.summaryZh,
     artifact: system.taxonomy.artifact,
@@ -45,7 +45,7 @@ export const collectionEntries = [
     published: paper.published,
     added: paper.added,
     url: paper.arxiv,
-    href: detailHash("benchmarks", paper.id),
+    href: detailPath("benchmarks", paper.id),
     summary: firstSentence(paper.abstract),
     summaryZh: firstSentence(paperAbstractsZh[paper.id]),
     mode: paperTaxonomy[paper.id].mode,

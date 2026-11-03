@@ -11,7 +11,7 @@ import { paperTaxonomy } from "../data/paperTaxonomy.js";
 import { paperInstitutions } from "../data/paperInstitutions.js";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
 import { citationEdges } from "../data/citationGraph.js";
-import { detailHash } from "./navigation.js";
+import { detailPath } from "./navigation.js";
 
 // Benchmarks have no one-line summary, so their first abstract sentence stands in for one.
 // Chinese full stops end a sentence without a following space.
@@ -85,7 +85,12 @@ export function findEntry(collection, id) {
 }
 
 export function entryHref(entry) {
-  return detailHash(entry.collection, entry.id);
+  return detailPath(entry.collection, entry.id);
+}
+
+// The page title: "Nickname: Title", unless the title already starts with the nickname.
+export function entryTitle(entry) {
+  return entry.title.startsWith(entry.nickname) ? entry.title : `${entry.nickname}: ${entry.title}`;
 }
 
 // Methods and benchmarks each have their own citation graph; systems are not in either.

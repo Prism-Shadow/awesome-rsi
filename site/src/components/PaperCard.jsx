@@ -4,7 +4,7 @@ import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
 import { paperInstitutions } from "../data/paperInstitutions.js";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperCardCopy, tagLabelsZh } from "../i18n.js";
-import { detailHash } from "../lib/navigation.js";
+import { detailPath } from "../lib/navigation.js";
 
 // Tag hues reuse the GDPevo domain palette (see styles.css variables).
 export const TAG_COLORS = {
@@ -63,7 +63,7 @@ export default function PaperCard({ paper, lang }) {
         </span>
       </div>
       <h3 className="paper-title">
-        <a href={detailHash("benchmarks", paper.id)}>{paper.title}</a>
+        <a href={detailPath("benchmarks", paper.id)}>{paper.title}</a>
       </h3>
       <p className="paper-authors">{formatAuthors(paper.authors, lang, copy)}</p>
       <p className="paper-institutions">

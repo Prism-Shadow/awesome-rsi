@@ -65,7 +65,7 @@ export function renderCatalog() {
   const entries = [...methodEntries, ...systemEntries].sort(newest);
   const sections = [
     '## Methods & Systems',
-    '[Compare all dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/#methods)',
+    '[Compare all dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/methods/)',
     'Grouped by RSI artifact and ordered by first publication or project release date, newest first. Conference labels reflect the venue recorded in the collection; projects link to their repositories.',
   ];
   for (const { value, label } of leaves) {
@@ -82,7 +82,7 @@ export function renderCatalog() {
     }
   }
   sections.push('## Benchmarks');
-  sections.push('[Compare benchmark dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/#benchmarks)');
+  sections.push('[Compare benchmark dimensions on the website →](https://prism-shadow.github.io/awesome-rsi/benchmarks/)');
   sections.push('Grouped by RSI mode, newest first. Benchmarks that support multiple protocols appear in each relevant group. Artifact labels describe what evolves in the evaluated workflow.');
   sections.push('<a href="assets/readme/benchmark-map.svg">\n  <picture>\n    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/benchmark-map-dark.svg">\n    <img src="assets/readme/benchmark-map.svg" alt="Left-to-right benchmark tree: RSI mode branches into Online, Offline, and Offline to Online, with representative benchmarks for each protocol. Open the full-size map for a closer look." width="100%">\n  </picture>\n</a>');
   sections.push('[Online](#online) · [Offline](#offline) · [Offline → Online](#offline-to-online)');

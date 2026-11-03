@@ -5,7 +5,9 @@ import { papers } from "../data/papers.js";
 import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { blogPosts } from "../data/blogPosts.js";
 import { blogPostsZh } from "../data/blogPosts.zh.js";
+import { blogMarkdown } from "../data/blogMarkdown.js";
 import { blogCover } from "../lib/blogMarkdown.js";
+import { TAB_PATHS, postPath } from "../lib/navigation.js";
 import { recentlyAdded } from "../lib/recentlyAdded.js";
 import { homeCopy, localizedValue } from "../i18n.js";
 import { heroHubIds, heroNodes as networkNodes } from "virtual:hero-network";
@@ -318,10 +320,10 @@ function CitationNetwork() {
 
 function HomeHero({ copy }) {
   const stats = [
-    [methods.length, copy.stats.methods, "#methods"],
-    [systems.length, copy.stats.systems, "#methods"],
-    [papers.length, copy.stats.benchmarks, "#benchmarks"],
-    [methodCitationEdges.length, copy.stats.citations, "#graph-methods"],
+    [methods.length, copy.stats.methods, TAB_PATHS.methods],
+    [systems.length, copy.stats.systems, TAB_PATHS.methods],
+    [papers.length, copy.stats.benchmarks, TAB_PATHS.papers],
+    [methodCitationEdges.length, copy.stats.citations, TAB_PATHS.graph],
   ];
   const { before, keep, gap, emphasis, after } = copy.title;
   return (
@@ -352,8 +354,8 @@ function RecentlyAdded({ copy, lang }) {
       <div className="section-head">
         <h2 id="recently-added-title">{copy.recentTitle}</h2>
         <p>
-          <a href="#methods">{copy.allMethods} →</a>
-          <a href="#benchmarks">{copy.allBenchmarks} →</a>
+          <a href={TAB_PATHS.methods}>{copy.allMethods} →</a>
+          <a href={TAB_PATHS.papers}>{copy.allBenchmarks} →</a>
         </p>
       </div>
       <ol className="entry-list">
@@ -381,8 +383,8 @@ function FromTheBlog({ copy, lang }) {
       </div>
       <ol className="entry-list entry-list--posts">
         {posts.map((post) => {
-          const href = `#blog/${encodeURIComponent(post.id)}`;
-          const cover = blogCover(post);
+          const href = postPath(post.id);
+          const cover = blogCover(post, blogMarkdown[lang][post.id]);
           return (
             <li className="entry entry--post" key={post.id}>
               <div className="entry-text">

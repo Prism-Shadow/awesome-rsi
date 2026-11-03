@@ -1,6 +1,3 @@
-import rsiDeepLearning from "./blog/rsi-deep-learning.zh.md?raw";
-import rsiGuide from "./blog/rsi-guide.zh.md?raw";
-
 export const blogPostsZh = [
   {
     id: "rsi-deep-learning",
@@ -11,7 +8,6 @@ export const blogPostsZh = [
     tags: ["RSI", "深度学习", "自我改进", "研究方向"],
     showImageCaptions: true,
     cover: "blog/rsi-deep-learning/cover.webp",
-    markdown: rsiDeepLearning,
   },
   {
     id: "understanding-rsi",
@@ -21,7 +17,6 @@ export const blogPostsZh = [
     summary: "从进化产物、版本结构、更新者、更新模式、反馈和经验范围等维度，系统梳理递归自我改进研究，并结合代表性论文解释不同技术路线。",
     tags: ["导读", "RSI", "自进化", "分类维度"],
     cover: "blog/rsi-guide/cover-zh.webp",
-    markdown: rsiGuide,
   },
   {
     id: "introducing-awesome-rsi",
@@ -56,7 +51,7 @@ export const blogPostsZh = [
           },
           {
             type: "p",
-            text: "这个定义有意保持宽泛。为了让它更精确，也为了比较不同类型的 RSI，我们重点说明最容易被误读的两个维度，再简要介绍其余维度。每篇论文的维度标签都可以在[基准论文列表](https://prism-shadow.github.io/awesome-rsi/#benchmarks)中查看。",
+            text: "这个定义有意保持宽泛。为了让它更精确，也为了比较不同类型的 RSI，我们重点说明最容易被误读的两个维度，再简要介绍其余维度。每篇论文的维度标签都可以在[基准论文列表](https://prism-shadow.github.io/awesome-rsi/benchmarks/)中查看。",
           },
           {
             type: "p",

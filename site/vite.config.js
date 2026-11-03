@@ -1,5 +1,9 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+
+const BASE = "/awesome-rsi/";
 
 const HERO_NETWORK = "virtual:hero-network";
 const HERO_NETWORK_ID = `\0${HERO_NETWORK}`;
@@ -43,33 +47,31 @@ function heroNetwork() {
   };
 }
 
-// Emits the static share page for every detail page (see src/lib/sharePages.js), and serves the
-// same pages from the dev server so shared links can be tried locally.
-function sharePages() {
+// GitHub Pages only serves files that exist, so after the build every page gets its own copy of
+// index.html with that page's title and preview tags (see src/lib/staticPages.js), plus a 404.html.
+function staticPages() {
+  let outDir;
   return {
-    name: "share-pages",
-    configureServer(server) {
-      server.middlewares.use(async (request, response, next) => {
-        const match = request.url?.match(/^\/awesome-rsi\/p\/([^/?#]+)\/?(?:index\.html)?(?:[?#].*)?$/);
-        if (!match) return next();
-        const { findShareEntry, sharePage } = await server.ssrLoadModule("/src/lib/sharePages.js");
-        const entry = findShareEntry(decodeURIComponent(match[1]));
-        if (!entry) return next();
-        response.setHeader("Content-Type", "text/html; charset=utf-8");
-        response.end(sharePage(entry));
-      });
+    name: "static-pages",
+    apply: "build",
+    configResolved(config) {
+      outDir = path.resolve(config.root, config.build.outDir);
     },
-    async generateBundle() {
-      const { catalogEntries, sharePage, sharePath } = await import(new URL("./src/lib/sharePages.js", import.meta.url).href);
-      for (const entry of catalogEntries) {
-        this.emitFile({ type: "asset", fileName: sharePath(entry), source: sharePage(entry) });
+    async closeBundle() {
+      const { notFoundHtml, pageHtml, staticPages: pages } = await import(new URL("./src/lib/staticPages.js", import.meta.url).href);
+      const template = await readFile(path.join(outDir, "index.html"), "utf8");
+      for (const page of pages()) {
+        const file = path.join(outDir, page.path.slice(BASE.length), "index.html");
+        await mkdir(path.dirname(file), { recursive: true });
+        await writeFile(file, pageHtml(template, page));
       }
+      await writeFile(path.join(outDir, "404.html"), notFoundHtml(template));
     },
   };
 }
 
 // base must match the GitHub Pages project path: https://<org>.github.io/awesome-rsi/
 export default defineConfig({
-  base: "/awesome-rsi/",
-  plugins: [react(), heroNetwork(), sharePages()],
+  base: BASE,
+  plugins: [react(), heroNetwork(), staticPages()],
 });

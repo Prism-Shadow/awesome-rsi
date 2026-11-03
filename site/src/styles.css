@@ -418,6 +418,7 @@ html[lang="zh-Hans"] .survey-feature h2 {
 }
 
 .blog-back-link {
+  display: inline-block;
   appearance: none;
   margin: 0 0 1.3rem;
   padding: 0;
@@ -2089,7 +2090,8 @@ html[lang="zh-Hans"] .method-status {
   padding: 0.5rem 0.7rem;
 }
 
-.taxonomy-profile-row span {
+.taxonomy-profile-row span,
+.taxonomy-profile-row a {
   padding: 0.16rem 0.46rem;
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
   border-radius: 0.34rem;
@@ -2420,6 +2422,16 @@ html[lang="zh-Hans"] .method-status {
 
 .detail-main .taxonomy-profile {
   margin-top: 0;
+}
+
+.detail-main .taxonomy-profile-row a:hover,
+.detail-tags a.tag:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.detail-tags a.tag {
+  border: 1px solid transparent;
 }
 
 .detail-related + .detail-related {

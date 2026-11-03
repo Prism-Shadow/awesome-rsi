@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { papers } from "../data/papers.js";
 import { filterDimensions, paperTaxonomy } from "../data/paperTaxonomy.js";
 import { FacetSidebar, ResultsBar, SearchField, activeFilterPills } from "./FilterBar.jsx";
@@ -7,6 +7,8 @@ import PaperCard from "./PaperCard.jsx";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { paperAbstractsZh } from "../data/paperAbstractsZh.js";
 import { appCopy, filterCopy, papersCopy } from "../i18n.js";
+import { TAB_PATHS } from "../lib/navigation.js";
+import { navigate } from "../lib/router.js";
 
 const INITIAL_SELECTIONS = Object.fromEntries(filterDimensions.map(({ id }) => [id, []]));
 const YEARS = papers.map((paper) => paper.year);
@@ -15,7 +17,7 @@ const YEAR_BOUNDS = [Math.min(...YEARS), Math.max(...YEARS)];
 const CITATION_BOUNDS = [Math.min(...CITATIONS), Math.max(...CITATIONS)];
 const indexedPapers = papers.map((paper) => ({ ...paper, facets: paperTaxonomy[paper.id] }));
 
-export default function PapersTab({ lang }) {
+export default function PapersTab({ lang, search = "" }) {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
   const [yearRange, setYearRange] = useState(YEAR_BOUNDS);
   const [citationRange, setCitationRange] = useState(CITATION_BOUNDS);
@@ -24,6 +26,25 @@ export default function PapersTab({ lang }) {
   const dimensions = useMemo(() => localizeFilterDimensions(filterDimensions, lang), [lang]);
   const copy = papersCopy[lang];
   const filterText = filterCopy[lang];
+
+  // A link such as benchmarks/?mode=Online, from a detail page, opens the list with only that filter.
+  // The address then drops the query, so later filter changes are not misdescribed by it.
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const requested = filterDimensions.filter(({ id }) => params.has(id));
+    if (requested.length === 0) return;
+    setSelections({
+      ...INITIAL_SELECTIONS,
+      ...Object.fromEntries(requested.map(({ id, options }) => [
+        id,
+        params.getAll(id).filter((value) => options.some((option) => option.value === value)),
+      ])),
+    });
+    setYearRange(YEAR_BOUNDS);
+    setCitationRange(CITATION_BOUNDS);
+    setQuery("");
+    navigate(TAB_PATHS.papers, { replace: true });
+  }, [search]);
 
   const facetCounts = useMemo(() => Object.fromEntries(dimensions.map((dimension) => [
     dimension.id,

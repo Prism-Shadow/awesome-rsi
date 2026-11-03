@@ -1,6 +1,3 @@
-import rsiDeepLearning from "./blog/rsi-deep-learning.en.md?raw";
-import rsiGuide from "./blog/rsi-guide.en.md?raw";
-
 export const blogPosts = [
   {
     id: "rsi-deep-learning",
@@ -11,7 +8,6 @@ export const blogPosts = [
     tags: ["RSI", "deep learning", "self-improvement", "research ideas"],
     showImageCaptions: true,
     cover: "blog/rsi-deep-learning/cover.webp",
-    markdown: rsiDeepLearning,
   },
   {
     id: "understanding-rsi",
@@ -22,7 +18,6 @@ export const blogPosts = [
       "A structured introduction to recursive self-improvement, covering what agents evolve, how versions relate, who performs the update, when evolution happens, and how feedback and experience shape the process.",
     tags: ["guide", "RSI", "self-evolution", "taxonomy"],
     cover: "blog/rsi-guide/cover-en.webp",
-    markdown: rsiGuide,
   },
   {
     id: "introducing-awesome-rsi",
@@ -58,7 +53,7 @@ export const blogPosts = [
           },
           {
             type: "p",
-            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the two dimensions that are most often misread, then note the others in brief; every dimension is tagged on the [benchmark list](https://prism-shadow.github.io/awesome-rsi/#benchmarks).",
+            text: "This definition is broad. To make it precise — and to compare different kinds of RSI — we sharpen it along the two dimensions that are most often misread, then note the others in brief; every dimension is tagged on the [benchmark list](https://prism-shadow.github.io/awesome-rsi/benchmarks/).",
           },
           {
             type: "p",

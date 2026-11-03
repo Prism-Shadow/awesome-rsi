@@ -1,19 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { bibtex, catalogEntries, citationNeighbors, entryHref, findEntry, firstSentence, similarEntries } from "../site/src/lib/catalog.js";
-import { findShareEntry, sharePage, sharePath, SITE_URL } from "../site/src/lib/sharePages.js";
+import { notFoundHtml, pageHtml, staticPages } from "../site/src/lib/staticPages.js";
 import { methods } from "../site/src/data/methods.js";
 import { systems } from "../site/src/data/systems.js";
 import { papers } from "../site/src/data/papers.js";
 import { methodCitationEdges } from "../site/src/data/methodCitationGraph.js";
-import { detailFromHash } from "../site/src/lib/navigation.js";
+import { routeFromPath } from "../site/src/lib/navigation.js";
+import { blogPosts } from "../site/src/data/blogPosts.js";
+import { readFile } from "node:fs/promises";
 
 test("every method, system, and benchmark has exactly one detail page", () => {
   assert.equal(catalogEntries.length, methods.length + systems.length + papers.length);
   assert.equal(new Set(catalogEntries.map((entry) => entry.id)).size, catalogEntries.length);
   for (const entry of catalogEntries) {
-    const route = detailFromHash(entryHref(entry));
-    assert.equal(findEntry(route.collection, route.id), entry, entry.id);
+    const { detail } = routeFromPath(entryHref(entry));
+    assert.equal(findEntry(detail.collection, detail.id), entry, entry.id);
     assert.ok(entry.title && entry.summary && entry.facets, entry.id);
   }
   assert.equal(findEntry("methods", "9999.99999"), null);
@@ -51,15 +53,21 @@ test("benchmark summaries take the first sentence in either language", () => {
   assert.equal(firstSentence("v1.5 works. Next."), "v1.5 works.");
 });
 
-test("share pages describe the paper and redirect to its detail page", () => {
-  assert.equal(new Set(catalogEntries.map(sharePath)).size, catalogEntries.length);
-  const entry = findShareEntry("2605.30105");
-  const html = sharePage(entry);
-  assert.match(html, new RegExp(`<link rel="canonical" href="${SITE_URL}p/2605.30105/" />`));
-  assert.match(html, /<meta property="og:title" content="EvoRepair: Learning from Repair Experience/);
-  assert.match(html, /location\.replace\("\.\.\/\.\.\/#methods\/2605\.30105"\)/);
-  const tricky = sharePage({ ...entry, nickname: "A&B", title: "A&B <script>", summary: `"quoted"` });
-  assert.ok(!tricky.includes("<script>A") && tricky.includes("A&amp;B &lt;script&gt;") && tricky.includes("&quot;quoted&quot;"));
+test("the build writes one titled page per address, from the real index.html", async () => {
+  const pages = staticPages();
+  assert.equal(pages.length, 5 + catalogEntries.length + blogPosts.length);
+  assert.equal(new Set(pages.map(({ path }) => path)).size, pages.length);
+  for (const page of pages) assert.notEqual(routeFromPath(page.path).tab, "notFound", page.path);
+  const template = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
+  const html = pageHtml(template, pages.find(({ path }) => path === "/awesome-rsi/methods/2605.30105/"));
+  assert.match(html, /<title>EvoRepair: Learning from Repair Experience: .+ — Awesome RSI<\/title>/);
+  assert.match(html, /<meta name="description" content="Retrieves past repair experience/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/prism-shadow\.github\.io\/awesome-rsi\/methods\/2605\.30105\/" \/>/);
+  assert.equal((html.match(/<title>/g) ?? []).length, 1);
+  assert.equal((html.match(/name="description"/g) ?? []).length, 1);
+  const tricky = pageHtml(template, { path: "/awesome-rsi/", title: "A&B <script>", description: '"quoted"' });
+  assert.ok(tricky.includes("<title>A&amp;B &lt;script&gt;</title>") && tricky.includes("&quot;quoted&quot;"));
   // A title that already starts with the nickname is not repeated.
-  assert.match(sharePage(findShareEntry("2607.28048")), /<title>SKILL-KD: Contrastive Skill Distillation for LLM Agents · Awesome RSI<\/title>/);
+  assert.ok(pages.some(({ title }) => title === "SKILL-KD: Contrastive Skill Distillation for LLM Agents — Awesome RSI"));
+  assert.match(notFoundHtml(template), /<meta name="robots" content="noindex" \/>/);
 });

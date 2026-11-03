@@ -6,7 +6,8 @@ import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { appCopy, graphCopy, graphExplorerCopy, methodGraphCopy } from "../i18n.js";
 import CitationGraph from "./CitationGraph.jsx";
 import PageHead from "./PageHead.jsx";
-import { detailHash, graphFocusFromHash } from "../lib/navigation.js";
+import { detailPath, graphPath } from "../lib/navigation.js";
+import { navigate } from "../lib/router.js";
 
 const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
   method.id,
@@ -14,25 +15,14 @@ const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
 ]));
 const methodNodeWeight = (paper) => METHOD_INCOMING_COUNTS[paper.id] ?? 0;
 
-function graphKindFromHash() {
-  return window.location.hash.startsWith("#graph-benchmark") ? "benchmark" : "methods";
-}
-
-// #graph-methods/<id> and #graph-benchmark/<id> open the graph focused on one paper.
-function paperFromHash() {
-  const focus = graphFocusFromHash(window.location.hash);
-  if (!focus) return null;
-  return (focus.kind === "methods" ? methods : papers).find((paper) => paper.id === focus.id) ?? null;
-}
-
 function searchableText(paper) {
   return [paper.id, paper.nickname, paper.title, ...(paper.authors ?? [])]
     .join(" ")
     .toLowerCase();
 }
 
-export default function GraphTab({ lang }) {
-  const [kind, setKind] = useState(graphKindFromHash);
+// The path picks the collection (graph/ or graph/benchmarks/), and ?paper=<id> opens it focused on one paper.
+export default function GraphTab({ lang, kind = "methods", focusId }) {
   const [query, setQuery] = useState("");
   const [resultsOpen, setResultsOpen] = useState(false);
   const [activeResult, setActiveResult] = useState(0);
@@ -48,21 +38,13 @@ export default function GraphTab({ lang }) {
   }, [graphPapers, graphEdges]);
 
   useEffect(() => {
-    const syncKindFromHash = () => {
-      if (!window.location.hash.startsWith("#graph") && window.location.hash !== "#methods-graph") return;
-      setKind(graphKindFromHash());
-      setQuery("");
-      setResultsOpen(false);
-      setActiveResult(0);
-      setFocusRequest(null);
-      const paper = paperFromHash();
-      if (paper) focusPaper(paper);
-    };
-    const paper = paperFromHash();
+    setQuery("");
+    setResultsOpen(false);
+    setActiveResult(0);
+    setFocusRequest(null);
+    const paper = focusId && (kind === "methods" ? methods : papers).find((candidate) => candidate.id === focusId);
     if (paper) focusPaper(paper);
-    window.addEventListener("hashchange", syncKindFromHash);
-    return () => window.removeEventListener("hashchange", syncKindFromHash);
-  }, []);
+  }, [kind, focusId]);
 
   const matches = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -70,14 +52,7 @@ export default function GraphTab({ lang }) {
     return graphPapers.filter((paper) => searchableText(paper).includes(normalized)).slice(0, 8);
   }, [graphPapers, query]);
 
-  const selectKind = (nextKind) => {
-    setKind(nextKind);
-    setQuery("");
-    setResultsOpen(false);
-    setActiveResult(0);
-    setFocusRequest(null);
-    window.history.replaceState(null, "", nextKind === "methods" ? "#graph-methods" : "#graph-benchmark");
-  };
+  const selectKind = (nextKind) => navigate(graphPath(nextKind), { replace: true });
 
   const focusPaper = (paper) => {
     focusSequence.current += 1;
@@ -196,7 +171,7 @@ export default function GraphTab({ lang }) {
           edges={graphEdges}
           copyOverride={graphText}
           focusRequest={focusRequest}
-          detailHref={(paper) => detailHash(kind === "methods" ? "methods" : "benchmarks", paper.id)}
+          detailHref={(paper) => detailPath(kind === "methods" ? "methods" : "benchmarks", paper.id)}
           spacious={kind === "methods"}
           nodeWeight={kind === "methods" ? methodNodeWeight : undefined}
           primaryMetric={kind === "methods" ? (paper) => paper.year : undefined}

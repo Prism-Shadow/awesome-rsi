@@ -4,9 +4,10 @@ import { localizeMethodDimensions, localizeMethodValue } from "../data/methodTax
 import { leafArtifacts } from "../data/artifactTaxonomy.js";
 import { filterDimensions } from "../data/paperTaxonomy.js";
 import { localizeFilterDimensions } from "../data/taxonomyZh.js";
-import { bibtex, citationNeighbors, entryHref, findEntry, similarEntries } from "../lib/catalog.js";
+import { bibtex, citationNeighbors, entryHref, entryTitle, findEntry, similarEntries } from "../lib/catalog.js";
 import { appCopy, detailCopy, methodCardCopy, systemCardCopy, tagLabelsZh } from "../i18n.js";
 import { TAG_COLORS } from "./PaperCard.jsx";
+import { TAB_PATHS, filterPath, graphPath } from "../lib/navigation.js";
 
 const ABSTRACT_SUMMARY = "Abstract summary: ";
 // Long relation lists, such as the papers citing DGM, start collapsed to this many entries.
@@ -28,12 +29,6 @@ function formatAuthors(entry, lang) {
   return lang === "zh" ? `${names} 等（${total}）` : `${names}, et al. (${total})`;
 }
 
-// The share link points at the page generated for this entry at build time, whose preview card
-// shows the paper instead of the site's generic title (see vite.config.js).
-function shareUrl(entry) {
-  return `${window.location.origin}${import.meta.env.BASE_URL}p/${encodeURIComponent(entry.id)}/`;
-}
-
 function useCopied() {
   const [copied, setCopied] = useState(null);
   useEffect(() => {
@@ -52,17 +47,22 @@ function useCopied() {
   return [copied, copy];
 }
 
+// Each label links to its list filtered by that label.
 function profileRows(entry, lang) {
   if (entry.kind === "benchmark") {
     return localizeFilterDimensions(filterDimensions, lang).map((dimension) => {
       const labels = Object.fromEntries(dimension.options.map((option) => [option.value, option.label]));
-      return { id: dimension.id, label: dimension.label, values: entry.facets[dimension.id].map((value) => labels[value] ?? value) };
+      return {
+        id: dimension.id,
+        label: dimension.label,
+        values: entry.facets[dimension.id].map((value) => ({ value, label: labels[value] ?? value })),
+      };
     });
   }
   return localizeMethodDimensions(methodFilterDimensions, lang).map((dimension) => ({
     id: dimension.id,
     label: dimension.label,
-    values: entry.facets[dimension.id].map((value) => localizeMethodValue(dimension.id, value, lang)),
+    values: entry.facets[dimension.id].map((value) => ({ value, label: localizeMethodValue(dimension.id, value, lang) })),
   }));
 }
 
@@ -105,13 +105,13 @@ export default function PaperDetail({ collection, id, lang }) {
     setShowBibtex(false);
     setShowOriginal(false);
     if (!entry) return undefined;
-    document.title = `${entry.nickname}: ${entry.title} — Awesome RSI`;
+    document.title = `${entryTitle(entry)} — Awesome RSI`;
     return () => {
       document.title = appCopy[lang].pageTitle;
     };
   }, [entry, lang]);
 
-  const back = <a className="detail-back" href={`#${collection}`}>← {listLabel}</a>;
+  const back = <a className="detail-back" href={TAB_PATHS[collection === "methods" ? "methods" : "papers"]}>← {listLabel}</a>;
   if (!entry) {
     return (
       <article className="detail">
@@ -126,7 +126,7 @@ export default function PaperDetail({ collection, id, lang }) {
   const isSummary = entry.abstract?.startsWith(ABSTRACT_SUMMARY);
   const abstract = isSummary ? entry.abstract.slice(ABSTRACT_SUMMARY.length) : entry.abstract;
   const translated = lang === "zh" && entry.abstractZh;
-  const graphHref = entry.kind === "method" ? `#graph-methods/${entry.id}` : entry.kind === "benchmark" ? `#graph-benchmark/${entry.id}` : null;
+  const graphHref = entry.kind === "system" ? null : graphPath(entry.kind === "method" ? "methods" : "benchmark", entry.id);
   const status = entry.kind === "system"
     ? systemCardCopy[lang].researchPreview
     : entry.kind === "method" ? methodCardCopy[lang][entry.status === "accepted" ? "accepted" : "preprint"] : null;
@@ -157,7 +157,7 @@ export default function PaperDetail({ collection, id, lang }) {
               return <span className="tag" style={{ "--tag-ink": ink, "--tag-bg": bg }} key={tag}>{lang === "zh" ? tagLabelsZh[tag] ?? tag : tag}</span>;
             })
             : leafArtifacts(entry.facets.artifact).map((value) => (
-              <span className="tag" key={value}>{localizeMethodValue("artifact", value, lang)}</span>
+              <a className="tag" href={filterPath(collection, "artifact", value)} key={value}>{localizeMethodValue("artifact", value, lang)}</a>
             ))}
         </div>
         <div className="detail-actions">
@@ -166,9 +166,6 @@ export default function PaperDetail({ collection, id, lang }) {
           {entry.links?.map((link) => (
             <a className="detail-action" href={link.url} target="_blank" rel="noreferrer" key={link.url}>{lang === "zh" ? link.labelZh : link.label}</a>
           ))}
-          <button className="detail-action" type="button" onClick={() => copyText("link", shareUrl(entry))}>
-            {copied === "link" ? copy.copied : copy.copyLink}
-          </button>
           {record && (
             <button className="detail-action" type="button" aria-expanded={showBibtex} onClick={() => setShowBibtex((value) => !value)}>
               {copy.bibtex}
@@ -214,7 +211,11 @@ export default function PaperDetail({ collection, id, lang }) {
               {profileRows(entry, lang).map((row) => (
                 <div className="taxonomy-profile-row" key={row.id}>
                   <strong>{row.label}</strong>
-                  <div>{row.values.map((value) => <span key={value}>{value}</span>)}</div>
+                  <div>
+                    {row.values.map(({ value, label }) => (
+                      <a href={filterPath(collection, row.id, value)} key={value}>{label}</a>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
