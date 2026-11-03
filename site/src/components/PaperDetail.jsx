@@ -160,42 +160,38 @@ export default function PaperDetail({ collection, id, lang }) {
               <a className="tag" href={filterPath(collection, "artifact", value)} key={value}>{localizeMethodValue("artifact", value, lang)}</a>
             ))}
         </div>
-        {/* Links to the paper or project are pills, the first one dark; tools for working with it
-            follow as quiet text links. */}
+        {/* Every action is the same pill with an icon; the paper's main link is dark. Links that leave
+            the site end with an arrow. */}
         <div className="detail-actions">
-          {(entry.arxiv || entry.pdf) && (
-            <div className="detail-links">
-              {entry.arxiv && (
-                <a className="detail-link is-primary" href={entry.arxiv} target="_blank" rel="noreferrer">
-                  <WebPageIcon />
-                  <span>arXiv</span>
-                  <ExternalIcon />
-                </a>
-              )}
-              {entry.pdf && (
-                <a className={`detail-link${entry.arxiv ? "" : " is-primary"}`} href={entry.pdf} target="_blank" rel="noreferrer">
-                  <PaperIcon />
-                  <span>{entry.arxiv ? "PDF" : copy.paper}</span>
-                  <ExternalIcon />
-                </a>
-              )}
-            </div>
+          {entry.arxiv && (
+            <a className="detail-link is-primary" href={entry.arxiv} target="_blank" rel="noreferrer">
+              <WebPageIcon />
+              <span>arXiv</span>
+              <ExternalIcon />
+            </a>
+          )}
+          {entry.pdf && (
+            <a className={`detail-link${entry.arxiv ? "" : " is-primary"}`} href={entry.pdf} target="_blank" rel="noreferrer">
+              <PaperIcon />
+              <span>{entry.arxiv ? "PDF" : copy.paper}</span>
+              <ExternalIcon />
+            </a>
           )}
           {entry.links?.map((link, index) => (
-            <a className={index === 0 ? "detail-link is-primary" : "detail-tool"} href={link.url} target="_blank" rel="noreferrer" key={link.url}>
+            <a className={`detail-link${index === 0 ? " is-primary" : ""}`} href={link.url} target="_blank" rel="noreferrer" key={link.url}>
               {index === 0 ? <GitHubIcon /> : <LinkIcon />}
               <span>{lang === "zh" ? link.labelZh : link.label}</span>
-              {index === 0 && <ExternalIcon />}
+              <ExternalIcon />
             </a>
           ))}
           {record && (
-            <button className="detail-tool" type="button" aria-expanded={showBibtex} onClick={() => setShowBibtex((value) => !value)}>
+            <button className="detail-link" type="button" aria-expanded={showBibtex} onClick={() => setShowBibtex((value) => !value)}>
               <CiteIcon />
               <span>{copy.bibtex}</span>
             </button>
           )}
           {graphHref && (
-            <a className="detail-tool" href={graphHref}>
+            <a className="detail-link" href={graphHref}>
               <GraphIcon />
               <span>{copy.graph}</span>
             </a>
