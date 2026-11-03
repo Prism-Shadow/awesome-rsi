@@ -45,9 +45,10 @@ const motion = networkNodes.map((node) => ({
   heading: Math.random() * 2 * Math.PI,
   mass: 1 + node.radius / 8,
 }));
-// The motion runs this many steps (about 13 s) before the first frame, so it starts mid-drift
-// instead of every node setting off from rest at once.
-const WARMUP_STEPS = 400;
+// The motion runs this many steps (about 10 s) before the first frame, so it starts mid-drift
+// instead of every node setting off from rest at once. Fewer steps leave a visible outward
+// spread at the start; this takes about 20 ms.
+const WARMUP_STEPS = 300;
 const restLengths = networkLinks.map(([source, target]) => (
   Math.hypot(networkNodes[source].x - networkNodes[target].x, networkNodes[source].y - networkNodes[target].y)
 ));
