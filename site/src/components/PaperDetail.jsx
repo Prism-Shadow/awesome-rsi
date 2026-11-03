@@ -7,7 +7,7 @@ import { localizeFilterDimensions } from "../data/taxonomyZh.js";
 import { bibtex, citationNeighbors, entryHref, entryTitle, findEntry, similarEntries } from "../lib/catalog.js";
 import { appCopy, detailCopy, methodCardCopy, systemCardCopy, tagLabelsZh } from "../i18n.js";
 import { TAG_COLORS } from "../lib/tagColors.js";
-import { CiteIcon, DownloadIcon, ExternalIcon, GitHubIcon, GraphIcon, LinkIcon, PaperIcon } from "./Icons.jsx";
+import { CiteIcon, ExternalIcon, GitHubIcon, GraphIcon, LinkIcon, PaperIcon, WebPageIcon } from "./Icons.jsx";
 import { TAB_PATHS, filterPath, graphPath } from "../lib/navigation.js";
 
 const ABSTRACT_SUMMARY = "Abstract summary: ";
@@ -160,25 +160,29 @@ export default function PaperDetail({ collection, id, lang }) {
               <a className="tag" href={filterPath(collection, "artifact", value)} key={value}>{localizeMethodValue("artifact", value, lang)}</a>
             ))}
         </div>
-        {/* The paper itself leads as one pill; tools for working with it follow as quiet text links. */}
+        {/* Links to the paper or project are pills, the first one dark; tools for working with it
+            follow as quiet text links. */}
         <div className="detail-actions">
           {(entry.arxiv || entry.pdf) && (
-            <div className="detail-paper-links">
-              <a href={entry.arxiv ?? entry.pdf} target="_blank" rel="noreferrer">
-                <PaperIcon />
-                <span>{entry.arxiv ? "arXiv" : copy.paper}</span>
-                <ExternalIcon />
-              </a>
-              {entry.arxiv && entry.pdf && (
-                <a href={entry.pdf} target="_blank" rel="noreferrer">
-                  <DownloadIcon />
-                  <span>PDF</span>
+            <div className="detail-links">
+              {entry.arxiv && (
+                <a className="detail-link is-primary" href={entry.arxiv} target="_blank" rel="noreferrer">
+                  <WebPageIcon />
+                  <span>arXiv</span>
+                  <ExternalIcon />
+                </a>
+              )}
+              {entry.pdf && (
+                <a className={`detail-link${entry.arxiv ? "" : " is-primary"}`} href={entry.pdf} target="_blank" rel="noreferrer">
+                  <PaperIcon />
+                  <span>{entry.arxiv ? "PDF" : copy.paper}</span>
+                  <ExternalIcon />
                 </a>
               )}
             </div>
           )}
           {entry.links?.map((link, index) => (
-            <a className={index === 0 ? "detail-paper-links detail-project-link" : "detail-tool"} href={link.url} target="_blank" rel="noreferrer" key={link.url}>
+            <a className={index === 0 ? "detail-link is-primary" : "detail-tool"} href={link.url} target="_blank" rel="noreferrer" key={link.url}>
               {index === 0 ? <GitHubIcon /> : <LinkIcon />}
               <span>{lang === "zh" ? link.labelZh : link.label}</span>
               {index === 0 && <ExternalIcon />}

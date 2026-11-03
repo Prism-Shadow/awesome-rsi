@@ -2143,45 +2143,49 @@ html[lang="zh-Hans"] .method-status {
   margin-top: 1.5rem;
 }
 
-/* The paper's own links share one dark pill, split by a hairline. */
-.detail-paper-links {
-  display: inline-flex;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--btn-bg);
-  box-shadow: var(--shadow-sm);
+/* Links to the paper or project: the first is dark, the rest are tinted. */
+.detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.detail-paper-links a,
-a.detail-project-link {
+.detail-link {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   height: 2.5rem;
   padding: 0 1.05rem;
-  color: var(--btn-fg);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
   font: 600 0.875rem var(--sans);
   transition: background 0.15s ease;
 }
 
-.detail-paper-links a + a {
-  border-left: 1px solid color-mix(in srgb, var(--btn-fg) 22%, transparent);
-}
-
-.detail-paper-links a:hover,
-a.detail-project-link:hover {
-  background: color-mix(in srgb, var(--btn-fg) 12%, var(--btn-bg));
+.detail-link:hover {
+  background: color-mix(in srgb, var(--accent) 14%, var(--accent-soft));
   text-decoration: none;
 }
 
-.detail-paper-links svg,
+.detail-link.is-primary {
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  box-shadow: var(--shadow-sm);
+}
+
+.detail-link.is-primary:hover {
+  background: color-mix(in srgb, var(--btn-fg) 12%, var(--btn-bg));
+}
+
+.detail-link svg,
 .detail-tool svg {
   width: 1.05rem;
   height: 1.05rem;
   flex: none;
 }
 
-.detail-paper-links svg:last-child:not(:first-child) {
+.detail-link svg:last-child:not(:first-child) {
   width: 0.8rem;
   height: 0.8rem;
   opacity: 0.6;

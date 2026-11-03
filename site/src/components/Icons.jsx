@@ -7,21 +7,22 @@ function Icon({ children }) {
   );
 }
 
-// A document with a folded corner.
+// A browser window, for a paper's web page such as its arXiv abstract.
+export function WebPageIcon() {
+  return (
+    <Icon>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 9h18M6.5 6.5h.01M9 6.5h.01" />
+    </Icon>
+  );
+}
+
+// A document with a folded corner, for the paper's PDF.
 export function PaperIcon() {
   return (
     <Icon>
       <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
       <path d="M14 3v5h5M9 13h6M9 17h4" />
-    </Icon>
-  );
-}
-
-// An arrow into a tray.
-export function DownloadIcon() {
-  return (
-    <Icon>
-      <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14" />
     </Icon>
   );
 }
