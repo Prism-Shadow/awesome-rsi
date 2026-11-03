@@ -10,6 +10,7 @@ import { TAB_PATHS, postPath } from "../lib/navigation.js";
 import { recentlyAdded } from "../lib/recentlyAdded.js";
 import { homeCopy, localizedValue } from "../i18n.js";
 import { heroHubIds, heroNodes as networkNodes } from "virtual:hero-network";
+import { HERO_WIDTH } from "../lib/heroNetwork.js";
 import BrandMark from "./BrandMark.jsx";
 import SurveyFeature from "./SurveyFeature.jsx";
 
@@ -36,12 +37,18 @@ const HOME_PULL = 0.0011;
 const LINK_PULL = 0.0006;
 const WALL_PULL = 0.01;
 const DAMPING = 0.92;
-const motion = networkNodes.map((node, index) => ({
+// Random headings: ordered ones line up with the layout's own angular order and make the whole
+// network visibly contract before it drifts freely.
+const motion = networkNodes.map((node) => ({
   vx: 0,
   vy: 0,
-  heading: index * 2.3999632297,
+  heading: Math.random() * 2 * Math.PI,
   mass: 1 + node.radius / 8,
 }));
+// The motion runs this many steps (about 10 s) before the first frame, so it starts mid-drift
+// instead of every node setting off from rest at once. Fewer steps leave a visible outward
+// spread at the start; this takes about 20 ms.
+const WARMUP_STEPS = 300;
 const restLengths = networkLinks.map(([source, target]) => (
   Math.hypot(networkNodes[source].x - networkNodes[target].x, networkNodes[source].y - networkNodes[target].y)
 ));
@@ -64,6 +71,43 @@ networkNodes.forEach((node, index) => {
   positions[index * 2] = node.x;
   positions[index * 2 + 1] = node.y;
 });
+
+// One step of the motion. The hovered node, if any, holds still so its label stays readable.
+function step(focus) {
+  const forces = new Float32Array(networkNodes.length * 2);
+  networkNodes.forEach((node, index) => {
+    const state = motion[index];
+    const x = positions[index * 2];
+    const y = positions[index * 2 + 1];
+    state.heading += (Math.random() - 0.5) * TURN;
+    // Soft walls keep nodes near the edges inside the canvas.
+    forces[index * 2] = Math.cos(state.heading) * WANDER + (node.x - x) * HOME_PULL
+      + (Math.max(0, 24 - x) - Math.max(0, x - (HERO_WIDTH - 24))) * WALL_PULL;
+    forces[index * 2 + 1] = Math.sin(state.heading) * WANDER + (node.y - y) * HOME_PULL
+      + (Math.max(0, 40 - y) - Math.max(0, y - 560)) * WALL_PULL;
+  });
+  networkLinks.forEach(([source, target], index) => {
+    const dx = positions[target * 2] - positions[source * 2];
+    const dy = positions[target * 2 + 1] - positions[source * 2 + 1];
+    const distance = Math.max(Math.hypot(dx, dy), 1);
+    const pull = ((distance - restLengths[index]) * LINK_PULL) / distance;
+    forces[source * 2] += dx * pull;
+    forces[source * 2 + 1] += dy * pull;
+    forces[target * 2] -= dx * pull;
+    forces[target * 2 + 1] -= dy * pull;
+  });
+  networkNodes.forEach((_, index) => {
+    const state = motion[index];
+    const damping = index === focus ? 0.6 : DAMPING;
+    state.vx = (state.vx + forces[index * 2] / state.mass) * damping;
+    state.vy = (state.vy + forces[index * 2 + 1] / state.mass) * damping;
+    positions[index * 2] += state.vx;
+    positions[index * 2 + 1] += state.vy;
+  });
+}
+
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!REDUCED_MOTION) for (let count = 0; count < WARMUP_STEPS; count += 1) step(null);
 
 function labelY(index) {
   return positions[index * 2 + 1] + networkNodes[index].radius * 0.55 + 14;
@@ -114,47 +158,13 @@ function CitationNetwork() {
   const [focus, setFocus] = useState(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (REDUCED_MOTION) return undefined;
     const svg = svgRef.current;
     const sparks = svg.querySelectorAll(".network-pulses circle");
     const pulses = [...sparks].map(() => ({ link: -1, start: 0 }));
     let frame = 0;
     let lastStep = 0;
     let nextPulse = 0;
-
-    const step = () => {
-      const forces = new Float32Array(networkNodes.length * 2);
-      networkNodes.forEach((node, index) => {
-        const state = motion[index];
-        const x = positions[index * 2];
-        const y = positions[index * 2 + 1];
-        state.heading += (Math.random() - 0.5) * TURN;
-        // Soft walls keep nodes near the edges inside the canvas.
-        forces[index * 2] = Math.cos(state.heading) * WANDER + (node.x - x) * HOME_PULL
-          + (Math.max(0, 24 - x) - Math.max(0, x - 896)) * WALL_PULL;
-        forces[index * 2 + 1] = Math.sin(state.heading) * WANDER + (node.y - y) * HOME_PULL
-          + (Math.max(0, 40 - y) - Math.max(0, y - 560)) * WALL_PULL;
-      });
-      networkLinks.forEach(([source, target], index) => {
-        const dx = positions[target * 2] - positions[source * 2];
-        const dy = positions[target * 2 + 1] - positions[source * 2 + 1];
-        const distance = Math.max(Math.hypot(dx, dy), 1);
-        const pull = ((distance - restLengths[index]) * LINK_PULL) / distance;
-        forces[source * 2] += dx * pull;
-        forces[source * 2 + 1] += dy * pull;
-        forces[target * 2] -= dx * pull;
-        forces[target * 2 + 1] -= dy * pull;
-      });
-      networkNodes.forEach((_, index) => {
-        const state = motion[index];
-        // The hovered node holds still so its label stays readable.
-        const damping = index === focusRef.current ? 0.6 : DAMPING;
-        state.vx = (state.vx + forces[index * 2] / state.mass) * damping;
-        state.vy = (state.vy + forces[index * 2 + 1] / state.mass) * damping;
-        positions[index * 2] += state.vx;
-        positions[index * 2 + 1] += state.vy;
-      });
-    };
 
     // The motion is slow, so the network redraws at about 30 fps.
     const draw = () => {
@@ -203,7 +213,7 @@ function CitationNetwork() {
       frame = requestAnimationFrame(tick);
       if (time - lastStep < 32) return;
       lastStep = time;
-      step();
+      step(focusRef.current);
       draw();
       movePulses(time);
     };
@@ -255,7 +265,7 @@ function CitationNetwork() {
     <svg
       ref={svgRef}
       className={`home-hero-network${focus === null ? "" : " has-focus"}`}
-      viewBox="0 20 920 560"
+      viewBox={`0 20 ${HERO_WIDTH} 560`}
       preserveAspectRatio="xMaxYMid meet"
       aria-hidden="true"
       onPointerMove={handlePointerMove}
@@ -263,20 +273,20 @@ function CitationNetwork() {
     >
       {/* The network fades out toward the headline; the hovered node is drawn above the fade. */}
       <defs>
-        <linearGradient id="hero-network-fade-side" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="230" y2="0">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.2" />
-          <stop offset="0.55" stopColor="#fff" stopOpacity="0.65" />
+        <linearGradient id="hero-network-fade-side" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="0">
+          <stop offset="0" stopColor="#fff" stopOpacity="0.12" />
+          <stop offset="0.55" stopColor="#fff" stopOpacity="0.5" />
           <stop offset="1" stopColor="#fff" />
         </linearGradient>
         <linearGradient id="hero-network-fade-bottom" gradientUnits="userSpaceOnUse" x1="0" y1="412" x2="0" y2="580">
           <stop offset="0" stopColor="#fff" />
           <stop offset="1" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
-        <mask id="hero-network-mask-side" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1120" height="820">
-          <rect x="-100" y="-100" width="1120" height="820" fill="url(#hero-network-fade-side)" />
+        <mask id="hero-network-mask-side" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
+          <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-side)" />
         </mask>
-        <mask id="hero-network-mask-bottom" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1120" height="820">
-          <rect x="-100" y="-100" width="1120" height="820" fill="url(#hero-network-fade-bottom)" />
+        <mask id="hero-network-mask-bottom" maskUnits="userSpaceOnUse" x="-100" y="-100" width={HERO_WIDTH + 200} height="820">
+          <rect x="-100" y="-100" width={HERO_WIDTH + 200} height="820" fill="url(#hero-network-fade-bottom)" />
         </mask>
       </defs>
       <g className="network-graph">
