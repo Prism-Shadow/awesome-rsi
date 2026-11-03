@@ -6,6 +6,7 @@ import { methodCitationEdges } from "../data/methodCitationGraph.js";
 import { appCopy, graphCopy, graphExplorerCopy, methodGraphCopy } from "../i18n.js";
 import CitationGraph from "./CitationGraph.jsx";
 import PageHead from "./PageHead.jsx";
+import { detailHash, graphFocusFromHash } from "../lib/navigation.js";
 
 const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
   method.id,
@@ -14,7 +15,14 @@ const METHOD_INCOMING_COUNTS = Object.fromEntries(methods.map((method) => [
 const methodNodeWeight = (paper) => METHOD_INCOMING_COUNTS[paper.id] ?? 0;
 
 function graphKindFromHash() {
-  return window.location.hash === "#graph-benchmark" ? "benchmark" : "methods";
+  return window.location.hash.startsWith("#graph-benchmark") ? "benchmark" : "methods";
+}
+
+// #graph-methods/<id> and #graph-benchmark/<id> open the graph focused on one paper.
+function paperFromHash() {
+  const focus = graphFocusFromHash(window.location.hash);
+  if (!focus) return null;
+  return (focus.kind === "methods" ? methods : papers).find((paper) => paper.id === focus.id) ?? null;
 }
 
 function searchableText(paper) {
@@ -47,7 +55,11 @@ export default function GraphTab({ lang }) {
       setResultsOpen(false);
       setActiveResult(0);
       setFocusRequest(null);
+      const paper = paperFromHash();
+      if (paper) focusPaper(paper);
     };
+    const paper = paperFromHash();
+    if (paper) focusPaper(paper);
     window.addEventListener("hashchange", syncKindFromHash);
     return () => window.removeEventListener("hashchange", syncKindFromHash);
   }, []);
@@ -184,6 +196,7 @@ export default function GraphTab({ lang }) {
           edges={graphEdges}
           copyOverride={graphText}
           focusRequest={focusRequest}
+          detailHref={(paper) => detailHash(kind === "methods" ? "methods" : "benchmarks", paper.id)}
           spacious={kind === "methods"}
           nodeWeight={kind === "methods" ? methodNodeWeight : undefined}
           primaryMetric={kind === "methods" ? (paper) => paper.year : undefined}

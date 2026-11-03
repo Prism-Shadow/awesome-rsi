@@ -363,7 +363,7 @@ function RecentlyAdded({ copy, lang }) {
               <span>{copy.kinds[entry.kind]}</span>
               <time dateTime={entry.added}>{formatDate(entry.added, lang)}</time>
             </div>
-            <h3><a href={entry.url} target="_blank" rel="noreferrer">{entry.title}</a></h3>
+            <h3><a href={entry.href}>{entry.title}</a></h3>
             <p>{localizedValue(entry, "summary", lang)}</p>
           </li>
         ))}

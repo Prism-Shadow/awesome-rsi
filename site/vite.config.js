@@ -43,8 +43,33 @@ function heroNetwork() {
   };
 }
 
+// Emits the static share page for every detail page (see src/lib/sharePages.js), and serves the
+// same pages from the dev server so shared links can be tried locally.
+function sharePages() {
+  return {
+    name: "share-pages",
+    configureServer(server) {
+      server.middlewares.use(async (request, response, next) => {
+        const match = request.url?.match(/^\/awesome-rsi\/p\/([^/?#]+)\/?(?:index\.html)?(?:[?#].*)?$/);
+        if (!match) return next();
+        const { findShareEntry, sharePage } = await server.ssrLoadModule("/src/lib/sharePages.js");
+        const entry = findShareEntry(decodeURIComponent(match[1]));
+        if (!entry) return next();
+        response.setHeader("Content-Type", "text/html; charset=utf-8");
+        response.end(sharePage(entry));
+      });
+    },
+    async generateBundle() {
+      const { catalogEntries, sharePage, sharePath } = await import(new URL("./src/lib/sharePages.js", import.meta.url).href);
+      for (const entry of catalogEntries) {
+        this.emitFile({ type: "asset", fileName: sharePath(entry), source: sharePage(entry) });
+      }
+    },
+  };
+}
+
 // base must match the GitHub Pages project path: https://<org>.github.io/awesome-rsi/
 export default defineConfig({
   base: "/awesome-rsi/",
-  plugins: [react(), heroNetwork()],
+  plugins: [react(), heroNetwork(), sharePages()],
 });

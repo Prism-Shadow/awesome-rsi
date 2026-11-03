@@ -2266,6 +2266,241 @@ html[lang="zh-Hans"] .method-status {
   .methods-placeholder-index { min-height: 2rem; border-right: 0; border-bottom: 1px solid var(--line); }
 }
 
+/* ---------- detail pages ---------- */
+
+.detail {
+  padding: 2rem 0 4rem;
+}
+
+.detail-back {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.detail-back:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.detail-head {
+  padding: 1.5rem 0 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.detail-head h1 {
+  max-width: 52rem;
+  margin: 0.75rem 0 1rem;
+  color: var(--ink);
+  font: 500 2.4rem/1.15 var(--serif);
+  letter-spacing: -0.02em;
+}
+
+.detail-authors {
+  max-width: 52rem;
+  margin: 0 0 0.35rem;
+  color: var(--body);
+  line-height: 1.6;
+}
+
+.detail-institutions {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+}
+
+.detail-action {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0 0.95rem;
+  border: 1px solid var(--line-2);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 0.875rem var(--sans);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.detail-action:hover {
+  border-color: var(--ink);
+  text-decoration: none;
+}
+
+.detail-action.is-primary {
+  border-color: var(--btn-bg);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+}
+
+.detail-bibtex {
+  position: relative;
+  max-width: 52rem;
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.58rem;
+  background: var(--surface-2);
+}
+
+.detail-bibtex pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  color: var(--body);
+  font: 500 0.78rem/1.6 var(--mono);
+}
+
+.detail-bibtex button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--line-2);
+  border-radius: 0.4rem;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 0.75rem var(--sans);
+  cursor: pointer;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: 3.5rem;
+  padding-top: 2rem;
+}
+
+.detail-main section + section {
+  margin-top: 2.25rem;
+}
+
+.detail-main h2,
+.detail-related h2 {
+  margin: 0 0 0.8rem;
+  color: var(--ink);
+  font: 500 1.3rem/1.3 var(--serif);
+}
+
+.detail-summary {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.detail-abstract {
+  margin: 0 0 0.6rem;
+  color: var(--body);
+  line-height: 1.8;
+}
+
+.detail-main .taxonomy-profile {
+  margin-top: 0;
+}
+
+.detail-related + .detail-related {
+  margin-top: 2rem;
+}
+
+.detail-related h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.detail-related h2 span {
+  color: var(--faint);
+  font: 600 0.8rem var(--mono);
+}
+
+.detail-related ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.detail-related li {
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-related a {
+  display: block;
+  padding: 0.7rem 0;
+  color: inherit;
+}
+
+.detail-related a:hover {
+  text-decoration: none;
+}
+
+.detail-related b {
+  display: block;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.detail-related a span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--body);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.detail-related a:hover span {
+  color: var(--ink);
+}
+
+.detail-related .abstract-toggle {
+  margin-top: 0.7rem;
+}
+
+.detail-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .detail-head h1 {
+    font-size: 1.85rem;
+  }
+}
+
 /* ---------- home ---------- */
 
 .home-hero {

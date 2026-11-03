@@ -33,6 +33,7 @@ test("the feed lists the newest additions first, grouped by day", () => {
 test("feed entries link to the paper and carry the tags shown on the home page", () => {
   for (const entry of collectionEntries) {
     assert.equal(new URL(entry.url).protocol, "https:", entry.id);
+    assert.ok(entry.href === `#${entry.kind === "benchmark" ? "benchmarks" : "methods"}/${entry.id}`, entry.id);
     if (entry.kind === "benchmark") assert.ok(entry.mode.length > 0, entry.id);
     else assert.ok(entry.artifact.length > 0, entry.id);
   }

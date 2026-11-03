@@ -3,6 +3,7 @@ import { methodFilterDimensions } from "../data/methodTaxonomy.js";
 import { localizeMethodDimensions, localizeMethodValue } from "../data/methodTaxonomyZh.js";
 import { leafArtifacts } from "../data/artifactTaxonomy.js";
 import { systemCardCopy } from "../i18n.js";
+import { detailHash } from "../lib/navigation.js";
 
 function formatDate(iso, lang) {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString(lang === "zh" ? "zh-CN" : "en-US", {
@@ -30,7 +31,7 @@ export default function SystemCard({ system, lang }) {
         </span>
       </div>
       <h3 className="paper-title">
-        <a href={system.links[0].url} target="_blank" rel="noreferrer">{system.title}</a>
+        <a href={detailHash("methods", system.id)}>{system.title}</a>
       </h3>
       <p className="paper-authors system-maintainers">
         <strong>{copy.maintainers}</strong> {system.maintainers}

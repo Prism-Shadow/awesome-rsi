@@ -4,9 +4,10 @@ import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
 import MethodsTab from "./components/MethodsTab.jsx";
 import GraphTab from "./components/GraphTab.jsx";
+import PaperDetail from "./components/PaperDetail.jsx";
 import BrandMark from "./components/BrandMark.jsx";
 import { appCopy, getInitialLanguage } from "./i18n.js";
-import { NAV_TABS, TAB_HASHES, tabFromHash } from "./lib/navigation.js";
+import { NAV_TABS, TAB_HASHES, detailFromHash, tabFromHash } from "./lib/navigation.js";
 
 const REPO_URL = "https://github.com/Prism-Shadow/awesome-rsi";
 
@@ -57,34 +58,53 @@ function GitHubIcon() {
 }
 
 export default function App() {
-  const [tab, setTab] = useState(() => tabFromHash(window.location.hash));
+  const [hash, setHash] = useState(() => window.location.hash);
+  const tab = tabFromHash(hash);
+  const detail = detailFromHash(hash);
   const [theme, toggleTheme] = useTheme();
   const [lang, setLang] = useLanguage();
   const copy = appCopy[lang];
-  const previousTab = useRef(tab);
+  const previousHash = useRef(hash);
+  // Where each list page was scrolled to, so returning from a detail page lands in the same place.
+  const listScroll = useRef({});
+  const onList = useRef(!detail);
+  onList.current = !detail;
 
+  // Detail pages title the tab with their paper instead.
+  const onDetail = Boolean(detail);
   useEffect(() => {
-    document.title = copy.pageTitle;
+    if (!onDetail) document.title = copy.pageTitle;
     document.querySelector('meta[name="description"]')?.setAttribute("content", copy.pageDescription);
-  }, [copy]);
+  }, [copy, onDetail]);
 
   useEffect(() => {
-    const syncTab = () => setTab(tabFromHash(window.location.hash));
-    window.addEventListener("hashchange", syncTab);
-    window.addEventListener("popstate", syncTab);
+    const syncHash = () => setHash(window.location.hash);
+    const rememberScroll = () => {
+      if (onList.current) listScroll.current[tabFromHash(window.location.hash)] = window.scrollY;
+    };
+    window.addEventListener("hashchange", syncHash);
+    window.addEventListener("popstate", syncHash);
+    window.addEventListener("scroll", rememberScroll, { passive: true });
     return () => {
-      window.removeEventListener("hashchange", syncTab);
-      window.removeEventListener("popstate", syncTab);
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("popstate", syncHash);
+      window.removeEventListener("scroll", rememberScroll);
     };
   }, []);
 
-  // A hash that names a section (#recently-added, #blog) scrolls to it; other page changes start at the top.
+  // A hash that names a section (#recently-added, #blog) scrolls to it. Detail pages start at the top,
+  // and leaving one returns its list to where it was; other page changes start at the top.
   useEffect(() => {
-    const target = document.getElementById(window.location.hash.slice(1));
+    const before = previousHash.current;
+    previousHash.current = hash;
+    const target = document.getElementById(hash.slice(1));
+    const current = tabFromHash(hash);
     if (target) target.scrollIntoView();
-    else if (previousTab.current !== tab) window.scrollTo(0, 0);
-    previousTab.current = tab;
-  }, [tab]);
+    else if (before === hash) return;
+    else if (detailFromHash(hash)) window.scrollTo(0, 0);
+    else if (detailFromHash(before) && tabFromHash(before) === current) window.scrollTo(0, listScroll.current[current] ?? 0);
+    else if (tabFromHash(before) !== current) window.scrollTo(0, 0);
+  }, [hash]);
 
   const hrefFor = (target) => TAB_HASHES[target] || import.meta.env.BASE_URL;
   const selectTab = (event, nextTab) => {
@@ -93,7 +113,6 @@ export default function App() {
     const nextUrl = TAB_HASHES[nextTab] || `${window.location.pathname}${window.location.search}`;
     window.history.pushState(null, "", nextUrl);
     window.dispatchEvent(new Event("hashchange"));
-    setTab(nextTab);
   };
 
   return (
@@ -147,13 +166,15 @@ export default function App() {
           <HomePage lang={lang} />
         ) : (
           <div className="container page-body">
-            {tab === "blog"
-              ? <BlogTab lang={lang} />
-              : tab === "papers"
-                ? <PapersTab lang={lang} />
-                : tab === "methods"
-                  ? <MethodsTab lang={lang} />
-                  : <GraphTab lang={lang} />}
+            {tab === "blog" ? <BlogTab lang={lang} /> : tab === "graph" ? <GraphTab lang={lang} /> : (
+              <>
+                {/* The list stays mounted under a detail page, so its filters survive the round trip. */}
+                <div hidden={Boolean(detail)}>
+                  {tab === "papers" ? <PapersTab lang={lang} /> : <MethodsTab lang={lang} />}
+                </div>
+                {detail && <PaperDetail collection={detail.collection} id={detail.id} lang={lang} />}
+              </>
+            )}
           </div>
         )}
       </main>
