@@ -98,6 +98,14 @@ test('Harness² and Skill∞ have original abstracts and are represented in the 
   }
 });
 
+test('SKILL-KD has its original abstract and is represented in the citation graph', () => {
+  assert.ok(methods.some((method) => method.id === '2607.28048'));
+  assert.ok(!methodAbstracts['2607.28048'].startsWith('Abstract summary:'));
+  assert.ok(methodCitationEdges.some(({ source }) => source === '2607.28048'));
+  // §3.2: each student failure triggers an update that is committed before the next instance.
+  assert.deepEqual(methodTaxonomy['2607.28048'].frequency, ['Event']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
