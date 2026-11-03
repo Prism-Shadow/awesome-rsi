@@ -2293,23 +2293,26 @@ html[lang="zh-Hans"] .method-status {
   right: 16px;
   width: 64%;
   height: 92%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 12%, rgba(0, 0, 0, 0.55) 30%, #000 50%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 12%, rgba(0, 0, 0, 0.55) 30%, #000 50%);
 }
 
-.home-hero-network line {
+.home-hero-network .network-graph {
+  mask: url(#hero-network-mask-side);
+}
+
+.home-hero-network .network-links {
+  fill: none;
   stroke: var(--accent-2);
   stroke-opacity: 0.16;
 }
 
-.home-hero-network circle {
+.home-hero-network .network-nodes {
   fill: var(--accent-2);
   fill-opacity: 0.2;
   stroke: var(--accent-2);
   stroke-opacity: 0.5;
 }
 
-.home-hero-network circle.is-hub {
+.home-hero-network .network-nodes.is-hub {
   fill: var(--accent);
   fill-opacity: 0.85;
   stroke: var(--accent);
@@ -2325,6 +2328,52 @@ html[lang="zh-Hans"] .method-status {
   stroke-linejoin: round;
 }
 
+.home-hero-network path,
+.home-hero-network text {
+  transition: fill-opacity 0.2s ease, stroke-opacity 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hovering a node brings out its citations and fades the rest. */
+.home-hero-network.has-focus .network-links {
+  stroke-opacity: 0.05;
+}
+
+.home-hero-network.has-focus .network-links.is-near {
+  stroke: var(--accent);
+  stroke-opacity: 0.55;
+}
+
+.home-hero-network.has-focus .network-nodes {
+  fill-opacity: 0.08;
+  stroke-opacity: 0.18;
+}
+
+.home-hero-network.has-focus .network-nodes.is-near {
+  fill-opacity: 0.35;
+  stroke-opacity: 0.9;
+}
+
+.home-hero-network.has-focus .network-labels text {
+  opacity: 0.3;
+}
+
+.home-hero-network.has-focus .network-labels text.is-near {
+  opacity: 1;
+}
+
+.home-hero-network .network-focus circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.home-hero-network .network-focus text {
+  fill: var(--ink);
+}
+
+.home-hero-network .network-pulses circle {
+  fill: var(--accent);
+}
+
 /* A fixed minimum height keeps the network the same size whatever the headline length. */
 .home-hero {
   display: grid;
@@ -2332,9 +2381,17 @@ html[lang="zh-Hans"] .method-status {
   min-height: 34rem;
 }
 
+/* The copy column overlays the network, so only the text and links take the pointer. */
 .home-hero .container {
   position: relative;
   width: 100%;
+  pointer-events: none;
+}
+
+.home-hero h1,
+.home-lede,
+.home-stats a {
+  pointer-events: auto;
 }
 
 .home-hero-copy {
@@ -2343,6 +2400,7 @@ html[lang="zh-Hans"] .method-status {
 }
 
 .home-hero h1 {
+  width: fit-content;
   margin: 0 0 1.4rem;
   color: var(--ink);
   font: 500 4.75rem/1.03 var(--serif);
@@ -2354,7 +2412,9 @@ html[lang="zh-Hans"] .method-status {
   white-space: nowrap;
 }
 
+/* The title takes two lines so it covers less of the network. */
 .home-hero h1 em {
+  display: block;
   color: var(--accent);
 }
 
@@ -2370,6 +2430,7 @@ html[lang="zh-Hans"] .home-hero h1 em {
 }
 
 .home-lede {
+  width: fit-content;
   max-width: 33rem;
   margin: 0;
   font-size: 1.125rem;
@@ -2657,8 +2718,10 @@ html[lang="zh-Hans"] .entry-list--posts h3 {
     right: auto;
     width: 100%;
     height: auto;
-    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
-    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  }
+
+  .home-hero-network .network-graph {
+    mask: url(#hero-network-mask-bottom);
   }
 
   .home-hero-network text {
