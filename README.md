@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**117 method papers · 33 benchmark papers · 3 systems**
+**118 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -417,6 +417,7 @@ Other artifacts evolve, such as data strategies, experiment configurations, or t
 | :--- | :--- |
 | [Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement](https://arxiv.org/abs/2609.01481) | arXiv preprint |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
+| [AutoSR: Automatic Symbolic Regression by Searching Research States](https://arxiv.org/abs/2608.16876) | arXiv preprint |
 
 ## Benchmarks
 

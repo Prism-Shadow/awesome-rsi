@@ -117,4 +117,6 @@ export const methodInstitutions = {
   "2608.23552": ["Princeton University", "Prime Intellect", "Massachusetts Institute of Technology"],
   "2608.27454": ["Google Research", "Virginia Tech"],
   "2609.00829": ["ICT AI Competence Center, Huawei Technologies"],
+  "2608.16876": ["University of Maryland", "The Chinese University of Hong Kong"],
+
 };

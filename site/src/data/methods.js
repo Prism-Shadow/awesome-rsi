@@ -1295,6 +1295,17 @@ export const methods = [
     summary: "Compares failed runs with verified reference trajectories to localize root causes, then accepts harness edits only after quality and recent-performance gates.",
     summaryZh: "把失败轨迹与已验证的参考轨迹对照以定位根因，再让 Harness 修改依次通过质量检查和近期性能门槛。",
   },
+  {
+    id: "2608.16876",
+    nickname: "AutoSR",
+    title: "AutoSR: Automatic Symbolic Regression by Searching Research States",
+    authors: ["Kejia Zhang", "Youran Sun", "Xingyu Ren"], authorCount: 5,
+    published: "2026-08-17", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-04",
+    summary: "Searches research states that keep candidate equations with motives, probes, failed attempts, and independent review. Recovers three cp3-bench equations that 12 published symbolic-regression systems missed.",
+    summaryZh: "多 agent 符号回归系统，搜索保留动机、探针、失败尝试与审查的 Research State；精确恢复 12 个已发表系统都解不出的 3 道 cp3-bench 题，并在 autosr.app 开放试用。",
+  },
+
 ].map((method) => ({
   ...method,
   arxiv: method.arxiv === null ? null : (method.arxiv ?? `https://arxiv.org/abs/${method.id}`),
