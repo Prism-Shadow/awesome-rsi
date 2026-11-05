@@ -1,18 +1,6 @@
-/* Until Inter arrives from Google Fonts, Arial (or a metric twin) stands in, scaled to Inter's width and
-   line metrics, so the header and text keep their size when Inter swaps in. size-adjust is tuned for
-   the medium-weight nav; the overrides are Inter's ascent and descent (0.969 and 0.241 em) over it. */
-@font-face {
-  font-family: "Inter Fallback";
-  src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Arimo"), local("Liberation Sans");
-  size-adjust: 106%;
-  ascent-override: 91.39%;
-  descent-override: 22.75%;
-  line-gap-override: 0%;
-}
-
 :root {
   /* Latin text always renders in Inter or Newsreader; only Chinese characters fall through to Noto. */
-  --sans: "Inter", "Inter Fallback", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: "Newsreader", "Noto Serif SC", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
