@@ -124,6 +124,14 @@ test('VideoHarness-SRSI and VideoHarness-RSI have original abstracts and are lin
   assert.ok(methodCitationEdges.some(({ source, target }) => source === '2610.19424' && target === '2608.24302'));
 });
 
+test('AutoSR has its original abstract and labels its per-problem research states', () => {
+  assert.ok(!methodAbstracts['2608.16876'].startsWith('Abstract summary:'));
+  assert.ok(!/\\textbf|--/.test(methodAbstracts['2608.16876']));
+  // §3.2: children see only their ancestors' records, and every cycle adds one state.
+  assert.deepEqual(methodTaxonomy['2608.16876'].topology, ['Tree']);
+  assert.deepEqual(methodTaxonomy['2608.16876'].frequency, ['Trajectory']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {

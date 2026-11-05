@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2608.16876",
+    nickname: "AutoSR",
+    title: "AutoSR: Automatic Symbolic Regression by Searching Research States",
+    authors: ["Kejia Zhang", "Youran Sun", "Xinyu Ren", "Chugang Yi", "Haizhao Yang"], authorCount: 5,
+    published: "2026-08-17", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-04",
+    summary: "Searches a symbolic-regression problem as a tree of research states, each keeping a candidate equation with its reasoning, computational evidence, failed tests, and an independent review that descendants inherit, and allocates proposer-reviewer cycles with progressive-widening MCTS.",
+    summaryZh: "把符号回归问题当作一棵研究状态树来搜索：每个状态保存候选方程及其推理、计算证据、失败尝试和独立评审，子节点会继承这些记录；用渐进展宽的蒙特卡洛树搜索分配提议–评审循环。",
+  },
+  {
     id: "2610.19424",
     nickname: "VideoHarness-SRSI",
     title: "VideoHarness-SRSI: Structured Recursive Self-Improvement for Video Understanding Harness",
@@ -1315,17 +1325,6 @@ export const methods = [
     summary: "Compares failed runs with verified reference trajectories to localize root causes, then accepts harness edits only after quality and recent-performance gates.",
     summaryZh: "把失败轨迹与已验证的参考轨迹对照以定位根因，再让 Harness 修改依次通过质量检查和近期性能门槛。",
   },
-  {
-    id: "2608.16876",
-    nickname: "AutoSR",
-    title: "AutoSR: Automatic Symbolic Regression by Searching Research States",
-    authors: ["Kejia Zhang", "Youran Sun", "Xingyu Ren"], authorCount: 5,
-    published: "2026-08-17", year: 2026, venue: "arXiv preprint", status: "preprint",
-    added: "2026-11-04",
-    summary: "Searches research states that keep candidate equations with motives, probes, failed attempts, and independent review. Recovers three cp3-bench equations that 12 published symbolic-regression systems missed.",
-    summaryZh: "多 agent 符号回归系统，搜索保留动机、探针、失败尝试与审查的 Research State；精确恢复 12 个已发表系统都解不出的 3 道 cp3-bench 题，并在 autosr.app 开放试用。",
-  },
-
 ].map((method) => ({
   ...method,
   arxiv: method.arxiv === null ? null : (method.arxiv ?? `https://arxiv.org/abs/${method.id}`),

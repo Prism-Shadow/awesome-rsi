@@ -116,6 +116,9 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3.2–3.4: each proposer-reviewer cycle adds one research state, and children read only their ancestors' records (branch memory), so the topology is a tree.
+  // The reviewer's score on the current problem steers PW-MCTS; requirement checks gate which candidates can be presented. Included as experience-driven improvement on one long-running task.
+  "2608.16876": { artifact: ["Non-parametric", "Memory", "Other artifact"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Instance result"], updater: ["Joint"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §§3–4 and Appendix I (arXiv v2): a separate coding proposer evolves executable harnesses around a frozen VLM; under information isolation it sees only scores and content-free traces.
   // Proposals draw on the archive, and Stage III composes edits from separate branches. On-axis tests gate branch edits; the validation-best harness is deployed on a held-out split.
   "2610.19424": { artifact: ["Non-parametric", "Harness code"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
@@ -304,6 +307,4 @@ export const methodTaxonomy = {
   "2608.23552": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Instance result"], updater: ["Self"], source: ["Environment", "Executable verifier"], feedback: ["Non-score", "Other"], frequency: ["Step", "Event", "Trajectory"], scope: ["General", "Specialized"] },
   "2608.27454": { artifact: ["Non-parametric", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   "2609.00829": { artifact: ["Non-parametric", "Harness code", "Context", "Skill"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
-  "2608.16876": { artifact: ["Non-parametric", "Other artifact"], mode: ["Offline"], topology: ["Tree"], selection: ["Benchmark score", "Artifact validation"], updater: ["Joint"], source: ["Train/dev set", "Executable verifier", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
-
 };
