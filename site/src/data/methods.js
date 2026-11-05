@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2610.19424",
+    nickname: "VideoHarness-SRSI",
+    title: "VideoHarness-SRSI: Structured Recursive Self-Improvement for Video Understanding Harness",
+    authors: ["Zihao Lin", "Haoyu Dong", "Haobo Xu", "Chi-Chih Chang", "Xuying Ning", "Yinglong Xia", "Shuang Yang", "Zhuokai Zhao", "Xinying Song", "Dongfang Liu", "Lifu Huang", "Yang Song", "Qifan Wang"], authorCount: 13,
+    published: "2026-10-14", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-04",
+    summary: "Evolves executable video-understanding harnesses around a frozen vision-language model with a coding proposer that sees only scores and content-free traces, and searches in three stages: instrumented warm-up, isolated per-mechanism branches, and factorial composition.",
+    summaryZh: "围绕冻结的视觉语言模型演化可执行的视频理解 Harness：编码提议者只能看到分数和不含题目内容的执行轨迹，并分三阶段搜索，依次是带对照实验的预热、按机制隔离的分支演化和因子化组合。",
+  },
+  {
+    id: "2608.24302",
+    nickname: "VideoHarness-RSI",
+    title: "VideoHarness-RSI: Recursive Harness Self-Improvement for Long-Video Understanding with Frozen Vision-Language Models",
+    authors: ["Guoyang Xu", "Hao Chen"], authorCount: 2,
+    published: "2026-08-25", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-04",
+    summary: "Recursively searches executable context-construction programs that decide what a frozen vision-language model sees of a long video, keeping a candidate only when it strictly raises development accuracy.",
+    summaryZh: "递归搜索可执行的上下文构建程序，决定冻结的视觉语言模型从长视频中看到哪些内容；候选只有在开发集准确率严格提升时才会被保留。",
+  },
+  {
     id: "2605.30105",
     nickname: "EvoRepair",
     title: "Learning from Repair Experience: Self-Evolving Agents for Automated Vulnerability Repair",

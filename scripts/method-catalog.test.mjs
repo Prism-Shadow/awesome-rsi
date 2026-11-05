@@ -114,6 +114,16 @@ test('EvoRepair has its original abstract and is represented in the citation gra
   assert.ok(methodTaxonomy['2605.30105'].source.includes('Benchmark'));
 });
 
+test('VideoHarness-SRSI and VideoHarness-RSI have original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2610.19424', '2608.24302']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+  // SRSI names VideoHarness-RSI as its closest, concurrent work.
+  assert.ok(methodCitationEdges.some(({ source, target }) => source === '2610.19424' && target === '2608.24302'));
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
