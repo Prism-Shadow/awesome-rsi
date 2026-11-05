@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import HomePage from "./components/HomePage.jsx";
 import BlogTab from "./components/BlogTab.jsx";
 import PapersTab from "./components/PapersTab.jsx";
@@ -52,6 +52,10 @@ function ThemeIcon({ theme }) {
   );
 }
 
+
+// The app restores scroll itself (below), so the browser's own restoration on back and forward does not
+// move the page a second time.
+window.history.scrollRestoration = "manual";
 
 function readLocation() {
   const { pathname, search, hash } = window.location;
@@ -113,8 +117,9 @@ export default function App() {
 
   // A hash that names a home section (#recently-added, #blog) scrolls to it. Detail pages and lists
   // opened with a filter start at the top, leaving a detail page returns its list to where it was,
-  // and other page changes start at the top.
-  useEffect(() => {
+  // and other page changes start at the top. This runs before the browser paints, so the new page
+  // never shows for a frame at the old scroll position.
+  useLayoutEffect(() => {
     const before = routeFromPath(previousPath.current);
     const samePage = previousPath.current === location.pathname;
     previousPath.current = location.pathname;

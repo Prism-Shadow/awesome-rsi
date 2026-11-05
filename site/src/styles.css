@@ -80,8 +80,11 @@
   box-sizing: border-box;
 }
 
+/* Always reserve the scrollbar's space, so short pages (a filtered list, the 404 page) do not shift
+   the centered layout sideways where scrollbars take up room. */
 html {
   min-height: 100%;
+  scrollbar-gutter: stable;
 }
 
 body {
