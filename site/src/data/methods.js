@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2608.16876",
+    nickname: "AutoSR",
+    title: "AutoSR: Automatic Symbolic Regression by Searching Research States",
+    authors: ["Kejia Zhang", "Youran Sun", "Xinyu Ren", "Chugang Yi", "Haizhao Yang"], authorCount: 5,
+    published: "2026-08-17", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-04",
+    summary: "Searches a symbolic-regression problem as a tree of research states, each keeping a candidate equation with its reasoning, computational evidence, failed tests, and an independent review that descendants inherit, and allocates proposer-reviewer cycles with progressive-widening MCTS.",
+    summaryZh: "把符号回归问题当作一棵研究状态树来搜索：每个状态保存候选方程及其推理、计算证据、失败尝试和独立评审，子节点会继承这些记录；用渐进展宽的蒙特卡洛树搜索分配提议–评审循环。",
+  },
+  {
     id: "2610.19424",
     nickname: "VideoHarness-SRSI",
     title: "VideoHarness-SRSI: Structured Recursive Self-Improvement for Video Understanding Harness",
