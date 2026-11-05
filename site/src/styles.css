@@ -1657,6 +1657,13 @@ html[lang="zh-Hans"] .blog-article h1 {
   background: var(--surface);
 }
 
+.inspector-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
 .inspector-index {
   color: var(--accent);
   font-family: var(--mono);
