@@ -116,6 +116,12 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§3–4 and Appendix I (arXiv v2): a separate coding proposer evolves executable harnesses around a frozen VLM; under information isolation it sees only scores and content-free traces.
+  // Proposals draw on the archive, and Stage III composes edits from separate branches. On-axis tests gate branch edits; the validation-best harness is deployed on a held-out split.
+  "2610.19424": { artifact: ["Non-parametric", "Harness code"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  // §§3.2–4.3: a separate proposer edits executable context constructors around a frozen VLM, reading an archive of code, scores, and traces and possibly composing archived code.
+  // Candidates are smoke-tested, and the frontier changes only on a strict development-accuracy gain; the held-out split never enters search.
+  "2608.24302": { artifact: ["Non-parametric", "Harness code"], mode: ["Offline"], topology: ["Graph"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // §§III-C1, III-C3–4: retrieved experience from multiple vulnerabilities informs later trajectories; a separate extractor/judge writes and scores memory.
   // Quality scores gate replacement or fusion of bank entries. Executable benchmark feedback evaluates repairs; the outer updater and model weights remain fixed.
   // §§III-C2 and IV-D: the agent runs the benchmark's own PoC and unit-test scripts while repairing, and the official oracle decides which vulnerabilities are retried, so Benchmark is a source.
