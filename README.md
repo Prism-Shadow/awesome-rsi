@@ -263,6 +263,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory](https://arxiv.org/abs/2504.07952) | EACL 2026 |
 | [Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement](https://arxiv.org/abs/2410.04444) | ACL 2025 |
 | [Cradle: Empowering Foundation Agents Towards General Computer Control](https://arxiv.org/abs/2403.03186) | ICML 2025 |
+| [SpecForge: Recursive Self-Improvement for Coding Agents via Behavioral Specifications]([https://arxiv.org/abs/2403.03186](https://arxiv.org/pdf/2610.15708)) | NeurIPS 2026 |
 
 ### Memory
 
