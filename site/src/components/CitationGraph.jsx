@@ -137,7 +137,8 @@ export default function CitationGraph({
     return () => svg.removeEventListener("wheel", handleWheel);
   }, [geometry]);
 
-  const selectedPaper = fullPaperById.get(selectedId) ?? papers[0];
+  // Nothing is selected until the reader picks a node, so the inspector never features an arbitrary paper.
+  const selectedPaper = fullPaperById.get(selectedId) ?? null;
   const activeId = hoveredId ?? selectedId;
   const incoming = selectedPaper ? visibleEdges.filter((edge) => edge.target === selectedPaper.id) : [];
   const outgoing = selectedPaper ? visibleEdges.filter((edge) => edge.source === selectedPaper.id) : [];
@@ -328,7 +329,7 @@ export default function CitationGraph({
         </div>
 
         <aside className="graph-inspector" aria-live="polite">
-          {selectedPaper && (
+          {selectedPaper ? (
             <>
               {selectedPaper.arxiv && <span className="inspector-index">arXiv:{selectedPaper.id}</span>}
               <h3>{selectedPaper.nickname}</h3>
@@ -343,6 +344,8 @@ export default function CitationGraph({
               {detailHref && <a className="inspector-link" href={detailHref(selectedPaper)}>{copy.viewDetails}</a>}
               <a className="inspector-link" href={selectedPaper.arxiv || selectedPaper.pdf} target="_blank" rel="noreferrer">{selectedPaper.arxiv ? copy.openArxiv : copy.openPaper}</a>
             </>
+          ) : (
+            <p className="inspector-empty">{copy.selectHint}</p>
           )}
         </aside>
       </div>
