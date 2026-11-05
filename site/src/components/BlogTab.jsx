@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import { blogPosts } from "../data/blogPosts.js";
@@ -294,8 +294,8 @@ export default function BlogTab({ lang, postId }) {
   const copy = blogCopy[lang];
   const activePost = posts.find((post) => post.id === postId);
 
-  // Links between posts change only the article, so start each one at the top.
-  useEffect(() => {
+  // Links between posts change only the article, so start each one at the top, before the first paint.
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [postId]);
 
