@@ -1746,9 +1746,14 @@ html[lang="zh-Hans"] .blog-article h1 {
 .relation-list button span { font-size: 0.69rem; font-weight: 700; }
 .relation-list button small { flex-shrink: 0; color: var(--muted); font-size: 0.52rem; }
 
-.inspector-link {
+.inspector-links {
   margin-top: 1.2rem;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+}
+
+.inspector-links a {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 700;
