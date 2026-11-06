@@ -116,6 +116,10 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§2–3 and Appendices C.3 and F: the backbone regenerates a module from its specifications, and separate diagnosis and prescription prompts revise one entity's specification from failing tests.
+  // The same model fills both roles, but the revision is a separate step, so the updater is Teacher, as for ACE. Each child revises one parent state; the shared bandit only schedules entities, so the topology is a tree.
+  // Appendices E and J: children enter a Pareto archive over per-entity pass rates on LLM-generated tests validated against the reference code; hidden ground-truth tests are used only for final evaluation.
+  "2610.15708": { artifact: ["Non-parametric", "Context"], mode: ["Offline"], topology: ["Tree"], selection: ["Benchmark score"], updater: ["Teacher"], source: ["Executable verifier", "LLM-generated tests"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Ground truth", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §§2.1–2.4 and Appendix C: separate analysis and evolve agents revise the group agent's memory representation, tools, middleware, prompts, and skills on a fixed 30% evolution split.
   // The three roles share a base model, but the update is formed outside the group agent, so the updater is Teacher. A candidate replaces the harness only after structural checks.
   // The checkpoint is chosen by evolution-split pass@1 and frozen for the held-out split and GroupMemBench. Low-confidence answers add the agent's self-reflection as evidence.
