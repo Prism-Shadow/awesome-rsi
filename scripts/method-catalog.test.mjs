@@ -158,6 +158,17 @@ test('Dream-RSI is listed under its arXiv number with its arXiv abstract and bib
   }
 });
 
+test('SpecForge has its original abstract and labels its generated-test search', () => {
+  assert.ok(!methodAbstracts['2610.15708'].startsWith('Abstract summary:'));
+  for (const target of ['2507.19457', '2510.04618', '2505.22954']) {
+    assert.ok(methodCitationEdges.some((edge) => edge.source === '2610.15708' && edge.target === target), target);
+  }
+  // Appendix J: search runs on LLM-generated tests that are executed against the reference code.
+  assert.ok(methodTaxonomy['2610.15708'].source.includes('LLM-generated tests'));
+  // Each child revises one entity of one parent state.
+  assert.deepEqual(methodTaxonomy['2610.15708'].topology, ['Tree']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {

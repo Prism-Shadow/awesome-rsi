@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2610.15708",
+    nickname: "SpecForge",
+    title: "SpecForge: Recursive Self-Improvement for Coding Agents via Behavioral Specifications",
+    authors: ["Yutong Cheng", "Haifeng Chen", "Peng Gao", "Wei Cheng"], authorCount: 4,
+    published: "2026-10-11", year: 2026, venue: "NeurIPS 2026", status: "accepted",
+    added: "2026-11-05",
+    summary: "Refines the natural-language behavioral specifications of a codebase's functions and classes from failing tests of code regenerated from them, with a multi-frontier tree search that keeps Pareto-complementary states, refines callees before callers, and expands each step from different subsets of failing tests.",
+    summaryZh: "根据由规格说明重新生成的代码未通过的测试，修改代码库中函数和类的自然语言行为规格说明；采用多前沿树搜索，保留 Pareto 互补的状态，先改被调用者再改调用者，并用不同的失败测试子集扩展每一步。",
+  },
+  {
     id: "2611.03868",
     nickname: "EvoGroup",
     title: "EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts",

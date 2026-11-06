@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**123 method papers · 33 benchmark papers · 3 systems**
+**124 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -174,6 +174,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463) | arXiv preprint |
 | [HarnessPro: Recursive Harness Self-Improvement with Pareto Optimization for Performance-Cost Trade-offs](https://arxiv.org/abs/2610.26770) | arXiv preprint |
 | [Trace-to-Architecture: Capability Bottleneck Diagnosis for Harness Revision](https://arxiv.org/abs/2610.16725) | arXiv preprint |
+| [SpecForge: Recursive Self-Improvement for Coding Agents via Behavioral Specifications](https://arxiv.org/abs/2610.15708) | NeurIPS 2026 |
 | [Harness²: Recursive Agent Harnessing for an Open World](https://arxiv.org/abs/2610.14224) | arXiv preprint |
 | [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](https://arxiv.org/abs/2610.12086) | arXiv preprint |
 | [EvoBelief: Falsifiable World Models for Self-Improving LLM Agents](https://arxiv.org/abs/2610.12789) | arXiv preprint |
@@ -269,7 +270,6 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | [Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory](https://arxiv.org/abs/2504.07952) | EACL 2026 |
 | [Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement](https://arxiv.org/abs/2410.04444) | ACL 2025 |
 | [Cradle: Empowering Foundation Agents Towards General Computer Control](https://arxiv.org/abs/2403.03186) | ICML 2025 |
-| [SpecForge: Recursive Self-Improvement for Coding Agents via Behavioral Specifications]([https://arxiv.org/abs/2403.03186](https://arxiv.org/pdf/2610.15708)) | NeurIPS 2026 |
 
 ### Memory
 
