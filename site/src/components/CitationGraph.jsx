@@ -341,8 +341,10 @@ export default function CitationGraph({
               </div>
               <RelationList title={copy.references} emptyText={copy.noReferences} edges={outgoing} paperById={fullPaperById} relationKey="target" onSelect={setSelectedId} copy={copy} />
               <RelationList title={copy.citedBy} emptyText={copy.noCitations} edges={incoming} paperById={fullPaperById} relationKey="source" onSelect={setSelectedId} copy={copy} />
-              {detailHref && <a className="inspector-link" href={detailHref(selectedPaper)}>{copy.viewDetails}</a>}
-              <a className="inspector-link" href={selectedPaper.arxiv || selectedPaper.pdf} target="_blank" rel="noreferrer">{selectedPaper.arxiv ? copy.openArxiv : copy.openPaper}</a>
+              <div className="inspector-links">
+                {detailHref && <a href={detailHref(selectedPaper)}>{copy.viewDetails}</a>}
+                <a href={selectedPaper.arxiv || selectedPaper.pdf} target="_blank" rel="noreferrer">{selectedPaper.arxiv ? copy.openArxiv : copy.openPaper}</a>
+              </div>
             </>
           ) : (
             <p className="inspector-empty">{copy.selectHint}</p>
