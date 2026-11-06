@@ -116,6 +116,18 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§2.1–2.4 and Appendix C: separate analysis and evolve agents revise the group agent's memory representation, tools, middleware, prompts, and skills on a fixed 30% evolution split.
+  // The three roles share a base model, but the update is formed outside the group agent, so the updater is Teacher. A candidate replaces the harness only after structural checks.
+  // The checkpoint is chosen by evolution-split pass@1 and frozen for the held-out split and GroupMemBench. Low-confidence answers add the agent's self-reflection as evidence.
+  "2611.03868": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  // §§3–4: the running agent edits its own executor (tools, context assembly, compaction, prompts, memory and skill policies, and when and how it revises itself) during task execution.
+  // Each edit replaces the one active executor, which a protected guardian activates only if it builds; earlier versions can be restored. History is annotated with model cost.
+  // §5: the agent edits mid-task and between tasks, after grader feedback and reflection on AppWorld and SREGym learning tasks and on the fixed Continual Learning Bench issue sequence.
+  "2611.00463": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Artifact validation"], updater: ["Self"], source: ["Train/dev set", "Benchmark", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Event", "Trajectory"], scope: ["Specialized"] },
+  // §§3.2–3.3 and Appendix D: a separate development agent revises the task agent's driver, skill cards, memory, decision rules, and action checks on development splits; harnesses are frozen before testing.
+  // Each round revises the one accepted harness. Acceptance requires registered target-task gains and protected-task thresholds, plus execution records showing that the edit was triggered.
+  // Feedback is ALFWorld and AppWorld task completion, ScienceWorld scores, and per-step execution records; AppWorld checks completion with unit tests.
+  "2610.16725": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill"], mode: ["Offline"], topology: ["Sequential"], selection: ["Artifact validation", "Benchmark score"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
   // §§3.2–3.4: each proposer-reviewer cycle adds one research state, and children read only their ancestors' records (branch memory), so the topology is a tree.
   // The reviewer's score on the current problem steers PW-MCTS; requirement checks gate which candidates can be presented. Included as experience-driven improvement on one long-running task.
   "2608.16876": { artifact: ["Non-parametric", "Memory", "Other artifact"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Instance result"], updater: ["Joint"], source: ["Train/dev set", "Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },

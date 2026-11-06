@@ -1,4 +1,7 @@
 export const methodInstitutions = {
+  "2611.03868": ["Sun Yat-sen University", "Meituan"],
+  "2611.00463": ["University of California, Berkeley", "Andreessen Horowitz", "Braintrust"],
+  "2610.16725": ["University of Pennsylvania", "Harbin Institute of Technology, Shenzhen", "DP Technology"],
   "2608.16876": ["University of Maryland", "The Chinese University of Hong Kong"],
   "2610.19424": ["University of California, Davis", "Duke University", "University of Illinois Urbana-Champaign", "Cornell University", "Meta", "Purdue University"],
   "2608.24302": ["Tencent"],
