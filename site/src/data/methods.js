@@ -740,15 +740,13 @@ export const methods = [
     summaryZh: "从同一基座模型初始化 Challenger 与 Solver：Challenger 因提出处于 Solver 能力边界的问题而获得奖励，Solver 用多数投票伪标签训练，课程随轮次跟随 Solver 的能力变化，全程不依赖外部数据。",
   },
   {
-    id: "dream-rsi",
+    id: "2609.14858",
     nickname: "Dream-RSI",
     title: "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
     authors: ["Tong Zheng", "Xidong Wu", "Zheng Zhang"], authorCount: 17,
-    // Release date from the authors' CITATION.cff; an arXiv posting is still pending.
-    published: "2026-09-11", year: 2026, venue: "Preprint", status: "preprint",
+    // Release date from the authors' CITATION.cff, three days before the arXiv posting.
+    published: "2026-09-11", year: 2026, venue: "arXiv preprint", status: "preprint",
     added: "2026-09-15",
-    arxiv: null,
-    pdf: "https://dream-rsi.com/assets/dream-rsi.pdf",
     summary: "Replays recorded discovery trees to evaluate and revise exploration-policy code cheaply, then redeploys the selected policy to guide fresh searches and expand the history available for improvement.",
     summaryZh: "把历史搜索树作为回放环境，以较低成本评估和修改探索策略代码，再将选出的策略投入新一轮真实搜索，持续积累后续改进可用的经验。",
   },

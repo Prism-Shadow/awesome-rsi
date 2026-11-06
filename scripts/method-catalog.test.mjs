@@ -139,12 +139,23 @@ test('T2A, EvoGroup, and Exo have cleaned original abstracts and are linked in t
     assert.ok(!/\\|--/.test(methodAbstracts[id]), id);
     assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
   }
-  // T2A cites Dream-RSI by its arXiv number, which the catalog lists under its project id.
-  assert.ok(methodCitationEdges.some(({ source, target }) => source === '2610.16725' && target === 'dream-rsi'));
+  // T2A cites Dream-RSI by the arXiv number the catalog now uses as its id.
+  assert.ok(methodCitationEdges.some(({ source, target }) => source === '2610.16725' && target === '2609.14858'));
   // Exo's running agent edits its own executor; T2A's development agent and EvoGroup's evolve agent edit another agent's harness.
   assert.deepEqual(methodTaxonomy['2611.00463'].updater, ['Self']);
   assert.deepEqual(methodTaxonomy['2610.16725'].updater, ['Teacher']);
   assert.deepEqual(methodTaxonomy['2611.03868'].updater, ['Teacher']);
+});
+
+test('Dream-RSI is listed under its arXiv number with its arXiv abstract and bibliography', () => {
+  const dream = methods.find(({ nickname }) => nickname === 'Dream-RSI');
+  assert.equal(dream.id, '2609.14858');
+  assert.equal(dream.arxiv, 'https://arxiv.org/abs/2609.14858');
+  assert.ok(!/\\/.test(methodAbstracts['2609.14858']));
+  // The arXiv version also cites G-Zero, EnvHarness, MM-Zero, AutoTTS, and R-Zero.
+  for (const target of ['2605.09959', '2608.19880', '2603.09206', '2605.08083', '2508.05004']) {
+    assert.ok(methodCitationEdges.some((edge) => edge.source === '2609.14858' && edge.target === target), target);
+  }
 });
 
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
