@@ -169,6 +169,22 @@ test('SpecForge has its original abstract and labels its generated-test search',
   assert.deepEqual(methodTaxonomy['2610.15708'].topology, ['Tree']);
 });
 
+test('the seven Feishu-listed papers have cleaned original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2610.15150', '2610.20926', '2610.24630', '2610.32813', '2610.39508', '2611.02079', '2611.05139']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id].replace(/\$\d/g, '')), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+  // Meta²'s offline Meta-Skill is read only by the evolver, so only the task agent's within-run harness edits are labeled.
+  assert.deepEqual(methodTaxonomy['2611.05139'].mode, ['Online']);
+  // SkillNEO develops skills on the same SkillsBench instances and verifiers it is evaluated on.
+  assert.ok(methodTaxonomy['2610.20926'].source.includes('Benchmark'));
+  // Harmony Harness keeps general and benchmark-specific scopes, and each child has a single parent.
+  assert.deepEqual(methodTaxonomy['2610.15150'].scope, ['General', 'Specialized']);
+  assert.deepEqual(methodTaxonomy['2610.15150'].topology, ['Tree']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {

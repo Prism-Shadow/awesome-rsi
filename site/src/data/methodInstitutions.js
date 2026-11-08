@@ -1,4 +1,11 @@
 export const methodInstitutions = {
+  "2611.05139": ["University of Maryland", "University of Washington", "University of Illinois Urbana-Champaign", "Scale AI", "All Purpose AI"],
+  "2611.02079": ["University College London", "Pohang University of Science and Technology", "Southern University of Science and Technology", "Southeast University", "Microsoft", "Mohamed bin Zayed University of Artificial Intelligence"],
+  "2610.39508": ["East China Normal University", "China University of Geosciences"],
+  "2610.32813": ["Tsinghua University", "Microsoft Research Asia"],
+  "2610.24630": ["Renmin University of China", "Beijing Academy of Artificial Intelligence"],
+  "2610.20926": ["University of Illinois Chicago", "Mohamed bin Zayed University of Artificial Intelligence", "University of California, San Diego", "University of California, Los Angeles", "Independent Researcher", "University of Texas at Arlington"],
+  "2610.15150": ["Google Cloud AI Research", "Carnegie Mellon University", "Google DeepMind"],
   "2610.15708": ["Virginia Tech", "NEC Laboratories America"],
   "2611.03868": ["Sun Yat-sen University", "Meituan"],
   "2611.00463": ["University of California, Berkeley", "Andreessen Horowitz", "Braintrust"],
