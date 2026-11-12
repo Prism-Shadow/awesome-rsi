@@ -116,6 +116,10 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §§4.1–4.4 and Figure 2: the search unit is a frozen artifact (hypothesis, FASTEXPR expression, platform evidence, rationale, review verdict); extend() appends one child on a lineage, so the topology is a tree and each pipeline updates the tree once (Trajectory).
+  // The proposer reads ancestor reports (lineage memory). A monotone ancestor-score gate and a self-correlation check apply, and a fresh-context reviewer may re-run simulations and zero fabricated evidence before the score enters the tree, so acceptance is Artifact validation and Instance result.
+  // WorldQuant BRAIN simulations supply platform scores; the reviewer writes textual audits and does not estimate quality.
+  "2608.11250": { artifact: ["Non-parametric", "Memory", "Other artifact"], mode: ["Offline"], topology: ["Tree"], selection: ["Artifact validation", "Instance result"], updater: ["Joint"], source: ["Environment", "Executable verifier", "LLM feedback"], feedback: ["Score", "Binary", "Non-binary", "Non-score", "LLM-as-a-judge", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §2, Algorithm 1, and §4.1: a separate research agent edits the stationary environment from the target agent's traces on disjoint training batches, adding tools and retrieval programs, cheat sheets, file indexes, an SQLite catalog, and converted files; the target's model and harness stay fixed.
   // An edit is kept only if it lowers cost while the research agent judges accuracy preserved without verifiers, and evolution stops when validation cost rises or pass rate drops, so acceptance is Combined metrics.
   "2611.07372": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill", "Other artifact"], mode: ["Offline"], topology: ["Sequential"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },

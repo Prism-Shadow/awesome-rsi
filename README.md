@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**133 method papers · 33 benchmark papers · 3 systems**
+**134 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -339,6 +339,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [AutoSR: Automatic Symbolic Regression by Searching Research States](https://arxiv.org/abs/2608.16876) | arXiv preprint |
 | [HyperSkill: Self-Evolving LLM Agents via Hypergraph-Structured Skill Memory](https://arxiv.org/abs/2608.16114) | arXiv preprint |
+| [AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search](https://arxiv.org/abs/2608.11250) | arXiv preprint |
 | [Knowledge-Centric Self-Improvement](https://arxiv.org/abs/2607.19592) | arXiv preprint |
 | [SAGEAgent: A Self-Evolving Agent for Cost-Aware Modality Acquisition in Multimodal Survival Prediction](https://arxiv.org/abs/2607.09521) | arXiv preprint |
 | [ISM: Self-Improving Strategy Memory for Continual Mathematical Reasoning](https://arxiv.org/abs/2606.31191) | ICML 2026 AI for Math Workshop |
@@ -461,6 +462,7 @@ Other artifacts evolve, such as data strategies, experiment configurations, or t
 | [Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement](https://arxiv.org/abs/2609.01481) | arXiv preprint |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [AutoSR: Automatic Symbolic Regression by Searching Research States](https://arxiv.org/abs/2608.16876) | arXiv preprint |
+| [AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search](https://arxiv.org/abs/2608.11250) | arXiv preprint |
 
 ## Benchmarks
 
