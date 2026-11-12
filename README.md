@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**131 method papers · 33 benchmark papers · 3 systems**
+**133 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -107,6 +107,7 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
 | [ParetoSaddler: Pareto-Guided Optimization of Agent Harnesses for Quality and Cost](https://arxiv.org/abs/2611.02079) | arXiv preprint |
@@ -175,6 +176,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
 | [ParetoSaddler: Pareto-Guided Optimization of Agent Harnesses for Quality and Cost](https://arxiv.org/abs/2611.02079) | arXiv preprint |
@@ -289,6 +291,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
 | [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463) | arXiv preprint |
 | [Compile Away Uncertainty: Self-Evolving Agent Skills via Programmatic Compilation](https://arxiv.org/abs/2610.39508) | arXiv preprint |
@@ -368,6 +371,8 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
+| [EvoGuard: Mitigating Degradation in Online Skill Evolution](https://arxiv.org/abs/2611.06444) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
 | [ParetoSaddler: Pareto-Guided Optimization of Agent Harnesses for Quality and Cost](https://arxiv.org/abs/2611.02079) | arXiv preprint |
@@ -452,6 +457,7 @@ Other artifacts evolve, such as data strategies, experiment configurations, or t
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement](https://arxiv.org/abs/2609.01481) | arXiv preprint |
 | [EnvHarness: Awakening Static Worlds for Agent Learning](https://arxiv.org/abs/2608.19880) | arXiv preprint |
 | [AutoSR: Automatic Symbolic Regression by Searching Research States](https://arxiv.org/abs/2608.16876) | arXiv preprint |
