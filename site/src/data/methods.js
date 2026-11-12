@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.07372",
+    nickname: "EnvOpt",
+    title: "EnvOpt: Automated Optimization for Agent Environments",
+    authors: ["Mingxuan Li", "Huanzhi Mao", "Qiuyang Mang", "Hanchen Li", "Joseph E. Gonzalez", "Alex Dimakis"], authorCount: 6,
+    published: "2026-11-05", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-11",
+    summary: "Has a separate research agent restructure a shared task environment for a fixed target agent, adding cheat sheets, file indexes, databases, converted files, and retrieval programs from the target's traces on training batches; edits are kept when they cut cost while answers appear preserved, and evolution stops once validation cost or pass rate worsens.",
+    summaryZh: "由独立的研究 Agent 根据目标 Agent 在训练任务批次上的执行轨迹，重组多任务共享的工作环境，加入速查表、文件索引、数据库、格式转换后的文件和检索程序；改动在降低成本且答案看起来未受影响时保留，一旦验证集上的成本或通过率变差就停止演化。目标 Agent 的模型和 Harness 保持不变。",
+  },
+  {
+    id: "2611.06444",
+    nickname: "EvoGuard",
+    title: "EvoGuard: Mitigating Degradation in Online Skill Evolution",
+    authors: ["Yanli Wang", "Zichen Bai", "Tianyue Jiang", "Kunming Shao", "Junhao Shi", "Xueqin Liu", "Jinguo Sun", "Muye Li", "Tingting Bi", "Yanlin Wang", "Shaoqiang Zheng", "Xuefei Diao", "Zhuwei Zeng", "Nan Duan", "Peng Cao"], authorCount: 15,
+    published: "2026-11-04", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-11",
+    summary: "After each task in an online stream, a fixed generator rewrites the task family's SKILL.md from the trajectory and outcome; a well-formed rewrite replaces the current skill only if a pairwise selector, trained offline on skill pairs with clear utility gaps, prefers it in a single forward pass over the two skill texts.",
+    summaryZh: "在线任务流中，每完成一个任务，固定的生成器就根据轨迹和结果重写该任务类别的 SKILL.md；格式合格的新版还要交给成对选择器，选择器离线用效用差距明显的技能对训练，只读新旧两份技能文本、一次前向计算即给出判断，认为新版更好才替换当前技能。",
+  },
+  {
     id: "2611.05139",
     nickname: "Meta²",
     title: "Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents",

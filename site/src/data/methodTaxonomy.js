@@ -116,6 +116,12 @@ export const methodFilterDimensions = [
 ];
 
 export const methodTaxonomy = {
+  // §2, Algorithm 1, and §4.1: a separate research agent edits the stationary environment from the target agent's traces on disjoint training batches, adding tools and retrieval programs, cheat sheets, file indexes, an SQLite catalog, and converted files; the target's model and harness stay fixed.
+  // An edit is kept only if it lowers cost while the research agent judges accuracy preserved without verifiers, and evolution stops when validation cost rises or pass rate drops, so acceptance is Combined metrics.
+  "2611.07372": { artifact: ["Non-parametric", "Harness code", "Context", "Memory", "Skill", "Other artifact"], mode: ["Offline"], topology: ["Sequential"], selection: ["Combined metrics"], updater: ["Teacher"], source: ["Train/dev set", "Environment", "LLM feedback"], feedback: ["Score", "Non-binary", "Non-score", "Other"], frequency: ["Batch"], scope: ["Specialized"] },
+  // §§3–4.5 and Algorithm 1: after every task, a fixed generator rewrites that family's SKILL.md from the trajectory and outcome (sample-test results on LiveCodeBench); other families' skills are untouched.
+  // A structural format check and a selector that reads only the two skill texts decide acceptance, so it is Artifact validation; training the selector on private-test utilities is teacher-side.
+  "2611.06444": { artifact: ["Non-parametric", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Artifact validation"], updater: ["Teacher"], source: ["Benchmark", "Environment", "Executable verifier"], feedback: ["Score", "Binary", "Non-score", "Other"], frequency: ["Trajectory"], scope: ["Specialized"] },
   // §§3.1–3.3, Algorithm 2, and Appendix H: at checkpoints within each run, a separate evolver role keeps or edits the task agent's prompt, checks, probes, tools, middleware, and skills; edits apply to the rest of the run and are discarded afterward.
   // The offline Meta-Skill is read only by the evolver, so its training-split revision is teacher-side and not recorded, as for VERSE. Edits that fail to load are rolled back, and held-out verifier feedback never reaches the evolver.
   "2611.05139": { artifact: ["Non-parametric", "Harness code", "Context", "Skill"], mode: ["Online"], topology: ["Sequential"], selection: ["Artifact validation"], updater: ["Teacher"], source: ["Environment", "Executable verifier"], feedback: ["Non-score", "Other"], frequency: ["Step", "Event"], scope: ["Specialized"] },

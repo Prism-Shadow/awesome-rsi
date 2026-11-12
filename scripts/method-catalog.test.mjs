@@ -185,6 +185,21 @@ test('the seven Feishu-listed papers have cleaned original abstracts and are lin
   assert.deepEqual(methodTaxonomy['2610.15150'].topology, ['Tree']);
 });
 
+test('EvoGuard and EnvOpt have original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.06444', '2611.07372']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+  // EvoGuard's selector reads only the two skill texts, so acceptance is a check of the artifact, not a score.
+  assert.deepEqual(methodTaxonomy['2611.06444'].selection, ['Artifact validation']);
+  // EnvOpt also restructures the environment's own files, e.g. converting .xlsx files to text.
+  assert.ok(methodTaxonomy['2611.07372'].artifact.includes('Other artifact'));
+  // EnvOpt builds on Meta-Harness.
+  assert.ok(methodCitationEdges.some(({ source, target }) => source === '2611.07372' && target === '2603.28052'));
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
