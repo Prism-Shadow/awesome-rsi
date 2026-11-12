@@ -2,6 +2,11 @@ export function clamp(value, minimum, maximum) {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
+// The spacious canvas grows with the paper count so every node + label box still finds a free slot.
+export function spaciousGraphHeight(count) {
+  return Math.max(820, Math.round(640 * Math.sqrt(count / 32)));
+}
+
 // Camera math shares the same dimensions as layout and SVG viewBox.
 export function createGraphGeometry(width = 920, height = 620) {
   const GRAPH_WIDTH = width;
