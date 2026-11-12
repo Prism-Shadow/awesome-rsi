@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildLayout, createGraphGeometry, nodeBounds } from "../site/src/lib/citationLayout.js";
+import { buildLayout, createGraphGeometry, nodeBounds, spaciousGraphHeight } from "../site/src/lib/citationLayout.js";
 import { methods } from "../site/src/data/methods.js";
 import { methodCitationEdges } from "../site/src/data/methodCitationGraph.js";
 import { papers } from "../site/src/data/papers.js";
@@ -10,7 +10,7 @@ const weights = new Map(methods.map((p) => [
   p.id, methodCitationEdges.filter((e) => e.target === p.id).length,
 ]));
 const weight = (p) => weights.get(p.id);
-const height = Math.max(820, Math.round(620 * Math.sqrt(methods.length / 32)));
+const height = spaciousGraphHeight(methods.length);
 
 test("spacious method layout keeps every node and label separate and inside the canvas", () => {
   const layout = buildLayout(methods, methodCitationEdges, weight, { height, spacious: true });

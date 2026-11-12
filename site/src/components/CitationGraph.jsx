@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { buildLayout, clamp, createGraphGeometry } from "../lib/citationLayout.js";
+import { buildLayout, clamp, createGraphGeometry, spaciousGraphHeight } from "../lib/citationLayout.js";
 
 const GRAPH_WIDTH = 920;
 const GRAPH_HEIGHT = 620;
@@ -72,7 +72,7 @@ export default function CitationGraph({
   detailHref,
   spacious = false,
 }) {
-  const graphHeight = spacious ? Math.max(820, Math.round(620 * Math.sqrt(papers.length / 32))) : GRAPH_HEIGHT;
+  const graphHeight = spacious ? spaciousGraphHeight(papers.length) : GRAPH_HEIGHT;
   const geometry = useMemo(() => createGraphGeometry(GRAPH_WIDTH, graphHeight), [graphHeight]);
   const { defaultCamera, constrainCamera, worldPointAtClient, cameraFromAnchor } = geometry;
   const fullPaperById = useMemo(() => new Map(papers.map((paper) => [paper.id, paper])), [papers]);
