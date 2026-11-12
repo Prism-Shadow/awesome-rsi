@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2608.11250",
+    nickname: "AgonAlpha",
+    title: "AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search",
+    authors: ["Weicheng Ye", "Youran Sun", "Xingyu Ren", "Shunyao Yu", "Chugang Yi", "Haizhao Yang"], authorCount: 6,
+    published: "2026-08-04", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-12",
+    summary: "Uses a multi-agent LLM method to mine trading factors (alpha). Factors are tested on WorldQuant BRAIN.",
+    summaryZh: "用 LLM 多 agent 方法自动挖掘因子（alpha）。因子在 WorldQuant BRAIN 上测试。",
+  },
+  {
     id: "2611.07372",
     nickname: "EnvOpt",
     title: "EnvOpt: Automated Optimization for Agent Environments",
