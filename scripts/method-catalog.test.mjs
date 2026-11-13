@@ -200,6 +200,20 @@ test('EvoGuard and EnvOpt have original abstracts and are linked in the citation
   assert.ok(methodCitationEdges.some(({ source, target }) => source === '2611.07372' && target === '2603.28052'));
 });
 
+test('SkillDuet and PASE have original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.12109', '2611.14019']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+  // SkillDuet co-evolves model parameters and external skills.
+  assert.deepEqual(methodTaxonomy['2611.12109'].artifact, ['Parametric', 'Non-parametric', 'Skill']);
+  // PASE links each natural-language skill with an executable program and gates updates on validation accuracy.
+  assert.deepEqual(methodTaxonomy['2611.14019'].artifact, ['Non-parametric', 'Harness code', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2611.14019'].selection, ['Benchmark score']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
