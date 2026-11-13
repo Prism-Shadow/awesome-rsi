@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.14019",
+    nickname: "PASE",
+    title: "Program-Aided Patchable Skill Evolution",
+    authors: ["Jiahao Wang", "Yuqi Xiong", "Qing Yang", "Zhipeng Xu", "Zhenghao Liu", "Zulong Chen", "Yubin Bao"], authorCount: 7,
+    published: "2026-11-10", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-13",
+    summary: "Pairs each natural-language skill document with a linked executable program and evolves both on training batches with a ReAct proposer that inspects trajectories, current skills and programs, and prior patches on demand to create, delete, or apply line-level edits to either component, keeping an update only when held-out validation accuracy improves.",
+    summaryZh: "将每份自然语言技能文档与关联的可执行程序配对，由 ReAct 提议者在训练任务批次上按需读取执行轨迹、当前技能与程序以及历史补丁，对技能文档或程序代码执行新建、删除或逐行修补，仅在留出验证集准确率提升时保留更新。",
+  },
+  {
+    id: "2611.12109",
+    nickname: "SkillDuet",
+    title: "SkillDuet: Co-Evolving Models and Skills through Response Feedback",
+    authors: ["Xingguang Ji", "Ziqiang Dong", "Yubo Zhang", "Xi Leng", "Ninghua Yan", "Yang Yang", "Guanjun Jiang"], authorCount: 7,
+    published: "2026-11-09", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-13",
+    summary: "Co-evolves policy parameters and a persistent global skill set during RL: an external analyzer extracts local skills from on-policy trajectories for token-level on-policy distillation at every step, while candidate skills are ranked by the log-probability shift they induce on held-out responses and the top half over each ten-step window are synthesized into the global skills used in later rollouts.",
+    summaryZh: "在强化学习过程中协同演化模型参数与持久化的全局技能集：外部分析器从在策略轨迹中提取局部技能，每步通过策略内蒸馏指导参数更新；同时按候选技能在留出轨迹响应上引起的对数概率变化幅度排序，每十步将得分最高的一半整合进全局技能集，用于指导后续交互。",
+  },
+  {
     id: "2611.07372",
     nickname: "EnvOpt",
     title: "EnvOpt: Automated Optimization for Agent Environments",
