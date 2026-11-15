@@ -214,6 +214,20 @@ test('SkillDuet and PASE have original abstracts and are linked in the citation 
   assert.deepEqual(methodTaxonomy['2611.14019'].selection, ['Benchmark score']);
 });
 
+test('SAT and FGSE have cleaned original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.13144', '2611.14326']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+    assert.deepEqual(methodTaxonomy[id].artifact, ['Non-parametric', 'Context', 'Memory', 'Skill'], id);
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  // SAT admits candidate skills on matched development-task verifier utility; FGSE gates hypotheses on joint transfer gain, falsification risk, and regression damage.
+  assert.deepEqual(methodTaxonomy['2611.13144'].selection, ['Benchmark score']);
+  assert.deepEqual(methodTaxonomy['2611.14326'].selection, ['Combined metrics']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {

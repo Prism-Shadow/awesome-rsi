@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.14326",
+    nickname: "FGSE",
+    title: "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
+    authors: ["Runxuan Tang", "Haoyu Gao", "Yuyan Ding", "Junyi Yao", "Zihao Zheng", "Zecheng Sheng", "Liwei Hou"], authorCount: 7,
+    published: "2026-11-10", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-16",
+    summary: "Represents each episode-derived lesson as a structured hypothesis with a precondition, behavior patch, expected effect, and verifier; evaluates it temporarily on target-transfer, targeted falsification, and archived-regression probes; narrows the precondition once when failures are separable; and commits only updates that jointly pass gain, falsification, and regression thresholds, deactivating rules that exceed a post-commit violation limit.",
+    summaryZh: "将每次交互得到的经验表示为包含适用条件、行为修补、预期效果和验证器的结构化假设，在临时状态下通过目标迁移、针对性反例和历史回归探测加以检验；若反例失败可通过收窄条件分离则修订一次适用条件，仅将同时满足迁移收益、反例风险与回归损伤阈值的更新写入持久记忆，并在后续运行中停用违规率超限的规则。",
+  },
+  {
+    id: "2611.13144",
+    nickname: "SAT",
+    title: "Teaching the Harness: Student-Aware Skill Transfer for LLM Agents",
+    authors: ["Chang Liu", "Bo Wu"], authorCount: 2,
+    published: "2026-11-09", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-16",
+    summary: "Pairs a stronger teacher model with a fixed student and harness: across teaching rounds, the teacher maintains an empirical profile and analytical hypotheses about the student's execution limits, tests hypotheses with controlled diagnostic probes that vary task properties such as inventory size, and proposes category-scoped advisory skills that enter the library only when they improve average verifier success on matched development tasks.",
+    summaryZh: "由更强的教师模型面向固定的学生模型与 Harness 开展多轮教学：教师维护学生执行表现的经验画像与关于执行限制的分析假设，通过改变库存规模等任务属性的受控诊断探测检验假设，并针对具体任务类别编写建议性技能，候选技能仅在匹配开发任务上的平均验证通过率高于无技能基线时入库。",
+  },
+  {
     id: "2611.14019",
     nickname: "PASE",
     title: "Program-Aided Patchable Skill Evolution",

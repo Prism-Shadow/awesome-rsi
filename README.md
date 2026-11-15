@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**135 method papers · 33 benchmark papers · 3 systems**
+**137 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -178,6 +178,8 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](https://arxiv.org/abs/2611.14326) | arXiv preprint |
+| [Teaching the Harness: Student-Aware Skill Transfer for LLM Agents](https://arxiv.org/abs/2611.13144) | arXiv preprint |
 | [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
@@ -293,6 +295,8 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](https://arxiv.org/abs/2611.14326) | arXiv preprint |
+| [Teaching the Harness: Student-Aware Skill Transfer for LLM Agents](https://arxiv.org/abs/2611.13144) | arXiv preprint |
 | [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [EvoGroup: A Self-Evolving Harness for Group Agents in Shared Contexts](https://arxiv.org/abs/2611.03868) | arXiv preprint |
 | [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463) | arXiv preprint |
@@ -374,7 +378,9 @@ Reusable strategies, procedures, workflows, or skill resources are created and r
 | Paper or project | Publication |
 | :--- | :--- |
 | [Program-Aided Patchable Skill Evolution](https://arxiv.org/abs/2611.14019) | arXiv preprint |
+| [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](https://arxiv.org/abs/2611.14326) | arXiv preprint |
 | [SkillDuet: Co-Evolving Models and Skills through Response Feedback](https://arxiv.org/abs/2611.12109) | arXiv preprint |
+| [Teaching the Harness: Student-Aware Skill Transfer for LLM Agents](https://arxiv.org/abs/2611.13144) | arXiv preprint |
 | [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [EvoGuard: Mitigating Degradation in Online Skill Evolution](https://arxiv.org/abs/2611.06444) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
