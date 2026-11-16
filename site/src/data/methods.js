@@ -1,5 +1,15 @@
 export const methods = [
   {
+    id: "2608.11250",
+    nickname: "AgonAlpha",
+    title: "AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search",
+    authors: ["Weicheng Ye", "Youran Sun", "Xingyu Ren", "Shunyao Yu", "Chugang Yi", "Haizhao Yang"], authorCount: 6,
+    published: "2026-08-04", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-12",
+    summary: "Searches for trading alphas as a tree of frozen research artifacts—each pairing a hypothesis, executable FASTEXPR formula, WorldQuant BRAIN simulation evidence, economic rationale, and review verdict that descendants inherit—allocating lineages with pending-aware PW-MCTS while each proposer–reviewer pipeline refines 16 candidates through a halving tournament and a fresh-context reviewer audits evidence integrity with re-execution and veto authority.",
+    summaryZh: "将量化因子挖掘组织为冻结研究产物的树搜索：每个节点保存假设、可执行 FASTEXPR 表达式、WorldQuant BRAIN 回测证据、经济学解释及评审结论供子节点继承；上层用带并发挂起感知的渐进展宽 MCTS 分配分支预算，下层在每次提议–评审流水线内通过五轮折半淘汰赛迭代修正 16 个候选因子，并由独立上下文评审员复核证据一致性与重跑回测，对伪造或不一致结果行使一票否决权。",
+  },
+  {
     id: "2611.14326",
     nickname: "FGSE",
     title: "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
