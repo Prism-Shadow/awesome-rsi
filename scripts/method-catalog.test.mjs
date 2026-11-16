@@ -228,6 +228,15 @@ test('SAT and FGSE have cleaned original abstracts and are linked in the citatio
   assert.deepEqual(methodTaxonomy['2611.14326'].selection, ['Combined metrics']);
 });
 
+test('AgonAlpha has its cleaned original abstract and labels its research-artifact tree search', () => {
+  assert.ok(methods.some((method) => method.id === '2608.11250'));
+  assert.ok(!methodAbstracts['2608.11250'].startsWith('Abstract summary:'));
+  assert.ok(!/\\|\$|--/.test(methodAbstracts['2608.11250']));
+  assert.deepEqual(methodTaxonomy['2608.11250'].artifact, ['Non-parametric', 'Memory', 'Other artifact']);
+  assert.deepEqual(methodTaxonomy['2608.11250'].topology, ['Tree']);
+  assert.deepEqual(methodTaxonomy['2608.11250'].frequency, ['Trajectory', 'Batch']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
