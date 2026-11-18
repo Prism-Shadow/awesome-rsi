@@ -237,11 +237,28 @@ test('AgonAlpha has its cleaned original abstract and labels its research-artifa
   assert.deepEqual(methodTaxonomy['2608.11250'].frequency, ['Trajectory', 'Batch']);
 });
 
+test('VbD and ELITE have cleaned original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.15276', '2611.21056']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+    assert.deepEqual(methodTaxonomy[id].topology, ['Graph'], id);
+  }
+  // VbD co-evolves task-local Actor and Evaluator harnesses online and gates Actor updates on strict support for the proposal's own fresh output.
+  assert.deepEqual(methodTaxonomy['2611.15276'].mode, ['Online']);
+  assert.deepEqual(methodTaxonomy['2611.15276'].selection, ['Instance result']);
+  // ELITE integrates mechanisms across same-parent exploratory children and gates acceptance on deterministic validity checks without downstream task evaluations.
+  assert.deepEqual(methodTaxonomy['2611.21056'].selection, ['Artifact validation']);
+  assert.deepEqual(methodTaxonomy['2611.21056'].updater, ['Joint']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
-  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, and Skill∞ also revise their own optimizer.
-  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434']) {
+  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
+  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {
     assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
   }
-  // HGM reuses DGM's self-modification step: a separate diagnosis call directs the agent's edits to its own code.
+  // HGM and ELITE reuse DGM's self-modification step: a separate diagnosis/hypothesis call directs the agent's edits to its own code.
   assert.deepEqual(methodTaxonomy['2510.21614'].updater, methodTaxonomy['2505.22954'].updater);
+  assert.deepEqual(methodTaxonomy['2611.21056'].updater, methodTaxonomy['2505.22954'].updater);
 });
