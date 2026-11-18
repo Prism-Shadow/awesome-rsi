@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.21056",
+    nickname: "ELITE",
+    title: "Evaluation-Free Recursive Self-Improvement for Coding Agents",
+    authors: ["Zhe Ren", "Guowei Rong", "Yimeng Chen", "Li Nanbo", "Piotr Piękos", "Mateusz Ostaszewski", "Dandan Guo", "Jürgen Schmidhuber"], authorCount: 8,
+    published: "2026-11-16", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-18",
+    summary: "Evolves a coding agent's source repository over generations without downstream task evaluations: a proposal step generates K focused improvement hypotheses from the parent source and compact evolution history, the agent implements each independently from the same parent, a deterministic gate filters out invalid patches, and an integration step inspects the surviving implementations to reimplement compatible mechanisms into one descendant accepted only if it passes compilation, interface, and smoke-test gates.",
+    summaryZh: "在不运行下游评测任务的情况下跨代演化编程智能体的源码仓库：提议步骤根据父版本源码与精简演化历史生成 K 条聚焦的改进假设，智能体从同一父版本分别独立实现各候选并经确定性门控过滤无效补丁，再由整合步骤审查合格候选的实现机制，筛除冗余或冲突部分并将互补机制重新实现为单一后代，通过编译、接口与冒烟测试门控后即作为下一代智能体。",
+  },
+  {
+    id: "2611.15276",
+    nickname: "VbD",
+    title: "Verify by Doing: Co-Evolving Agent Execution and Evaluation without External Feedback",
+    authors: ["Yitong Lin", "Jianda Chen", "Yihao Hu", "Pan Wang", "Hang Wang", "Zhihao Wen", "Xiaoxue Ren", "Wei Wu"], authorCount: 8,
+    published: "2026-11-11", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-18",
+    summary: "Co-evolves an Actor harness and a tool-using Evaluator harness within a single task without external labels: across rounds, the current and proposed Actors generate fresh candidate outputs, the Evaluator actively inspects saved environment states and deliverables with tools and verification scripts to produce scoped findings, a bidirectional reviewer adopts the proposed Evaluator only when both presentation orders favor its report on common candidates, and the retained Evaluator selects the incumbent output and accepts the proposed Actor only when its own fresh output wins both strict comparisons.",
+    summaryZh: "在无外部标准答案的单任务内协同演化执行器（Actor）与可调用工具的评估器（Evaluator）Harness：每轮由当前与候选 Actor 生成新结果，Evaluator 调用工具和验证脚本主动查验环境状态与交付物以形成带作用域的查验结论；双向评审在相同候选上正反序一致认可新报告时采纳候选 Evaluator，保留的 Evaluator 据此选出当前最优输出，且仅在候选 Actor 自身新输出在两轮严格对比中均获胜时采纳该 Actor 更新，查验结论同时指导下一轮两者的提示、评分准则与技能修订。",
+  },
+  {
     id: "2608.11250",
     nickname: "AgonAlpha",
     title: "AgonAlpha: Autonomous Alpha Discovery via Prompt Economy and Scalable Agentic Search",
