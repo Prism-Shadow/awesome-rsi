@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**140 method papers · 33 benchmark papers · 3 systems**
+**142 method papers · 33 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -80,6 +80,7 @@ The student's model parameters are updated to improve task performance. This inc
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [HandRSI: Recursive Self-Improvement for Hand Pose Estimation](https://arxiv.org/abs/2611.22164) | arXiv preprint |
 | [SkillDuet: Co-Evolving Models and Skills through Response Feedback](https://arxiv.org/abs/2611.12109) | arXiv preprint |
 | [ReSAIL: Mitigating Collapse in Iterative Agent Self-Distillation](https://arxiv.org/abs/2609.39306) | arXiv preprint |
 | [Gödel Forest: Balancing Search Depth and Breadth for Data-Centric Recursive Self-Improvement](https://arxiv.org/abs/2609.36675) | arXiv preprint |
@@ -108,7 +109,9 @@ Executable agent, harness, control-flow, self-improvement, or tool code is modif
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [HandRSI: Recursive Self-Improvement for Hand Pose Estimation](https://arxiv.org/abs/2611.22164) | arXiv preprint |
 | [Evaluation-Free Recursive Self-Improvement for Coding Agents](https://arxiv.org/abs/2611.21056) | arXiv preprint |
+| [Self-Improvement Memory Enables Continual Recursive Self-Improvement](https://arxiv.org/abs/2611.18856) | arXiv preprint |
 | [Program-Aided Patchable Skill Evolution](https://arxiv.org/abs/2611.14019) | arXiv preprint |
 | [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) | arXiv preprint |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](https://arxiv.org/abs/2611.05139) | arXiv preprint |
@@ -180,6 +183,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 | Paper or project | Publication |
 | :--- | :--- |
 | [Evaluation-Free Recursive Self-Improvement for Coding Agents](https://arxiv.org/abs/2611.21056) | arXiv preprint |
+| [Self-Improvement Memory Enables Continual Recursive Self-Improvement](https://arxiv.org/abs/2611.18856) | arXiv preprint |
 | [Verify by Doing: Co-Evolving Agent Execution and Evaluation without External Feedback](https://arxiv.org/abs/2611.15276) | arXiv preprint |
 | [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](https://arxiv.org/abs/2611.14326) | arXiv preprint |
 | [Teaching the Harness: Student-Aware Skill Transfer for LLM Agents](https://arxiv.org/abs/2611.13144) | arXiv preprint |
@@ -298,6 +302,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Self-Improvement Memory Enables Continual Recursive Self-Improvement](https://arxiv.org/abs/2611.18856) | arXiv preprint |
 | [Verify by Doing: Co-Evolving Agent Execution and Evaluation without External Feedback](https://arxiv.org/abs/2611.15276) | arXiv preprint |
 | [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](https://arxiv.org/abs/2611.14326) | arXiv preprint |
 | [Teaching the Harness: Student-Aware Skill Transfer for LLM Agents](https://arxiv.org/abs/2611.13144) | arXiv preprint |
