@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**142 method papers · 33 benchmark papers · 3 systems**
+**142 method papers · 34 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -505,6 +505,7 @@ Experience accumulates during the task stream or repeated interaction, and later
 
 | Benchmark paper | Year | RSI artifact |
 | :--- | :--- | :--- |
+| [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](https://arxiv.org/abs/2611.24395) | 2026 | Harness code · Other artifacts |
 | [RSIGym: A Flexible Environment for Recursive Self-Improvement](https://arxiv.org/abs/2610.10310) | 2026 | Model parameters · Harness code · Context · Other artifacts |
 | [Agent Plasticity: Measuring Self-Improvement Through Experience](https://arxiv.org/abs/2610.08902) | 2026 | Harness code · Context · Memory · Skill |
 | [Aspire: Can Models Self-Evolve from Vague Goals?](https://arxiv.org/abs/2608.31111) | 2026 | Model parameters · Harness code · Context · Memory |

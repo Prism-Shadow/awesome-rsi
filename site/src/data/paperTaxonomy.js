@@ -125,6 +125,18 @@ export const filterDimensions = [
 ];
 
 export const paperTaxonomy = {
+  // Section 3.3: one eight-hour optimization run per task, evaluated on a fixed workload.
+  // No held-out partition — the same task is optimized and measured, so Online.
+  // Artifact is the infrastructure code the agent edits (engine/kernel/instruction level).
+  "2611.24395": {
+    origin: ["Original"],
+    mode: ["Online", "Repeated / iterative"],
+    artifact: ["Non-parametric", "Harness code", "Other artifact"],
+    construction: ["Headroom", "Diversity", "Other criteria"],
+    metric: ["Gain", "Latency", "Cost"],
+    creation: ["Human-in-the-loop"],
+    evaluation: ["Rule-based", "LLM-as-a-judge"],
+  },
   // Sections 3–4: Data/Joint update model weights; Harness/Joint revise code.
   // Development exposes the final tasks, so the main protocol is not held-out.
   "2610.10310": {

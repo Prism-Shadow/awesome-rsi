@@ -2,6 +2,8 @@
 // bibliography checks of the original PDFs (verifiedBy: "paper-pdf").
 // Each edge points from the citing paper to the paper in its bibliography.
 export const citationEdges = [
+  // RSIBench-Infra reference [11] cites RSIBench-Data.
+  { source: "2611.24395", target: "2607.25886", verifiedBy: "paper-pdf" },
   { source: "2610.10310", target: "2607.25886", verifiedBy: "paper-pdf" },
   { source: "2610.10310", target: "2604.10547", verifiedBy: "paper-pdf" },
   { source: "2610.10310", target: "2603.08640", verifiedBy: "paper-pdf" },
