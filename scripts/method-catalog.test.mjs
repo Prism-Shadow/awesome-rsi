@@ -253,6 +253,21 @@ test('VbD and ELITE have cleaned original abstracts and are linked in the citati
   assert.deepEqual(methodTaxonomy['2611.21056'].updater, ['Joint']);
 });
 
+test('HandRSI and SIM have cleaned original abstracts and complete bibliography citation links', () => {
+  for (const id of ['2611.22164', '2611.18856']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+  }
+  // Both papers cite DGM and Meta-Harness in their bibliographies.
+  for (const source of ['2611.22164', '2611.18856']) {
+    for (const target of ['2505.22954', '2603.28052']) {
+      assert.ok(methodCitationEdges.some((edge) => edge.source === source && edge.target === target), `${source}->${target}`);
+    }
+  }
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {
