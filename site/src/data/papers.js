@@ -1,6 +1,32 @@
 // Paper metadata fetched from the arXiv API; citation counts from Semantic Scholar (2026-08-13).
 export const papers = [
   {
+    "id": "2611.24395",
+    "nickname": "RSIBench-Infra",
+    "title": "RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?",
+    "authors": [
+      "Hanlin Wu",
+      "Yifei Wang",
+      "Zhicheng Cai",
+      "Huan-ang Gao",
+      "Wei-Ying Ma",
+      "Ya-Qin Zhang",
+      "Jingjing Liu",
+      "Hao Zhou"
+    ],
+    "published": "2026-11-18",
+    "added": "2026-11-19",
+    "year": 2026,
+    "tags": [
+      "Research Automation",
+      "Self-Evolution"
+    ],
+    "citations": 0,
+    "abstract": "Improving the efficiency of training and inference infrastructure is a practical component of recursive self-improvement. Existing benchmarks for agent-driven optimization largely focus on individual software layers such as kernel, leaving unclear whether agents can deliver end-to-end performance gains under production workloads. We introduce RSIBench-Infra, a benchmark of 20 training and inference tasks spanning diverse model families and modalities, with deployments of up to 32 accelerators on NVIDIA GPUs and Ascend NPUs. Agents start from runnable baselines derived from official recipes and can modify the software stack across engine, kernel, and instruction levels. An OCI image-layer submission protocol captures these changes for reproducible deployment, while independent evaluation measures end-to-end performance under task-specific quality constraints. Across all task results, 66.2% exceed 1.10x validated speedup. These results demonstrate that current agents can improve production-scale training and inference performance, but identifying effective optimization strategies and consistently translating local improvements into end-to-end gains remain challenging.",
+    "arxiv": "https://arxiv.org/abs/2611.24395",
+    "pdf": "https://arxiv.org/pdf/2611.24395"
+  },
+  {
     "id": "2610.10310",
     "nickname": "RSIGym",
     "title": "RSIGym: A Flexible Environment for Recursive Self-Improvement",

@@ -1,6 +1,8 @@
 export const methodInstitutions = {
   "2611.21056": ["Jilin University", "King Abdullah University of Science and Technology"],
   "2611.15276": ["Ant International", "Zhejiang University"],
+  "2611.22164": ["LivSyn Robotics", "South China University of Technology", "University of Technology Sydney", "University of Science and Technology Beijing", "Tsinghua University"],
+  "2611.18856": ["Google Cloud AI", "Google DeepMind", "The Pennsylvania State University"],
   "2608.11250": ["The Chinese University of Hong Kong", "University of Maryland"],
   "2611.14326": ["Nanyang Technological University", "Georgia Institute of Technology", "University of Washington", "Washington University in St. Louis", "University of Sydney", "National University of Singapore"],
   "2611.13144": ["Colorado School of Mines"],
