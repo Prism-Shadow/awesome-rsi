@@ -268,6 +268,22 @@ test('HandRSI and SIM have cleaned original abstracts and complete bibliography 
   }
 });
 
+test('MetaAct and EvoDisco have cleaned original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.20655', '2611.22102']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+    assert.deepEqual(methodTaxonomy[id].artifact, ['Non-parametric', 'Context', 'Memory', 'Skill'], id);
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  // MetaAct gates candidate constraint specifications on type-contract compilation and replay coverage/false-block criteria.
+  assert.deepEqual(methodTaxonomy['2611.20655'].selection, ['Artifact validation', 'Combined metrics']);
+  // EvoDisco retains transformed memory graphs regardless of immediate utility without rollback.
+  assert.deepEqual(methodTaxonomy['2611.22102'].selection, ['No validation']);
+  assert.deepEqual(methodTaxonomy['2611.22102'].mode, ['Online']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {

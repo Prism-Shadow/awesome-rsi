@@ -1,6 +1,10 @@
 // Verified against the bibliography text of the local paper PDFs.
 // Each edge points from the citing method to the method it references.
 export const methodCitationEdges = [
+  { source: "2611.22102", target: "2502.12110", verifiedBy: "paper-pdf" },
+  { source: "2611.22102", target: "2508.06433", verifiedBy: "paper-pdf" },
+  { source: "2611.20655", target: "2507.19457", verifiedBy: "paper-pdf" },
+  { source: "2611.20655", target: "2510.04618", verifiedBy: "paper-pdf" },
   { source: "2611.21056", target: "2505.22954", verifiedBy: "paper-pdf" },
   { source: "2611.21056", target: "2510.21614", verifiedBy: "paper-pdf" },
   { source: "2611.21056", target: "2410.04444", verifiedBy: "paper-pdf" },

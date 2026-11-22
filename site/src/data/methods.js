@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.22102",
+    nickname: "EvoDisco",
+    title: "EvoDisco: Strategy Discovery for Evolving Agent Memory",
+    authors: ["Mingyang Liu", "Qingcan Kang", "Shixiong Kai", "Kaichao Liang", "Xiaojin Fu", "Tao Zhong", "Linqi Song"], authorCount: 7,
+    published: "2026-11-17", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-22",
+    summary: "Formulates agent memory evolution as strategy discovery over a multi-relational memory graph: when triggered during an online task stream, a learnable policy conditions on graph statistics, retrieval behavior, recent outcomes, and structural deficiencies to select and instantiate one of four cognitive operators (Abstract, Refine, Bridge, and Reframe), retaining edits without rollback while training the policy with immediate retrieval-versus-complexity utility and window-level strategic efficacy.",
+    summaryZh: "将智能体记忆演化建模为多关系记忆图上的策略发现：在连续在线任务流中触发整理时，可学习策略结合图结构统计、检索表现、近期结果与结构缺陷，从归纳（Abstract）、拆分（Refine）、连接（Bridge）和关系重构（Reframe）四类认知算子中选择并实例化编辑操作；每次图修改直接保留而不回滚，同时利用检索增益与结构复杂度构成的即时效用及滑动窗口策略效能更新选择策略。",
+  },
+  {
+    id: "2611.20655",
+    nickname: "MetaAct",
+    title: "MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents",
+    authors: ["Jiaxing Zhao", "Hanwen Wang", "Di Liu", "Shaoteng Liu", "Jing-Ran Su", "Yanheng Li", "Qian Zha", "Jiaxi Li", "Hongbin Xie", "Haoran Zhang", "Xuan Song", "Haoxuan Che"], authorCount: 12,
+    published: "2026-11-16", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-22",
+    summary: "Synthesizes typed Grounded Executable Action Rules (GEAR) from contrastive failed and successful trajectories, compiles them into deterministic action-masking guards with replanning trigger messages, and validates or refines candidates offline via counterexample-guided trajectory replay over failure coverage and effective-action false-block thresholds before deployment or online stream updates.",
+    summaryZh: "从成功与失败轨迹的对比证据中合成带类型的可执行动作规则（GEAR），编译为带重规划提示的确定性动作掩码守卫，并通过基于历史轨迹回放的反例引导搜索在部署前或在线交互流中检验失败覆盖率与有效动作误拦率阈值。",
+  },
+  {
     id: "2611.21056",
     nickname: "ELITE",
     title: "Evaluation-Free Recursive Self-Improvement for Coding Agents",
