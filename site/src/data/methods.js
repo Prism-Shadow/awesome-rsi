@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.26256",
+    nickname: "SkillBridge",
+    title: "SkillBridge: Cost-Aware Diagnosis and Repair of Cross-OS Compatibility Defects in Agent Skills",
+    authors: ["Anjie Xu", "Zixing Wang", "Yifeng Cai", "Leye Wang"], authorCount: 4,
+    published: "2026-11-19", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-23",
+    summary: "Treats each skill package as a five-part contract (guide text, package surface, metadata, install contract, and OS assumptions), uses static contract rules to prioritize skill–OS pairs for budgeted dynamic validation, and coordinates separate Issue, Dev, and Review agents to attribute failures across Linux, macOS, and Windows, patch the localized contract field, and verify repairs via target-OS task replay.",
+    summaryZh: "将技能包建模为包含说明文档、脚本与入口、平台元数据、安装依赖和系统假设的五元组契约：先通过静态规则筛查高风险的技能–操作系统组合以分配动态验证预算，再由独立的问题、开发与审查智能体对比跨 Linux、macOS 和 Windows 的运行证据定位根因、修改对应契约字段，并在目标系统上重放原任务以核验修复效果。",
+  },
+  {
+    id: "2611.15754",
+    nickname: "MULTILOOP",
+    title: "MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks",
+    authors: ["Daniela Gottesman", "Gal Yona", "Ori Ram", "Zorik Gekhman", "Jonathan Herzig", "Mor Geva", "Roee Aharoni"], authorCount: 7,
+    published: "2026-11-11", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-23",
+    summary: "Iteratively optimizes an orchestrator–subagent information-seeking harness on a small set of challenging training queries: each round converts orchestrator and subagent rollouts into structured Markdown traces, a coding-agent optimizer inspects the full history of versions, scores, and traces to edit prompts and tool code, and the version with the highest training accuracy is selected for held-out evaluation.",
+    summaryZh: "在少量高难度训练问题上迭代演化“协调器–子智能体”信息检索 Harness：每轮将协调器与子智能体的完整执行轨迹转换为结构化 Markdown 记录，由编码智能体优化器结合历代代码、得分历史与执行轨迹修改提示词和工具代码，并选出训练准确率最高的版本用于测试集评估。",
+  },
+  {
     id: "2611.22102",
     nickname: "EvoDisco",
     title: "EvoDisco: Strategy Discovery for Evolving Agent Memory",
