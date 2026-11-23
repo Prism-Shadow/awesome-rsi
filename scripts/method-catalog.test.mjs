@@ -284,6 +284,19 @@ test('MetaAct and EvoDisco have cleaned original abstracts and are linked in the
   assert.deepEqual(methodTaxonomy['2611.22102'].mode, ['Online']);
 });
 
+test('MULTILOOP and SkillBridge have cleaned original abstracts and verified taxonomy labels', () => {
+  for (const id of ['2611.15754', '2611.26256']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.deepEqual(methodTaxonomy[id].artifact, ['Non-parametric', 'Harness code', 'Context', 'Skill'], id);
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  assert.ok(methodCitationEdges.some(({ source }) => source === '2611.15754'));
+  assert.deepEqual(methodTaxonomy['2611.15754'].topology, ['Graph']);
+  assert.deepEqual(methodTaxonomy['2611.26256'].selection, ['Artifact validation', 'Instance result']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {
