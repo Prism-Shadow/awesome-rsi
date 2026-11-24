@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**146 method papers · 34 benchmark papers · 3 systems**
+**148 method papers · 34 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -80,6 +80,7 @@ The student's model parameters are updated to improve task performance. This inc
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [AeroRSI: Recursive Self-Improvement for Aerial Vision-Language Navigation](https://arxiv.org/abs/2611.24077) | arXiv preprint |
 | [HandRSI: Recursive Self-Improvement for Hand Pose Estimation](https://arxiv.org/abs/2611.22164) | arXiv preprint |
 | [SkillDuet: Co-Evolving Models and Skills through Response Feedback](https://arxiv.org/abs/2611.12109) | arXiv preprint |
 | [ReSAIL: Mitigating Collapse in Iterative Agent Self-Distillation](https://arxiv.org/abs/2609.39306) | arXiv preprint |
@@ -184,6 +185,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Embodied-Harness: Towards Recursive Self-Improvement for Robotic Manipulation](https://arxiv.org/abs/2611.27689) | arXiv preprint |
 | [SkillBridge: Cost-Aware Diagnosis and Repair of Cross-OS Compatibility Defects in Agent Skills](https://arxiv.org/abs/2611.26256) | arXiv preprint |
 | [EvoDisco: Strategy Discovery for Evolving Agent Memory](https://arxiv.org/abs/2611.22102) | arXiv preprint |
 | [Evaluation-Free Recursive Self-Improvement for Coding Agents](https://arxiv.org/abs/2611.21056) | arXiv preprint |
@@ -308,6 +310,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [Embodied-Harness: Towards Recursive Self-Improvement for Robotic Manipulation](https://arxiv.org/abs/2611.27689) | arXiv preprint |
 | [EvoDisco: Strategy Discovery for Evolving Agent Memory](https://arxiv.org/abs/2611.22102) | arXiv preprint |
 | [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](https://arxiv.org/abs/2611.20655) | arXiv preprint |
 | [Self-Improvement Memory Enables Continual Recursive Self-Improvement](https://arxiv.org/abs/2611.18856) | arXiv preprint |

@@ -297,6 +297,28 @@ test('MULTILOOP and SkillBridge have cleaned original abstracts and verified tax
   assert.deepEqual(methodTaxonomy['2611.26256'].selection, ['Artifact validation', 'Instance result']);
 });
 
+test('Embodied-Harness and AeroRSI have cleaned original abstracts and label their recursive self-improvement mechanisms', () => {
+  for (const id of ['2611.27689', '2611.24077']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+  }
+  // Embodied-Harness: frozen Actor and Reflector, harness is textual guidance (Context, Memory), no code or weight updates.
+  assert.deepEqual(methodTaxonomy['2611.27689'].artifact, ['Non-parametric', 'Context', 'Memory']);
+  assert.deepEqual(methodTaxonomy['2611.27689'].updater, ['Teacher']);
+  assert.deepEqual(methodTaxonomy['2611.27689'].mode, ['Online']);
+  assert.deepEqual(methodTaxonomy['2611.27689'].selection, ['No validation']);
+  assert.deepEqual(methodTaxonomy['2611.27689'].frequency, ['Trajectory']);
+  assert.deepEqual(methodTaxonomy['2611.27689'].source, ['Benchmark', 'Environment', 'LLM feedback']);
+  // AeroRSI: the policy judges its own repairs by flying on from them (Self), LoRA updates (Parametric).
+  assert.deepEqual(methodTaxonomy['2611.24077'].artifact, ['Parametric']);
+  assert.deepEqual(methodTaxonomy['2611.24077'].updater, ['Self']);
+  assert.deepEqual(methodTaxonomy['2611.24077'].mode, ['Offline']);
+  assert.deepEqual(methodTaxonomy['2611.24077'].selection, ['No validation']);
+  assert.deepEqual(methodTaxonomy['2611.24077'].frequency, ['Batch']);
+  assert.deepEqual(methodTaxonomy['2611.24077'].source, ['Train/dev set', 'Environment', 'Executable verifier']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {
