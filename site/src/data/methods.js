@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.27797",
+    nickname: "EvoTER",
+    title: "EvoTER: Evolving Embodied Agents via Tool-Use Experience and Reflection",
+    authors: ["Yingting Zhou", "Yuyin Zhou", "Yongliang Wang", "Haoran Li", "Dongbin Zhao"], authorCount: 5,
+    published: "2026-11-20", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-26",
+    summary: "Evolves an embodied agent's observation-grounded tool-use skill library through an Explorer–Diagnoser–Validator loop: Explorer logs tool-use trajectories, Diagnoser distills tool-selection, argument-computation scripts, postcondition checks, and recovery rules (accessing privileged simulator state only when exploration stagnates), and Validator accepts a revised library only when complete-task success improves in fresh sessions using ordinary tools, before transferring and further evolving the library on a real robot.",
+    summaryZh: "通过探索者–诊断者–验证者（Explorer–Diagnoser–Validator）三角色闭环演化具身智能体的工具调用技能库：探索者记录工具调用轨迹，诊断者在常规排查停滞时可读取仿真底层真值定位失败原因，并将其转化为仅依赖常规观测的工具选择、参数计算脚本、后置检查与恢复规则，验证者在无特权信息的全新会话中重跑验证集，仅保留完整任务成功率严格提升的版本，并支持向真机迁移与继续演化。",
+  },
+  {
+    id: "2611.27285",
+    nickname: "SIR-Agent",
+    title: "SIR-Agent: Skill-Augmented Image Restoration Agent with Recursive Self-Improvement",
+    authors: ["Yijian Wang", "Qingsen Yan", "Weiyu Zhou", "Mingde Zhang", "Axi Niu", "Haokui Zhang", "Jiantao Zhou"], authorCount: 7,
+    published: "2026-11-20", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-26",
+    summary: "Maintains an image-restoration skill library with Chain Feedback-driven Skill Revision (CFSR) and RSI-driven skill meta-learning: CFSR inspects intermediate images along the restoration chain to localize weak steps, tests replacement tools on the same intermediate image, and replays historical images associated with the skill to either replace it in place when mean quality improves within a regression-rate bound or branch a new entry with narrower applicability conditions, while meta-learning refines CFSR's own revision rules from revision trajectories.",
+    summaryZh: "通过链式反馈驱动技能修订（CFSR）与 RSI 技能元学习维护图像修复技能库：CFSR 检查修复链各步输出的中间图像以定位薄弱步骤，在同一中间图上实测候选替换工具，并在该技能关联的历史图像上回放，满足平均画质提升且退化比例不超标时原地替换原技能，否则为新技能标注更细适用条件后分支新增入库；同时元学习根据修订轨迹优化 CFSR 自身的修订规则。",
+  },
+  {
     id: "2611.26256",
     nickname: "SkillBridge",
     title: "SkillBridge: Cost-Aware Diagnosis and Repair of Cross-OS Compatibility Defects in Agent Skills",

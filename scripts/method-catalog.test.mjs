@@ -319,9 +319,26 @@ test('Embodied-Harness and AeroRSI have cleaned original abstracts and label the
   assert.deepEqual(methodTaxonomy['2611.24077'].source, ['Train/dev set', 'Environment', 'Executable verifier']);
 });
 
+test('EvoTER and SIR-Agent have cleaned original abstracts and are linked in the citation graph', () => {
+  for (const id of ['2611.27797', '2611.27285']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.ok(methodCitationEdges.some(({ source }) => source === id), id);
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  // EvoTER evolves observation-grounded skills with executable argument-computation scripts and gates updates on validation-set task success.
+  assert.deepEqual(methodTaxonomy['2611.27797'].artifact, ['Non-parametric', 'Harness code', 'Context', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2611.27797'].selection, ['Benchmark score']);
+  // SIR-Agent replaces compatible skills in place or branches new ones when historical replay shows regressions.
+  assert.deepEqual(methodTaxonomy['2611.27285'].artifact, ['Non-parametric', 'Context', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2611.27285'].topology, ['Sequential', 'Tree']);
+  assert.deepEqual(methodTaxonomy['2611.27285'].selection, ['Instance result', 'Benchmark score', 'Combined metrics']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
-  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, and VbD also revise their own optimizer or evaluator.
-  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276']) {
+  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, VbD, and SIR-Agent also revise their own optimizer or evaluator.
+  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276', '2611.27285']) {
     assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
   }
   // HGM and ELITE reuse DGM's self-modification step: a separate diagnosis/hypothesis call directs the agent's edits to its own code.
