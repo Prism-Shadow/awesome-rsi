@@ -336,9 +336,26 @@ test('EvoTER and SIR-Agent have cleaned original abstracts and are linked in the
   assert.deepEqual(methodTaxonomy['2611.27285'].selection, ['Instance result', 'Benchmark score', 'Combined metrics']);
 });
 
+test('SkillPlumber and RemoteEvolver have cleaned original abstracts and verified taxonomy labels', () => {
+  for (const id of ['2611.25429', '2611.27110']) {
+    assert.ok(methods.some((method) => method.id === id), id);
+    assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'), id);
+    assert.ok(!/\\|\$|--/.test(methodAbstracts[id]), id);
+    assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
+  }
+  // SkillPlumber revises a single active skill while reading all prior versions and coverage reports in H and retracting ineffective edits.
+  assert.ok(methodCitationEdges.some(({ source }) => source === '2611.25429'));
+  assert.deepEqual(methodTaxonomy['2611.25429'].artifact, ['Non-parametric', 'Context', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2611.25429'].topology, ['Sequential', 'Graph']);
+  // RemoteEvolver expands callable tools mid-task on capability gaps and consolidates skills after each trajectory.
+  assert.deepEqual(methodTaxonomy['2611.27110'].artifact, ['Non-parametric', 'Harness code', 'Context', 'Memory', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2611.27110'].frequency, ['Event', 'Trajectory']);
+  assert.deepEqual(methodTaxonomy['2611.27110'].selection, ['Artifact validation', 'Instance result']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
-  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, VbD, and SIR-Agent also revise their own optimizer or evaluator.
-  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276', '2611.27285']) {
+  // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, VbD, SIR-Agent, and SkillPlumber also revise their own optimizer or evaluator.
+  for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276', '2611.27285', '2611.25429']) {
     assert.deepEqual(methodTaxonomy[id].updater, ['Teacher'], id);
   }
   // HGM and ELITE reuse DGM's self-modification step: a separate diagnosis/hypothesis call directs the agent's edits to its own code.
