@@ -1,6 +1,11 @@
 // Verified against the bibliography text of the local paper PDFs.
 // Each edge points from the citing method to the method it references.
 export const methodCitationEdges = [
+  { source: "2611.rio-cloud-operations-ontology-evolution", target: "2509.25140", verifiedBy: "paper-pdf" },
+  { source: "2611.rio-cloud-operations-ontology-evolution", target: "2510.04618", verifiedBy: "paper-pdf" },
+  { source: "2611.rio-cloud-operations-ontology-evolution", target: "2609.09153", verifiedBy: "paper-pdf" },
+  { source: "2611.rio-cloud-operations-ontology-evolution", target: "2609.15364", verifiedBy: "paper-pdf" },
+  { source: "2611.rio-cloud-operations-ontology-evolution", target: "2609.15779", verifiedBy: "paper-pdf" },
   { source: "2611.25429", target: "2409.07429", verifiedBy: "paper-pdf" },
   { source: "2611.25429", target: "2504.07952", verifiedBy: "paper-pdf" },
   { source: "2611.25429", target: "2507.19457", verifiedBy: "paper-pdf" },

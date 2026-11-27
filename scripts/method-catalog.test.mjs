@@ -353,6 +353,22 @@ test('SkillPlumber and RemoteEvolver have cleaned original abstracts and verifie
   assert.deepEqual(methodTaxonomy['2611.27110'].selection, ['Artifact validation', 'Instance result']);
 });
 
+test('RIO links to its alphaXiv page and has its original abstract and verified taxonomy labels', () => {
+  const id = '2611.rio-cloud-operations-ontology-evolution';
+  const rio = methods.find((method) => method.id === id);
+  assert.ok(rio);
+  assert.equal(rio.arxiv, null);
+  assert.equal(rio.pdf, `https://www.alphaxiv.org/abs/${id}`);
+  assert.ok(!methodAbstracts[id].startsWith('Abstract summary:'));
+  assert.ok(!/\\|\$|--/.test(methodAbstracts[id]));
+  assert.ok(methodCitationEdges.some(({ source }) => source === id));
+  // Each candidate item is admitted only after a fixed probe template fails to refute it against live sources.
+  assert.deepEqual(methodTaxonomy[id].artifact, ['Non-parametric', 'Context', 'Memory']);
+  assert.deepEqual(methodTaxonomy[id].mode, ['Offline', 'Offline → Online']);
+  assert.deepEqual(methodTaxonomy[id].selection, ['Artifact validation']);
+  assert.deepEqual(methodTaxonomy[id].frequency, ['Event', 'Batch']);
+});
+
 test('an optimizer rewriting its own procedure is labeled only by its role toward the student', () => {
   // SePO, Hyperagents, Escher-Loop, Red Queen Gödel Machine, VERSE, HMED, Skill∞, VbD, SIR-Agent, and SkillPlumber also revise their own optimizer or evaluator.
   for (const id of ['2606.04465', '2603.19461', '2604.23472', '2606.26294', '2610.02616', '2610.07979', '2610.35434', '2611.15276', '2611.27285', '2611.25429']) {

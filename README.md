@@ -38,7 +38,7 @@ Awesome RSI collects **benchmarks, methods, and systems for Recursive Self-Impro
 
 <!-- BEGIN GENERATED COUNTS -->
 
-**152 method papers · 34 benchmark papers · 3 systems**
+**153 method papers · 34 benchmark papers · 3 systems**
 
 <!-- END GENERATED COUNTS -->
 
@@ -187,6 +187,7 @@ Prompts or working context are updated. Observations, feedback, and experience c
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [RIO: Recursively Self-Improving Cloud Operations Agent via Evolving Its Ontology](https://www.alphaxiv.org/abs/2611.rio-cloud-operations-ontology-evolution) | alphaXiv preprint |
 | [Embodied-Harness: Towards Recursive Self-Improvement for Robotic Manipulation](https://arxiv.org/abs/2611.27689) | arXiv preprint |
 | [EvoTER: Evolving Embodied Agents via Tool-Use Experience and Reflection](https://arxiv.org/abs/2611.27797) | arXiv preprint |
 | [RemoteEvolver: Expanding Earth Observation Capabilities through Agent Harness Evolution](https://arxiv.org/abs/2611.27110) | arXiv preprint |
@@ -316,6 +317,7 @@ Information or experience is stored, updated, and retrieved across steps, trajec
 
 | Paper or project | Publication |
 | :--- | :--- |
+| [RIO: Recursively Self-Improving Cloud Operations Agent via Evolving Its Ontology](https://www.alphaxiv.org/abs/2611.rio-cloud-operations-ontology-evolution) | alphaXiv preprint |
 | [Embodied-Harness: Towards Recursive Self-Improvement for Robotic Manipulation](https://arxiv.org/abs/2611.27689) | arXiv preprint |
 | [RemoteEvolver: Expanding Earth Observation Capabilities through Agent Harness Evolution](https://arxiv.org/abs/2611.27110) | arXiv preprint |
 | [EvoDisco: Strategy Discovery for Evolving Agent Memory](https://arxiv.org/abs/2611.22102) | arXiv preprint |
