@@ -1,5 +1,18 @@
 export const methods = [
   {
+    id: "2611.rio-cloud-operations-ontology-evolution",
+    nickname: "RIO",
+    title: "RIO: Recursively Self-Improving Cloud Operations Agent via Evolving Its Ontology",
+    authors: ["Yin Wu", "Yijing Liu", "Zhengxuan Zhang", "Tianfu Wang", "Zhuowen Liang", "Zechao Chen", "Xing Mou", "Yi Yang", "Pei Shi", "Bin Wen", "Honghuai Xiong", "Yuyu Luo", "Hui Xiong", "Nan Tang"], authorCount: 14,
+    published: "2026-11-24", year: 2026, venue: "alphaXiv preprint", status: "preprint",
+    added: "2026-11-27",
+    // Published on alphaXiv rather than arXiv, so the entry links to its alphaXiv page.
+    arxiv: null,
+    pdf: "https://www.alphaxiv.org/abs/2611.rio-cloud-operations-ontology-evolution",
+    summary: "Evolves an executable ontology for cross-source cloud investigations: the solver answers only through deterministic plans over verified items or abstains and names the missing item, a candidate item is admitted only when a falsifiable live probe fails to refute it, verified items become instruments for probing later candidates, and revising an item revalidates only its dependents.",
+    summaryZh: "为跨数据源的云运维调查演进可执行本体：求解器只通过已验证条目上的确定性计划作答，否则放弃作答并指出缺失的条目；候选条目只有在可证伪的实时探针未能反驳时才被接纳，已验证条目作为检验后续候选的依据，条目被修订后只重验依赖它的条目。",
+  },
+  {
     id: "2611.27110",
     nickname: "RemoteEvolver",
     title: "RemoteEvolver: Expanding Earth Observation Capabilities through Agent Harness Evolution",
