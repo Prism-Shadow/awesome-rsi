@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2611.27110",
+    nickname: "RemoteEvolver",
+    title: "RemoteEvolver: Expanding Earth Observation Capabilities through Agent Harness Evolution",
+    authors: ["Shengxiang Xu", "Liang Yao", "Shuyi Chen", "Yishu Wang", "Shimin Di", "Fan Liu", "Bishun Yao", "Hanghui Guo", "Xinyu Liu", "Chengye Liang", "Yuyu Luo", "Min-Ling Zhang"], authorCount: 12,
+    published: "2026-11-20", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-27",
+    summary: "Evolves an external remote-sensing harness around a frozen base model through dynamic toolset expansion and skill library consolidation: when a capability gap arises mid-task, it searches GitHub and HuggingFace for matching pretrained models or code, wraps and iteratively debugs callable adapter interfaces until execution checks pass, and after task verification distills successful workflows into reusable skill.md documents while revising, merging, or deactivating existing skills by historical success rate.",
+    summaryZh: "围绕冻结基座模型演化遥感智能体的外部 Harness，结合动态工具集扩展与技能库整合：当任务中途遇到能力缺口时，自动检索 GitHub 与 HuggingFace 上的开源代码和预训练模型，编写并迭代修复适配接口直至通过执行检验；任务完成后将验证成功的执行工作流提炼为可复用的 skill.md，并按历史调用成功率修订、合并或停用已有技能。",
+  },
+  {
+    id: "2611.25429",
+    nickname: "SkillPlumber",
+    title: "Evolve Where It Matters: Coverage-Guided Self-Evolution of Agent Skills",
+    authors: ["Boyin Tan", "Jiadong Zhang", "Xiaosong Ma", "Chun Jason Xue", "Xiaowei Huang", "Youcheng Sun"], authorCount: 6,
+    published: "2026-11-19", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-27",
+    summary: "Guides skill self-evolution with instruction-level coverage that labels each skill instruction after a run as follow, not-follow, or not covered without seeing the verifier outcome: a persistent root-cause analysis (RCA) agent turns these labels into targeted revision questions, reviews its prior hypothesis against the next fresh execution, and can revisit earlier versions or retract ineffective edits while a cross-task maintainer distills investigative strategies.",
+    summaryZh: "利用指令级覆盖率引导技能自演化：裁判模型在不看验证器结果的情况下将技能中的每条指令标注为已遵循（follow）、未遵循（not-follow）或未触发（not covered），持久化的根因分析（RCA）智能体据此区分“指令有误”与“指令未被遵循”以定向修订技能，在下一轮全新执行后复核假设并可回看历史版本撤回无效修改，同时由跨任务维护器提炼共享排查策略。",
+  },
+  {
     id: "2611.27797",
     nickname: "EvoTER",
     title: "EvoTER: Evolving Embodied Agents via Tool-Use Experience and Reflection",
