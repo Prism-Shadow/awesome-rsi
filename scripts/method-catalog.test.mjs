@@ -362,3 +362,17 @@ test('an optimizer rewriting its own procedure is labeled only by its role towar
   assert.deepEqual(methodTaxonomy['2510.21614'].updater, methodTaxonomy['2505.22954'].updater);
   assert.deepEqual(methodTaxonomy['2611.21056'].updater, methodTaxonomy['2505.22954'].updater);
 });
+
+test('ReSight and EmbodiRSI preserve their artifact and evaluation-protocol classifications', () => {
+  assert.deepEqual(methodTaxonomy['2610.33487'].artifact, ['Non-parametric', 'Harness code', 'Context', 'Memory', 'Skill']);
+  assert.deepEqual(methodTaxonomy['2610.33487'].mode, ['Online', 'Offline']);
+  assert.deepEqual(methodTaxonomy['2609.38905'].artifact, ['Parametric']);
+  assert.deepEqual(methodTaxonomy['2609.38905'].mode, ['Offline']);
+  for (const id of ['2610.33487', '2609.38905']) {
+    assert.deepEqual(methodTaxonomy[id].selection, ['No validation']);
+    assert.ok(methodAbstracts[id].startsWith('Abstract summary — '));
+  }
+  for (const target of ['2507.19457', '2605.24539', '2606.14249', '2603.28052', '2604.25850', '2606.09498', '2505.22954', '2510.04618']) {
+    assert.ok(methodCitationEdges.some((edge) => edge.source === '2610.33487' && edge.target === target));
+  }
+});

@@ -1,5 +1,25 @@
 export const methods = [
   {
+    id: "2610.33487",
+    nickname: "ReSight",
+    title: "ReSight: Task-Driven Self-Improving Memory for Embodied Agents",
+    authors: ["Lirong Che", "Yang Chen", "Yimeng Su", "Daqi Liu", "Zhenyu Huang", "Jiong Wang", "Yuzhe Yang", "Xu Cao", "Chuang Wang", "Jian Su", "Xueqian Wang"], authorCount: 11,
+    published: "2026-10-24", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-28",
+    summary: "Uses a coding agent to turn execution difficulties and exploratory programs into reusable memory builders, query tools, and skills. Mounted extensions enrich retained visual observations and support later embodied queries with a fixed execution model and online budget.",
+    summaryZh: "由编码 Agent 根据执行困难与探索程序生成可复用的记忆构建器、查询工具和技能，挂载后扩展历史视觉观测的可访问字段，在保持执行模型和在线预算一致的条件下支持后续具身查询。",
+  },
+  {
+    id: "2609.38905",
+    nickname: "EmbodiRSI",
+    title: "EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation",
+    authors: ["Haoran Lang", "Haotao Lu", "Shiyu Sang", "Haoyang Luo", "Guo Chen", "Qun Li", "Jingyi Yu", "Ye Shi", "Jingya Wang"], authorCount: 9,
+    published: "2026-09-30", year: 2026, venue: "arXiv preprint", status: "preprint",
+    added: "2026-11-28",
+    summary: "Improves robot policies across scheduled simulation-training rounds. Agent-guided corrections recover from learner-reached states, and failure attribution redirects demonstration sampling. Accumulated trajectories train each successor policy before physical refinement and autonomous evaluation.",
+    summaryZh: "在预先安排的仿真训练轮次中，由 Agent 从学习器实际到达的失败状态生成纠正经验，根据失败归因调整示范采样，再用累积轨迹训练后继策略，经过少量实机纠正数据微调后自主评测。",
+  },
+  {
     id: "2611.27110",
     nickname: "RemoteEvolver",
     title: "RemoteEvolver: Expanding Earth Observation Capabilities through Agent Harness Evolution",
